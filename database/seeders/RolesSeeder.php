@@ -1,18 +1,20 @@
 <?php
 
-use App\Helpers\AclHelper;
-use App\User;
+namespace Database\Seeders;
+
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+
+use App\Helpers\AclHelper;
+use App\Models\User;
 use Spatie\Permission\Models\Role;
 
 class RolesSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
         foreach (AclHelper::$ROLES_ARRAY as $roleStr) {
             $role = Role::create(['name' => $roleStr]);

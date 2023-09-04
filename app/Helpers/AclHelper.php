@@ -10,7 +10,7 @@ class AclHelper
 {
     public static $BASIC_PERMISSIONS_ARRAY = ['Create', 'Read', 'Update', 'Delete'];
     public static $SPECIAL_PERMISSIONS_ARRAY = [];
-    public static $MODULES_ARRAY = array('Dashboard', 'Users', 'Roles');
+    public static $MODULES_ARRAY = array('Dashboard', 'Users', 'Roles', 'Permissions');
     public static $ROLES_ARRAY = array('SuperAdmin', 'Admin');
 
 
