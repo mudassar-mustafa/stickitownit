@@ -1,26 +1,27 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Backend;
 
-use App\Models\State;
+use App\Models\Brand;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
-class StateController extends Controller
+class BrandController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index() : View
     {
-        //
+        return view('backend.pages.brand.index');
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create() : View
     {
-        //
+        return view('backend.pages.brand.create');
     }
 
     /**
@@ -34,7 +35,7 @@ class StateController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(State $state)
+    public function show(Brand $brand)
     {
         //
     }
@@ -42,7 +43,7 @@ class StateController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(State $state)
+    public function edit(Brand $brand)
     {
         //
     }
@@ -50,7 +51,7 @@ class StateController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, State $state)
+    public function update(Request $request, Brand $brand)
     {
         //
     }
@@ -58,7 +59,7 @@ class StateController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(State $state)
+    public function destroy(Brand $brand)
     {
         //
     }
