@@ -10,42 +10,59 @@
 
         <section class="section">
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-md-12">
                     <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Vertical Form</h5>
-
-                            <!-- Vertical Form -->
-                            <form class="row g-3">
-                                <div class="col-12">
-                                    <label for="inputNanme4" class="form-label">Your Name</label>
-                                    <input type="text" class="form-control" id="inputNanme4">
-                                </div>
-                                <div class="col-12">
-                                    <label for="inputEmail4" class="form-label">Email</label>
-                                    <input type="email" class="form-control" id="inputEmail4">
-                                </div>
-                                <div class="col-12">
-                                    <label for="inputPassword4" class="form-label">Password</label>
-                                    <input type="password" class="form-control" id="inputPassword4">
-                                </div>
-                                <div class="col-12">
-                                    <label for="inputAddress" class="form-label">Address</label>
-                                    <input type="text" class="form-control" id="inputAddress"
-                                           placeholder="1234 Main St">
-                                </div>
-                                <div class="text-center">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                    <button type="reset" class="btn btn-secondary">Reset</button>
-                                </div>
-                            </form><!-- Vertical Form -->
-
+                    <div class="card-header">
+                        <h4 class="card-title"> Brands</h4>
+                    </div>
+                    <div class="card-body">
+                      <a href="{{route('backend.pages.brand.create')}}">
+                        <button type="button" class="btn btn-primary me-1 pull-right">Add New Brand</button> 
+                      </a>
+                        <div class="table-responsive">
+                            {{$dataTable->table()}}
                         </div>
+              
+                    </div>
                     </div>
                 </div>
-            </div>
+              </div>
         </section>
     </main>
 @endsection
 @push('scripts')
+{{$dataTable->scripts()}}
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+  function drawCallBackHandler() {
+
+console.log("Draw Call Back Called");
+$('[data-toggle="tooltip"]').tooltip();
+var confirmAction = $(".deleteModel");
+if (confirmAction.length)
+{
+    confirmAction.click(function (e) {
+        e.preventDefault();
+        var formId = $(this).attr("form-id");
+        var confirmMessage = $(this).attr("form-alert-message");
+
+        swal({
+            title: "Are you sure?",
+            text: confirmMessage,
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then(isConfirm => {
+            if (isConfirm) {
+                $("#"+formId).submit();
+                swal("Submited", "{{ trans('Deletion Request Submitted') }}", "success");
+            } else {
+                swal("Cancelled", "{{ trans('Request Cancelled') }}", "error");
+            }
+        });
+
+    });
+}
+}
+</script>
 @endpush

@@ -1231,3 +1231,12 @@ h6 {
   font-size: 13px;
   color: #012970;
 }
+
+
+.invalid-feedback {
+  display: block;
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: .875em;
+  color: var(--bs-form-invalid-color);
+}

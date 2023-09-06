@@ -31,7 +31,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/', 'index')->name('backend.pages.brand.index');
         Route::get('/create', 'create')->name('backend.pages.brand.create');
         Route::post('/store', 'store')->name('backend.pages.brand.store');
-        Route::get('/{id}/edit', 'edit')->name('backend.pages.brand.create');
+        Route::get('/{id}/edit', 'edit')->name('backend.pages.brand.edit');
         Route::delete('/delete/{id}', 'destroy')->name('backend.pages.brand.destroy');
     });
     

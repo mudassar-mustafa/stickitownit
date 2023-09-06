@@ -24,6 +24,7 @@
   <link href="{{ asset('backend/vendor/quill/quill.snow.css')}}" rel="stylesheet">
   <link href="{{ asset('backend/vendor/quill/quill.bubble.css')}}" rel="stylesheet">
   <link href="{{ asset('backend/vendor/remixicon/remixicon.css')}}" rel="stylesheet">
+  <link href="{{ asset('backend/vendor/datatable/dataTables.bootstrap5.min.css')}}" rel="stylesheet">
 
   <!-- Template Main CSS File -->
   <link href="{{ asset('backend/css/style.css')}}" rel="stylesheet">
@@ -60,6 +61,9 @@
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="{{ asset('backend/vendor/datatable/jquery.dataTables.min.js')}}"></script>
+  <script src="{{ asset('backend/vendor/datatable/dataTables.bootstrap5.min.js')}}"></script>
   <script src="{{ asset('backend/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
   <script src="{{ asset('backend/vendor/quill/quill.min.js')}}"></script>
   <script src="{{ asset('backend/vendor/tinymce/tinymce.min.js')}}"></script>

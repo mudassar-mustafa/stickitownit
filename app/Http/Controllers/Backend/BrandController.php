@@ -2,26 +2,40 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Models\Brand;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
-use App\Repositories\Backend\BaseRepository;
+use App\Repositories\Backend\BrandRepository;
+use App\Contracts\Backend\BrandContract;
+use App\Http\Requests\Brand\StoreBrandRequest;
+use App\Services\UtilService;
+use App\Http\Enums\CommonEnum;
+use Illuminate\Http\RedirectResponse;
+use App\DataTables\BrandDataTable;
 
 class BrandController extends Controller
 {
-    protected $repository;
+    /**
+     * @var BrandContract
+     */
+    protected $brandRepository;
 
-    public function __construct(BaseRepository $repository)
-    {
-        $this->repository = $repository;
+    public function __construct(
+        BrandContract $brandRepository
+    ) {
+        $this->brandRepository = $brandRepository;
     }
     /**
      * Display a listing of the resource.
      */
-    public function index() : View
-    {
-
-        return view('backend.pages.brand.index');
+    public function index(
+        UtilService $utilService,
+        BrandDataTable  $dataTable
+    ) {
+        try {
+            return  $dataTable->render('backend.pages.brand.index');
+        } catch (\Exception $exception) {
+            return $utilService->logErrorAndRedirectToBack('backend.pages.brand.index', $exception->getMessage());
+        }
     }
 
     /**
@@ -33,11 +47,23 @@ class BrandController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * @param StoreBrandRequest $request
+     * @param UtilService $utilService
+     * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(StoreBrandRequest $request, UtilService $utilService) : RedirectResponse
     {
-        //
+        try {
+            $data = $request->validated();
+            $this->brandRepository->create($data);
+
+            return redirect()->route("backend.pages.brand.index")->with([
+                "status" => CommonEnum::SUCCESS_STATUS,
+                "message" => "Brand has been added successfully."
+            ]);
+        } catch (\Exception $exception) {
+            return $utilService->logErrorAndRedirectToBack('backend.pages.brand.store', $exception->getMessage());
+        }
     }
 
     /**
