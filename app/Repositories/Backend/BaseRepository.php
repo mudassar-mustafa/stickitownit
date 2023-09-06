@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Repositories\Backend;
-
 use App\Contracts\Backend\BaseContract;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -18,15 +17,13 @@ class BaseRepository implements BaseContract
      * @var Model
      */
     protected $model;
-    protected $region_id;
-
     /**
      * BaseRepository constructor.
      * @param Model $model
      */
     public function __construct(Model $model)
     {
-        $this->model = $model;    
+        $this->model = $model;
     }
 
     /**

@@ -5,14 +5,22 @@ namespace App\Http\Controllers\Backend;
 use App\Models\Brand;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use App\Repositories\Backend\BaseRepository;
 
 class BrandController extends Controller
 {
+    protected $repository;
+
+    public function __construct(BaseRepository $repository)
+    {
+        $this->repository = $repository;
+    }
     /**
      * Display a listing of the resource.
      */
     public function index() : View
     {
+
         return view('backend.pages.brand.index');
     }
 

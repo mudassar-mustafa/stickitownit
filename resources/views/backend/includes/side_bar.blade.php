@@ -8,6 +8,12 @@
           <span>Dashboard</span>
         </a>
       </li><!-- End Dashboard Nav -->
+        <li class="nav-item">
+            <a class="nav-link " href="{{ route('backend.pages.brand.index') }}">
+                <i class="bi bi-grid"></i>
+                <span>Brands</span>
+            </a>
+        </li>
 
       {{-- <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
