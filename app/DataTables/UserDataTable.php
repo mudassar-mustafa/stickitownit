@@ -23,6 +23,10 @@ class UserDataTable extends DataTable
                 $sql = "name like ?";
                 $query->whereRaw($sql, ["%{$keyword}%"]);
             })
+            ->filterColumn('email', function ($query, $keyword) {
+                $sql = "email like ?";
+                $query->whereRaw($sql, ["%{$keyword}%"]);
+            })
             ->addColumn('name', function ($user) {
                 return empty($user->name) ? "None" : $user->name;
             })
