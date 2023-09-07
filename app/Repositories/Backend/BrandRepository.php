@@ -1,16 +1,16 @@
 <?php
+
 namespace App\Repositories\Backend;
 
 use App\Models\Brand;
-use App\Repositories\Backend\BaseRepository;
 use App\Contracts\Backend\BrandContract;
-use Illuminate\Http\Request;
 
 class BrandRepository extends BaseRepository implements BrandContract
 {
     protected $model;
 
-    public function __construct(Brand $model){
+    public function __construct(Brand $model)
+    {
         $this->model = $model;
     }
 
@@ -20,7 +20,8 @@ class BrandRepository extends BaseRepository implements BrandContract
      * @param array $columns
      * @return mixed
      */
-    public function listBrand(string $order = 'id', string $sort = 'desc', array $columns = ['*']){
+    public function listBrand(string $order = 'id', string $sort = 'desc', array $columns = ['*'])
+    {
 
     }
 
@@ -28,7 +29,19 @@ class BrandRepository extends BaseRepository implements BrandContract
      * @param int $id
      * @return mixed
      */
-    public function findBrandById(int $id){
+    public function findBrandById(int $id)
+    {
+        return $this->find($id);
+    }
+
+    /**
+     * @param array $params
+     * @return mixed
+     */
+    public function createBrand(array $params)
+    {
+        $params['slug'] = \Str::slug(strtolower($params['name']));
+        return $this->create($params);
 
     }
 
@@ -36,20 +49,10 @@ class BrandRepository extends BaseRepository implements BrandContract
      * @param array $params
      * @return mixed
      */
-    public function create(array $params){
-        $brand = new Brand;
-        $brand->name = $params['name'];
-        $brand->slug = \Str::slug(strtolower($params['name']));
-        $brand->status = $params['status'];
-        $brand->save();
-        return $brand; 
-    }
-
-    /**
-     * @param array $params
-     * @return mixed
-     */
-    public function updateBrand(array $params){
+    public function updateBrand($id, array $params)
+    {
+        $params['slug'] = \Str::slug(strtolower($params['name']));
+        return $this->update($params, $id);
 
     }
 
@@ -57,7 +60,8 @@ class BrandRepository extends BaseRepository implements BrandContract
      * @param $id
      * @return bool
      */
-    public function deleteBrand($id){
-        
+    public function deleteBrand($id)
+    {
+        return $this->delete($id);
     }
 }

@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Http\Requests\Brand\UpdateBrandRequest;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\Request;
-use App\Repositories\Backend\BrandRepository;
 use App\Contracts\Backend\BrandContract;
 use App\Http\Requests\Brand\StoreBrandRequest;
 use App\Services\UtilService;
@@ -19,20 +18,21 @@ class BrandController extends Controller
      */
     protected $brandRepository;
 
-    public function __construct(
-        BrandContract $brandRepository
-    ) {
+    public function __construct(BrandContract $brandRepository)
+    {
         $this->brandRepository = $brandRepository;
     }
+
     /**
      * Display a listing of the resource.
      */
     public function index(
-        UtilService $utilService,
-        BrandDataTable  $dataTable
-    ) {
+        UtilService    $utilService,
+        BrandDataTable $dataTable
+    )
+    {
         try {
-            return  $dataTable->render('backend.pages.brand.index');
+            return $dataTable->render('backend.pages.brand.index');
         } catch (\Exception $exception) {
             return $utilService->logErrorAndRedirectToBack('backend.pages.brand.index', $exception->getMessage());
         }
@@ -41,7 +41,7 @@ class BrandController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create() : View
+    public function create(): View
     {
         return view('backend.pages.brand.create');
     }
@@ -51,11 +51,11 @@ class BrandController extends Controller
      * @param UtilService $utilService
      * @return RedirectResponse
      */
-    public function store(StoreBrandRequest $request, UtilService $utilService) : RedirectResponse
+    public function store(StoreBrandRequest $request, UtilService $utilService): RedirectResponse
     {
         try {
             $data = $request->validated();
-            $this->brandRepository->create($data);
+            $this->brandRepository->createBrand($data);
 
             return redirect()->route("backend.pages.brand.index")->with([
                 "status" => CommonEnum::SUCCESS_STATUS,
@@ -66,35 +66,52 @@ class BrandController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Brand $brand)
+    public function edit($id, UtilService $utilService)
     {
-        //
+        try {
+            $brand = $this->brandRepository->findBrandById($id);
+            return view('backend.pages.brand.edit', compact('brand'));
+        } catch (\Exception $exception) {
+            return $utilService->logErrorAndRedirectToBack('backend.pages.brand.edit', $exception->getMessage());
+        }
+
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * @param $id
+     * @param UpdateBrandRequest $request
+     * @param UtilService $utilService
+     * @return RedirectResponse
      */
-    public function edit(Brand $brand)
+    public function update($id, UpdateBrandRequest $request, UtilService $utilService)
     {
-        //
-    }
+        try {
+            $data = $request->validated();
+            $this->brandRepository->updateBrand($id, $data);
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Brand $brand)
-    {
-        //
+            return redirect()->route("backend.pages.brand.index")->with([
+                "status" => CommonEnum::SUCCESS_STATUS,
+                "message" => "Brand has been updated successfully."
+            ]);
+        } catch (\Exception $exception) {
+            return $utilService->logErrorAndRedirectToBack('backend.pages.brand.update', $exception->getMessage());
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Brand $brand)
+    public function destroy($id, UtilService $utilService)
     {
-        //
+
+        try {
+            $this->brandRepository->deleteBrand($id);
+            return redirect()->route("backend.pages.brand.index")->with([
+                "status" => CommonEnum::SUCCESS_STATUS,
+                "message" => "Brand has been deleted successfully."
+            ]);
+        } catch (\Exception $exception) {
+            return $utilService->logErrorAndRedirectToBack('backend.pages.brand.destroy', $exception->getMessage());
+        }
     }
 }

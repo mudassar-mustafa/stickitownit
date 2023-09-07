@@ -11,7 +11,7 @@ class AclHelper
     public static $BASIC_PERMISSIONS_ARRAY = ['Create', 'Read', 'Update', 'Delete'];
     public static $SPECIAL_PERMISSIONS_ARRAY = [];
     public static $MODULES_ARRAY = array('Dashboard', 'Users', 'Roles', 'Permissions');
-    public static $ROLES_ARRAY = array('SuperAdmin', 'Admin');
+    public static $ROLES_ARRAY = array('SuperAdmin', 'Admin', 'Customer');
 
 
     public static function getPermissionsForRole($role)
@@ -29,16 +29,6 @@ class AclHelper
                     $nameArr = explode(".", $permission->name);
                     // Create & READ
                     if (count($nameArr) >= 2 && ($nameArr[1] == AclHelper::$BASIC_PERMISSIONS_ARRAY[0] || $nameArr[1] == AclHelper::$BASIC_PERMISSIONS_ARRAY[1])) {
-                        $permissions[$i++] = $permission;
-                    }
-                }
-                break;
-            // Editor
-            case AclHelper::$ROLES_ARRAY[2]:
-                foreach (Permission::all() as $permission) {
-                    $nameArr = explode(".", $permission->name);
-                    // READ, UPDATE, DELETE
-                    if (count($nameArr) >= 2 && ($nameArr[1] == AclHelper::$BASIC_PERMISSIONS_ARRAY[1] || $nameArr[1] == AclHelper::$BASIC_PERMISSIONS_ARRAY[2] || $nameArr[1] == AclHelper::$BASIC_PERMISSIONS_ARRAY[3])) {
                         $permissions[$i++] = $permission;
                     }
                 }

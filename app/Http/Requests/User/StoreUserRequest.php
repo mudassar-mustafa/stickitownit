@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Requests\Brand;
+namespace App\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Password;
 
-class StoreBrandRequest extends FormRequest
+class StoreUserRequest extends FormRequest
 {
 
     /**
@@ -26,8 +27,17 @@ class StoreBrandRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:255', 'unique:brands'],
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'email', 'max:255', 'unique:users'],
             'status' => ['string', 'max:255'],
+            'phone_number' => ['required'],
+            'cnic' => ['required'],
+            'password' => ['required', Password::min(8)
+                ->letters()
+                ->mixedCase()
+                ->numbers()
+                ->symbols()
+                ->uncompromised()]
         ];
     }
 }

@@ -27,5 +27,8 @@ class RolesSeeder extends Seeder
 
         $user = User::findOrFail(2);
         $user->assignRole(Role::findById(2));
+
+        $user = User::findOrFail(3);
+        $user->assignRole(Role::findById(3));
     }
 }

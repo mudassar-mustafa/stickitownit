@@ -6,7 +6,7 @@ namespace App\Contracts\Backend;
  * Interface CityContract
  * @package App\Contracts
  */
-interface BrandContract
+interface UserContract
 {
     /**
      * @param string $order
@@ -14,29 +14,29 @@ interface BrandContract
      * @param array $columns
      * @return mixed
      */
-    public function listBrand(string $order = 'id', string $sort = 'desc', array $columns = ['*']);
+    public function listUser(string $order = 'id', string $sort = 'desc', array $columns = ['*']);
 
     /**
      * @param int $id
      * @return mixed
      */
-    public function findBrandById(int $id);
+    public function findUserById(int $id);
 
     /**
      * @param array $params
      * @return mixed
      */
-    public function createBrand(array $params);
+    public function createUser(array $params);
 
     /**
      * @param array $params
      * @return mixed
      */
-    public function updateBrand($id, array $params);
+    public function updateUser($id, array $params);
 
     /**
      * @param $id
      * @return bool
      */
-    public function deleteBrand($id);
+    public function deleteUser($id);
 }

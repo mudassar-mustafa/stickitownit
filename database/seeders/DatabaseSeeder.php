@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@stickitownit.com',
             'password' => Hash::make('admin123'),
             'status' => 'active',
+            'user_type' => 'super-admin',
             'created_at' => Carbon::now(),
         ]);
 
@@ -29,6 +30,16 @@ class DatabaseSeeder extends Seeder
             'email' => 'anotheradmin@stickitownit.com',
             'password' => Hash::make('admin123'),
             'status' => 'active',
+            'user_type' => 'admin',
+            'created_at' => Carbon::now(),
+        ]);
+
+        DB::table('users')->insert([
+            'name' => 'An Customer',
+            'email' => 'customer@stickitownit.com',
+            'password' => Hash::make('customer123'),
+            'status' => 'active',
+            'user_type' => 'customer',
             'created_at' => Carbon::now(),
         ]);
 

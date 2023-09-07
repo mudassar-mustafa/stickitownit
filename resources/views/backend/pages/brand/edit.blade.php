@@ -10,14 +10,15 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Add New Brand</h5>
+                            <h5 class="card-title">Update {{ $brand->name }} Brand</h5>
                             <!-- Vertical Form -->
-                            <form class="row g-3" action="{{route('backend.pages.brand.store')}}" method="POST">
+                            <form class="row g-3" action="{{route('backend.pages.brand.update',$brand->id)}}"
+                                  method="POST">
                                 @csrf
                                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                     <label for="name" class="form-label">Name</label>
                                     <input type="text" class="form-control" id="name" name="name"
-                                           value="{{ old('name') }}">
+                                           value="{{ old('name',$brand->name) }}">
                                     @if ($errors->has('name'))
                                         <div class="invalid-feedback">
                                             {{ $errors->first('name') }}
@@ -27,8 +28,12 @@
                                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                     <label for="status" class="form-label">Status</label>
                                     <select id="status" class="form-select" name="status">
-                                        <option selected value="active">Active</option>
-                                        <option value="inactive">Inactive</option>
+                                        <option value="active" {{ $brand->status === 'active' ? 'selected' : '' }}>
+                                            Active
+                                        </option>
+                                        <option value="inactive" {{ $brand->status === 'inactive' ? 'selected' : '' }}>
+                                            Inactive
+                                        </option>
                                     </select>
                                     @if ($errors->has('status'))
                                         <div class="invalid-feedback">
