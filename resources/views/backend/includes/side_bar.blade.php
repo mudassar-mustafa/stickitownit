@@ -9,18 +9,20 @@
             </a>
         </li>
         <!-- End Dashboard Nav -->
-        <li class="nav-item">
-            <a class="nav-link " href="{{ route('backend.pages.brand.index') }}">
-                <i class="bi bi-grid"></i>
-                <span>Brands</span>
-            </a>
-        </li>
+
         <li class="nav-item">
             <a class="nav-link " href="{{ route('backend.pages.users.index') }}">
-                <i class="bi bi-grid"></i>
+                <i class="bi bi-person"></i>
                 <span>Users</span>
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link " href="{{ route('backend.pages.brand.index') }}">
+                <i class="bi bi-bag-x"></i>
+                <span>Brands</span>
+            </a>
+        </li>
+
 
         {{-- <li class="nav-item">
           <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">

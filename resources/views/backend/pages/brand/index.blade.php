@@ -1,4 +1,5 @@
 @extends('backend.layouts.app')
+@section('title','Brands')
 @push('css')
 @endpush
 @section('content')

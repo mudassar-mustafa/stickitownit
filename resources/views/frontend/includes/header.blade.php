@@ -54,7 +54,7 @@
                         <div class="main-menu main-menu1 t-center">
                             <nav id="mobile-menu">
                                 <ul>
-                                    <li >
+                                    <li>
                                         <a href="index.html">Home</a>
 
                                     </li>
@@ -70,21 +70,21 @@
                                         </ul>
                                     </li>
                                     <li><a href="news.html">Blogs</a></li>
-{{--                                    <li class="menu-item-has-children">--}}
-{{--                                        <a href="#">Pages</a>--}}
-{{--                                        <ul class="sub-menu">--}}
-{{--                                            <li><a href="about.html">about</a></li>--}}
+                                    {{--                                    <li class="menu-item-has-children">--}}
+                                    {{--                                        <a href="#">Pages</a>--}}
+                                    {{--                                        <ul class="sub-menu">--}}
+                                    {{--                                            <li><a href="about.html">about</a></li>--}}
 
 
-{{--                                            <li><a href="faq.html">faq</a></li>--}}
-{{--                                            <li>--}}
-{{--                                                <a href="error.html">error</a>--}}
-{{--                                            </li>--}}
+                                    {{--                                            <li><a href="faq.html">faq</a></li>--}}
+                                    {{--                                            <li>--}}
+                                    {{--                                                <a href="error.html">error</a>--}}
+                                    {{--                                            </li>--}}
 
-{{--                                            <li><a href="signin.html">signin</a></li>--}}
-{{--                                            <li><a href="signup.html">signup</a></li>--}}
-{{--                                        </ul>--}}
-{{--                                    </li>--}}
+                                    {{--                                            <li><a href="signin.html">signin</a></li>--}}
+                                    {{--                                            <li><a href="signup.html">signup</a></li>--}}
+                                    {{--                                        </ul>--}}
+                                    {{--                                    </li>--}}
 
                                     <li><a href="contact.html">About Us</a></li>
                                     <li><a href="contact.html">Contact</a></li>
@@ -96,7 +96,19 @@
                         <div class="cp-header2-action d-flex align-items-center justify-content-end">
                             <div class="d-none d-md-block">
                                 <ul>
-                                    <li><a href="javascript:void(0)"><i class="fas fa-user-alt"></i></a></li>
+                                    @auth
+                                        <li><a href="{{ route('dashboard') }}"><i class="fas fa-home"></i></a></li>
+                                        <li>
+                                            <form method="POST" action="{{ route('logout') }}">
+                                                @csrf
+                                                <a href="{{ route('logout') }}"   onclick="event.preventDefault(); this.closest('form').submit();"><i class="fas fa-sign-out"></i></a>
+                                            </form>
+                                        </li>
+                                    @else
+                                        <li><a href="{{ route('login') }}"><i class="fas fa-user-alt"></i></a></li>
+                                    @endauth
+
+
                                     <li><a href="javascript:void(0)"><i
                                                 class="fas fa-cart-plus"></i><span>4</span></a></li>
                                 </ul>

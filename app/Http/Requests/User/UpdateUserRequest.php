@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\User;
 
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
 
 
@@ -27,29 +29,20 @@ class UpdateUserRequest extends FormRequest
     public function rules(): array
     {
 
-        if ($this->has('password') && !is_null($this->password)) {
             return [
                 'name' => 'required|string|max:255',
-                'email' => 'required|email|max:255|unique:users,id,' . $this->id,
+                'email' => ['email', 'max:255', Rule::unique(User::class)->ignore($this->user()->id)],
                 'status' => ['string', 'max:255'],
                 'phone_number' => ['required'],
                 'cnic' => ['required'],
-                'password' => ['required', Password::min(8)
+                'password' => $this->has('password') && !is_null($this->password) ? ['required', Password::min(8)
                     ->letters()
                     ->mixedCase()
                     ->numbers()
                     ->symbols()
-                    ->uncompromised()]
+                    ->uncompromised()] : ['nullable']
             ];
-        } else {
-            return [
-                'name' => 'required|string|max:255',
-                'email' => 'required|email|max:255|unique:users,id,' . $this->id,
-                'status' => ['string', 'max:255'],
-                'phone_number' => ['required'],
-                'cnic' => ['required'],
-            ];
-        }
+
 
     }
 }

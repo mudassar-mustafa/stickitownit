@@ -27,9 +27,17 @@ class AuthenticatedSessionController extends Controller
     {
         $request->authenticate();
 
-        $request->session()->regenerate();
+        if ($request->user()->status === 'active') {
+            $request->session()->regenerate();
+            if ($request->user()->user_type === 'customer') {
+                return redirect()->route('/');
+            }
+            return redirect()->intended(RouteServiceProvider::HOME);
+        } else {
+            Auth::logout();
+            return redirect()->route('login')->with('status', 'not-verified');
+        }
 
-        return redirect()->intended(RouteServiceProvider::HOME);
     }
 
     /**

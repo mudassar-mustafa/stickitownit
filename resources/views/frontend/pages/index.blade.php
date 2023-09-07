@@ -1,4 +1,5 @@
 @extends('frontend.layouts.app')
+@section('title','Home')
 @push('css')
 @endpush
 @section('content')
@@ -39,14 +40,17 @@
                                     <div class="cp-banner-img p-relative">
                                         <div class="cp-banner-3 p-absolute d-none d-xxl-block wow fadeInUp animated"
                                              data-wow-duration="3s" data-wow-delay="2.3s">
-                                            <img class="cp-bg-move-x" src="{{ asset('assets/img/shape/banner-shape-3.png') }}"
+                                            <img class="cp-bg-move-x"
+                                                 src="{{ asset('assets/img/shape/banner-shape-3.png') }}"
                                                  alt="img not found">
                                         </div>
                                         <div class="cp-banner-4 p-absolute cp-rotation zi--1">
-                                            <img src="{{ asset('assets/img/shape/banner-shape-4.png') }}" alt="img not found">
+                                            <img src="{{ asset('assets/img/shape/banner-shape-4.png') }}"
+                                                 alt="img not found">
                                         </div>
                                         <div class="cp-banner-5 p-absolute cp-rotation">
-                                            <img src="{{ asset('assets/img/shape/banner-shape-5.png') }}" alt="img not found">
+                                            <img src="{{ asset('assets/img/shape/banner-shape-5.png') }}"
+                                                 alt="img not found">
                                         </div>
                                         <div class="wow fadeInUp animated" data-wow-duration="3s">
                                             <div class="js-tilt w-img cp-banner-main-img">
@@ -575,8 +579,9 @@
                                             <a target="_blank" href="#"><i class="fab fa-youtube"></i></a>
                                         </div>
                                         <div class="cp-team-img w-img mb-20">
-                                            <a href="team-details.html"><img src="{{ asset('assets/img/team/team-11.png') }}"
-                                                                             alt="team"></a>
+                                            <a href="team-details.html"><img
+                                                    src="{{ asset('assets/img/team/team-11.png') }}"
+                                                    alt="team"></a>
                                         </div>
                                         <div class="cp-team-content">
                                             <h4 class="cp-team-name"><a href="team-details.html">Billy Murphy</a></h4>
@@ -593,8 +598,9 @@
                                             <a target="_blank" href="#"><i class="fab fa-youtube"></i></a>
                                         </div>
                                         <div class="cp-team-img w-img mb-20">
-                                            <a href="team-details.html"><img src="{{ asset('assets/img/team/team-12.png') }}"
-                                                                             alt="team"></a>
+                                            <a href="team-details.html"><img
+                                                    src="{{ asset('assets/img/team/team-12.png') }}"
+                                                    alt="team"></a>
                                         </div>
                                         <div class="cp-team-content">
                                             <h4 class="cp-team-name"><a href="team-details.html">Mr Eli Bell</a></h4>
@@ -611,8 +617,9 @@
                                             <a target="_blank" href="#"><i class="fab fa-youtube"></i></a>
                                         </div>
                                         <div class="cp-team-img w-img mb-20">
-                                            <a href="team-details.html"><img src="{{ asset('assets/img/team/team-13.png') }}"
-                                                                             alt="team"></a>
+                                            <a href="team-details.html"><img
+                                                    src="{{ asset('assets/img/team/team-13.png') }}"
+                                                    alt="team"></a>
                                         </div>
                                         <div class="cp-team-content">
                                             <h4 class="cp-team-name"><a href="team-details.html">Harrison Walker</a>
@@ -630,8 +637,9 @@
                                             <a target="_blank" href="#"><i class="fab fa-youtube"></i></a>
                                         </div>
                                         <div class="cp-team-img w-img mb-20">
-                                            <a href="team-details.html"><img src="{{ asset('assets/img/team/team-14.png') }}"
-                                                                             alt="team"></a>
+                                            <a href="team-details.html"><img
+                                                    src="{{ asset('assets/img/team/team-14.png') }}"
+                                                    alt="team"></a>
                                         </div>
                                         <div class="cp-team-content">
                                             <h4 class="cp-team-name"><a href="team-details.html">Billy Murphy</a></h4>
@@ -648,8 +656,9 @@
                                             <a target="_blank" href="#"><i class="fab fa-youtube"></i></a>
                                         </div>
                                         <div class="cp-team-img w-img mb-20">
-                                            <a href="team-details.html"><img src="{{ asset('assets/img/team/team-15.png') }}"
-                                                                             alt="team"></a>
+                                            <a href="team-details.html"><img
+                                                    src="{{ asset('assets/img/team/team-15.png') }}"
+                                                    alt="team"></a>
                                         </div>
                                         <div class="cp-team-content">
                                             <h4 class="cp-team-name"><a href="team-details.html">Mr Eli Bell</a></h4>
@@ -666,8 +675,9 @@
                                             <a target="_blank" href="#"><i class="fab fa-youtube"></i></a>
                                         </div>
                                         <div class="cp-team-img w-img mb-20">
-                                            <a href="team-details.html"><img src="{{ asset('assets/img/team/team-16.png') }}"
-                                                                             alt="team"></a>
+                                            <a href="team-details.html"><img
+                                                    src="{{ asset('assets/img/team/team-16.png') }}"
+                                                    alt="team"></a>
                                         </div>
                                         <div class="cp-team-content">
                                             <h4 class="cp-team-name"><a href="team-details.html">Harrison Walker</a>
@@ -685,8 +695,9 @@
                                             <a target="_blank" href="#"><i class="fab fa-youtube"></i></a>
                                         </div>
                                         <div class="cp-team-img w-img mb-20">
-                                            <a href="team-details.html"><img src="{{ asset('assets/img/team/team-17.png') }}"
-                                                                             alt="team"></a>
+                                            <a href="team-details.html"><img
+                                                    src="{{ asset('assets/img/team/team-17.png') }}"
+                                                    alt="team"></a>
                                         </div>
                                         <div class="cp-team-content">
                                             <h4 class="cp-team-name"><a href="team-details.html">Billy Murphy</a></h4>
@@ -703,8 +714,9 @@
                                             <a target="_blank" href="#"><i class="fab fa-youtube"></i></a>
                                         </div>
                                         <div class="cp-team-img w-img mb-20">
-                                            <a href="team-details.html"><img src="{{ asset('assets/img/team/team-18.png') }}"
-                                                                             alt="team"></a>
+                                            <a href="team-details.html"><img
+                                                    src="{{ asset('assets/img/team/team-18.png') }}"
+                                                    alt="team"></a>
                                         </div>
                                         <div class="cp-team-content">
                                             <h4 class="cp-team-name"><a href="team-details.html">Billy Murphy</a></h4>
@@ -748,8 +760,9 @@
                                          data-title="Architect Design" data-fx="1">
                                         <div class="cp-img-overlay wow"></div>
                                         <div class="cp-case-study-img w-img fix">
-                                            <a href="project-details.html"><img src="{{ asset('assets/img/case/case-study-1.jpg') }}"
-                                                                                alt="study"></a>
+                                            <a href="project-details.html"><img
+                                                    src="{{ asset('assets/img/case/case-study-1.jpg') }}"
+                                                    alt="study"></a>
                                         </div>
                                     </div>
                                 </div>
@@ -759,8 +772,9 @@
                                          data-title="Custom Greeting Card Printed" data-fx="1">
                                         <div class="cp-img-overlay wow"></div>
                                         <div class="cp-case-study-img w-img fix">
-                                            <a href="project-details.html"><img src="{{ asset('assets/img/case/case-study-2.jpg') }}"
-                                                                                alt="case-study"></a>
+                                            <a href="project-details.html"><img
+                                                    src="{{ asset('assets/img/case/case-study-2.jpg') }}"
+                                                    alt="case-study"></a>
                                         </div>
                                     </div>
                                 </div>
@@ -770,8 +784,9 @@
                                          data-title="Printed Paper Coffee Cup" data-fx="1">
                                         <div class="cp-img-overlay wow"></div>
                                         <div class="cp-case-study-img w-img fix">
-                                            <a href="project-details.html"><img src="{{ asset('assets/img/case/case-study-4.jpg') }}"
-                                                                                alt="case-study"></a>
+                                            <a href="project-details.html"><img
+                                                    src="{{ asset('assets/img/case/case-study-4.jpg') }}"
+                                                    alt="case-study"></a>
                                         </div>
                                     </div>
                                 </div>
@@ -787,8 +802,9 @@
                                          data-title="Printed Plastic Coffee Cup" data-fx="1">
                                         <div class="cp-img-overlay wow"></div>
                                         <div class="cp-case-study-img w-img fix">
-                                            <a href="project-details.html"><img src="{{ asset('assets/img/case/case-study-3.jpg') }}"
-                                                                                alt="case-study"></a>
+                                            <a href="project-details.html"><img
+                                                    src="{{ asset('assets/img/case/case-study-3.jpg') }}"
+                                                    alt="case-study"></a>
                                         </div>
                                     </div>
                                 </div>
@@ -798,8 +814,9 @@
                                          data-title="Custom Greeting Card Printed" data-fx="1">
                                         <div class="cp-img-overlay wow"></div>
                                         <div class="cp-case-study-img w-img fix">
-                                            <a href="project-details.html"><img src="{{ asset('assets/img/case/case-study-5.jpg') }}"
-                                                                                alt="case-study"></a>
+                                            <a href="project-details.html"><img
+                                                    src="{{ asset('assets/img/case/case-study-5.jpg') }}"
+                                                    alt="case-study"></a>
                                         </div>
                                     </div>
                                 </div>
@@ -809,8 +826,9 @@
                                          data-title="Custom Greeting Card Printed" data-fx="1">
                                         <div class="cp-img-overlay wow"></div>
                                         <div class="cp-case-study-img w-img fix">
-                                            <a href="project-details.html"><img src="{{ asset('assets/img/case/case-study-6.jpg') }}"
-                                                                                alt="case-study"></a>
+                                            <a href="project-details.html"><img
+                                                    src="{{ asset('assets/img/case/case-study-6.jpg') }}"
+                                                    alt="case-study"></a>
                                         </div>
                                     </div>
                                 </div>
@@ -864,8 +882,9 @@
                                                     <img src="{{ asset('assets/img/testimonial/testimonial-1.jpg') }}"
                                                          alt="testimonial">
                                                     <div class="cp-testimonial-quotation p-absolute">
-                                                        <img src="{{ asset('assets/img/testimonial/testimonial-quotation.png') }}"
-                                                             alt="testimonial">
+                                                        <img
+                                                            src="{{ asset('assets/img/testimonial/testimonial-quotation.png') }}"
+                                                            alt="testimonial">
                                                     </div>
                                                 </div>
                                                 <div class="cp-testimonial-content">
@@ -893,8 +912,9 @@
                                                     <img src="{{ asset('assets/img/testimonial/testimonial-2.jpg') }}"
                                                          alt="testimonial">
                                                     <div class="cp-testimonial-quotation p-absolute">
-                                                        <img src="{{ asset('assets/img/testimonial/testimonial-quotation.png') }}"
-                                                             alt="testimonial">
+                                                        <img
+                                                            src="{{ asset('assets/img/testimonial/testimonial-quotation.png') }}"
+                                                            alt="testimonial">
                                                     </div>
                                                 </div>
                                                 <div class="cp-testimonial-content">
@@ -921,8 +941,9 @@
                                                     <img src="{{ asset('assets/img/testimonial/testimonial-3.jpg') }}"
                                                          alt="testimonial">
                                                     <div class="cp-testimonial-quotation p-absolute">
-                                                        <img src="{{ asset('assets/img/testimonial/testimonial-quotation.png') }}"
-                                                             alt="testimonial">
+                                                        <img
+                                                            src="{{ asset('assets/img/testimonial/testimonial-quotation.png') }}"
+                                                            alt="testimonial">
                                                     </div>
                                                 </div>
                                                 <div class="cp-testimonial-content">
@@ -950,8 +971,9 @@
                                                     <img src="{{ asset('assets/img/testimonial/testimonial-4.jpg') }}"
                                                          alt="testimonial">
                                                     <div class="cp-testimonial-quotation p-absolute">
-                                                        <img src="{{ asset('assets/img/testimonial/testimonial-quotation.png') }}"
-                                                             alt="testimonial">
+                                                        <img
+                                                            src="{{ asset('assets/img/testimonial/testimonial-quotation.png') }}"
+                                                            alt="testimonial">
                                                     </div>
                                                 </div>
                                                 <div class="cp-testimonial-content">
@@ -1020,8 +1042,9 @@
                                     <div class="swiper-slide">
                                         <div class="cp-news3-item">
                                             <div class="cp-news3-img w-img">
-                                                <a href="news-details.html"><img src="{{ asset('assets/img/news/news-1.jpg') }}"
-                                                                                 alt="news"></a>
+                                                <a href="news-details.html"><img
+                                                        src="{{ asset('assets/img/news/news-1.jpg') }}"
+                                                        alt="news"></a>
                                             </div>
                                             <div class="cp-news3-content">
                                                 <span class="cp-news3-data">January 02, 2023</span>
@@ -1037,8 +1060,9 @@
                                     <div class="swiper-slide">
                                         <div class="cp-news3-item">
                                             <div class="cp-news3-img w-img">
-                                                <a href="news-details.html"><img src="{{ asset('assets/img/news/news-2.jpg') }}"
-                                                                                 alt="news"></a>
+                                                <a href="news-details.html"><img
+                                                        src="{{ asset('assets/img/news/news-2.jpg') }}"
+                                                        alt="news"></a>
                                             </div>
                                             <div class="cp-news3-content">
                                                 <span class="cp-news3-data">January 03, 2023</span>
@@ -1053,8 +1077,9 @@
                                     <div class="swiper-slide">
                                         <div class="cp-news3-item">
                                             <div class="cp-news3-img w-img">
-                                                <a href="news-details.html"><img src="{{ asset('assets/img/news/news-3.jpg') }}"
-                                                                                 alt="news"></a>
+                                                <a href="news-details.html"><img
+                                                        src="{{ asset('assets/img/news/news-3.jpg') }}"
+                                                        alt="news"></a>
                                             </div>
                                             <div class="cp-news3-content">
                                                 <span class="cp-news3-data">January 02, 2023</span>
@@ -1070,8 +1095,9 @@
                                     <div class="swiper-slide">
                                         <div class="cp-news3-item">
                                             <div class="cp-news3-img w-img">
-                                                <a href="news-details.html"><img src="{{ asset('assets/img/news/news-1.jpg') }}"
-                                                                                 alt="news"></a>
+                                                <a href="news-details.html"><img
+                                                        src="{{ asset('assets/img/news/news-1.jpg') }}"
+                                                        alt="news"></a>
                                             </div>
                                             <div class="cp-news3-content">
                                                 <span class="cp-news3-data">January 04, 2023</span>

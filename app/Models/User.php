@@ -30,7 +30,8 @@ class User extends Authenticatable
         'cnic',
         'country_id',
         'state_id',
-        'city_id'
+        'city_id',
+        'profile_image'
     ];
 
     /**
