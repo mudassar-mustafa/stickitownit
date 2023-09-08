@@ -3,6 +3,9 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\UserController;
+use App\Http\Controllers\Backend\CountryController;
+use App\Http\Controllers\Backend\StateController;
+use App\Http\Controllers\Backend\CityController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -49,6 +52,37 @@ Route::middleware('auth')->group(function () {
         Route::post('/{id}/update', 'update')->name('backend.pages.users.update');
         Route::delete('/delete/{id}', 'destroy')->name('backend.pages.users.destroy');
     });
+
+    //  Country Routes
+    Route::controller(CountryController::class)->prefix('countries')->group(function () {
+        Route::get('/', 'index')->name('backend.pages.country.index');
+        Route::get('/create', 'create')->name('backend.pages.country.create');
+        Route::post('/store', 'store')->name('backend.pages.country.store');
+        Route::get('/{id}/edit', 'edit')->name('backend.pages.country.edit');
+        Route::post('/{id}/update', 'update')->name('backend.pages.country.update');
+        Route::delete('/delete/{id}', 'destroy')->name('backend.pages.country.destroy');
+    });
+
+    //  State Routes
+    Route::controller(StateController::class)->prefix('states')->group(function () {
+        Route::get('/', 'index')->name('backend.pages.state.index');
+        Route::get('/create', 'create')->name('backend.pages.state.create');
+        Route::post('/store', 'store')->name('backend.pages.state.store');
+        Route::get('/{id}/edit', 'edit')->name('backend.pages.state.edit');
+        Route::post('/{id}/update', 'update')->name('backend.pages.state.update');
+        Route::delete('/delete/{id}', 'destroy')->name('backend.pages.state.destroy');
+    });
+
+    //  City Routes
+    Route::controller(CityController::class)->prefix('cities')->group(function () {
+        Route::get('/', 'index')->name('backend.pages.city.index');
+        Route::get('/create', 'create')->name('backend.pages.city.create');
+        Route::post('/store', 'store')->name('backend.pages.city.store');
+        Route::get('/{id}/edit', 'edit')->name('backend.pages.city.edit');
+        Route::post('/{id}/update', 'update')->name('backend.pages.city.update');
+        Route::delete('/delete/{id}', 'destroy')->name('backend.pages.city.destroy');
+    });
+
 });
 
 require __DIR__.'/auth.php';

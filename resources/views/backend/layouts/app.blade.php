@@ -25,6 +25,7 @@
   <link href="{{ asset('backend/vendor/quill/quill.bubble.css')}}" rel="stylesheet">
   <link href="{{ asset('backend/vendor/remixicon/remixicon.css')}}" rel="stylesheet">
   <link href="{{ asset('backend/vendor/datatable/dataTables.bootstrap5.min.css')}}" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
   <!-- Template Main CSS File -->
   <link href="{{ asset('backend/css/style.css')}}" rel="stylesheet">
@@ -67,6 +68,7 @@
   <script src="{{ asset('backend/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
   <script src="{{ asset('backend/vendor/quill/quill.min.js')}}"></script>
   <script src="{{ asset('backend/vendor/tinymce/tinymce.min.js')}}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
   <!-- Template Main JS File -->
   <script src="{{ asset('backend/js/main.js')}}"></script>
