@@ -7,12 +7,20 @@ use App\Contracts\Backend\CategoryContract;
 use App\Contracts\Backend\FaqContract;
 use App\Contracts\Backend\FeatureContract;
 use App\Contracts\Backend\UserContract;
+use App\Contracts\Backend\CountryContract;
+use App\Contracts\Backend\StateContract;
+use App\Contracts\Backend\CityContract;
+
+use Illuminate\Support\ServiceProvider;
+
+use App\Repositories\Backend\BrandRepository;
+use App\Repositories\Backend\CountryRepository;
+use App\Repositories\Backend\StateRepository;
+use App\Repositories\Backend\CityRepository;
 use App\Repositories\Backend\CategoryRepository;
 use App\Repositories\Backend\FaqRepository;
 use App\Repositories\Backend\FeatureRepository;
 use App\Repositories\Backend\UserRepository;
-use Illuminate\Support\ServiceProvider;
-use App\Repositories\Backend\BrandRepository;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -22,6 +30,9 @@ class RepositoryServiceProvider extends ServiceProvider
         CategoryContract::class => CategoryRepository::class,
         FeatureContract::class => FeatureRepository::class,
         FaqContract::class => FaqRepository::class,
+        CountryContract::class => CountryRepository::class,
+        StateContract::class => StateRepository::class,
+        CityContract::class => CityRepository::class,
     ];
 
     /**

@@ -40,6 +40,28 @@
                 <span>FAQs</span>
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#" aria-expanded="true">
+                <i class="bi bi-map-fill"></i><span>Locations</span><i class="bi bi-map ms-auto"></i>
+            </a>
+            <ul id="forms-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
+                <li>
+                    <a href="{{ route('backend.pages.country.index') }}">
+                        <i class="bi bi-circle"></i><span>Country</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('backend.pages.state.index') }}">
+                        <i class="bi bi-circle"></i><span>State</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('backend.pages.city.index') }}">
+                        <i class="bi bi-circle"></i><span>City</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
 
 
         {{-- <li class="nav-item">
