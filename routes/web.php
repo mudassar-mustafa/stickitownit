@@ -1,8 +1,12 @@
 <?php
 
+use \App\Http\Controllers\Frontend\LandingController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\UserController;
+use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\FeaturesController;
+use App\Http\Controllers\Backend\FAQController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,9 +20,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('frontend.pages.index');
-})->name('/');
+Route::get('/', [LandingController::class, 'index'])->name('/');
+
 
 Route::get('/dashboard', function () {
     return view('backend.pages.index');
@@ -48,6 +51,37 @@ Route::middleware('auth')->group(function () {
         Route::get('/{id}/edit', 'edit')->name('backend.pages.users.edit');
         Route::post('/{id}/update', 'update')->name('backend.pages.users.update');
         Route::delete('/delete/{id}', 'destroy')->name('backend.pages.users.destroy');
+    });
+
+    //  Category Routes
+    Route::controller(CategoryController::class)->prefix('categories')->group(function () {
+        Route::get('/', 'index')->name('backend.pages.categories.index');
+        Route::get('/create', 'create')->name('backend.pages.categories.create');
+        Route::post('/store', 'store')->name('backend.pages.categories.store');
+        Route::get('/{id}/edit', 'edit')->name('backend.pages.categories.edit');
+        Route::post('/{id}/update', 'update')->name('backend.pages.categories.update');
+        Route::delete('/delete/{id}', 'destroy')->name('backend.pages.categories.destroy');
+    });
+
+
+    //  Features Routes
+    Route::controller(FeaturesController::class)->prefix('features')->group(function () {
+        Route::get('/', 'index')->name('backend.pages.features.index');
+        Route::get('/create', 'create')->name('backend.pages.features.create');
+        Route::post('/store', 'store')->name('backend.pages.features.store');
+        Route::get('/{id}/edit', 'edit')->name('backend.pages.features.edit');
+        Route::post('/{id}/update', 'update')->name('backend.pages.features.update');
+        Route::delete('/delete/{id}', 'destroy')->name('backend.pages.features.destroy');
+    });
+
+    //  FAQ Routes
+    Route::controller(FAQController::class)->prefix('faqs')->group(function () {
+        Route::get('/', 'index')->name('backend.pages.faqs.index');
+        Route::get('/create', 'create')->name('backend.pages.faqs.create');
+        Route::post('/store', 'store')->name('backend.pages.faqs.store');
+        Route::get('/{id}/edit', 'edit')->name('backend.pages.faqs.edit');
+        Route::post('/{id}/update', 'update')->name('backend.pages.faqs.update');
+        Route::delete('/delete/{id}', 'destroy')->name('backend.pages.faqs.destroy');
     });
 });
 

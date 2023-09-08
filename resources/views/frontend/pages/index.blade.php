@@ -133,28 +133,29 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-3 col-lg-4 col-md-6"></div>
-                    <div class="col-xl-3 col-lg-4 col-md-6">
-                        <div class="cp-services-item t-center mb-30 wow fadeInUp animated" data-wow-duration="1.5s"
-                             data-wow-delay=".3s">
-                            <span class="cp-services-num">01</span>
-                            <div class="cp-services-img w-img">
-                                <img src="{{ asset('assets/img/service/services-1.jpg') }}" alt="img not found">
+                    @if(!empty($categories) && count($categories) > 0)
+                        @if(count($categories) === 2)
+                            <div class="col-xl-3 col-lg-4 col-md-6"></div>
+                        @endif
+                        @foreach($categories as $key=>$category)
+
+                            <div class="col-xl-3 col-lg-4 col-md-6">
+                                <div class="cp-services-item t-center mb-30 wow fadeInUp animated"
+                                     data-wow-duration="1.5s"
+                                     data-wow-delay=".3s">
+                                    <span class="cp-services-num">0{{ $key+1 }}</span>
+                                    <div class="cp-services-img w-img">
+                                        <img src="{{ $category->image }}" alt="{{ $category->name }}">
+                                    </div>
+                                    <h4 class="cp-services-title"><a href="#">{{ $category->name }}</a></h4>
+                                </div>
                             </div>
-                            <h4 class="cp-services-title"><a href="service-details.html">Stickers</a></h4>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-4 col-md-6">
-                        <div class="cp-services-item t-center mb-30 wow fadeInUp animated" data-wow-duration="1.5s"
-                             data-wow-delay=".4s">
-                            <span class="cp-services-num">02</span>
-                            <div class="cp-services-img w-img">
-                                <img src="{{ asset('assets/img/service/services-2.jpg') }}" alt="img not found">
-                            </div>
-                            <h4 class="cp-services-title"><a href="service-details.html">Labels</a></h4>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-4 col-md-6"></div>
+                        @endforeach
+                    @endif
+
+                    @if(count($categories) === 2)
+                        <div class="col-xl-3 col-lg-4 col-md-6"></div>
+                    @endif
                 </div>
             </div>
         </section>
@@ -182,94 +183,22 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xl-3 col-lg-4 col-sm-6">
-                        <div class="cp-feature-item mb-40 wow fadeInUp animated" data-wow-duration="1.5s"
-                             data-wow-delay="0.5s">
-                            <div class="cp-feature-icon mb-30">
-                                <img src="{{ asset('assets/img/feature/feature-icon-1.png') }}" alt="feature">
+                    @if(!empty($features) && count($features) >0)
+                        @foreach($features as $key=>$feature)
+                            <div class="col-xl-3 col-lg-4 col-sm-6">
+                                <div class="cp-feature-item mb-40 wow fadeInUp animated"
+                                     data-wow-duration="1.{{$key+5}}s"
+                                     data-wow-delay="0.{{$key+1}}s">
+                                    <div class="cp-feature-icon mb-30">
+                                        <img src="{{$feature->image}}" alt="{{ $feature->name }}">
+                                    </div>
+                                    <h4 class="cp-feature-title mb-20">{{ $feature->name }}</h4>
+                                    <p class="cp-feature-text">{{ $feature->short_description }}</p>
+                                </div>
                             </div>
-                            <h4 class="cp-feature-title mb-20">Top quality prints</h4>
-                            <p class="cp-feature-text">communications det, consec tetur adipiscing elit duis nec fringi
-                                communications company</p>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-4 col-sm-6">
-                        <div class="cp-feature-item mb-40 wow fadeInUp animated" data-wow-duration="1.5s"
-                             data-wow-delay="0.6s">
-                            <div class="cp-feature-icon mb-30">
-                                <img src="{{ asset('assets/img/feature/feature-icon-2.png') }}" alt="feature">
-                            </div>
-                            <h4 class="cp-feature-title mb-20">Mix and match colors</h4>
-                            <p class="cp-feature-text">communications det, consec tetur adipiscing elit duis nec fringi
-                                communications company</p>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-4 col-sm-6">
-                        <div class="cp-feature-item mb-40 wow fadeInUp animated" data-wow-duration="1.5s"
-                             data-wow-delay="0.7s">
-                            <div class="cp-feature-icon mb-30">
-                                <img src="{{ asset('assets/img/feature/feature-icon-3.png') }}" alt="feature">
-                            </div>
-                            <h4 class="cp-feature-title mb-20">Shipping worldwide</h4>
-                            <p class="cp-feature-text">communications det, consec tetur adipiscing elit duis nec fringi
-                                communications company</p>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-4 col-sm-6">
-                        <div class="cp-feature-item mb-40 wow fadeInUp animated" data-wow-duration="1.5s"
-                             data-wow-delay="0.8s">
-                            <div class="cp-feature-icon mb-30">
-                                <img src="{{ asset('assets/img/feature/feature-icon-4.png') }}" alt="feature">
-                            </div>
-                            <h4 class="cp-feature-title mb-20">Offset Printing</h4>
-                            <p class="cp-feature-text">communications det, consec tetur adipiscing elit duis nec fringi
-                                communications company</p>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-4 col-sm-6">
-                        <div class="cp-feature-item mb-40 wow fadeInUp animated" data-wow-duration="1.5s"
-                             data-wow-delay="0.9s">
-                            <div class="cp-feature-icon mb-30">
-                                <img src="{{ asset('assets/img/feature/feature-icon-5.png') }}" alt="feature">
-                            </div>
-                            <h4 class="cp-feature-title mb-20">Made-to-measure</h4>
-                            <p class="cp-feature-text">communications det, consec tetur adipiscing elit duis nec fringi
-                                communications company</p>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-4 col-sm-6">
-                        <div class="cp-feature-item mb-40 wow fadeInUp animated" data-wow-duration="1.5s"
-                             data-wow-delay="1s">
-                            <div class="cp-feature-icon mb-30">
-                                <img src="{{ asset('assets/img/feature/feature-icon-6.png') }}" alt="feature">
-                            </div>
-                            <h4 class="cp-feature-title mb-20">Reorder quickly and easily</h4>
-                            <p class="cp-feature-text">communications det, consec tetur adipiscing elit duis nec fringi
-                                communications company</p>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-4 col-sm-6">
-                        <div class="cp-feature-item mb-40 wow fadeInUp animated" data-wow-duration="1.5s"
-                             data-wow-delay="1.1s">
-                            <div class="cp-feature-icon mb-30">
-                                <img src="{{ asset('assets/img/feature/feature-icon-7.png') }}" alt="feature">
-                            </div>
-                            <h4 class="cp-feature-title mb-20">Quality Guarantee</h4>
-                            <p class="cp-feature-text">communications det, consec tetur adipiscing elit duis nec fringi
-                                communications company</p>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-4 col-sm-6">
-                        <div class="cp-feature-item mb-40 wow fadeInUp animated" data-wow-duration="1.5s"
-                             data-wow-delay="1.2s">
-                            <div class="cp-feature-icon mb-30">
-                                <img src="{{ asset('assets/img/feature/feature-icon-8.png') }}" alt="feature">
-                            </div>
-                            <h4 class="cp-feature-title mb-20">Friendly production processes</h4>
-                            <p class="cp-feature-text">communications det, consec tetur adipiscing elit duis nec fringi
-                                communications company</p>
-                        </div>
-                    </div>
+                        @endforeach
+                    @endif
+
                 </div>
             </div>
         </section>
@@ -358,67 +287,26 @@
                                     A
                                     full administration printing background.</p>
                                 <div class="accordion" id="accordionExample">
-                                    <div class="accordion-item wow fadeInUp animated" data-wow-delay="0.6s">
-                                        <h2 class="accordion-header" id="headingOne">
-                                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                                    data-bs-target="#collapseOne" aria-expanded="true"
-                                                    aria-controls="collapseOne">Find
-                                                the perfect product
-                                            </button>
-                                        </h2>
-                                        <div id="collapseOne" class="accordion-collapse collapse show"
-                                             aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                            <div class="accordion-body">Communications det, consec tetur adipiscing elit
-                                                duis nec
-                                                fringi communications company We build and activate brands through
-                                                cultural
-                                                insight,
-                                                str vision, and.
+                                    @if(!empty($faqs) && count($faqs) > 0)
+                                        @foreach($faqs as $key=>$faq)
+                                            <div class="accordion-item wow fadeInUp animated"
+                                                 data-wow-delay="0.{{$key+6}}s">
+                                                <h2 class="accordion-header" id="heading{{$key}}">
+                                                    <button class="accordion-button {{ $key !== 0 ? 'collapsed' : '' }}" type="button"
+                                                            data-bs-toggle="collapse"
+                                                            data-bs-target="#collapse{{$key}}" aria-expanded="{{ $key === 0  ? true : false }}"
+                                                            aria-controls="collapse{{$key}}">{{$faq->name}}
+                                                    </button>
+                                                </h2>
+                                                <div id="collapse{{$key}}"
+                                                     class="accordion-collapse collapse {{ $key===0 ? 'show' : '' }}"
+                                                     aria-labelledby="heading{{$key}}" data-bs-parent="#accordionExample">
+                                                    <div class="accordion-body">{{$faq->short_description}}
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="accordion-item wow fadeInUp animated" data-wow-delay="0.7s">
-                                        <h2 class="accordion-header" id="headingTwo">
-                                            <button class="accordion-button collapsed" type="button"
-                                                    data-bs-toggle="collapse"
-                                                    data-bs-target="#collapseTwo" aria-expanded="false"
-                                                    aria-controls="collapseTwo">We
-                                                provide fast on-demand printing
-                                            </button>
-                                        </h2>
-                                        <div id="collapseTwo" class="accordion-collapse collapse"
-                                             aria-labelledby="headingTwo"
-                                             data-bs-parent="#accordionExample">
-                                            <div class="accordion-body">Communications det, consec tetur adipiscing elit
-                                                duis nec
-                                                fringi communications company We build and activate brands through
-                                                cultural
-                                                insight,
-                                                str vision, and.
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="accordion-item wow fadeInUp animated" data-wow-delay="0.8s">
-                                        <h2 class="accordion-header" id="headingThree">
-                                            <button class="accordion-button collapsed" type="button"
-                                                    data-bs-toggle="collapse"
-                                                    data-bs-target="#collapseThree" aria-expanded="false"
-                                                    aria-controls="collapseThree">Activate brands through cultural
-                                                insight
-                                            </button>
-                                        </h2>
-                                        <div id="collapseThree" class="accordion-collapse collapse"
-                                             aria-labelledby="headingThree"
-                                             data-bs-parent="#accordionExample">
-                                            <div class="accordion-body">Communications det, consec tetur adipiscing elit
-                                                duis nec
-                                                fringi communications company We build and activate brands through
-                                                cultural
-                                                insight,
-                                                str vision, and.
-                                            </div>
-                                        </div>
-                                    </div>
+                                        @endforeach
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -427,7 +315,6 @@
             </div>
         </section>
         <!-- faq area end here  -->
-
 
 
         <!-- news area end here  -->

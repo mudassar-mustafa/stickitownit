@@ -22,6 +22,24 @@
                 <span>Brands</span>
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link " href="{{ route('backend.pages.categories.index') }}">
+                <i class="bi bi-type"></i>
+                <span>Category</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link " href="{{ route('backend.pages.features.index') }}">
+                <i class="bi bi-database"></i>
+                <span>Features</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link " href="{{ route('backend.pages.faqs.index') }}">
+                <i class="bi bi-question"></i>
+                <span>FAQs</span>
+            </a>
+        </li>
 
 
         {{-- <li class="nav-item">

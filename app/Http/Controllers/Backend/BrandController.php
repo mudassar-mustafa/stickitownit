@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Requests\Brand\UpdateBrandRequest;
+use App\Http\Requests\Brand\UpdateCategoryRequest;
 use Illuminate\Contracts\View\View;
 use App\Contracts\Backend\BrandContract;
-use App\Http\Requests\Brand\StoreBrandRequest;
+use App\Http\Requests\Brand\StoreCategoryRequest;
 use App\Services\UtilService;
 use App\Http\Enums\CommonEnum;
 use Illuminate\Http\RedirectResponse;
@@ -47,11 +47,11 @@ class BrandController extends Controller
     }
 
     /**
-     * @param StoreBrandRequest $request
+     * @param StoreCategoryRequest $request
      * @param UtilService $utilService
      * @return RedirectResponse
      */
-    public function store(StoreBrandRequest $request, UtilService $utilService): RedirectResponse
+    public function store(StoreCategoryRequest $request, UtilService $utilService): RedirectResponse
     {
         try {
             $data = $request->validated();
@@ -79,11 +79,11 @@ class BrandController extends Controller
 
     /**
      * @param $id
-     * @param UpdateBrandRequest $request
+     * @param UpdateCategoryRequest $request
      * @param UtilService $utilService
      * @return RedirectResponse
      */
-    public function update($id, UpdateBrandRequest $request, UtilService $utilService)
+    public function update($id, UpdateCategoryRequest $request, UtilService $utilService)
     {
         try {
             $data = $request->validated();
