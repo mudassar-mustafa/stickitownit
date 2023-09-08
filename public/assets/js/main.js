@@ -31,9 +31,9 @@ Counter Js
 range slider activation
 Product Slider Js
 side - info
-about zoom js 
+about zoom js
 Tilt js
-Banner Video 
+Banner Video
 
 ****************************************************/
 
@@ -127,7 +127,7 @@ Banner Video
     var settings = $("body");
     let dark;
     $x == true ? (dark = "d-block") : (dark = "d-none");
-    var settings_html = `<div class="tp-theme-settings-area transition-3">
+    var settings_html = `<div class="tp-theme-settings-area transition-3" style="display:none">
 		<div class="tp-theme-wrapper">
 		   <div class="tp-theme-header text-center">
 			  <h4 class="tp-theme-header-title">Theme Settings</h4>
@@ -169,8 +169,8 @@ Banner Video
 				 <div class="row row-cols-4 gy-2 gx-2">
 					<div class="col">
 					   <div class="tp-theme-color-item tp-color-active">
-					   <button class="tp-theme-color-btn tp-color-settings-btn d-none" data-color-default="#FF3737" type="button" data-color="#FF3737"></button>
-						  <button class="tp-theme-color-btn tp-color-settings-btn" type="button" data-color="#FF3737"></button>
+					   <button class="tp-theme-color-btn tp-color-settings-btn d-none" data-color-default="#73c100" type="button" data-color="#FF3737"></button>
+						  <button class="tp-theme-color-btn tp-color-settings-btn" type="button" data-color="#73c100"></button>
 					   </div>
 					</div>
 					<div class="col">
@@ -602,7 +602,7 @@ Banner Video
 
 
   ////////////////////////////////////////////////////
-  // Team Active js 
+  // Team Active js
   var cpTeam = new Swiper(".cp-team-active", {
     slidesPerView: 1,
     spaceBetween: 30,
@@ -673,7 +673,7 @@ Banner Video
 
 
   ////////////////////////////////////////
-  // Brand Active Js 
+  // Brand Active Js
   var brandActive = new Swiper(".cp-brand-active", {
     slidesPerView: 5,
     spaceBetween: 140,
@@ -915,7 +915,7 @@ Banner Video
     (this).swiper.autoplay.start();
   });
 
-  // project js   
+  // project js
   var projectActive = new Swiper(".cp-related-project-active", {
     slidesPerView: 3,
     spaceBetween: 30,
@@ -947,7 +947,7 @@ Banner Video
   });
 
 
-  // product isotope js 
+  // product isotope js
   $(".grid").imagesLoaded(function () {
     var $grid = $(".grid").isotope({
       percentPosition: true,
@@ -970,7 +970,7 @@ Banner Video
     );
   });
 
-  // news active js   
+  // news active js
   var cpnews3 = new Swiper(".cp-news3-active", {
     slidesPerView: 2,
     spaceBetween: 30,
@@ -1164,7 +1164,7 @@ Banner Video
     $(".offcanvas-overlay").addClass("overlay-open");
   });
 
-  // about zoom js 
+  // about zoom js
   var elementOffset = 400;
   $(window).on("scroll", function () {
     var toFade = document.getElementsByClassName("fade-jr");
@@ -1177,7 +1177,7 @@ Banner Video
   });
 
   /////////////////////////////////////////
-  // Titl js 
+  // Titl js
   const tilt = $('.js-tilt').tilt({
     maxTilt: 20,
     perspective: 1000,
@@ -1192,7 +1192,7 @@ Banner Video
   });
 
   /////////////////////////////////////////
-  // Banner Video 
+  // Banner Video
   $("#video_check").on('click', function () {
     $('.add-z-index-1000').toggleClass('z-index-1000');
   });
