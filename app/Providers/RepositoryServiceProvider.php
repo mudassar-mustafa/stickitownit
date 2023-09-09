@@ -10,6 +10,10 @@ use App\Contracts\Backend\UserContract;
 use App\Contracts\Backend\CountryContract;
 use App\Contracts\Backend\StateContract;
 use App\Contracts\Backend\CityContract;
+use App\Contracts\Backend\AttributeContract;
+use App\Contracts\Backend\AttributeValueContract;
+use App\Contracts\Backend\PackageContract;
+use App\Contracts\Backend\PageContract;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -21,6 +25,10 @@ use App\Repositories\Backend\CategoryRepository;
 use App\Repositories\Backend\FaqRepository;
 use App\Repositories\Backend\FeatureRepository;
 use App\Repositories\Backend\UserRepository;
+use App\Repositories\Backend\AttributeRepository;
+use App\Repositories\Backend\AttributeValueRepository;
+use App\Repositories\Backend\PackageRepository;
+use App\Repositories\Backend\PageRepository;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -33,6 +41,10 @@ class RepositoryServiceProvider extends ServiceProvider
         CountryContract::class => CountryRepository::class,
         StateContract::class => StateRepository::class,
         CityContract::class => CityRepository::class,
+        AttributeContract::class => AttributeRepository::class,
+        AttributeValueContract::class => AttributeValueRepository::class,
+        PackageContract::class => PackageRepository::class,
+        PageContract::class => PageRepository::class,
     ];
 
     /**

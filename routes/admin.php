@@ -7,6 +7,10 @@ use App\Http\Controllers\Backend\FAQController;
 use App\Http\Controllers\Backend\CountryController;
 use App\Http\Controllers\Backend\StateController;
 use App\Http\Controllers\Backend\CityController;
+use App\Http\Controllers\Backend\AttributeController;
+use App\Http\Controllers\Backend\AttributeValueController;
+use App\Http\Controllers\Backend\PackageController;
+use App\Http\Controllers\Backend\PageController;
 
 //  Brands Routes
 Route::controller(BrandController::class)->prefix('brands')->group(function () {
@@ -88,4 +92,55 @@ Route::controller(CityController::class)->prefix('cities')->group(function () {
     Route::get('/{id}/edit', 'edit')->name('backend.pages.city.edit');
     Route::post('/{id}/update', 'update')->name('backend.pages.city.update');
     Route::delete('/delete/{id}', 'destroy')->name('backend.pages.city.destroy');
+});
+
+//  Attribute Routes
+Route::controller(AttributeController::class)->prefix('attributes')->group(function () {
+    Route::get('/', 'index')->name('backend.pages.attribute.index');
+    Route::get('/create', 'create')->name('backend.pages.attribute.create');
+    Route::post('/store', 'store')->name('backend.pages.attribute.store');
+    Route::get('/{id}/edit', 'edit')->name('backend.pages.attribute.edit');
+    Route::post('/{id}/update', 'update')->name('backend.pages.attribute.update');
+    Route::delete('/delete/{id}', 'destroy')->name('backend.pages.attribute.destroy');
+});
+
+//  Attribute Routes
+Route::controller(AttributeController::class)->prefix('attributes')->group(function () {
+    Route::get('/', 'index')->name('backend.pages.attribute.index');
+    Route::get('/create', 'create')->name('backend.pages.attribute.create');
+    Route::post('/store', 'store')->name('backend.pages.attribute.store');
+    Route::get('/{id}/edit', 'edit')->name('backend.pages.attribute.edit');
+    Route::post('/{id}/update', 'update')->name('backend.pages.attribute.update');
+    Route::delete('/delete/{id}', 'destroy')->name('backend.pages.attribute.destroy');
+});
+
+//  Attribute Values Routes
+Route::controller(AttributeValueController::class)->prefix('attribute-values')->group(function () {
+    Route::get('/', 'index')->name('backend.pages.attribute-value.index');
+    Route::get('/create', 'create')->name('backend.pages.attribute-value.create');
+    Route::post('/store', 'store')->name('backend.pages.attribute-value.store');
+    Route::get('/{id}/edit', 'edit')->name('backend.pages.attribute-value.edit');
+    Route::post('/{id}/update', 'update')->name('backend.pages.attribute-value.update');
+    Route::delete('/delete/{id}', 'destroy')->name('backend.pages.attribute-value.destroy');
+});
+
+
+//  Package Routes
+Route::controller(PackageController::class)->prefix('packages')->group(function () {
+    Route::get('/', 'index')->name('backend.pages.package.index');
+    Route::get('/create', 'create')->name('backend.pages.package.create');
+    Route::post('/store', 'store')->name('backend.pages.package.store');
+    Route::get('/{id}/edit', 'edit')->name('backend.pages.package.edit');
+    Route::post('/{id}/update', 'update')->name('backend.pages.package.update');
+    Route::delete('/delete/{id}', 'destroy')->name('backend.pages.package.destroy');
+});
+
+//  page Routes
+Route::controller(PageController::class)->prefix('pages')->group(function () {
+    Route::get('/', 'index')->name('backend.pages.page.index');
+    Route::get('/create', 'create')->name('backend.pages.page.create');
+    Route::post('/store', 'store')->name('backend.pages.page.store');
+    Route::get('/{id}/edit', 'edit')->name('backend.pages.page.edit');
+    Route::post('/{id}/update', 'update')->name('backend.pages.page.update');
+    Route::delete('/delete/{id}', 'destroy')->name('backend.pages.page.destroy');
 });

@@ -13,7 +13,8 @@ class LandingController extends Controller
     public function index()
     {
         $categories = Category::whereStatus('active')->orderBy('id', 'asc')->get(['id', 'name', 'slug', 'image']);
-        $features = Feature::whereStatus('active')->orderBy('id', 'asc')->get(['id', 'name', 'short_description', 'image']);
+        $features = Feature::
+        orderBy('id', 'asc')->get(['id', 'name', 'short_description', 'image']);
         $faqs = FAQ::whereStatus('active')->orderBy('id', 'asc')->get(['name', 'short_description']);
         return view('frontend.pages.index', compact('categories', 'features', 'faqs'));
     }
