@@ -11,40 +11,41 @@
         <!-- End Dashboard Nav -->
 
         <li class="nav-item">
-            <a class="nav-link " href="{{ route('backend.pages.users.index') }}">
+            <a class="nav-link collapsed" href="{{ route('backend.pages.users.index') }}">
                 <i class="bi bi-person"></i>
                 <span>Users</span>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link " href="{{ route('backend.pages.brand.index') }}">
+            <a class="nav-link collapsed" href="{{ route('backend.pages.brand.index') }}">
                 <i class="bi bi-bag-x"></i>
                 <span>Brands</span>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link " href="{{ route('backend.pages.categories.index') }}">
+            <a class="nav-link collapsed" href="{{ route('backend.pages.categories.index') }}">
                 <i class="bi bi-type"></i>
                 <span>Category</span>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link " href="{{ route('backend.pages.features.index') }}">
+            <a class="nav-link collapsed" href="{{ route('backend.pages.features.index') }}">
                 <i class="bi bi-database"></i>
                 <span>Features</span>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link " href="{{ route('backend.pages.faqs.index') }}">
+            <a class="nav-link collapsed" href="{{ route('backend.pages.faqs.index') }}">
                 <i class="bi bi-question"></i>
                 <span>FAQs</span>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#" aria-expanded="true">
-                <i class="bi bi-map-fill"></i><span>Locations</span><i class="bi bi-map ms-auto"></i>
+            <a class="nav-link collapsed" data-bs-target="#locations-nav" data-bs-toggle="collapse" href="#"
+               aria-expanded="true">
+                <i class="bi bi-map-fill"></i><span>Locations</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
-            <ul id="forms-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
+            <ul id="locations-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
                 <li>
                     <a href="{{ route('backend.pages.country.index') }}">
                         <i class="bi bi-circle"></i><span>Country</span>
@@ -58,6 +59,29 @@
                 <li>
                     <a href="{{ route('backend.pages.city.index') }}">
                         <i class="bi bi-circle"></i><span>City</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#blogs-nav" data-bs-toggle="collapse" href="#"
+               aria-expanded="false">
+                <i class="bi bi-newspaper"></i><span>Blogs</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="blogs-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
+                <li>
+                    <a href="{{ route('backend.pages.blogs-categories.index') }}">
+                        <i class="bi bi-circle"></i><span>Categories</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('backend.pages.blogs-tags.index') }}">
+                        <i class="bi bi-circle"></i><span>Tags</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('backend.pages.blogs.index') }}">
+                        <i class="bi bi-circle"></i><span>Blogs</span>
                     </a>
                 </li>
             </ul>

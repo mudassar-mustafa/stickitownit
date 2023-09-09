@@ -29,7 +29,7 @@ class UpdateFeatureRequest extends FormRequest
             'name' => 'required|string|max:255|unique:features,id,' . $this->id,
             'short_description' => ['required'],
             'status' => ['string', 'max:255'],
-            'image' => ['max:2048'],
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ];
     }
 }

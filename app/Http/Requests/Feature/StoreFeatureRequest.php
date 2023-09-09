@@ -29,7 +29,7 @@ class StoreFeatureRequest extends FormRequest
             'name' => ['required', 'string', 'max:255', 'unique:features'],
             'short_description' => ['required'],
             'status' => ['string', 'max:255'],
-            'image' => ['required', 'mimes:png,jpg,jpeg,PNG|max:2048'],
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ];
     }
 }

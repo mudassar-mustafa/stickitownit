@@ -1245,3 +1245,7 @@ h6 {
 .mandatorySign {
     color: red
 }
+
+.tox-promotion {
+    display: none;
+}

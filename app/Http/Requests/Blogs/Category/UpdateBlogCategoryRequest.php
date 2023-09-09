@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Category;
+namespace App\Http\Requests\Blogs\Category;
 
 use Illuminate\Foundation\Http\FormRequest;
 
 
-class UpdateCategoryRequest extends FormRequest
+class UpdateBlogCategoryRequest extends FormRequest
 {
 
     /**
@@ -26,7 +26,7 @@ class UpdateCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255|unique:categories,id,' . $this->id,
+            'name' => 'required|string|max:255|unique:blog_categories,id,' . $this->id,
             'status' => ['string', 'max:255'],
             'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
             'icon' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
