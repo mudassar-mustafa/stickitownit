@@ -4,11 +4,9 @@ namespace App\Http\Controllers\Backend;
 
 use App\Contracts\Backend\BlogContract;
 use App\DataTables\BlogDataTable;
-use App\Helpers\s3Helper;
 use App\Http\Enums\CommonEnum;
 use App\Http\Requests\Blogs\StoreBlogRequest;
 use App\Http\Requests\Blogs\UpdateBlogRequest;
-use App\Models\PropertyPhoto;
 use App\Services\UtilService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;

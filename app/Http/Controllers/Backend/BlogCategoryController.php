@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Backend;
 use App\Contracts\Backend\BlogCategoryContract;
 use App\DataTables\BlogCategoryDataTable;
 use App\Http\Enums\CommonEnum;
-use App\Http\Requests\Blogs\Category\StoreBlogTagRequest;
-use App\Http\Requests\Blogs\Category\UpdateBlogTagRequest;
+use App\Http\Requests\Blogs\Category\StoreBlogCategoryRequest;
+use App\Http\Requests\Blogs\Category\UpdateBlogCategoryRequest;
 use App\Services\UtilService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -48,11 +48,11 @@ class BlogCategoryController extends Controller
     }
 
     /**
-     * @param StoreBlogTagRequest $request
+     * @param StoreBlogCategoryRequest $request
      * @param UtilService $utilService
      * @return RedirectResponse
      */
-    public function store(StoreBlogTagRequest $request, UtilService $utilService): RedirectResponse
+    public function store(StoreBlogCategoryRequest $request, UtilService $utilService): RedirectResponse
     {
         try {
             $data = $request->validated();
@@ -80,11 +80,11 @@ class BlogCategoryController extends Controller
 
     /**
      * @param $id
-     * @param UpdateBlogTagRequest $request
+     * @param UpdateBlogCategoryRequest $request
      * @param UtilService $utilService
      * @return RedirectResponse
      */
-    public function update($id, UpdateBlogTagRequest $request, UtilService $utilService)
+    public function update($id, UpdateBlogCategoryRequest $request, UtilService $utilService)
     {
         try {
             $data = $request->validated();
