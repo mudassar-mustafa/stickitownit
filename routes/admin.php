@@ -11,6 +11,7 @@ use App\Http\Controllers\Backend\AttributeController;
 use App\Http\Controllers\Backend\AttributeValueController;
 use App\Http\Controllers\Backend\PackageController;
 use App\Http\Controllers\Backend\PageController;
+use App\Http\Controllers\Backend\StickerController;
 
 //  Brands Routes
 Route::controller(BrandController::class)->prefix('brands')->group(function () {
@@ -143,4 +144,13 @@ Route::controller(PageController::class)->prefix('pages')->group(function () {
     Route::get('/{id}/edit', 'edit')->name('backend.pages.page.edit');
     Route::post('/{id}/update', 'update')->name('backend.pages.page.update');
     Route::delete('/delete/{id}', 'destroy')->name('backend.pages.page.destroy');
+});
+
+Route::controller(StickerController::class)->prefix('stickers')->group(function () {
+    Route::get('/', 'index')->name('backend.pages.sticker.index');
+    Route::get('/create', 'create')->name('backend.pages.sticker.create');
+    Route::post('/store', 'store')->name('backend.pages.sticker.store');
+    Route::get('/{id}/edit', 'edit')->name('backend.pages.sticker.edit');
+    Route::post('/{id}/update', 'update')->name('backend.pages.sticker.update');
+    Route::delete('/delete/{id}', 'destroy')->name('backend.pages.sticker.destroy');
 });
