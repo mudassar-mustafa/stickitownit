@@ -14,6 +14,7 @@ use App\Contracts\Backend\AttributeContract;
 use App\Contracts\Backend\AttributeValueContract;
 use App\Contracts\Backend\PackageContract;
 use App\Contracts\Backend\PageContract;
+use App\Contracts\Backend\StickerContract;
 use App\Contracts\Backend\BlogCategoryContract;
 use App\Contracts\Backend\BlogTagContract;
 use App\Contracts\Backend\BlogContract;
@@ -32,6 +33,7 @@ use App\Repositories\Backend\AttributeRepository;
 use App\Repositories\Backend\AttributeValueRepository;
 use App\Repositories\Backend\PackageRepository;
 use App\Repositories\Backend\PageRepository;
+use App\Repositories\Backend\StickerRepository;
 use App\Repositories\Backend\BlogCategoryRepository;
 use App\Repositories\Backend\BlogTagRepository;
 use App\Repositories\Backend\BlogRepository;
@@ -52,6 +54,7 @@ class RepositoryServiceProvider extends ServiceProvider
         AttributeValueContract::class => AttributeValueRepository::class,
         PackageContract::class => PackageRepository::class,
         PageContract::class => PageRepository::class,
+        StickerContract::class => StickerRepository::class,
         BlogCategoryContract::class => BlogCategoryRepository::class,
         BlogTagContract::class => BlogTagRepository::class,
         BlogContract::class => BlogRepository::class,
