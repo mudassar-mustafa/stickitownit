@@ -88,6 +88,19 @@ class BlogRepository extends BaseRepository implements BlogContract
      */
     public function deleteBlog($id)
     {
+        $blog = $this->find($id);
+        if ($blog->image) {
+            \File::delete(public_path('/storage/uploads/blogs/images/' . $blog->image));
+        }
+        $blogPhotos = BlogPhoto::whereBlogId($id)->get();
+        foreach ($blogPhotos as $photo) {
+            if ($photo->filename) {
+                \File::delete(public_path('/storage/uploads/blogs/images/' . $photo->filename));
+            }
+            $photo->delete();
+        }
+        $blog->categories()->detach();
+        $blog->tags()->detach();
         return $this->delete($id);
     }
 
