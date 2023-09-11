@@ -1,6 +1,7 @@
 <?php
 
 use \App\Http\Controllers\Frontend\LandingController;
+use \App\Http\Controllers\Frontend\BlogController;
 use App\Http\Controllers\ProfileController;
 
 use Illuminate\Support\Facades\Route;
@@ -17,6 +18,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [LandingController::class, 'index'])->name('/');
+    Route::get('blogs', [BlogController::class, 'index'])->name('blogs.list');
+Route::get('blog/{slug}', [BlogController::class, 'blogDetail'])->name('blog.detail');
 
 
 Route::get('/dashboard', function () {

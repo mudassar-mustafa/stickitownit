@@ -292,15 +292,18 @@
                                             <div class="accordion-item wow fadeInUp animated"
                                                  data-wow-delay="0.{{$key+6}}s">
                                                 <h2 class="accordion-header" id="heading{{$key}}">
-                                                    <button class="accordion-button {{ $key !== 0 ? 'collapsed' : '' }}" type="button"
+                                                    <button class="accordion-button {{ $key !== 0 ? 'collapsed' : '' }}"
+                                                            type="button"
                                                             data-bs-toggle="collapse"
-                                                            data-bs-target="#collapse{{$key}}" aria-expanded="{{ $key === 0  ? true : false }}"
+                                                            data-bs-target="#collapse{{$key}}"
+                                                            aria-expanded="{{ $key === 0  ? true : false }}"
                                                             aria-controls="collapse{{$key}}">{{$faq->name}}
                                                     </button>
                                                 </h2>
                                                 <div id="collapse{{$key}}"
                                                      class="accordion-collapse collapse {{ $key===0 ? 'show' : '' }}"
-                                                     aria-labelledby="heading{{$key}}" data-bs-parent="#accordionExample">
+                                                     aria-labelledby="heading{{$key}}"
+                                                     data-bs-parent="#accordionExample">
                                                     <div class="accordion-body">{{$faq->short_description}}
                                                     </div>
                                                 </div>
@@ -351,76 +354,25 @@
                         <div class="cp-news3-right wow fadeInRight animated" data-wow-delay="0.4s">
                             <div class="swiper-container cp-news3-active">
                                 <div class="swiper-wrapper">
-                                    <div class="swiper-slide">
-                                        <div class="cp-news3-item">
-                                            <div class="cp-news3-img w-img">
-                                                <a href="news-details.html"><img
-                                                        src="{{ asset('assets/img/news/news-1.jpg') }}"
-                                                        alt="news"></a>
+                                    @if(!empty($blogs) && count($blogs) > 0)
+                                        @foreach($blogs as $blog)
+                                            <div class="swiper-slide">
+                                                <div class="cp-news3-item">
+                                                    <div class="cp-news3-img w-img">
+                                                        <a href="{{ route('blog.detail',$blog->slug) }}"><img
+                                                                src="{{ $blog->image }}"
+                                                                alt="{{ $blog->name }}"></a>
+                                                    </div>
+                                                    <div class="cp-news3-content">
+                                                        <span class="cp-news3-data">{{date('F j, Y', strtotime($blog->created_at))}}</span>
+                                                        <h3 class="cp-news-title"><a href="{{ route('blog.detail',$blog->slug) }}">{{ $blog->name }}</a></h3>
+                                                        <h5 class="cp-news-post-by">Author : <a href="javascript:void(0)">{{ $blog->author_name }}</a>
+                                                        </h5>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="cp-news3-content">
-                                                <span class="cp-news3-data">January 02, 2023</span>
-                                                <h3 class="cp-news-title"><a href="news-details.html">How to Edit a Film
-                                                        Score to
-                                                        Best
-                                                        Serve
-                                                        Your Story..</a></h3>
-                                                <h5 class="cp-news-post-by">Author : <a href="#">Johann Doe</a></h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <div class="cp-news3-item">
-                                            <div class="cp-news3-img w-img">
-                                                <a href="news-details.html"><img
-                                                        src="{{ asset('assets/img/news/news-2.jpg') }}"
-                                                        alt="news"></a>
-                                            </div>
-                                            <div class="cp-news3-content">
-                                                <span class="cp-news3-data">January 03, 2023</span>
-                                                <h3 class="cp-news-title"><a href="news-details.html">Can you Scan my
-                                                        Hard
-                                                        copies
-                                                        into Electronic</a></h3>
-                                                <h5 class="cp-news-post-by">Author : <a href="#">Mr Don</a></h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <div class="cp-news3-item">
-                                            <div class="cp-news3-img w-img">
-                                                <a href="news-details.html"><img
-                                                        src="{{ asset('assets/img/news/news-3.jpg') }}"
-                                                        alt="news"></a>
-                                            </div>
-                                            <div class="cp-news3-content">
-                                                <span class="cp-news3-data">January 02, 2023</span>
-                                                <h3 class="cp-news-title"><a href="news-details.html">How to Edit a Film
-                                                        Score to
-                                                        Best
-                                                        Serve
-                                                        Your Story..</a></h3>
-                                                <h5 class="cp-news-post-by">Author : <a href="#">Johann Doe</a></h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <div class="cp-news3-item">
-                                            <div class="cp-news3-img w-img">
-                                                <a href="news-details.html"><img
-                                                        src="{{ asset('assets/img/news/news-1.jpg') }}"
-                                                        alt="news"></a>
-                                            </div>
-                                            <div class="cp-news3-content">
-                                                <span class="cp-news3-data">January 04, 2023</span>
-                                                <h3 class="cp-news-title"><a href="news-details.html">What Mockup Type
-                                                        Do
-                                                        you Accept
-                                                        for Printing</a></h3>
-                                                <h5 class="cp-news-post-by">Author : <a href="#">Mr Harry</a></h5>
-                                            </div>
-                                        </div>
-                                    </div>
+                                        @endforeach
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -431,155 +383,7 @@
         <!-- news area end here  -->
 
 
-        <!-- floating area start here  -->
-        <div class="cp-floating-area d-none d-md-block zi-1100 p-relative ">
-            <div class="cp-floating-action cp-bg-move-y">
-            <span class="cp-floating-btn cp-floating-phone-btn cp" data-bs-toggle="modal"
-                  data-bs-target="#phonePopup"><i class="fal fa-phone-alt"></i></span>
-                <span class="cp-floating-btn cp-floating-location-btn cp" data-bs-toggle="modal"
-                      data-bs-target="#locationPopup"><i class="fal fa-location-arrow"></i></span>
-                <span class="cp-floating-btn cp-floating-form-btn cp" data-bs-toggle="modal"
-                      data-bs-target="#formPopup"><i
-                        class="fal fa-envelope-open-text"></i></span>
-            </div>
-
-            <!-- phone Modal start -->
-            <div class="modal fade cp-floating-model" id="phonePopup" data-bs-keyboard="false" tabindex="-1"
-                 aria-labelledby="phonePopupLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-
-                        <div class="cp-floating-item cp-phone-popup" id="phonePopupLabel">
-                            <div class="cp-floating-left w-img">
-                                <img src="{{ asset('assets/img/cta/popup2.jpg') }}" alt="contact">
-                            </div>
-                            <div class="cp-floating-text">
-                                <h4 class="cp-floating-title">Our <span>Office Time</span></h4>
-                                <div class="cp-floating-text-inner">
-                           <span class="cp-floating-text-inner-icon">
-                              <i class="fal fa-calendar-day"></i>
-                           </span>
-                                    <span class="cp-floating-text-inner-text">monday - sunday</span>
-                                </div>
-                                <div class="cp-floating-text-inner">
-                           <span class="cp-floating-text-inner-icon">
-                              <i class="fal fa-watch"></i>
-                           </span>
-                                    <span class="cp-floating-text-inner-text">8.00 am - 9.00 pm</span>
-                                </div>
-                                <div class="cp-floating-text-inner">
-                           <span class="cp-floating-text-inner-icon">
-                              <i class="far fa-phone-alt"></i>
-                           </span>
-                                    <span class="cp-floating-text-inner-text"><a
-                                            href="tel:+910265362003">+910265362003</a></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- phone Modal end -->
-
-            <!-- location Modal start -->
-            <div class="modal fade cp-floating-model" id="locationPopup" data-bs-keyboard="false" tabindex="-1"
-                 aria-labelledby="locationPopupLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        <div class="cp-floating-item cp-location-popup" id="locationPopupLabel">
-                            <div class="cp-floating-left">
-                                <div class="cp-floating-location">
-                                    <iframe
-                                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d99370.14184006557!2d-77.0846156762382!3d38.89386718919168!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m3!3e6!4m0!4m0!5e0!3m2!1sen!2sbd!4v1671881294236!5m2!1sen!2sbd"
-                                        style="border:0;" allowfullscreen="" loading="lazy"
-                                        referrerpolicy="no-referrer-when-downgrade"></iframe>
-                                </div>
-                            </div>
-                            <div class="cp-floating-text">
-                                <h4 class="cp-floating-title">know <span>our location</span></h4>
-                                <div class="cp-floating-text-inner">
-                           <span class="cp-floating-text-inner-icon">
-                              <i class="fal fa-location-arrow"></i>
-                           </span>
-                                    <span class="cp-floating-text-inner-text"><a target="_blank"
-                                                                                 href="https://www.google.com/maps/@38.8938672,-77.0846157,12z">88
-                                 New Street,
-                                 Washington DC,
-                                 America</a></span>
-                                </div>
-                                <div class="cp-floating-text-inner">
-                           <span class="cp-floating-text-inner-icon">
-                              <i class="fal fa-location-arrow"></i>
-                           </span>
-                                    <span class="cp-floating-text-inner-text"><a target="_blank"
-                                                                                 href="https://www.google.com/maps/@1.952577,44.3912535,3z">100 New
-                                 Street, melbon,
-                                 Australian</a></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- location Modal end -->
-
-            <!-- form Modal start -->
-            <div class="modal fade cp-floating-model" id="formPopup" data-bs-keyboard="false" tabindex="-1"
-                 aria-labelledby="formPopupLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        <div class="cp-floating-item" id="formPopupLabel">
-                            <div class="cp-floating-form-img w-img">
-                                <img src="{{ asset('assets/img/cta/cta-img.png') }}" alt="contact">
-                            </div>
-                            <div class="cp-floating-left cp-signup-popup">
-                                <h3 class="cp-floating-title">Do you have any question?</h3>
-                                <div class="cp-floating-form">
-                                    <form action="#">
-                                        <div class="row">
-                                            <div class="col-xl-6">
-                                                <div class="cp-input-field">
-                                                    <label for="name">Your Name</label>
-                                                    <input type="text" id="name">
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-6">
-                                                <div class="cp-input-field">
-                                                    <label for="email">Your Email</label>
-                                                    <input type="email" id="email">
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-12">
-                                                <div class="cp-input-field">
-                                                    <label for="message">Your question</label>
-                                                    <textarea id="message" cols="30" rows="10"></textarea>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <button type="submit" class="cp-btn mt-20">
-                                            send question
-                                            <span class="cp-btn__inner">
-                                    <span class="cp-btn__blobs">
-                                       <span class="cp-btn__blob"></span>
-                                       <span class="cp-btn__blob"></span>
-                                       <span class="cp-btn__blob"></span>
-                                       <span class="cp-btn__blob"></span>
-                                    </span>
-                                 </span>
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- form Modal end -->
-        </div>
-        <!-- floating area end here  -->
+        @include('frontend.includes.social')
 
     </main>
 @endsection

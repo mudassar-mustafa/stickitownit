@@ -8,23 +8,21 @@
                         <h4 class="cp-footer-widget-title">Useful Links</h4>
                         <ul class="cp-footer-widget-link">
                             <li><a href="about.html">About us</a></li>
-                            <li><a href="news.html">Our news</a></li>
-                            <li><a href="contact.html">Start a Return</a></li>
+                            <li><a href="{{ route('blogs.list') }}">Blogs</a></li>
                             <li><a href="contact.html">Contact Us</a></li>
-                            <li><a href="shop.html">Shipping</a></li>
                             <li><a href="faq.html">FAQ</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-xl-3 col-lg-4 col-md-5 col-sm-6">
                     <div class="cp-footer-widget mb-50">
-                        <h4 class="cp-footer-widget-title">Our Services</h4>
+                        <h4 class="cp-footer-widget-title">Our Products</h4>
                         <ul class="cp-footer-widget-link">
-                            <li><a href="service-details.html">Printing Services</a></li>
-                            <li><a href="service-details.html">Digital Scanning</a></li>
-                            <li><a href="service-details.html">Design Services</a></li>
-                            <li><a href="service-details.html">Copying Services</a></li>
-                            <li><a href="service-details.html">Customize Design</a></li>
+                            @if(!empty($categories) && count($categories) >0)
+                                @foreach($categories as $category)
+                                    <li><a href="javascript:void(0)">{{ $category->name }}</a></li>
+                                @endforeach
+                            @endif
                         </ul>
                     </div>
                 </div>
@@ -80,7 +78,8 @@
                 </div>
                 <div class="cp-copy-item">
                     <div class="cp-copy-text mb-15 text-xl-end">
-                        <p class="mb-0 white-color">© 2023 <a href="https://devsleagues.com">Design & Developed by Devsleagues</a>. All rights reserved.</p>
+                        <p class="mb-0 white-color">© 2023 <a href="https://devsleagues.com">Design & Developed by
+                                Devsleagues</a>. All rights reserved.</p>
                     </div>
                 </div>
             </div>

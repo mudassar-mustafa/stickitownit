@@ -29,19 +29,19 @@ class UpdateUserRequest extends FormRequest
     public function rules(): array
     {
 
-            return [
-                'name' => 'required|string|max:255',
-                'email' => ['email', 'max:255', Rule::unique(User::class)->ignore($this->user()->id)],
-                'status' => ['string', 'max:255'],
-                'phone_number' => ['required'],
-                'cnic' => ['required'],
-                'password' => $this->has('password') && !is_null($this->password) ? ['required', Password::min(8)
-                    ->letters()
-                    ->mixedCase()
-                    ->numbers()
-                    ->symbols()
-                    ->uncompromised()] : ['nullable']
-            ];
+        return [
+            'name' => 'required|string|max:255',
+            'email' => ['email', 'max:255', Rule::unique(User::class, 'id')->ignore($this->user()->id)],
+            'status' => ['string', 'max:255'],
+            'phone_number' => ['required'],
+            'cnic' => ['required'],
+            'password' => $this->has('password') && !is_null($this->password) ? ['required', Password::min(8)
+                ->letters()
+                ->mixedCase()
+                ->numbers()
+                ->symbols()
+                ->uncompromised()] : ['nullable']
+        ];
 
 
     }

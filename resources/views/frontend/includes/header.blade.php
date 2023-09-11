@@ -61,30 +61,20 @@
                                     <li class="menu-item-has-children">
                                         <a href="index.html">Products</a>
                                         <ul class="sub-menu">
-                                            <li><a href="shop.html">shop</a></li>
-                                            <li><a href="shop-sidebar.html">shop sidebar</a></li>
-                                            <li><a href="shop-details.html">shop details</a></li>
-                                            <li><a href="cart.html">cart</a></li>
-                                            <li><a href="quote.html">quote</a></li>
-                                            <li><a href="checkout.html">checkout</a></li>
+                                            @if(!empty($categories) && count($categories) >0)
+                                                @foreach($categories as $category)
+                                                    <li><a href="javascript:void(0)">{{ $category->name }}</a></li>
+                                                @endforeach
+                                            @endif
+{{--                                            <li><a href="shop.html">shop</a></li>--}}
+{{--                                            <li><a href="shop-sidebar.html">shop sidebar</a></li>--}}
+{{--                                            <li><a href="shop-details.html">shop details</a></li>--}}
+{{--                                            <li><a href="cart.html">cart</a></li>--}}
+{{--                                            <li><a href="quote.html">quote</a></li>--}}
+{{--                                            <li><a href="checkout.html">checkout</a></li>--}}
                                         </ul>
                                     </li>
-                                    <li><a href="news.html">Blogs</a></li>
-                                    {{--                                    <li class="menu-item-has-children">--}}
-                                    {{--                                        <a href="#">Pages</a>--}}
-                                    {{--                                        <ul class="sub-menu">--}}
-                                    {{--                                            <li><a href="about.html">about</a></li>--}}
-
-
-                                    {{--                                            <li><a href="faq.html">faq</a></li>--}}
-                                    {{--                                            <li>--}}
-                                    {{--                                                <a href="error.html">error</a>--}}
-                                    {{--                                            </li>--}}
-
-                                    {{--                                            <li><a href="signin.html">signin</a></li>--}}
-                                    {{--                                            <li><a href="signup.html">signup</a></li>--}}
-                                    {{--                                        </ul>--}}
-                                    {{--                                    </li>--}}
+                                    <li><a href="{{ route('blogs.list') }}">Blogs</a></li>
 
                                     <li><a href="contact.html">About Us</a></li>
                                     <li><a href="contact.html">Contact</a></li>
