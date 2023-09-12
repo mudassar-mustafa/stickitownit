@@ -59,6 +59,38 @@
 
                                         </div>
                                     </div>
+                                    <div class="cp-news-share t-right">
+                                        <div class="cp-news-social-link two d-xl-none">
+                                            <ul>
+                                                <li>
+                                                    <a onclick="window.open('http://www.facebook.com/sharer.php?u={{route('blog.detail',$blog->slug)}}','Facebook','width=600,height=300,left='+(screen.availWidth/2-300)+',top='+(screen.availHeight/2-150)+''); return false;"
+                                                       href="http://www.facebook.com/sharer.php?u={{route('blog.detail',$blog->slug)}}"><i class="fab fa-facebook"></i></a></li>
+                                                <li><a href="http://twitter.com/share?url={{route('blog.detail',$blog->slug)}}&text={{$blog->name}}"
+                                                    onclick="window.open('http://twitter.com/share?url={{route('blog.detail',$blog->slug)}}&text={{$blog->name}}','Twitter share','width=600,height=300,left='+(screen.availWidth/2-300)+',top='+(screen.availHeight/2-150)+''); return false;"
+                                                    ><i class="fab fa-twitter"></i></a></li>
+                                                <li><a href="https://www.linkedin.com/cws/share?url={{route('blog.detail',$blog->slug)}}&text={{$blog->name}}"
+                                                    onclick="window.open('https://www.linkedin.com/cws/share?url={{route('blog.detail',$blog->slug)}}&text={{$blog->name}}','Linkedin share','width=600,height=300,left='+(screen.availWidth/2-300)+',top='+(screen.availHeight/2-150)+''); return false;"
+                                                    ><i class="fab fa-linkedin-in"></i></a></li>
+
+                                            </ul>
+                                        </div>
+                                        <div class="cp-news-share-text p-relative d-none d-xl-block">
+                                            <span>Share <i class="far fa-share-alt"></i></span>
+                                            <div class="cp-news-social-link p-absolute">
+                                                <ul>
+                                                    <li>
+                                                        <a onclick="window.open('http://www.facebook.com/sharer.php?u={{route('blog.detail',$blog->slug)}}','Facebook','width=600,height=300,left='+(screen.availWidth/2-300)+',top='+(screen.availHeight/2-150)+''); return false;"
+                                                           href="http://www.facebook.com/sharer.php?u={{route('blog.detail',$blog->slug)}}"><i class="fab fa-facebook"></i></a></li>
+                                                    <li><a href="http://twitter.com/share?url={{route('blog.detail',$blog->slug)}}&text={{$blog->name}}"
+                                                           onclick="window.open('http://twitter.com/share?url={{route('blog.detail',$blog->slug)}}&text={{$blog->name}}','Twitter share','width=600,height=300,left='+(screen.availWidth/2-300)+',top='+(screen.availHeight/2-150)+''); return false;"
+                                                        ><i class="fab fa-twitter"></i></a></li>
+                                                    <li><a href="https://www.linkedin.com/cws/share?url={{route('blog.detail',$blog->slug)}}&text={{$blog->name}}"
+                                                           onclick="window.open('https://www.linkedin.com/cws/share?url={{route('blog.detail',$blog->slug)}}&text={{$blog->name}}','Linkedin share','width=600,height=300,left='+(screen.availWidth/2-300)+',top='+(screen.availHeight/2-150)+''); return false;"
+                                                        ><i class="fab fa-linkedin-in"></i></a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

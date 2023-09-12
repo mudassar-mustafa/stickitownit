@@ -110,16 +110,6 @@ Route::group(['prefix' => 'backend'], function () {
         Route::delete('/delete/{id}', 'destroy')->name('backend.pages.attribute.destroy');
     });
 
-//  Attribute Routes
-    Route::controller(AttributeController::class)->prefix('attributes')->group(function () {
-        Route::get('/', 'index')->name('backend.pages.attribute.index');
-        Route::get('/create', 'create')->name('backend.pages.attribute.create');
-        Route::post('/store', 'store')->name('backend.pages.attribute.store');
-        Route::get('/{id}/edit', 'edit')->name('backend.pages.attribute.edit');
-        Route::post('/{id}/update', 'update')->name('backend.pages.attribute.update');
-        Route::delete('/delete/{id}', 'destroy')->name('backend.pages.attribute.destroy');
-    });
-
 //  Attribute Values Routes
     Route::controller(AttributeValueController::class)->prefix('attribute-values')->group(function () {
         Route::get('/', 'index')->name('backend.pages.attribute-value.index');
@@ -151,6 +141,7 @@ Route::group(['prefix' => 'backend'], function () {
         Route::delete('/delete/{id}', 'destroy')->name('backend.pages.page.destroy');
     });
 
+//  page Routes
     Route::controller(StickerController::class)->prefix('stickers')->group(function () {
         Route::get('/', 'index')->name('backend.pages.sticker.index');
         Route::get('/create', 'create')->name('backend.pages.sticker.create');
@@ -177,6 +168,7 @@ Route::group(['prefix' => 'backend'], function () {
 
     });
 
+// Blogs Category Routes
     Route::controller(BlogCategoryController::class)->prefix('blogs/categories')->group(function () {
         Route::get('/', 'index')->name('backend.pages.blogs-categories.index');
         Route::get('/create', 'create')->name('backend.pages.blogs-categories.create');
@@ -186,6 +178,7 @@ Route::group(['prefix' => 'backend'], function () {
         Route::delete('/delete/{id}', 'destroy')->name('backend.pages.blogs-categories.destroy');
     });
 
+// Blogs Tags Routes
     Route::controller(BlogTagController::class)->prefix('blogs/tags')->group(function () {
         Route::get('/', 'index')->name('backend.pages.blogs-tags.index');
         Route::get('/create', 'create')->name('backend.pages.blogs-tags.create');
