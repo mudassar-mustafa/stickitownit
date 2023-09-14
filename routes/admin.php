@@ -16,6 +16,7 @@ use App\Http\Controllers\Backend\StickerController;
 use App\Http\Controllers\Backend\BlogController;
 use App\Http\Controllers\Backend\BlogCategoryController;
 use App\Http\Controllers\Backend\BlogTagController;
+use App\Http\Controllers\Backend\ProductController;
 
 Route::group(['prefix' => 'backend'], function () {
 //  Brands Routes
@@ -178,7 +179,7 @@ Route::group(['prefix' => 'backend'], function () {
         Route::delete('/delete/{id}', 'destroy')->name('backend.pages.blogs-categories.destroy');
     });
 
-// Blogs Tags Routes
+    // Blogs Tags Routes
     Route::controller(BlogTagController::class)->prefix('blogs/tags')->group(function () {
         Route::get('/', 'index')->name('backend.pages.blogs-tags.index');
         Route::get('/create', 'create')->name('backend.pages.blogs-tags.create');
@@ -187,5 +188,14 @@ Route::group(['prefix' => 'backend'], function () {
         Route::post('/{id}/update', 'update')->name('backend.pages.blogs-tags.update');
         Route::delete('/delete/{id}', 'destroy')->name('backend.pages.blogs-tags.destroy');
     });
+
+    // Products Routes
+    Route::controller(ProductController::class)->prefix('products')->group(function () {
+        Route::get('/', 'index')->name('backend.pages.product.index');
+        Route::get('/create', 'create')->name('backend.pages.product.create');
+        Route::post('/store', 'store')->name('backend.pages.product.store');
+        Route::get('/{id}/edit', 'edit')->name('backend.pages.product.edit');
+        Route::post('/{id}/update', 'update')->name('backend.pages.product.update');
+        Route::delete('/delete/{id}', 'destroy')->name('backend.pages.product.destroy');
+    });
 });
-// Blogs Routes End

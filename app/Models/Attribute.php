@@ -21,6 +21,6 @@ class Attribute extends Model
     */
     public function attribute_values(): HasMany
     {
-        return $this->hasMany(AttributeValue::class,'attribute_id','id');
+        return $this->hasMany(AttributeValue::class,'attribute_id','id')->where('status', 'active');
     }
 }

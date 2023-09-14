@@ -1249,3 +1249,11 @@ h6 {
 .tox-promotion {
     display: none;
 }
+
+.hidden {
+    display: none;
+}
+
+.select2-container{
+    width: 100% !important;
+}

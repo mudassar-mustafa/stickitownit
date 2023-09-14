@@ -18,6 +18,7 @@ use App\Contracts\Backend\StickerContract;
 use App\Contracts\Backend\BlogCategoryContract;
 use App\Contracts\Backend\BlogTagContract;
 use App\Contracts\Backend\BlogContract;
+use App\Contracts\Backend\ProductContract;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -37,6 +38,7 @@ use App\Repositories\Backend\StickerRepository;
 use App\Repositories\Backend\BlogCategoryRepository;
 use App\Repositories\Backend\BlogTagRepository;
 use App\Repositories\Backend\BlogRepository;
+use App\Repositories\Backend\ProductRepository;
 
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -58,6 +60,7 @@ class RepositoryServiceProvider extends ServiceProvider
         BlogCategoryContract::class => BlogCategoryRepository::class,
         BlogTagContract::class => BlogTagRepository::class,
         BlogContract::class => BlogRepository::class,
+        ProductContract::class => ProductRepository::class,
     ];
 
     /**
