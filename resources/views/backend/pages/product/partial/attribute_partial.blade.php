@@ -3,7 +3,7 @@
     <select class="attribute_id form-select" name="attribute_ids[]" multiple="multiple">
         @if (!empty($attributes))
             @foreach ($attributes as $attribute)
-                <option value ="{{ $attribute->id }}" {{ old('attribute_id') == $attribute->id ? "selected" : ""  }}>{{ $attribute->name }}</option>
+                <option value ="{{ $attribute->name }}" {{ old('attribute_id') == $attribute->name ? "selected" : ""  }}>{{ $attribute->name }}</option>
             @endforeach
         @endif
       </select>

@@ -37,8 +37,8 @@
                     <input value="" type="file"
                         class="form-control"
                         onchange="readURL(this)" id="combination_image"
-                        name="combination_image" style="padding: 9px; cursor: pointer">
-                    <img width="300" height="300" class="img-thumbnail" style="display:none;"
+                        name="combination_image[]" style="padding: 9px; cursor: pointer">
+                    <img class="img-thumbnail" style="display:none; height: 100px !important;"
                             id="img" src="#"
                             alt="your combination_image"/>
                 </div>

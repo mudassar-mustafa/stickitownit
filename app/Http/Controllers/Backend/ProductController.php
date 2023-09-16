@@ -54,10 +54,12 @@ class ProductController extends Controller
      * @param UtilService $utilService
      * @return RedirectResponse
      */
-    public function store(StoreProductRequest $request, UtilService $utilService): RedirectResponse
+    public function store(Request $request, UtilService $utilService)
     {
         try {
-            $data = $request->validated();
+            //return $request;
+            //$data = $request->validated();
+            $data = $request->except('_token');
             $this->productRepository->createProduct($data);
 
             return redirect()->route("backend.pages.product.index")->with([
@@ -69,11 +71,15 @@ class ProductController extends Controller
         }
     }
 
-    public function edit($id, UtilService $utilService)
+    public function edit($id, UtilService $utilService): view
     {
         try {
             $product = $this->productRepository->findProductById($id);
-            return view('backend.pages.product.edit', compact('product'));
+            $brands = $this->productRepository->getBrands();
+            $categories = $this->productRepository->getCategories();
+            $attributes = $this->productRepository->getAttributes();
+            return view('backend.pages.product.create', compact('brands', 'categories', 'attributes', 'product'));
+            
         } catch (\Exception $exception) {
             return $utilService->logErrorAndRedirectToBack('backend.pages.product.edit', $exception->getMessage());
         }

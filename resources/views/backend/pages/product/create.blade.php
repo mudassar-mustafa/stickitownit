@@ -33,7 +33,7 @@
                                         class="form-control @error('main_image') is-invalid @enderror"
                                         onchange="readURL(this)" id="main_image"
                                         name="main_image" style="padding: 9px; cursor: pointer">
-                                    <img width="300" height="300" class="img-thumbnail" style="display:none;"
+                                    <img  class="img-thumbnail" style="display:none; height: 100px !important;"
                                          id="img" src="#"
                                          alt="your main_image"/>
                                     @error('main_image')
@@ -66,7 +66,7 @@
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                     <label for="category_id" class="form-label">Category</label>
-                                    <select class="category_id form-select" name="category_id">
+                                    <select class="category_id form-select" name="category_id[]">
                                         <option value=""> Please Select Category</option>
                                         @if (!empty($categories))
                                             @foreach ($categories as $category)

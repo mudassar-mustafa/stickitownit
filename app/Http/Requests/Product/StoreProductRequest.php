@@ -27,6 +27,14 @@ class StoreProductRequest extends FormRequest
     {
         return [
             'title' => ['required', 'string', 'max:255'],
+            'short_description' => ['required', 'string'],
+            'description' => ['required', 'string'],
+            'category_id' => ['nullable'],
+            'brand_id' => ['required'],
+            'product_type' => ['required'],
+            'quantity' => ['required_if:product_type,normal', 'numeric'],
+            'price' => ['required_if:product_type,normal', 'numeric'],
+            'attribute_ids.*' => ['required_if:product_type,variation'],
             'status' => ['string', 'max:255'],
         ];
     }
