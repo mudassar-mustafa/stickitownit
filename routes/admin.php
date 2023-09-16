@@ -197,5 +197,7 @@ Route::group(['prefix' => 'backend'], function () {
         Route::get('/{id}/edit', 'edit')->name('backend.pages.product.edit');
         Route::post('/{id}/update', 'update')->name('backend.pages.product.update');
         Route::delete('/delete/{id}', 'destroy')->name('backend.pages.product.destroy');
+        Route::post('/getAttributeValues', 'getAttributeValues')->name('backend.pages.product.getAttributeValues');
+        Route::post('/getCombination', 'getCombination')->name('backend.pages.product.getCombination');
     });
 });

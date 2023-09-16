@@ -111,7 +111,42 @@
                                 </div>
                                 @include('backend.pages.product.partial.normal_partial')
                                 @include('backend.pages.product.partial.attribute_partial')
-                                <div class="col-lg-4 col-md- col-sm-12 col-xs-12">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 appendAttributeValues">
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 hidden variation_product_fields">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="auto_combination" onchange="getAutoCombination()">
+                                        <label class="form-check-label" for="gridCheck1">
+                                          Auto Combination
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 append_combinations hidden variation_product_fields">
+                                    <div class="row">
+                                        <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12">
+                                            Visibility
+                                        </div>
+                                        <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
+                                            Combination
+                                        </div>
+                                        <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                                            Qunatity
+                                        </div>
+                                        <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                                            Price
+                                        </div>
+                                        <div class="col-lg-1 col-md-2 col-sm-12 col-xs-12">
+                                            Sku
+                                        </div>
+                                        <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                                            Image
+                                        </div>
+                                        <div class="col-lg-1 col-md-2 col-sm-12 col-xs-12">
+                                            Action
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                     <label for="shipping_type" class="form-label">Shipping Type</label>
                                     <select id="shipping_type" class="form-select" name="shipping_type" onchange="getShippingFields()">
                                         <option value="" {{ old('shipping_type') == "" ? "selected" : "" }}>Please Shipping Type</option>
@@ -160,6 +195,7 @@
 @endsection
 @push('scripts')
 <script>
+    var attributeArray = [];
     $(document).ready(function() {
         $('.category_id').select2();
         $('.brand_id').select2();
@@ -174,11 +210,29 @@
                 }
 
                 return {
-                id: term,
-                text: term,
+                id: term[0].toUpperCase() + term.slice(1),
+                text: term[0].toUpperCase() + term.slice(1),
                 newTag: true // add additional parameters
                 }
             }
+        });
+
+        $('.attribute_id').on('select2:select', function (e) {
+
+            var data = e.params.data.text;
+            getAttributeValue(data);
+            var attribute = [];
+            attribute.push(data);
+            attribute.push(null);
+            attributeArray.push(attribute);
+        });
+        $('.attribute_id').on('select2:unselect', function (e) {
+
+            var data = e.params.data.text;
+            attributeArray = $.grep(attributeArray, function(n) {
+                return n[0] != data;
+            });
+            $(".attribure_value"+data+"").remove();
         });
     });
 
@@ -199,5 +253,81 @@
             $(".shipping_fields").removeClass('hidden');
         }
     }
+
+    function getAttributeValue(data) {
+        var csrf_token = $('meta[name="csrf-token"]').attr('content');
+        $.ajax({
+            type: 'POST',
+            async: false,
+            url: '{{route("backend.pages.product.getAttributeValues")}}',
+            data: {
+            attribute_name: data,
+            _token: csrf_token
+            },
+            dataType: 'JSON',
+            success: function (data) {
+                if (data.status == 'success') {
+                    if(data.data.getAttributeValueHtml != ''){
+                        $(".appendAttributeValues").append(data.data.getAttributeValueHtml);
+                    }
+                    $('.attribute_value_id'+ data.data.attributeName +'').select2({
+                        placeholder: "Select Attribute Value",
+                        tags: true,
+                        createTag: function (params) {
+                            var term = $.trim(params.term);
+
+                            if (term === '') {
+                            return null;
+                            }
+
+                            return {
+                            id: term[0].toUpperCase() + term.slice(1),
+                            text: term[0].toUpperCase() + term.slice(1),
+                            newTag: true // add additional parameters
+                            }
+                        }
+                    });
+                }
+            }
+        });   
+    }
+
+    function updateAttributeValueArray(attributeName){
+        var data = $(".attribute_value_id"+attributeName+"").val();
+        for(var i = 0; i<attributeArray.length; i++ ){
+            if(attributeArray[i][0] == attributeName){
+                attributeArray[i][1] = data;
+                return;
+            }
+        }
+    }
+
+    function getAutoCombination() {
+        if ($("#auto_combination").is(':checked')) {
+            var csrf_token = $('meta[name="csrf-token"]').attr('content');
+        $.ajax({
+            type: 'POST',
+            async: false,
+            url: '{{route("backend.pages.product.getCombination")}}',
+            data: {
+                attributeArray: attributeArray,
+                _token: csrf_token
+            },
+            dataType: 'JSON',
+            success: function (data) {
+                if (data.status == 'success') {
+                    if(data.data != ''){
+                        $(".append_combinations").append(data.data);
+                    }
+                }
+            }
+        });
+        }else{
+            $(".remove_combinations").remove();
+        }
+        
+    }
+
+
 </script>
 @endpush

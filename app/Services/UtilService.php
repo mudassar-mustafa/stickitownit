@@ -49,6 +49,6 @@ class UtilService
         $response['code'] = $statusCode;
         $response['message'] = app()->environment('local') ? $message : CommonEnum::GENERAL_ERROR_MESSAGE;
         $response['status'] = $type;
-        return new JsonResponse($response, $statusCode);
+        return response()->json($response, $statusCode);
     }
 }

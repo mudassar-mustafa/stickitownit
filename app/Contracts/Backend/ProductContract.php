@@ -54,4 +54,14 @@ interface ProductContract
      * @return mixed
      */
     public function getAttributes();
+
+    /**
+     * @return mixed
+     */
+    public function getAttributeValues($attributeName);
+
+    /**
+     * @return mixed
+     */
+    public function getCombination($attributeArray);
 }
