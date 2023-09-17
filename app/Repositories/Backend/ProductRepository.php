@@ -39,23 +39,38 @@ class ProductRepository extends BaseRepository implements ProductContract
      */
     public function findProductById(int $id)
     {
-        return $this->find($id);
+        $product = Product::with([
+            'categories:id,name', 
+            'brand:id,name', 
+            'attributes:id,name',
+            'product_groups.attribute_values',
+            'attribute_values'
+            ])->where('id', $id)->first();
+        return $product;
     }
 
     /**
      * @param array $params
      * @return mixed
      */
-    public function createProduct(array $params)
+    public function createProduct($id, array $params)
     {
 
-        $product = new Product;
+        if($id != null){
+            $product = Product::where('id', $id)->first();
+        }else{
+            $product = new Product;
+        }
+
+        
         $product->title = $params['title'];
         $product->slug = \Str::slug(strtolower($params['title']));
         $product->title = $params['title'];
         $product->short_description = $params['short_description'];
         $product->description = $params['description'];
-        $product->main_image = $params['main_image'];
+        if(isset($params['main_image'])){
+            $product->main_image = $params['main_image'];
+        }
         $product->brand_id = $params['brand_id'];
         $product->product_type = $params['product_type'];
         $product->shipping_type = $params['shipping_type'];
@@ -65,7 +80,10 @@ class ProductRepository extends BaseRepository implements ProductContract
         $product->user_id = Auth::user()->id;
         $product->save();
 
-        $product->categories()->sync($params['category_id']);
+        if(isset($params['category_id']) && $params['category_id'][0] != null){
+            $product->categories()->sync($params['category_id']);
+        }
+        
 
         if($params['product_type'] == "normal"){
             $product->quantity = $params['quantity'];
@@ -73,6 +91,7 @@ class ProductRepository extends BaseRepository implements ProductContract
             $product->save();
         }else{
             // Check and Store Attribute, Check and Store Attribute values,  Create and update product Attribute,  
+            $attributeIds = [];
             foreach ($params['attribute_ids'] as $key => $attributeName) {
                 $attributeId = 0;
                 $attribute = Attribute::where('name', strtolower($attributeName))->where('status', 'active')->first();
@@ -99,31 +118,67 @@ class ProductRepository extends BaseRepository implements ProductContract
                     }
                 }
 
-                $productAttribute = new ProductAttribute;
-                $productAttribute->product_id = $product->id;
-                $productAttribute->attribute_id = $attributeId;
-                $productAttribute->save();
+                array_push($attributeIds, $attributeId);
+
+                // $productAttribute = new ProductAttribute;
+                // $productAttribute->product_id = $product->id;
+                // $productAttribute->attribute_id = $attributeId;
+                // $productAttribute->save();
             }
 
-            // Store Attribute Group and Attribute Value Group
+            $product->attributes()->sync($attributeIds);
+
+            //Delete Product Attribute Group 
+            $getProdcutGroupArray = ProductAttributeGroup::where('product_id', $product->id)->pluck('id')->toArray();
+            if(count($getProdcutGroupArray) > 0){
+                $deleteProductGroupArray = array_diff($getProdcutGroupArray, $params['combination_ids']);
+                if(count($deleteProductGroupArray) > 0){
+                    $product->product_attribute_group()->detach($deleteProductGroupArray);
+                    $product->product_groups()->whereIn('id', $deleteProductGroupArray)->delete();
+                }
+            }
             
-            foreach ($params['visibility'] as $combKey => $value) {
-                $productAttributeGroup = new ProductAttributeGroup;
+            // Store Attribute Group and Attribute Value Group
+            $visibilityIds = explode(',', $params['visibility_ids']);
+            foreach ($params['combination_ids'] as $combKey => $value) {
+
+                $productAttributeGroup = ProductAttributeGroup::where('id', $value)->first();
+                if(empty($productAttributeGroup)){
+                    $productAttributeGroup = new ProductAttributeGroup;
+                }
+
                 $productAttributeGroup->product_id = $product->id;
-                $productAttributeGroup->main_image = $params['combination_image'][$combKey];
+                if(isset($params['combination_image'][$combKey]) && $params['combination_image'][$combKey] != null){
+                    $productAttributeGroup->main_image = $params['combination_image'][$combKey];
+                }
                 $productAttributeGroup->short_description = $params['combination'][$combKey];
                 $productAttributeGroup->quantity = $params['combination_quantity'][$combKey];
                 $productAttributeGroup->sku = $params['combination_sku'][$combKey];
                 $productAttributeGroup->price = $params['combination_price'][$combKey];
-                $productAttributeGroup->visibilty = $value == 'on' ? true : false;
+                $productAttributeGroup->visibilty = $visibilityIds[$combKey];
                 $productAttributeGroup->save();
 
                 $getcombinationArray = explode('-', $params['combination'][$combKey]);
 
+                //Delete Product Attribute Group Value 
+                $getProdcutGroupValueArray = ProductAttributeValueGroup::where('product_id', $product->id)->where('product_group_id', $productAttributeGroup->id)->pluck('product_attribute_val_id')->toArray();
+                if(count($getProdcutGroupValueArray) > 0){
+                    $getAttributeValueIds = AttributeValue::whereIn('name', $getcombinationArray)->pluck('id')->toArray();
+                    $deleteProductGroupValueArray = array_diff($getProdcutGroupValueArray, $getAttributeValueIds);
+                    
+                    if(count($deleteProductGroupValueArray) > 0){
+                        ProductAttributeValueGroup::whereIn('product_attribute_val_id', $deleteProductGroupValueArray)->where('product_id', $product->id)->where('product_group_id', $productAttributeGroup->id)->delete();
+                    }
+                }
+
                 foreach ($getcombinationArray as $value) {
                     $getAttributeValueId = AttributeValue::where('name', strtolower($value))->where('status', 'active')->value('id');
 
-                    $productAttributeValueGroup = new ProductAttributeValueGroup;
+                    $productAttributeValueGroup = ProductAttributeValueGroup::where('product_id', $product->id)->where('product_group_id', $productAttributeGroup->id)->where('product_attribute_val_id', $getAttributeValueId)->first();
+                    if(empty($productAttributeValueGroup)){
+                        $productAttributeValueGroup = new ProductAttributeValueGroup;
+                    }
+                    
                     $productAttributeValueGroup->product_id = $product->id;
                     $productAttributeValueGroup->product_group_id = $productAttributeGroup->id;
                     $productAttributeValueGroup->product_attribute_val_id = $getAttributeValueId;
@@ -223,6 +278,25 @@ class ProductRepository extends BaseRepository implements ProductContract
         }
     
         return $result;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProducAttributeValue($productId, $attributeName){
+        $productAttributeValueGroupIds = ProductAttributeValueGroup::where('product_id', $productId)->groupBy('product_attribute_val_id')->pluck('product_attribute_val_id')->toArray();
+
+        return AttributeValue::whereIn('id',$productAttributeValueGroupIds)->whereHas('attribute', function($q) use($attributeName){
+            $q->where('name', strtolower($attributeName));
+        })->pluck('name')->toArray();
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getProductGroups($productId){
+        return ProductAttributeGroup::where('product_id', $productId)->get();
     }
     
 }

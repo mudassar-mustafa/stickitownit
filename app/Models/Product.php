@@ -51,4 +51,44 @@ class Product extends Model
     {
         return $this->belongsToMany(Category::class, 'product_categories', 'product_id', 'category_id');
     }
+
+    /**
+    * @return BelongsTo
+    */
+    public function brand(): BelongsTo 
+    {
+        return $this->belongsTo(Brand::class);
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function attributes(): BelongsToMany
+    {
+        return $this->belongsToMany(Attribute::class, 'product_attributes', 'product_id', 'attribute_id');
+    }
+
+    /**
+    * @return HasMany
+    */
+    public function product_groups(): HasMany
+    {
+        return $this->hasMany(ProductAttributeGroup::class,'product_id','id');
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function attribute_values(): BelongsToMany
+    {
+        return $this->belongsToMany(AttributeValue::class, 'product_attribute_value_groups', 'product_id', 'product_attribute_val_id')->groupBy('product_attribute_val_id');
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function product_attribute_group(): BelongsToMany
+    {
+        return $this->belongsToMany(ProductAttributeGroup::class, 'product_attribute_value_groups', 'product_id', 'product_group_id');
+    }
 }

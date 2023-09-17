@@ -60,7 +60,7 @@ class ProductController extends Controller
             //return $request;
             //$data = $request->validated();
             $data = $request->except('_token');
-            $this->productRepository->createProduct($data);
+            $this->productRepository->createProduct(null ,$data);
 
             return redirect()->route("backend.pages.product.index")->with([
                 "status" => CommonEnum::SUCCESS_STATUS,
@@ -71,18 +71,23 @@ class ProductController extends Controller
         }
     }
 
-    public function edit($id, UtilService $utilService): view
+    public function edit($id, UtilService $utilService)
     {
-        try {
+        // try {
             $product = $this->productRepository->findProductById($id);
+            //return $product;
             $brands = $this->productRepository->getBrands();
             $categories = $this->productRepository->getCategories();
-            $attributes = $this->productRepository->getAttributes();
+            $attributes = [];
+            if(!empty($product) && $product->product_type == 'variation'){
+                $attributes = $this->productRepository->getAttributes();
+            }
+            
             return view('backend.pages.product.create', compact('brands', 'categories', 'attributes', 'product'));
             
-        } catch (\Exception $exception) {
-            return $utilService->logErrorAndRedirectToBack('backend.pages.product.edit', $exception->getMessage());
-        }
+        // } catch (\Exception $exception) {
+        //     return $utilService->logErrorAndRedirectToBack('backend.pages.product.edit', $exception->getMessage());
+        // }
 
     }
 
@@ -92,11 +97,13 @@ class ProductController extends Controller
      * @param UtilService $utilService
      * @return RedirectResponse
      */
-    public function update($id, UpdateProductRequest $request, UtilService $utilService)
+    public function update($id, Request $request, UtilService $utilService)
     {
         try {
-            $data = $request->validated();
-            $this->productRepository->updateProduct($id, $data);
+            //return $request;
+            //$data = $request->validated();
+            $data = $request->except('_token');
+            $this->productRepository->createProduct($id, $data);
 
             return redirect()->route("backend.pages.product.index")->with([
                 "status" => CommonEnum::SUCCESS_STATUS,
@@ -136,12 +143,17 @@ class ProductController extends Controller
         try {
             $getAttributeValueHtml= "";
             $attributeValues = $this->productRepository->getAttributeValues($request->attribute_name);
+            $attributeSelectedValues = [];
+            if($request->product_id != 0){
+                $attributeSelectedValues = $this->productRepository->getProducAttributeValue($request->product_id, $request->attribute_name);
+            }
 
-            $getAttributeValueHtml = view('backend.pages.product.partial.attribute_value_partial', ['attributeValues'=> $attributeValues,  'attributeName' => $request->attribute_name])->render();
+            $getAttributeValueHtml = view('backend.pages.product.partial.attribute_value_partial', ['attributeValues'=> $attributeValues,  'attributeName' => $request->attribute_name, 'attributeSelectedValues' => $attributeSelectedValues])->render();
 
             $data = [
                 'getAttributeValueHtml' => $getAttributeValueHtml,
-                'attributeName' => $request->attribute_name
+                'attributeName' => $request->attribute_name,
+                'attributeSelectedValues' => $attributeSelectedValues
             ];
             
             return $utilService->makeResponse(200, "Attribute Value Get Successfully", $data, CommonEnum::SUCCESS_STATUS);
@@ -161,8 +173,12 @@ class ProductController extends Controller
         try {
             $getCombinationHtml= "";
             $combinations = $this->productRepository->getCombination($request->attributeArray);
+            $productGroups = [];
+            if($request->product_id != 0){
+                $productGroups = $this->productRepository->getProductGroups($request->product_id);
+            }
 
-            $getCombinationHtml = view('backend.pages.product.partial.attribute_combination_partial', ['combinations'=> $combinations])->render();
+            $getCombinationHtml = view('backend.pages.product.partial.attribute_combination_partial', ['combinations'=> $combinations, 'productGroups' => $productGroups])->render();
 
             $data = $getCombinationHtml;
             

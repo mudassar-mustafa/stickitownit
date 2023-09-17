@@ -7,7 +7,7 @@
         <select class="attribute_value_id{{ $attributeName }} form-select" name="attribute_value_id{{ $attributeName }}[]" multiple="multiple" onchange="updateAttributeValueArray('{{ $attributeName }}')">
             @if (!empty($attributeValues))
                 @foreach ($attributeValues as $attributeValue)
-                    <option value ="{{ $attributeValue->name }}">{{ $attributeValue->name }}</option>
+                    <option value ="{{ $attributeValue->name }}" {{ in_array($attributeValue->name, $attributeSelectedValues) ? "selected" : ""  }}>{{ $attributeValue->name }}</option>
                 @endforeach
             @endif
         </select>

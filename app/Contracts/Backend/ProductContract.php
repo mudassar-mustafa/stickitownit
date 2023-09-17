@@ -26,7 +26,7 @@ interface ProductContract
      * @param array $params
      * @return mixed
      */
-    public function createProduct(array $params);
+    public function createProduct($id , array $params);
 
     /**
      * @param array $params
@@ -64,4 +64,14 @@ interface ProductContract
      * @return mixed
      */
     public function getCombination($attributeArray);
+
+    /**
+     * @return mixed
+     */
+    public function getProducAttributeValue($productId, $attributeName);
+
+    /**
+     * @return mixed
+     */
+    public function getProductGroups($productId);
 }
