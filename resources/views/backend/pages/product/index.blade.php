@@ -18,6 +18,10 @@
                                         <button type="button" class="btn btn-primary me-1 pull-right">Add New Product
                                         </button>
                                     </a>
+                                    <a href="{{route('backend.pages.product.import_data')}}" class="float-end">
+                                        <button type="button" class="btn btn-primary me-1 pull-right">Import Data
+                                        </button>
+                                    </a>
                                 </div>
                             </div>
                         </div>

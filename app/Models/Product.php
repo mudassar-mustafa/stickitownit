@@ -24,14 +24,14 @@ class Product extends Model
      * @param $value
      * @return string
      */
-    public function setMainImageAttribute($value)
-    {
-        $imageName = '';
-        if (!is_null($value) && $value !== '') {
-            $imageName =  $this->upload($value, 'products');
-            $this->attributes['main_image'] = $imageName;
-        }
-    }
+    // public function setMainImageAttribute($value)
+    // {
+    //     $imageName = '';
+    //     if (!is_null($value) && $value !== '') {
+    //         $imageName =  $this->upload($value, 'products');
+    //         $this->attributes['main_image'] = $imageName;
+    //     }
+    // }
 
 
     /**

@@ -211,6 +211,25 @@ class ProductRepository extends BaseRepository implements ProductContract
      */
     public function deleteProduct($id)
     {
+
+        $product = Product::where('id', $id)->with('product_groups')->first();
+        if ($product->main_image) {
+            \File::delete(public_path('/storage/uploads/products/' . $product->main_image));
+        }
+        $product->categories()->detach();
+
+        if($product->type == "variation"){
+            foreach ($product->product_groups as $key => $value) {
+                if ($product->main_image) {
+                    \File::delete(public_path('/storage/uploads/products/' . $value->main_image));
+                }
+            }
+            
+            $product->attributes()->delete();
+            $product->product_attribute_group()->delete();
+            $product->attribute_values()->delete();
+        }
+        
         return $this->delete($id);
     }
 
