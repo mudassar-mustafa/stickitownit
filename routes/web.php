@@ -3,6 +3,7 @@
 use \App\Http\Controllers\Frontend\LandingController;
 use \App\Http\Controllers\Frontend\BlogController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Frontend\ProductDetailController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -18,8 +19,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [LandingController::class, 'index'])->name('/');
-    Route::get('blogs', [BlogController::class, 'index'])->name('blogs.list');
+Route::get('blogs', [BlogController::class, 'index'])->name('blogs.list');
 Route::get('blog/{slug}', [BlogController::class, 'blogDetail'])->name('blog.detail');
+Route::get('product_detail/{slug}', [ProductDetailController::class, 'productDetail'])->name('product.productDetail');
 
 
 Route::get('/dashboard', function () {

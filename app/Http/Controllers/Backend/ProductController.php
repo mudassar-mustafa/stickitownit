@@ -204,6 +204,7 @@ class ProductController extends Controller
     public function import_data()
     {
         ini_set('memory_limit', '-1');
+        ini_set('max_execution_time', '-1');
         $uploadFile = "";
 
         $import = new YourImportClass();
@@ -221,12 +222,13 @@ class ProductController extends Controller
                     $product->main_image = "1694893109391850627Screenshot (6).png";
                     $product->quantity = 0;
                     $product->price = 0.0;
+                    $product->brand_id = 1;
                     $product->shipping_type = "free";
                     $product->status = "active";
                     $product->save();
                 }
 
-                $product->categories()->sync([2]);
+                $product->categories()->sync([1]);
 
                 $attributeMaterialId = Attribute::where('name', strtolower('material'))->value('id');
                 $attributeSizeId = Attribute::where('name', strtolower('size'))->value('id');

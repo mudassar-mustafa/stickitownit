@@ -73,10 +73,13 @@ class ProductRepository extends BaseRepository implements ProductContract
         }
         $product->brand_id = $params['brand_id'];
         $product->product_type = $params['product_type'];
-        $product->shipping_type = $params['shipping_type'];
-        if($params['product_type'] == "fixed"){
-            $product->shipping_fee = $params['shipping_fee'];
+        if(isset($params['shipping_type'])){
+            $product->shipping_type = $params['shipping_type'];
+            if($params['shipping_type'] == "fixed"){
+                $product->shipping_fee = $params['shipping_fee'];
+            }
         }
+        
         $product->user_id = Auth::user()->id;
         $product->save();
 

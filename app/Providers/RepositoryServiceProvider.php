@@ -20,6 +20,10 @@ use App\Contracts\Backend\BlogTagContract;
 use App\Contracts\Backend\BlogContract;
 use App\Contracts\Backend\ProductContract;
 
+//Frontend 
+use App\Contracts\Frontend\ProductDetailContract;
+
+
 use Illuminate\Support\ServiceProvider;
 
 use App\Repositories\Backend\BrandRepository;
@@ -39,6 +43,9 @@ use App\Repositories\Backend\BlogCategoryRepository;
 use App\Repositories\Backend\BlogTagRepository;
 use App\Repositories\Backend\BlogRepository;
 use App\Repositories\Backend\ProductRepository;
+
+//Frontend 
+use App\Repositories\Frontend\ProductDetailRepository;
 
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -61,6 +68,7 @@ class RepositoryServiceProvider extends ServiceProvider
         BlogTagContract::class => BlogTagRepository::class,
         BlogContract::class => BlogRepository::class,
         ProductContract::class => ProductRepository::class,
+        ProductDetailContract::class => ProductDetailRepository::class,
     ];
 
     /**

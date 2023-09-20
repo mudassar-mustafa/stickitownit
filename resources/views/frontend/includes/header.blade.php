@@ -63,7 +63,7 @@
                                         <ul class="sub-menu">
                                             @if(!empty($categories) && count($categories) >0)
                                                 @foreach($categories as $category)
-                                                    <li><a href="javascript:void(0)">{{ $category->name }}</a></li>
+                                                    <li><a href="#">{{ $category->name }}</a></li>
                                                 @endforeach
                                             @endif
 {{--                                            <li><a href="shop.html">shop</a></li>--}}

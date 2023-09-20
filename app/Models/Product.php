@@ -91,4 +91,12 @@ class Product extends Model
     {
         return $this->belongsToMany(ProductAttributeGroup::class, 'product_attribute_value_groups', 'product_id', 'product_group_id');
     }
+
+    /**
+    * @return HasMany
+    */
+    public function product_images(): HasMany
+    {
+        return $this->hasMany(ProductImage::class,'product_id','id')->orderBy('order', 'asc');
+    }
 }
