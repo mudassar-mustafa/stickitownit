@@ -12,13 +12,12 @@
 @section('og-site-name','Stickitownit')
 @section('og-image', $product->main_image ?? "")
 @push('css')
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <style>
-    .nice-select{
-        width: 100%;
+    .select2-container{
+        width: 100% !important;
     }
-    .nice-select .list{
-        width: 100%;
-    }
+
 </style>
 @endpush
 @section('content')
@@ -27,6 +26,7 @@
 <section class="shop-details-area pt-150 pb-110 fix">
     <div class="container">
         <div class="row wow align-items-xl-center fadeInUp" data-wow-delay=".3s">
+            <input type="hidden" value="{{ $product->id }}" id="product_id">
             <div class="col-lg-7">
                 <div class="product-d-img-tab-wrapper mb-70">
                     <div class="product-d-img-nav">
@@ -108,19 +108,15 @@
                         @foreach ($product->attributes as $key => $attribute)
                             <div class="{{ $key + 1 == count($product->attributes) ? "col-lg-12 col-md-12 col-sm-12 col-xs-12" : "col-lg-6 col-md-6 col-sm-12 col-xs-12" }}">
                                 <div class="cp-input-field">
-                                <label for="attribure_{{ $attribute->name }}">{{ $attribute->name }}</label>
-                                <select id="attribure_{{ $attribute->name }}">
-                                    @foreach ($attribute->attribute_values as $attributeValue)
-                                    @if (in_array($attributeValue->id, $productAttributeValues))
-                                        <option {{ $attributeValue->id }}> {{ $attributeValue->name }}</option>    
-                                    @endif
-                                        
-                                    @endforeach
-                                    
+                                <label for="attribute_{{ $key }}">{{ $attribute->name }}</label>
+                                <select id="attribute_{{ $key }}" class="attributes js-example-basic-single" data-attribute_id ={{ $attribute->id }}  data-attribute_name ={{ $attribute->name }} data-key ={{ $key }} onchange="updateAttributeValue('{{ $key }}')"> 
                                 </select>
                                 </div>
                             </div>    
                         @endforeach
+                    </div>
+                    <div class="product-price hidden variable_product_price" style="float: right;">
+                        <span class="price-now variable_product_amount"></span>
                     </div>
                     @endif
                     
@@ -1120,4 +1116,156 @@
 <!-- floating area end here  -->
 @endsection
 @push('js')
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+    var sele
+    $(document).ready(function() {
+        $('.js-example-basic-single').select2();
+    });
+    window.onload = function() {
+        setTimeout(myFunc, 1000);
+    }
+
+    var myFunc = function attributeValues() {
+        var attributeId = $("#attribute_0").data('attribute_id');
+        getAttributeValue(0, attributeId);    
+      
+    }
+
+    async function getAttributeValue(key, attributeId) {
+        var selectedIds = [];
+        $(".attributes").each(function() {
+            if($(this).find(':selected').val() != undefined){
+                selectedIds.push($(this).find(':selected').val());
+            }
+        });
+        var arrayIds = "";
+        if(selectedIds.length > 0){
+            arrayIds = selectedIds.toString(); 
+        }
+        var csrf_token = $('meta[name="csrf-token"]').attr('content');
+        const url ='{{route("product.getAttributeValue")}}';
+        var data = {
+            'product_id': $("#product_id").val(),
+            'attribute_id': attributeId,
+            'key': key,
+            'selectedIds': arrayIds,
+            _token: csrf_token
+        };
+        try {
+            const result = await doAjax(url, data);
+            if(result['data']['productAttributeValues'] != null){
+                var html = "";
+                for (let index = 0; index < result['data']['productAttributeValues'].length; index++) {
+                    if(index == 0){
+                        if(key == 2){
+                            html +='<option value= '+result['data']['productAttributeValues'][index]['id']+' selected>'+result['data']['productAttributeValues'][index]['name']+' ('+result['data']['groupData'][index]['price']+')</option>';
+                        }else{
+                            html +='<option value= '+result['data']['productAttributeValues'][index]['id']+' selected>'+result['data']['productAttributeValues'][index]['name']+'</option>';
+                        }
+                        
+                    }else{
+
+                        if(key == 2){
+                            html +='<option value= '+result['data']['productAttributeValues'][index]['id']+'>'+result['data']['productAttributeValues'][index]['name']+' ('+result['data']['groupData'][index]['price']+')</option>';
+                        }else{
+                            html +='<option value= '+result['data']['productAttributeValues'][index]['id']+'>'+result['data']['productAttributeValues'][index]['name']+'</option>';
+                        }
+                        
+                    }
+                }
+
+                $("#attribute_"+key+"").append(html);
+                if(key == "0"){
+                    var attributeId = $("#attribute_1").data('attribute_id');
+                    $("#attribute_1").empty();
+                    getAttributeValue(1, attributeId);
+                }
+
+                if(key == "1"){
+                    var attributeId = $("#attribute_2").data('attribute_id');
+                    $("#attribute_2").empty();
+                    getAttributeValue(2, attributeId);
+                }
+
+                if(key == "2"){
+                    var selectedIds = [];
+                    $(".attributes").each(function() {
+                        if($(this).find(':selected').val() != undefined){
+                            selectedIds.push($(this).find(':selected').val());
+                        }
+                    });
+                    var arrayIds = "";
+                    if(selectedIds.length > 0){
+                        arrayIds = selectedIds.toString(); 
+                    }
+                    getProductGroupValue(arrayIds);
+                }
+            }
+        } catch (error) {
+            console.log('Error! InsertAssignments:', error);
+        }
+        
+    }
+
+
+    async function getProductGroupValue(selectedIds) {
+        
+        var csrf_token = $('meta[name="csrf-token"]').attr('content');
+        const url ='{{route("product.getProductGroupValue")}}';
+        var data = {
+            'product_id': $("#product_id").val(),
+            'selectedIds': selectedIds,
+            _token: csrf_token
+        };
+        try {
+            const result = await doAjax(url, data);
+            if(result['data'] != null){
+                $(".variable_product_price").removeClass('hidden');
+                $(".variable_product_amount").text('$'+result['data']['price']+'');
+            }else{
+                
+                $(".variable_product_price").addClass('hidden');
+                $(".variable_product_amount").text('');
+            }
+        } catch (error) {
+            console.log('Error! InsertAssignments:', error);
+        }
+        
+    }
+
+    async function updateAttributeValue(key) {
+        
+        if(key == "2"){
+            var selectedIds = [];
+            $(".attributes").each(function() {
+                if($(this).find(':selected').val() != undefined){
+                    selectedIds.push($(this).find(':selected').val());
+                }
+            });
+            var arrayIds = "";
+            if(selectedIds.length > 0){
+                arrayIds = selectedIds.toString(); 
+            }
+            getProductGroupValue(arrayIds);
+        }else{
+            var keyValue = parseInt(key) + 1;
+            var attributeId = $("#attribute_"+keyValue+"").data('attribute_id');
+            $("#attribute_"+keyValue+"").empty();
+            getAttributeValue(keyValue, attributeId);
+        }
+        
+        
+    }
+
+    async function doAjax(url, params = {}, method = 'POST') {
+        return $.ajax({
+        url: url,
+        type: method,
+        async: false,
+        dataType: 'json',
+        data: params
+        });
+    }
+</script>
 @endpush

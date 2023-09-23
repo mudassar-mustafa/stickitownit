@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class AttributeValue extends Model
 {
@@ -38,5 +39,13 @@ class AttributeValue extends Model
     public function product_attribute_group(): BelongsToMany
     {
         return $this->belongsToMany(ProductAttributeGroup::class, 'product_attribute_value_groups', 'product_attribute_val_id', 'product_group_id');
+    }
+
+    /**
+    * @return HasMany
+    */
+    public function product_attribute_value_group(): HasMany
+    {
+        return $this->hasMany(ProductAttributeValueGroup::class,'product_attribute_val_id','id');
     }
 }

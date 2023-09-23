@@ -18,5 +18,7 @@ interface ProductDetailContract
      * @param integer $productId
      * @return mixed
     */
-    public function getProductAttributeValueArray($productId);
+    public function getProductAttributeValue($productId, $attributeId, $index, $selectedIds);
+
+    public function getProductGroupAttribute($productId, $selectedIds);
 }
