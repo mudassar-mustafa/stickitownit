@@ -8,6 +8,7 @@ use App\Services\UtilService;
 use App\Http\Enums\CommonEnum;
 use Illuminate\Http\RedirectResponse;
 use App\DataTables\ProductDataTable;
+use App\DataTables\ProductVariationDataTable;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
@@ -301,5 +302,56 @@ class ProductController extends Controller
         }
 
         return view('backend.pages.product.import_data');
+    }
+
+    /**
+     * Display a listing of the resource.
+     */
+    public function variationEdit(
+        UtilService    $utilService,
+        ProductVariationDataTable $dataTable,
+        $id
+    )
+    {
+        try {
+            return $dataTable->with(['id' => $id])->render('backend.pages.product.variationEdit');
+        } catch (\Exception $exception) {
+            return $utilService->logErrorAndRedirectToBack('backend.pages.product.variationEdit', $exception->getMessage());
+        }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroyVariation($id, UtilService $utilService)
+    {
+
+        try {
+            $this->productRepository->deleteProductVariation($id);
+            return redirect()->back()->with([
+                "status" => CommonEnum::SUCCESS_STATUS,
+                "message" => "Product Variation has been deleted successfully."
+            ]);
+        } catch (\Exception $exception) {
+            return $utilService->logErrorAndRedirectToBack('backend.pages.product.destroyVariation', $exception->getMessage());
+        }
+    }
+
+    /**
+     * @param $id
+     * @param UpdateProductRequest $request
+     * @param UtilService $utilService
+     * @return RedirectResponse
+     */
+    public function updateVariation(Request $request, UtilService $utilService)
+    {
+        try {
+            $data = $request->except('_token');
+            $this->productRepository->updateProductVariation($data);
+
+            return $utilService->makeResponse(200, "Variation Update Successfully", [], CommonEnum::SUCCESS_STATUS);
+        } catch (\Exception $exception) {
+            return $utilService->makeResponse(500, $exception->getMessage());
+        }
     }
 }

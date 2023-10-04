@@ -320,5 +320,34 @@ class ProductRepository extends BaseRepository implements ProductContract
     public function getProductGroups($productId){
         return ProductAttributeGroup::where('product_id', $productId)->get();
     }
+
+    /**
+     * @param array $params
+     * @return mixed
+    */
+    public function updateProductVariation(array $params){
+        $productAttributeGroup = ProductAttributeGroup::where('id', $params['id'])->first();
+        if(!empty($productAttributeGroup)){
+            if(isset($params['image']) && $params['image'] != null){
+                $productAttributeGroup->main_image = $params['image'];
+            }
+
+            $productAttributeGroup->price = $params['price'];
+            $productAttributeGroup->quantity = $params['quantity'];
+            $productAttributeGroup->visibilty = $params['visibility'] == "1" ? 1 : 0;
+            $productAttributeGroup->save();
+        }
+        return $productAttributeGroup;
+    }
+
+    /**
+     * @param $id
+     * @return bool
+     */
+    public function deleteProductVariation($id){
+        ProductAttributeValueGroup::where('product_group_id', $id)->delete();
+        ProductAttributeGroup::where('id', $id)->delete();
+        return true;
+    }
     
 }

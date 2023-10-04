@@ -200,5 +200,8 @@ Route::group(['prefix' => 'backend'], function () {
         Route::post('/getAttributeValues', 'getAttributeValues')->name('backend.pages.product.getAttributeValues');
         Route::post('/getCombination', 'getCombination')->name('backend.pages.product.getCombination');
         Route::get('/import_data', 'import_data')->name('backend.pages.product.import_data');
+        Route::get('/{id}/variationEdit', 'variationEdit')->name('backend.pages.product.variationEdit');
+        Route::post('/updateVariation', 'updateVariation')->name('backend.pages.product.updateVariation');
+        Route::delete('/deleteVariation/{id}', 'destroyVariation')->name('backend.pages.product.destroyVariation');
     });
 });

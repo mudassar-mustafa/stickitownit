@@ -74,4 +74,16 @@ interface ProductContract
      * @return mixed
      */
     public function getProductGroups($productId);
+
+    /**
+     * @param array $params
+     * @return mixed
+    */
+    public function updateProductVariation(array $params);
+
+    /**
+     * @param $id
+     * @return bool
+     */
+    public function deleteProductVariation($id);
 }
