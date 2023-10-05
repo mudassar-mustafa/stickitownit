@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [LandingController::class, 'index'])->name('/');
 Route::get('blogs', [BlogController::class, 'index'])->name('blogs.list');
 Route::get('blog/{slug}', [BlogController::class, 'blogDetail'])->name('blog.detail');
-Route::get('product_detail/{slug}', [ProductDetailController::class, 'productDetail'])->name('product.productDetail');
+Route::get('product/{slug}', [ProductDetailController::class, 'productDetail'])->name('product.productDetail');
 Route::post('getAttributeValue', [ProductDetailController::class, 'getAttributeValue'])->name('product.getAttributeValue');
 Route::post('getProductGroupValue', [ProductDetailController::class, 'getProductGroupValue'])->name('product.getProductGroupValue');
 Route::get('faqs', [LandingController::class, 'faq'])->name('faqs');

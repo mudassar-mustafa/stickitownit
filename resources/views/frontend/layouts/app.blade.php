@@ -19,7 +19,6 @@
     <link rel="stylesheet" href="{{ asset('assets/css/backToTop.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/magnific-popup.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/ui-range-slider.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/nice-select.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/fontAwesome5Pro.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/hover-reveal.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/default.css') }}">
@@ -59,7 +58,7 @@
 <script src="{{ asset('assets/js/parallax.min.js') }}"></script>
 <script src="{{ asset('assets/js/backToTop.js') }}"></script>
 <script src="{{ asset('assets/js/jquery-ui-slider-range.js') }}"></script>
-<script src="{{ asset('assets/js/nice-select.min.js') }}"></script>
+<script src="{ asset('assets/js/nice-select.min.js') }}"></script>
 <script src="{{ asset('assets/js/counterup.min.js') }}"></script>
 <script src="{{ asset('assets/js/ajax-form.js') }}"></script>
 <script src="{{ asset('assets/js/wow.min.js') }}"></script>

@@ -1,6 +1,7 @@
 @extends('frontend.layouts.app')
 @section('title','Home')
 @push('css')
+    <link rel="stylesheet" href="{{ asset('assets/css/nice-select.css') }}">
 @endpush
 @section('content')
     <main>
@@ -359,4 +360,5 @@
     </main>
 @endsection
 @push('js')
+    <script src="{{ asset('assets/js/nice-select.min.js') }}"></script>
 @endpush

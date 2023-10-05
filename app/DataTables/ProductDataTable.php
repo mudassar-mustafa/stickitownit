@@ -28,16 +28,23 @@ class ProductDataTable extends DataTable
             ->addColumn('status', function ($product) {
                 return ($product->status == "active") ? '<span class="badge rounded-pill btn btn-success">Active</span>' : '<span class="badge rounded-pill btn btn-danger">De-active</span>';
             })
+            ->addColumn('variations', function ($product) {
+                if($product->product_type == "variation"){
+                    return '<a href="' . route("backend.pages.product.variationEdit", $product->id) . '" class="badge rounded-pill btn btn-primary">Variations</a>';
+                }else{
+                    return  'N/A';
+                }
+            })
             ->escapeColumns(
                 []
             )
             ->addColumn('action', function ($product) {
 
+
+
                 $editAction = '<a href="' . route("backend.pages.product.edit", $product->id) . '" class="item-edit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit font-small-4"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg></a>';
 
-                if($product->product_type == "variation"){
-                    $editVariationAction = '<a href="' . route("backend.pages.product.variationEdit", $product->id) . '" class="item-edit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit font-small-4"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg></a>';
-                }
+
 
                 $deleteAction = '<a form-alert-message="Kindly Confirm the removal of this Product" ' .
                     'form-id="chargeDelete' . $product->id . '" class="deleteModel" href="'
@@ -50,12 +57,12 @@ class ProductDataTable extends DataTable
                 $deleteAction .= Form::close();
 
                 if($product->product_type == "variation"){
-                    return $editVariationAction . $editAction . $deleteAction;
+                    return  $editAction . $deleteAction;
                 }else{
                     return $editAction . $deleteAction;
                 }
 
-                
+
             })->rawColumns(['action']);
     }
 
@@ -97,6 +104,8 @@ class ProductDataTable extends DataTable
             Column::make('Title')->name('title')->data("title")
                 ->addClass('text-center'),
             Column::make('Status')->name('status')->data("status")
+                ->addClass('text-center'),
+            Column::make('Variations')->name('variations')->data("variations")
                 ->addClass('text-center'),
             Column::computed('action')
                 ->exportable(false)
