@@ -55,25 +55,30 @@
                             <nav id="mobile-menu">
                                 <ul>
                                     <li>
-                                        <a href="index.html">Home</a>
+                                        <a href="{{ route('/') }}">Home</a>
 
                                     </li>
-                                    <li class="menu-item-has-children">
-                                        <a href="index.html">Products</a>
-                                        <ul class="sub-menu">
-                                            @if(!empty($categories) && count($categories) >0)
-                                                @foreach($categories as $category)
-                                                    <li><a href="#">{{ $category->name }}</a></li>
-                                                @endforeach
-                                            @endif
+                                    @if(!empty($categories) && count($categories) >0)
+                                        @foreach($categories as $category)
+                                            <li><a href="#">{{ $category->name }}</a></li>
+                                        @endforeach
+                                    @endif
+{{--                                    <li class="menu-item-has-children">--}}
+{{--                                        <a href="javascript:void(0)">Products</a>--}}
+{{--                                        <ul class="sub-menu">--}}
+{{--                                            @if(!empty($categories) && count($categories) >0)--}}
+{{--                                                @foreach($categories as $category)--}}
+{{--                                                    <li><a href="#">{{ $category->name }}</a></li>--}}
+{{--                                                @endforeach--}}
+{{--                                            @endif--}}
 {{--                                            <li><a href="shop.html">shop</a></li>--}}
 {{--                                            <li><a href="shop-sidebar.html">shop sidebar</a></li>--}}
 {{--                                            <li><a href="shop-details.html">shop details</a></li>--}}
 {{--                                            <li><a href="cart.html">cart</a></li>--}}
 {{--                                            <li><a href="quote.html">quote</a></li>--}}
 {{--                                            <li><a href="checkout.html">checkout</a></li>--}}
-                                        </ul>
-                                    </li>
+{{--                                        </ul>--}}
+{{--                                    </li>--}}
                                     <li><a href="{{ route('blogs.list') }}">Blogs</a></li>
 
                                     <li><a href="contact.html">About Us</a></li>

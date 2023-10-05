@@ -6,7 +6,7 @@
             <div class="offset-widget offset-logo mb-50">
                 <div class="row align-items-center">
                     <div class="col-9">
-                        <a href="index.html">
+                        <a href="{{ route('/') }}">
                             <img src="{{ asset('assets/img/logo/logo.png') }}" alt="Logo">
                         </a>
                     </div>

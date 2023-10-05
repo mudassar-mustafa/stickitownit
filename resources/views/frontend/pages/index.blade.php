@@ -204,112 +204,39 @@
         </section>
         <!-- feature area start end  -->
 
-        <!-- faq area start here  -->
-        <section class="cp-faq-area p-relative pt-150 pb-100 fix">
-            <div class="cp-faq-shape-area">
-                <div class="cp-faq-shape-img cp-faq-shape1 m-img p-absolute zi--1 cp-bg-move-x">
-                    <img src="{{ asset('assets/img/faq/faq-shape-1.png') }}" alt="shape">
-                </div>
-                <div class="cp-faq-shape2 br-50 p-absolute cp-round-rotation1"></div>
-                <div class="cp-faq-shape3 br-50 p-absolute cp-round-rotation2"></div>
-                <div class="cp-faq-shape4 br-50 p-absolute cp-round-rotation1"></div>
-                <div class="cp-faq-shape5 p-absolute d-none d-md-block cp-rotation">
-                    <svg width="77" height="91" viewBox="0 0 77 91" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M55.1403 75.1239C66.7298 66.6461 72.5829 54.9314 68.2136 48.9584C63.8442 42.9854 50.9071 45.0159 39.3176 53.4937C27.7281 61.9714 21.875 73.6862 26.2444 79.6592C30.6137 85.6322 43.5508 83.6017 55.1403 75.1239Z"
-                            stroke="#FBD017" stroke-width="2.5" stroke-miterlimit="10" stroke-linecap="round"
-                            stroke-linejoin="round"/>
-                        <path
-                            d="M24.8245 75.4001C24.8245 76.0001 24.9245 76.5001 25.0245 77.0001L1.72447 3.1001C1.52447 2.5001 2.22447 2.0001 2.72447 2.4001L66.1245 47.0001"
-                            stroke="#FBD017" stroke-width="2.5" stroke-miterlimit="10" stroke-linecap="round"
-                            stroke-linejoin="round"/>
-                    </svg>
-                </div>
-                <div class="cp-faq-shape6 br-50 p-absolute cp-round-rotation2"></div>
-                <div class="cp-faq-shape7 br-50 p-absolute"></div>
+        <!-- about area start here  -->
+        <section class="cp-about-area p-relative pb-115 fix">
+            <div class="cp-about-shape-img five m-img cp-bg-move-y">
+                <img src="{{ asset('assets/img/about/about-squre.png') }}" alt="img not found">
             </div>
             <div class="container">
-                <div class="row">
-                    <div class="col-xl-6 col-lg-10">
-                        <div class="cp-faq-img-wrap mb-20 wow fadeInLeft animated" data-wow-delay="0.3s">
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="cp-faq-img-item p-relative w-img mb-30">
-                                        <div class="cp-img-overlay wow"></div>
-                                        <div class="cp-img-blur">
-                                            <img src="{{ asset('assets/img/faq/faq-1.jpg') }}" alt="faq">
-                                            <img src="{{ asset('assets/img/faq/faq-1.jpg') }}" alt="faq">
-                                        </div>
+                <div class="row justify-content-center align-items-center">
+                    <div class="col-xl-8">
+                        <div class="cp-about-wrap fade-jr p-relative">
+                            <div class="cp-about-shape one p-absolute d-none d-xl-block cp-round-rotation2"></div>
+                            <div class="cp-about-shape two p-absolute d-none d-xl-block cp-round-rotation1"></div>
+                            <div class="cp-about-shape three p-absolute cp-round-rotation1"></div>
+
+                            <div
+                                class="js-tilt cp-about-inner ml-5 mr-5 t-center d-flex align-items-center justify-content-center"
+                                data-background="assets/img/about/about-round.jpg">
+                                <div class="cp-about-content">
+                                    <span class="cp-about-subtitle mb-15">About Our Company</span>
+                                    <h2 class="cp-about-title mb-70">We are just <br> <span>better Quality</span> <br> for over
+                                        35 <br> <span>years</span> -</h2>
+                                    <div class="cp-about-btn">
+                                        <a class="cp-btn-2" href="contact.html">
+                                            Contact us
+                                            <span class="cp-btn-2__inner">
+                                    <span class="cp-btn-2__blobs">
+                                       <span class="cp-btn-2__blob"></span>
+                                       <span class="cp-btn-2__blob"></span>
+                                       <span class="cp-btn-2__blob"></span>
+                                       <span class="cp-btn-2__blob"></span>
+                                    </span>
+                                 </span>
+                                        </a>
                                     </div>
-                                    <div class="cp-faq-img-item p-relative w-img mb-30 js-tilt">
-                                        <div class="cp-img-overlay wow"></div>
-                                        <div class="cp-img-blur">
-                                            <img src="{{ asset('assets/img/faq/faq-3.jpg') }}" alt="faq">
-                                            <img src="{{ asset('assets/img/faq/faq-3.jpg') }}" alt="faq">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="cp-faq-img-item p-relative w-img mb-30 js-tilt">
-                                        <div class="cp-img-overlay wow"></div>
-                                        <div class="cp-img-blur cp-min-height-445">
-                                            <img src="{{ asset('assets/img/faq/faq-2.jpg') }}" alt="faq">
-                                            <img src="{{ asset('assets/img/faq/faq-2.jpg') }}" alt="faq">
-                                        </div>
-                                    </div>
-                                    <div class="cp-faq-img-item mb-30">
-                                        <div class="cp-faq-img-content">
-                                            <div class="cp-faq-img-icon m-img">
-                                                <img src="{{ asset('assets/img/faq/faq-phone-icon.png') }}" alt="faq">
-                                            </div>
-                                            <h4>Call us now</h4>
-                                            <a href="tel:+910265362003">+91 0265 362 003</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-6">
-                        <div class="cp-faq-wrap cp-faq-space pl-60 pr-60 mb-50">
-                            <div class="cp-faq-title-wrap mt--5">
-                                <div class="cp-section-title mb-35">
-                           <span class="cp-subtitle mb-15 wow fadeInUp animated" data-wow-delay="0.3s">First &
-                              Quality Service</span>
-                                    <h2 class="cp-title wow fadeInUp animated" data-wow-delay="0.4s">how <span>your
-                                 products</span> come to life</h2>
-                                </div>
-                                <p class="cp-faq-text mb-40 wow fadeInUp animated" data-wow-delay="0.5s">ABC Printing
-                                    Co, a
-                                    solutions-driven graphic communications company
-                                    with a history of success connecting brands with consumers. What’s more, we do it
-                                    right!
-                                    A
-                                    full administration printing background.</p>
-                                <div class="accordion" id="accordionExample">
-                                    @if(!empty($faqs) && count($faqs) > 0)
-                                        @foreach($faqs as $key=>$faq)
-                                            <div class="accordion-item wow fadeInUp animated"
-                                                 data-wow-delay="0.{{$key+6}}s">
-                                                <h2 class="accordion-header" id="heading{{$key}}">
-                                                    <button class="accordion-button {{ $key !== 0 ? 'collapsed' : '' }}"
-                                                            type="button"
-                                                            data-bs-toggle="collapse"
-                                                            data-bs-target="#collapse{{$key}}"
-                                                            aria-expanded="{{ $key === 0  ? true : false }}"
-                                                            aria-controls="collapse{{$key}}">{{$faq->name}}
-                                                    </button>
-                                                </h2>
-                                                <div id="collapse{{$key}}"
-                                                     class="accordion-collapse collapse {{ $key===0 ? 'show' : '' }}"
-                                                     aria-labelledby="heading{{$key}}"
-                                                     data-bs-parent="#accordionExample">
-                                                    <div class="accordion-body">{{$faq->short_description}}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        @endforeach
-                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -317,6 +244,11 @@
                 </div>
             </div>
         </section>
+        <!-- about area end here  -->
+
+        <!-- faq area start here  -->
+
+        @include('frontend.partials.faq')
         <!-- faq area end here  -->
 
 
@@ -364,9 +296,13 @@
                                                                 alt="{{ $blog->name }}"></a>
                                                     </div>
                                                     <div class="cp-news3-content">
-                                                        <span class="cp-news3-data">{{date('F j, Y', strtotime($blog->created_at))}}</span>
-                                                        <h3 class="cp-news-title"><a href="{{ route('blog.detail',$blog->slug) }}">{{ $blog->name }}</a></h3>
-                                                        <h5 class="cp-news-post-by">Author : <a href="javascript:void(0)">{{ $blog->author_name }}</a>
+                                                        <span
+                                                            class="cp-news3-data">{{date('F j, Y', strtotime($blog->created_at))}}</span>
+                                                        <h3 class="cp-news-title"><a
+                                                                href="{{ route('blog.detail',$blog->slug) }}">{{ $blog->name }}</a>
+                                                        </h3>
+                                                        <h5 class="cp-news-post-by">Author : <a
+                                                                href="javascript:void(0)">{{ $blog->author_name }}</a>
                                                         </h5>
                                                     </div>
                                                 </div>
@@ -381,6 +317,41 @@
             </div>
         </section>
         <!-- news area end here  -->
+
+        <div class="cp-brand-area pb-130">
+            <div class="container">
+                <div class="row wow fadeInUp animated" data-wow-duration="1.5s" data-wow-delay="0.3">
+                    <div class="col-xl-12">
+                        <div class="cp-news3-left">
+                            <div class="cp-news3-title-wrap mb-40">
+                                <div class="cp-section-title text-center">
+                                    <h3 class="cp-subtitle mb-15 wow fadeInUp animated " data-wow-delay="0.3s">What we
+                                        are printing</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-12">
+
+                        <div class="cp-brand-wrap">
+                            <div class="swiper-container cp-brand-active">
+                                <div class="swiper-wrapper">
+                                    @if(!empty($stickers) && count($stickers) > 0)
+                                        @foreach($stickers as $key=>$sticker)
+                                            <div class="swiper-slide">
+                                                <div class="cp-brand-img m-img">
+                                                    <img src="{{$sticker->image}}" alt="{{$key+1}}.png">
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
         @include('frontend.includes.social')

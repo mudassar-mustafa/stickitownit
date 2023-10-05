@@ -7,6 +7,7 @@ use App\Models\Blog;
 use App\Models\Category;
 use App\Models\FAQ;
 use App\Models\Feature;
+use App\Models\Sticker;
 use Illuminate\Http\Request;
 
 class LandingController extends Controller
@@ -16,6 +17,13 @@ class LandingController extends Controller
         $features = Feature::orderBy('id', 'asc')->get(['id', 'name', 'short_description', 'image']);
         $faqs = FAQ::whereStatus('active')->orderBy('id', 'asc')->get(['name', 'short_description']);
         $blogs = Blog::whereStatus('active')->orderBy('id', 'asc')->get(['id', 'name', 'title', 'slug', 'image', 'created_at', 'author_name']);
-        return view('frontend.pages.index', compact('features', 'faqs', 'blogs'));
+        $stickers = Sticker::whereStatus('active')->orderBy('id', 'asc')->get(['image']);
+        return view('frontend.pages.index', compact('features', 'faqs', 'blogs', 'stickers'));
+    }
+
+    public function faq()
+    {
+        $faqs = FAQ::whereStatus('active')->orderBy('id', 'asc')->get(['name', 'short_description']);
+        return view('frontend.pages.faq', compact('faqs'));
     }
 }

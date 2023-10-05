@@ -981,7 +981,7 @@
     var cpnews3 = new Swiper(".cp-news3-active", {
         slidesPerView: 2,
         spaceBetween: 30,
-        loop: true,
+        loop: false,
         rtl: rtl_setting,
         navigation: {
             nextEl: '.cp-news3-button-next',
