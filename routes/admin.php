@@ -19,16 +19,6 @@ use App\Http\Controllers\Backend\BlogTagController;
 use App\Http\Controllers\Backend\ProductController;
 
 Route::group(['prefix' => 'backend'], function () {
-//  Brands Routes
-    Route::controller(BrandController::class)->prefix('brands')->group(function () {
-        Route::get('/', 'index')->name('backend.pages.brand.index');
-        Route::get('/create', 'create')->name('backend.pages.brand.create');
-        Route::post('/store', 'store')->name('backend.pages.brand.store');
-        Route::get('/{id}/edit', 'edit')->name('backend.pages.brand.edit');
-        Route::post('/{id}/update', 'update')->name('backend.pages.brand.update');
-        Route::delete('/delete/{id}', 'destroy')->name('backend.pages.brand.destroy');
-    });
-
 
 //  User Routes
     Route::controller(UserController::class)->prefix('users')->group(function () {
@@ -40,6 +30,16 @@ Route::group(['prefix' => 'backend'], function () {
         Route::delete('/delete/{id}', 'destroy')->name('backend.pages.users.destroy');
     });
 
+//  Brands Routes
+    Route::controller(BrandController::class)->prefix('brands')->group(function () {
+        Route::get('/', 'index')->name('backend.pages.brand.index');
+        Route::get('/create', 'create')->name('backend.pages.brand.create');
+        Route::post('/store', 'store')->name('backend.pages.brand.store');
+        Route::get('/{id}/edit', 'edit')->name('backend.pages.brand.edit');
+        Route::post('/{id}/update', 'update')->name('backend.pages.brand.update');
+        Route::delete('/delete/{id}', 'destroy')->name('backend.pages.brand.destroy');
+    });
+
 //  Category Routes
     Route::controller(CategoryController::class)->prefix('categories')->group(function () {
         Route::get('/', 'index')->name('backend.pages.categories.index');
@@ -49,7 +49,6 @@ Route::group(['prefix' => 'backend'], function () {
         Route::post('/{id}/update', 'update')->name('backend.pages.categories.update');
         Route::delete('/delete/{id}', 'destroy')->name('backend.pages.categories.destroy');
     });
-
 
 //  Features Routes
     Route::controller(FeaturesController::class)->prefix('features')->group(function () {
@@ -101,6 +100,58 @@ Route::group(['prefix' => 'backend'], function () {
         Route::delete('/delete/{id}', 'destroy')->name('backend.pages.city.destroy');
     });
 
+//  Blogs Routes Start
+    Route::controller(BlogController::class)->prefix('blogs')->group(function () {
+        Route::get('/', 'index')->name('backend.pages.blogs.index');
+        Route::get('/create', 'create')->name('backend.pages.blogs.create');
+        Route::post('/store', 'store')->name('backend.pages.blogs.store');
+        Route::get('/{id}/edit', 'edit')->name('backend.pages.blogs.edit');
+        Route::post('/{id}/update', 'update')->name('backend.pages.blogs.update');
+        Route::delete('/delete/{id}', 'destroy')->name('backend.pages.blogs.destroy');
+
+        Route::post('/upload', 'upload')->name('backend.pages.blogs.media.upload');
+        Route::get('/fetch/{id}', 'fetch')->name('backend.pages.blogs.media.fetch');
+        Route::get('/media/delete', 'deleteMedia')->name('backend.pages.blogs.media.delete');
+
+
+    });
+
+//  Blogs Category Routes
+    Route::controller(BlogCategoryController::class)->prefix('blogs/categories')->group(function () {
+        Route::get('/', 'index')->name('backend.pages.blogs-categories.index');
+        Route::get('/create', 'create')->name('backend.pages.blogs-categories.create');
+        Route::post('/store', 'store')->name('backend.pages.blogs-categories.store');
+        Route::get('/{id}/edit', 'edit')->name('backend.pages.blogs-categories.edit');
+        Route::post('/{id}/update', 'update')->name('backend.pages.blogs-categories.update');
+        Route::delete('/delete/{id}', 'destroy')->name('backend.pages.blogs-categories.destroy');
+    });
+
+//  Blogs Tags Routes
+    Route::controller(BlogTagController::class)->prefix('blogs/tags')->group(function () {
+        Route::get('/', 'index')->name('backend.pages.blogs-tags.index');
+        Route::get('/create', 'create')->name('backend.pages.blogs-tags.create');
+        Route::post('/store', 'store')->name('backend.pages.blogs-tags.store');
+        Route::get('/{id}/edit', 'edit')->name('backend.pages.blogs-tags.edit');
+        Route::post('/{id}/update', 'update')->name('backend.pages.blogs-tags.update');
+        Route::delete('/delete/{id}', 'destroy')->name('backend.pages.blogs-tags.destroy');
+    });
+
+//  Products Routes
+    Route::controller(ProductController::class)->prefix('products')->group(function () {
+        Route::get('/', 'index')->name('backend.pages.product.index');
+        Route::get('/create', 'create')->name('backend.pages.product.create');
+        Route::post('/store', 'store')->name('backend.pages.product.store');
+        Route::get('/{id}/edit', 'edit')->name('backend.pages.product.edit');
+        Route::post('/{id}/update', 'update')->name('backend.pages.product.update');
+        Route::delete('/delete/{id}', 'destroy')->name('backend.pages.product.destroy');
+        Route::post('/get/attribute-values', 'getAttributeValues')->name('backend.pages.product.getAttributeValues');
+        Route::post('/get/combination', 'getCombination')->name('backend.pages.product.getCombination');
+        Route::get('/import-data', 'import_data')->name('backend.pages.product.import_data');
+        Route::get('/{id}/variation/edit', 'variationEdit')->name('backend.pages.product.variationEdit');
+        Route::post('/update/variation', 'updateVariation')->name('backend.pages.product.updateVariation');
+        Route::delete('/delete/variation/{id}', 'destroyVariation')->name('backend.pages.product.destroyVariation');
+    });
+
 //  Attribute Routes
     Route::controller(AttributeController::class)->prefix('attributes')->group(function () {
         Route::get('/', 'index')->name('backend.pages.attribute.index');
@@ -121,7 +172,6 @@ Route::group(['prefix' => 'backend'], function () {
         Route::delete('/delete/{id}', 'destroy')->name('backend.pages.attribute-value.destroy');
     });
 
-
 //  Package Routes
     Route::controller(PackageController::class)->prefix('packages')->group(function () {
         Route::get('/', 'index')->name('backend.pages.package.index');
@@ -132,7 +182,7 @@ Route::group(['prefix' => 'backend'], function () {
         Route::delete('/delete/{id}', 'destroy')->name('backend.pages.package.destroy');
     });
 
-//  page Routes
+//  Pages Routes
     Route::controller(PageController::class)->prefix('pages')->group(function () {
         Route::get('/', 'index')->name('backend.pages.page.index');
         Route::get('/create', 'create')->name('backend.pages.page.create');
@@ -142,7 +192,7 @@ Route::group(['prefix' => 'backend'], function () {
         Route::delete('/delete/{id}', 'destroy')->name('backend.pages.page.destroy');
     });
 
-//  page Routes
+//  Stickers Routes
     Route::controller(StickerController::class)->prefix('stickers')->group(function () {
         Route::get('/', 'index')->name('backend.pages.sticker.index');
         Route::get('/create', 'create')->name('backend.pages.sticker.create');
@@ -152,56 +202,4 @@ Route::group(['prefix' => 'backend'], function () {
         Route::delete('/delete/{id}', 'destroy')->name('backend.pages.sticker.destroy');
     });
 
-
-// Blogs Routes Start
-    Route::controller(BlogController::class)->prefix('blogs')->group(function () {
-        Route::get('/', 'index')->name('backend.pages.blogs.index');
-        Route::get('/create', 'create')->name('backend.pages.blogs.create');
-        Route::post('/store', 'store')->name('backend.pages.blogs.store');
-        Route::get('/{id}/edit', 'edit')->name('backend.pages.blogs.edit');
-        Route::post('/{id}/update', 'update')->name('backend.pages.blogs.update');
-        Route::delete('/delete/{id}', 'destroy')->name('backend.pages.blogs.destroy');
-
-        Route::post('/upload', 'upload')->name('backend.pages.blogs.media.upload');
-        Route::get('/fetch/{id}', 'fetch')->name('backend.pages.blogs.media.fetch');
-        Route::get('/media/delete', 'deleteMedia')->name('backend.pages.blogs.media.delete');
-
-
-    });
-
-// Blogs Category Routes
-    Route::controller(BlogCategoryController::class)->prefix('blogs/categories')->group(function () {
-        Route::get('/', 'index')->name('backend.pages.blogs-categories.index');
-        Route::get('/create', 'create')->name('backend.pages.blogs-categories.create');
-        Route::post('/store', 'store')->name('backend.pages.blogs-categories.store');
-        Route::get('/{id}/edit', 'edit')->name('backend.pages.blogs-categories.edit');
-        Route::post('/{id}/update', 'update')->name('backend.pages.blogs-categories.update');
-        Route::delete('/delete/{id}', 'destroy')->name('backend.pages.blogs-categories.destroy');
-    });
-
-    // Blogs Tags Routes
-    Route::controller(BlogTagController::class)->prefix('blogs/tags')->group(function () {
-        Route::get('/', 'index')->name('backend.pages.blogs-tags.index');
-        Route::get('/create', 'create')->name('backend.pages.blogs-tags.create');
-        Route::post('/store', 'store')->name('backend.pages.blogs-tags.store');
-        Route::get('/{id}/edit', 'edit')->name('backend.pages.blogs-tags.edit');
-        Route::post('/{id}/update', 'update')->name('backend.pages.blogs-tags.update');
-        Route::delete('/delete/{id}', 'destroy')->name('backend.pages.blogs-tags.destroy');
-    });
-
-    // Products Routes
-    Route::controller(ProductController::class)->prefix('products')->group(function () {
-        Route::get('/', 'index')->name('backend.pages.product.index');
-        Route::get('/create', 'create')->name('backend.pages.product.create');
-        Route::post('/store', 'store')->name('backend.pages.product.store');
-        Route::get('/{id}/edit', 'edit')->name('backend.pages.product.edit');
-        Route::post('/{id}/update', 'update')->name('backend.pages.product.update');
-        Route::delete('/delete/{id}', 'destroy')->name('backend.pages.product.destroy');
-        Route::post('/getAttributeValues', 'getAttributeValues')->name('backend.pages.product.getAttributeValues');
-        Route::post('/getCombination', 'getCombination')->name('backend.pages.product.getCombination');
-        Route::get('/import_data', 'import_data')->name('backend.pages.product.import_data');
-        Route::get('/{id}/variationEdit', 'variationEdit')->name('backend.pages.product.variationEdit');
-        Route::post('/updateVariation', 'updateVariation')->name('backend.pages.product.updateVariation');
-        Route::delete('/deleteVariation/{id}', 'destroyVariation')->name('backend.pages.product.destroyVariation');
-    });
 });

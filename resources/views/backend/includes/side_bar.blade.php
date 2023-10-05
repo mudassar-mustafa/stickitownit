@@ -87,6 +87,48 @@
             </ul>
         </li>
 
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#products-nav" data-bs-toggle="collapse" href="#"
+               aria-expanded="false">
+                <i class="bi bi-basket"></i><span>Products</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="products-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
+                <li>
+                    <a  href="{{ route('backend.pages.product.index') }}">
+                        <i class="bi bi-basket"></i><span>Products</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('backend.pages.attribute.index') }}">
+                        <i class="bi bi-database"></i><span>Attributes</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('backend.pages.attribute-value.index') }}">
+                        <i class="bi bi-database"></i><span>Attributes Values</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="{{ route('backend.pages.package.index') }}">
+                <i class="bi bi-stripe"></i>
+                <span>Packages</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="{{ route('backend.pages.page.index') }}">
+                <i class="bi bi-info"></i>
+                <span>Pages</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="{{ route('backend.pages.sticker.index') }}">
+                <i class="bi bi-printer"></i>
+                <span>Stickers</span>
+            </a>
+        </li>
 
         {{-- <li class="nav-item">
           <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
