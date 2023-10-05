@@ -1,4 +1,4 @@
-<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 {{ !empty($product) && $product->product_type == "variation" ? "" : "hidden" }} variation_product_fields">
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 {{ !empty($product) && $product->product_type == "variation" ? "hidden" : "hidden" }} variation_product_fields">
     @php
         $attributesArray = [];
         $attributeNameString = "";

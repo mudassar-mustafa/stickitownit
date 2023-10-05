@@ -163,7 +163,7 @@
                                 @include('backend.pages.product.partial.attribute_partial')
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 appendAttributeValues">
                                 </div>
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 {{ !empty($product) && $product->product_type == "variation" ? "" : "hidden" }} variation_product_fields">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 {{ !empty($product) && $product->product_type == "variation" ? "hidden" : "hidden" }} variation_product_fields">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" id="auto_combination" onchange="getAutoCombination()">
                                         <label class="form-check-label" for="gridCheck1">
@@ -171,7 +171,7 @@
                                         </label>
                                     </div>
                                 </div>
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 append_combinations {{ !empty($product) && $product->product_type == "variation" ? "" : "hidden" }} variation_product_fields">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 append_combinations {{ !empty($product) && $product->product_type == "variation" ? "hidden" : "hidden" }} variation_product_fields">
                                     <div class="row">
                                         <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12">
                                             Visibility
@@ -282,22 +282,22 @@
                 }
             }
         });
-        if($("#attribute_name_string").val() != ""){
-            var attributeList = $("#attribute_name_string").val().split(',');
-            attributeList.forEach(element => {
-                var attribute = [];
-                attribute.push(element);
-                attribute.push(null);
-                attributeArray.push(attribute);
-                getAttributeValue(element);
+        // if($("#attribute_name_string").val() != ""){
+        //     var attributeList = $("#attribute_name_string").val().split(',');
+        //     attributeList.forEach(element => {
+        //         var attribute = [];
+        //         attribute.push(element);
+        //         attribute.push(null);
+        //         attributeArray.push(attribute);
+        //         getAttributeValue(element);
                 
-            });
-        }
+        //     });
+        // }
 
-        if($("#product_id") != 0 && $('#product_type').find(":selected").val() == "variation"){
-            $("#auto_combination").prop('checked', true);
-            getAutoCombination();
-        }
+        // if($("#product_id") != 0 && $('#product_type').find(":selected").val() == "variation"){
+        //     $("#auto_combination").prop('checked', true);
+        //     getAutoCombination();
+        // }
         
 
         $('.attribute_id').on('select2:select', function (e) {

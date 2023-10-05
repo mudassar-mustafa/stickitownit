@@ -7,11 +7,16 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
 {
+
+    protected $commands = [
+        Commands\ProductImportCron::class,
+    ];
     /**
      * Define the application's command schedule.
      */
     protected function schedule(Schedule $schedule): void
     {
+        $schedule->command('productImport:cron')->hourly();
         // $schedule->command('inspire')->hourly();
     }
 

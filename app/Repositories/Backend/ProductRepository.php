@@ -94,102 +94,105 @@ class ProductRepository extends BaseRepository implements ProductContract
             $product->save();
         }else{
             // Check and Store Attribute, Check and Store Attribute values,  Create and update product Attribute,  
-            $attributeIds = [];
-            foreach ($params['attribute_ids'] as $key => $attributeName) {
-                $attributeId = 0;
-                $attribute = Attribute::where('name', strtolower($attributeName))->where('status', 'active')->first();
-                if(!empty($attribute)){
-                    $attributeId = $attribute->id;
-                }else{
-                    $attribute = new Attribute;
-                    $attribute->name = $attributeName;
-                    $attribute->slug = \Str::slug(strtolower($attributeName));
-                    $attribute->status = "active";
-                    $attribute->save();
-                    $attributeId = $attribute->id;
-                }
 
-                foreach ($params['attribute_value_id'.$attributeName.''] as $key => $attributeValueName) {
-                    $attributeValues = AttributeValue::where('name', strtolower($attributeValueName))->where('attribute_id', $attributeId)->where('status', 'active')->first();
-                    if(empty($attributeValues)){
-                        $attributeValues = new AttributeValue;
-                        $attributeValues->attribute_id = $attributeId;
-                        $attributeValues->name = $attributeValueName;
-                        $attributeValues->slug = strtolower($attributeValueName);
-                        $attributeValues->status = 'active';
-                        $attributeValues->save();
+            if($id == null){
+                $attributeIds = [];
+                foreach ($params['attribute_ids'] as $key => $attributeName) {
+                    $attributeId = 0;
+                    $attribute = Attribute::where('name', strtolower($attributeName))->where('status', 'active')->first();
+                    if(!empty($attribute)){
+                        $attributeId = $attribute->id;
+                    }else{
+                        $attribute = new Attribute;
+                        $attribute->name = $attributeName;
+                        $attribute->slug = \Str::slug(strtolower($attributeName));
+                        $attribute->status = "active";
+                        $attribute->save();
+                        $attributeId = $attribute->id;
+                    }
+    
+                    foreach ($params['attribute_value_id'.$attributeName.''] as $key => $attributeValueName) {
+                        $attributeValues = AttributeValue::where('name', strtolower($attributeValueName))->where('attribute_id', $attributeId)->where('status', 'active')->first();
+                        if(empty($attributeValues)){
+                            $attributeValues = new AttributeValue;
+                            $attributeValues->attribute_id = $attributeId;
+                            $attributeValues->name = $attributeValueName;
+                            $attributeValues->slug = strtolower($attributeValueName);
+                            $attributeValues->status = 'active';
+                            $attributeValues->save();
+                        }
+                    }
+    
+                    array_push($attributeIds, $attributeId);
+    
+                    // $productAttribute = new ProductAttribute;
+                    // $productAttribute->product_id = $product->id;
+                    // $productAttribute->attribute_id = $attributeId;
+                    // $productAttribute->save();
+                }
+    
+                $product->attributes()->sync($attributeIds);
+    
+                //Delete Product Attribute Group 
+                $getProdcutGroupArray = ProductAttributeGroup::where('product_id', $product->id)->pluck('id')->toArray();
+                if(count($getProdcutGroupArray) > 0){
+                    $deleteProductGroupArray = array_diff($getProdcutGroupArray, $params['combination_ids']);
+                    if(count($deleteProductGroupArray) > 0){
+                        $product->product_attribute_group()->detach($deleteProductGroupArray);
+                        $product->product_groups()->whereIn('id', $deleteProductGroupArray)->delete();
                     }
                 }
-
-                array_push($attributeIds, $attributeId);
-
-                // $productAttribute = new ProductAttribute;
-                // $productAttribute->product_id = $product->id;
-                // $productAttribute->attribute_id = $attributeId;
-                // $productAttribute->save();
-            }
-
-            $product->attributes()->sync($attributeIds);
-
-            //Delete Product Attribute Group 
-            $getProdcutGroupArray = ProductAttributeGroup::where('product_id', $product->id)->pluck('id')->toArray();
-            if(count($getProdcutGroupArray) > 0){
-                $deleteProductGroupArray = array_diff($getProdcutGroupArray, $params['combination_ids']);
-                if(count($deleteProductGroupArray) > 0){
-                    $product->product_attribute_group()->detach($deleteProductGroupArray);
-                    $product->product_groups()->whereIn('id', $deleteProductGroupArray)->delete();
+                
+                // Store Attribute Group and Attribute Value Group
+                $visibilityIds = explode(',', $params['visibility_ids']);
+                foreach ($params['combination_ids'] as $combKey => $value) {
+    
+                    $productAttributeGroup = ProductAttributeGroup::where('id', $value)->first();
+                    if(empty($productAttributeGroup)){
+                        $productAttributeGroup = new ProductAttributeGroup;
+                    }
+    
+                    $productAttributeGroup->product_id = $product->id;
+                    if(isset($params['combination_image'][$combKey]) && $params['combination_image'][$combKey] != null){
+                        $productAttributeGroup->main_image = $params['combination_image'][$combKey];
+                    }
+                    $productAttributeGroup->short_description = $params['combination'][$combKey];
+                    $productAttributeGroup->quantity = $params['combination_quantity'][$combKey];
+                    $productAttributeGroup->sku = $params['combination_sku'][$combKey];
+                    $productAttributeGroup->price = $params['combination_price'][$combKey];
+                    $productAttributeGroup->visibilty = $visibilityIds[$combKey];
+                    $productAttributeGroup->save();
+    
+                    $getcombinationArray = explode('-', $params['combination'][$combKey]);
+    
+                    //Delete Product Attribute Group Value 
+                    $getProdcutGroupValueArray = ProductAttributeValueGroup::where('product_id', $product->id)->where('product_group_id', $productAttributeGroup->id)->pluck('product_attribute_val_id')->toArray();
+                    if(count($getProdcutGroupValueArray) > 0){
+                        $getAttributeValueIds = AttributeValue::whereIn('name', $getcombinationArray)->pluck('id')->toArray();
+                        $deleteProductGroupValueArray = array_diff($getProdcutGroupValueArray, $getAttributeValueIds);
+                        
+                        if(count($deleteProductGroupValueArray) > 0){
+                            ProductAttributeValueGroup::whereIn('product_attribute_val_id', $deleteProductGroupValueArray)->where('product_id', $product->id)->where('product_group_id', $productAttributeGroup->id)->delete();
+                        }
+                    }
+    
+                    foreach ($getcombinationArray as $value) {
+                        $getAttributeValueId = AttributeValue::where('name', strtolower($value))->where('status', 'active')->value('id');
+    
+                        $productAttributeValueGroup = ProductAttributeValueGroup::where('product_id', $product->id)->where('product_group_id', $productAttributeGroup->id)->where('product_attribute_val_id', $getAttributeValueId)->first();
+                        if(empty($productAttributeValueGroup)){
+                            $productAttributeValueGroup = new ProductAttributeValueGroup;
+                        }
+                        
+                        $productAttributeValueGroup->product_id = $product->id;
+                        $productAttributeValueGroup->product_group_id = $productAttributeGroup->id;
+                        $productAttributeValueGroup->product_attribute_val_id = $getAttributeValueId;
+                        $productAttributeValueGroup->save();
+                    }
+    
                 }
             }
             
-            // Store Attribute Group and Attribute Value Group
-            $visibilityIds = explode(',', $params['visibility_ids']);
-            foreach ($params['combination_ids'] as $combKey => $value) {
-
-                $productAttributeGroup = ProductAttributeGroup::where('id', $value)->first();
-                if(empty($productAttributeGroup)){
-                    $productAttributeGroup = new ProductAttributeGroup;
-                }
-
-                $productAttributeGroup->product_id = $product->id;
-                if(isset($params['combination_image'][$combKey]) && $params['combination_image'][$combKey] != null){
-                    $productAttributeGroup->main_image = $params['combination_image'][$combKey];
-                }
-                $productAttributeGroup->short_description = $params['combination'][$combKey];
-                $productAttributeGroup->quantity = $params['combination_quantity'][$combKey];
-                $productAttributeGroup->sku = $params['combination_sku'][$combKey];
-                $productAttributeGroup->price = $params['combination_price'][$combKey];
-                $productAttributeGroup->visibilty = $visibilityIds[$combKey];
-                $productAttributeGroup->save();
-
-                $getcombinationArray = explode('-', $params['combination'][$combKey]);
-
-                //Delete Product Attribute Group Value 
-                $getProdcutGroupValueArray = ProductAttributeValueGroup::where('product_id', $product->id)->where('product_group_id', $productAttributeGroup->id)->pluck('product_attribute_val_id')->toArray();
-                if(count($getProdcutGroupValueArray) > 0){
-                    $getAttributeValueIds = AttributeValue::whereIn('name', $getcombinationArray)->pluck('id')->toArray();
-                    $deleteProductGroupValueArray = array_diff($getProdcutGroupValueArray, $getAttributeValueIds);
-                    
-                    if(count($deleteProductGroupValueArray) > 0){
-                        ProductAttributeValueGroup::whereIn('product_attribute_val_id', $deleteProductGroupValueArray)->where('product_id', $product->id)->where('product_group_id', $productAttributeGroup->id)->delete();
-                    }
-                }
-
-                foreach ($getcombinationArray as $value) {
-                    $getAttributeValueId = AttributeValue::where('name', strtolower($value))->where('status', 'active')->value('id');
-
-                    $productAttributeValueGroup = ProductAttributeValueGroup::where('product_id', $product->id)->where('product_group_id', $productAttributeGroup->id)->where('product_attribute_val_id', $getAttributeValueId)->first();
-                    if(empty($productAttributeValueGroup)){
-                        $productAttributeValueGroup = new ProductAttributeValueGroup;
-                    }
-                    
-                    $productAttributeValueGroup->product_id = $product->id;
-                    $productAttributeValueGroup->product_group_id = $productAttributeGroup->id;
-                    $productAttributeValueGroup->product_attribute_val_id = $getAttributeValueId;
-                    $productAttributeValueGroup->save();
-                }
-
-            }
-
             $product->save();
             
         }
