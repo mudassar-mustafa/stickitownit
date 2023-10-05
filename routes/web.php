@@ -25,6 +25,7 @@ Route::get('product/{slug}', [ProductDetailController::class, 'productDetail'])-
 Route::post('getAttributeValue', [ProductDetailController::class, 'getAttributeValue'])->name('product.getAttributeValue');
 Route::post('getProductGroupValue', [ProductDetailController::class, 'getProductGroupValue'])->name('product.getProductGroupValue');
 Route::get('faqs', [LandingController::class, 'faq'])->name('faqs');
+Route::get('{slug}',[LandingController::class, 'page'])->name('page.index');
 
 Route::get('/dashboard', function () {
     return view('backend.pages.index');

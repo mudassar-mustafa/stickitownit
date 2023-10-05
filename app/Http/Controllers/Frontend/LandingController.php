@@ -7,6 +7,7 @@ use App\Models\Blog;
 use App\Models\Category;
 use App\Models\FAQ;
 use App\Models\Feature;
+use App\Models\Page;
 use App\Models\Sticker;
 use Illuminate\Http\Request;
 
@@ -25,5 +26,14 @@ class LandingController extends Controller
     {
         $faqs = FAQ::whereStatus('active')->orderBy('id', 'asc')->get(['name', 'short_description']);
         return view('frontend.pages.faq', compact('faqs'));
+    }
+
+    public function page($slug)
+    {
+        $page = Page::where([
+            'slug' => $slug,
+            'status' => 'active'
+        ])->first();
+        return view('frontend.pages.page', compact('page'));
     }
 }

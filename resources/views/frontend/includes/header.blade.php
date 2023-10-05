@@ -81,7 +81,12 @@
 {{--                                    </li>--}}
                                     <li><a href="{{ route('blogs.list') }}">Blogs</a></li>
 
-                                    <li><a href="contact.html">About Us</a></li>
+                                    @if(!empty($pages) && count($pages) >0)
+                                        @foreach($pages as $page)
+                                            <li><a href="{{ route('page.index',$page->slug) }}">{{$page->name}}</a></li>
+                                        @endforeach
+                                    @endif
+
                                     <li><a href="contact.html">Contact</a></li>
                                 </ul>
                             </nav>

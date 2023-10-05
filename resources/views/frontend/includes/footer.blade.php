@@ -7,7 +7,11 @@
                     <div class="cp-footer-widget mb-50">
                         <h4 class="cp-footer-widget-title">Useful Links</h4>
                         <ul class="cp-footer-widget-link">
-                            <li><a href="about.html">About us</a></li>
+                            @if(!empty($pages) && count($pages) >0)
+                                @foreach($pages as $page)
+                                    <li><a href="{{ route('page.index',$page->slug) }}">{{$page->name}}</a></li>
+                                @endforeach
+                            @endif
                             <li><a href="{{ route('blogs.list') }}">Blogs</a></li>
                             <li><a href="contact.html">Contact Us</a></li>
                             <li><a href="{{ route('faqs') }}">FAQ</a></li>
