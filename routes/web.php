@@ -4,6 +4,7 @@ use \App\Http\Controllers\Frontend\LandingController;
 use \App\Http\Controllers\Frontend\BlogController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Frontend\ProductDetailController;
+use App\Http\Controllers\Frontend\CartController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +28,8 @@ Route::post('getAttributeValue', [ProductDetailController::class, 'getAttributeV
 Route::post('getProductGroupValue', [ProductDetailController::class, 'getProductGroupValue'])->name('product.getProductGroupValue');
 Route::get('faqs', [LandingController::class, 'faq'])->name('faqs');
 
+Route::get('cart', [CartController::class, 'cart'])->name('cart.cart');
+
 Route::get('/dashboard', function () {
     return view('backend.pages.index');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -35,7 +38,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
+    Route::post('addToCart', [ProductDetailController::class, 'addToCart'])->name('product.addToCart');
+    Route::post('removeToCart', [CartController::class, 'removeToCart'])->name('product.removeToCart');
 
     require __DIR__ . '/admin.php';
 

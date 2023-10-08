@@ -6,7 +6,9 @@ use App\Models\Product;
 use App\Models\ProductAttributeValueGroup;
 use App\Models\AttributeValue;
 use App\Models\ProductAttributeGroup;
+use App\Models\Cart;
 use App\Contracts\Frontend\ProductDetailContract;
+use Auth;
 
 class ProductDetailRepository extends BaseRepository implements ProductDetailContract
 {
@@ -63,10 +65,38 @@ class ProductDetailRepository extends BaseRepository implements ProductDetailCon
         }
         if(count($selectedAttributeValueId) == 2){
             $combinationString = $combinationString.'-';
-            return ProductAttributeGroup::where('short_description','like','%'.$combinationString.'%')->get();
+            return ProductAttributeGroup::where('product_id', $productId)->where('short_description','like','%'.$combinationString.'%')->get();
         }else{
-            return ProductAttributeGroup::where('short_description',$combinationString)->first();
+            return ProductAttributeGroup::where('product_id', $productId)->where('short_description',$combinationString)->first();
         }
+    }
+
+    public function addToCart(array $params){
+        $status = 0;
+        $productCart = Cart::where('product_attribute_group_id', $params['product_attribute_group_id'])->where('user_id', Auth::user()->id)->first();
+        if(!empty($productCart)){
+            $status = -1;
+        }else{
+            if($params['product_type'] == "sticker"){
+                $productAttributeGroupDescription = ProductAttributeGroup::where('id', $params['product_attribute_group_id'])->value('short_description');
+
+                $values = explode('-', $productAttributeGroupDescription);
+                $params['qty'] = $values[2];
+            }
+            $productCart = new Cart;
+            $productCart->product_attribute_group_id = $params['product_attribute_group_id'];
+            $productCart->user_id = Auth::user()->id;
+            if(isset($params['image'])){
+                $productCart->image_path = $params['image'];
+            }
+            $productCart->qty = $params['qty'];
+            $productCart->product_type = $params['product_type'];
+            $productCart->save();
+            $status = 1;
+        }
+
+        return $status;
+
     }
 
 }

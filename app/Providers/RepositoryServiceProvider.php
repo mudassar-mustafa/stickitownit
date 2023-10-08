@@ -22,6 +22,7 @@ use App\Contracts\Backend\ProductContract;
 
 //Frontend 
 use App\Contracts\Frontend\ProductDetailContract;
+use App\Contracts\Frontend\CartContract;
 
 
 use Illuminate\Support\ServiceProvider;
@@ -46,6 +47,7 @@ use App\Repositories\Backend\ProductRepository;
 
 //Frontend 
 use App\Repositories\Frontend\ProductDetailRepository;
+use App\Repositories\Frontend\CartRepository;
 
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -69,6 +71,7 @@ class RepositoryServiceProvider extends ServiceProvider
         BlogContract::class => BlogRepository::class,
         ProductContract::class => ProductRepository::class,
         ProductDetailContract::class => ProductDetailRepository::class,
+        CartContract::class => CartRepository::class,
     ];
 
     /**

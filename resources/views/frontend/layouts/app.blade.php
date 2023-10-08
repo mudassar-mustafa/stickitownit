@@ -70,6 +70,18 @@
 <script src="{{ asset('assets/js/hover-reveal.js') }}"></script>
 <script src="{{ asset('assets/js/tween-max.js') }}"></script>
 <script src="{{ asset('assets/js/main.js') }}"></script>
+
+<script>
+async function doAjax(url, params = {}, method = 'POST') {
+    return $.ajax({
+        url: url,
+        type: method,
+        async: false,
+        dataType: 'json',
+        data: params
+    });
+}
+</script>
 @stack('js')
 </body>
 </html>

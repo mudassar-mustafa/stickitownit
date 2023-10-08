@@ -64,4 +64,12 @@ class ProductAttributeGroup extends Model
     {
         return $this->belongsToMany(AttributeValue::class, 'product_attribute_value_groups', 'product_group_id', 'product_attribute_val_id');
     }
+
+    /**
+    * @return HasMany
+    */
+    public function cart_product(): HasMany
+    {
+        return $this->hasMany(Cart::class,'product_attribute_group_id','id');
+    }
 }

@@ -107,7 +107,7 @@
                         @if (!empty($product->short_description))
                             <p class="mb-30">{{ $product->short_description }}</p>
                         @endif
-
+                        <input type="hidden" value="" id="product_attribute_group_id">
                         @if ($product->product_type != "normal" && !empty($product->attributes))
                             <div class="row">
                                 @foreach ($product->attributes as $key => $attribute)
@@ -180,6 +180,23 @@
                                 <span>Available :</span>
                                 <span>{{ $product->quantity }}</span>
                             </div>
+                        @endif
+
+                        @if ($product->product_type != "normal" && !empty($product->attributes))
+                        <input class="form-control" type="file" id="uploadFile" name="uploadFile"onchange="uploadUserFile()">
+                        <img src="" class="rounded mx-auto d-block hidden uploadImage" alt="" style="width: 200px; height:200px">
+                        <a href="javascript:void(0);" onclick="addToCart('{{ auth()->check() }}', 'sticker')" class="cp-border-btn cp-il hidden shopping-basket">
+                            <i class="fas fa-shopping-basket"></i>Add to
+                            Cart
+                            <span class="cp-border-btn__inner">
+                            <span class="cp-border-btn__blobs">
+                                <span class="cp-border-btn__blob"></span>
+                                <span class="cp-border-btn__blob"></span>
+                                <span class="cp-border-btn__blob"></span>
+                                <span class="cp-border-btn__blob"></span>
+                            </span>
+                        </span>
+                        </a>
                         @endif
 
                     </div>
@@ -925,6 +942,10 @@
         }
 
         async function getAttributeValue(key, attributeId) {
+            $('#uploadFile').val('');
+            $(".uploadImage").prop("src", "");
+            $('.uploadImage').addClass('hidden');
+            $(".shopping-basket").addClass('hidden');
             var selectedIds = [];
             $(".attributes").each(function () {
                 if ($(this).find(':selected').val() != undefined) {
@@ -951,7 +972,7 @@
                     for (let index = 0; index < result['data']['productAttributeValues'].length; index++) {
                         if (index == 0) {
                             if (key == 2) {
-                                html += '<option value= ' + result['data']['productAttributeValues'][index]['id'] + ' selected>' + result['data']['productAttributeValues'][index]['name'] + ' (' + result['data']['groupData'][index]['price'] + ')</option>';
+                                html += '<option value= ' + result['data']['productAttributeValues'][index]['id'] + ' selected>' + result['data']['productAttributeValues'][index]['name'] + ' <span style="float:right;">(' + result['data']['groupData'][index]['price'] + ')</span></option>';
                             } else {
                                 html += '<option value= ' + result['data']['productAttributeValues'][index]['id'] + ' selected>' + result['data']['productAttributeValues'][index]['name'] + '</option>';
                             }
@@ -959,7 +980,7 @@
                         } else {
 
                             if (key == 2) {
-                                html += '<option value= ' + result['data']['productAttributeValues'][index]['id'] + '>' + result['data']['productAttributeValues'][index]['name'] + ' (' + result['data']['groupData'][index]['price'] + ')</option>';
+                                html += '<option value= ' + result['data']['productAttributeValues'][index]['id'] + '>' + result['data']['productAttributeValues'][index]['name'] + ' <span style="float:right;">(' + result['data']['groupData'][index]['price'] + ')</span></option>';
                             } else {
                                 html += '<option value= ' + result['data']['productAttributeValues'][index]['id'] + '>' + result['data']['productAttributeValues'][index]['name'] + '</option>';
                             }
@@ -1015,8 +1036,8 @@
                 if (result['data'] != null) {
                     $(".variable_product_price").removeClass('hidden');
                     $(".variable_product_amount").text('$' + result['data']['price'] + '');
+                    $("#product_attribute_group_id").val(result['data']['id']);
                 } else {
-
                     $(".variable_product_price").addClass('hidden');
                     $(".variable_product_amount").text('');
                 }
@@ -1046,18 +1067,63 @@
                 $("#attribute_" + keyValue + "").empty();
                 getAttributeValue(keyValue, attributeId);
             }
-
-
         }
 
-        async function doAjax(url, params = {}, method = 'POST') {
-            return $.ajax({
-                url: url,
-                type: method,
-                async: false,
-                dataType: 'json',
-                data: params
+        function uploadUserFile() {
+            var ext = $('#uploadFile').val().split('.').pop().toLowerCase();
+            if ($.inArray(ext, ['png', 'jpg', 'jepg']) == -1){
+                $.growl.error({
+                title: "Error",
+                message: "Please add Only PNG,JPG.",
+                duration: 3200
+                });
+                $('#uploadFile').val('');
+                return false;
+            }
+            var files = $('#uploadFile')[0].files[0];
+            var f = files;
+            var fileReader = new FileReader();
+            fileReader.onload = (function(e) {
+                var file = e.target;
+
+                $(".uploadImage").prop("src", e.target.result);
+                $('.uploadImage').removeClass('hidden');
+                $(".shopping-basket").removeClass('hidden');          
             });
+            fileReader.readAsDataURL(f);
+        }
+
+        function addToCart(user, type){
+            if(user == false){
+                window.location.href = "{{ url('/login') }}";
+            }else{
+                var csrf_token = $('meta[name="csrf-token"]').attr('content');
+                var form_data = new FormData();
+                if(document.getElementById('uploadFile').files[0] != undefined){
+                    form_data.append("image", document.getElementById('uploadFile').files[0]);
+                }
+                form_data.append("product_attribute_group_id", $("#product_attribute_group_id").val());
+                form_data.append("product_type", type);
+                form_data.append("_token", csrf_token);
+                $.ajax({
+                    type: 'POST',
+                    url: '{{route("product.addToCart")}}',
+                    data: form_data,
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    success: function (data) {
+                        if (data.data == 1) {
+                            alert("Product added in cart successfully");
+                            location.reload(true);
+                        }else if(data.data == -1){
+                            alert("Product already add in cart");
+                        }else{
+                            alert("something Wrong");
+                        }
+                    }
+                });
+            }
         }
     </script>
 @endpush

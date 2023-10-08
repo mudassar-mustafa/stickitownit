@@ -3,10 +3,6 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use App\Models\Blog;
-use App\Models\Category;
-use App\Models\FAQ;
-use App\Models\Feature;
 use Illuminate\Http\Request;
 use App\Contracts\Frontend\ProductDetailContract;
 use Illuminate\Contracts\View\View;
@@ -65,5 +61,19 @@ class ProductDetailController extends Controller
         $groupData = $this->productDetailRepository->getProductGroupAttribute($request->product_id, $request->selectedIds);
         
         return $utilService->makeResponse(200, "Combination Value Get Successfully", $groupData, CommonEnum::SUCCESS_STATUS);
+    }
+
+
+    /**
+     * @param Request $request
+     * @param UtilService $utilService
+     * @return JsonResponse
+    */
+    public function addToCart(Request $request, UtilService $utilService)
+    {
+        $data = $request->except('_token');
+        $cartProduct = $this->productDetailRepository->addToCart($data);
+        
+        return $utilService->makeResponse(200, "Product Added Successfully", $cartProduct, CommonEnum::SUCCESS_STATUS);
     }
 }

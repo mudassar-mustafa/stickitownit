@@ -40,14 +40,14 @@ class ProductImportCron extends Command
         $uploadFile = "";
 
         $files = [
-            ['Diecut Sticker', 'diecut-stickers.png', '/diecut_sticker.csv'],
-            ['Circle Sticker', 'circle-stickers.png', '/circle_sticker.csv'],
-            ['Rectangle Sticker', 'rectangle-stickers.png', '/rectangle_sticker.csv'],
-            ['Square Sticker', 'square-stickers.png', '/square_sticker.csv'],
-            ['Diecut Label', 'diecut-label.png', '/diecut_label.csv'],
-            ['Circle Label', 'circle-label.png', '/circle_label.csv'],
-            ['Rectangle Label', 'rectangle-label.png', '/rectangle_label.csv'],
-            ['Square Label', 'square-label.png', '/square_label.csv'],
+            //['Diecut Sticker', 'diecut-stickers.png', '/diecut_sticker.csv', '0'],
+            ['Circle Sticker', 'circle-stickers.png', '/circle_sticker.csv', '1'],
+            //['Rectangle Sticker', 'rectangle-stickers.png', '/rectangle_sticker.csv', '0'],
+            ['Square Sticker', 'square-stickers.png', '/square_sticker.csv', '1'],
+            //['Diecut Label', 'diecut-label.png', '/diecut_label.csv', '0'],
+            ['Circle Label', 'circle-label.png', '/circle_label.csv', '1'],
+            //['Rectangle Label', 'rectangle-label.png', '/rectangle_label.csv', '0'],
+            ['Square Label', 'square-label.png', '/square_label.csv', '1'],
         ];
 
         try {
@@ -91,8 +91,9 @@ class ProductImportCron extends Command
                             $attributeValueMaterial->status = 'active';
                             $attributeValueMaterial->save();
                         }
-    
-                        $size = "".$value[3]."x".$value[4]."";
+
+
+                        $size = $fileDetail['3'] == '0' ? "".$value[3]."x".$value[4]."" : $value[3];
                         $attributeValueSize = AttributeValue::where('name', strtolower($size))->where('attribute_id', $attributeSizeId)->first();
                         if(empty($attributeValueSize)){
                             $attributeValueSize = new AttributeValue;
@@ -102,13 +103,14 @@ class ProductImportCron extends Command
                             $attributeValueSize->status = 'active';
                             $attributeValueSize->save();
                         }
-    
-                        $attributeValueQuantity = AttributeValue::where('name', strtolower($value[5]))->where('attribute_id', $attributeQuantityId)->first();
+
+                        $qty = $fileDetail['3'] == '0' ? $value[5] : $value[4];
+                        $attributeValueQuantity = AttributeValue::where('name', strtolower($qty))->where('attribute_id', $attributeQuantityId)->first();
                         if(empty($attributeValueQuantity)){
                             $attributeValueQuantity = new AttributeValue;
                             $attributeValueQuantity->attribute_id = $attributeQuantityId;
-                            $attributeValueQuantity->name = $value[5];
-                            $attributeValueQuantity->slug = \Str::slug(strtolower($value[5]));
+                            $attributeValueQuantity->name = $qty;
+                            $attributeValueQuantity->slug = \Str::slug(strtolower($qty));
                             $attributeValueQuantity->status = 'active';
                             $attributeValueQuantity->save();
                         }
@@ -116,7 +118,7 @@ class ProductImportCron extends Command
                         $productAttributeGroup = new ProductAttributeGroup;
                         $productAttributeGroup->product_id = $product->id;
                         $productAttributeGroup->main_image = $fileDetail[1];
-                        $productAttributeGroup->short_description = "".$value[2]."-".$size."-".$value[5]."";
+                        $productAttributeGroup->short_description = "".$value[2]."-".$size."-".$qty."";
                         $productAttributeGroup->sku = $key + 1;
                         $productAttributeGroup->quantity = 100000;
                         $productAttributeGroup->price = $value[9];

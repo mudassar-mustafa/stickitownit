@@ -21,4 +21,6 @@ interface ProductDetailContract
     public function getProductAttributeValue($productId, $attributeId, $index, $selectedIds);
 
     public function getProductGroupAttribute($productId, $selectedIds);
+
+    public function addToCart(array $params);
 }

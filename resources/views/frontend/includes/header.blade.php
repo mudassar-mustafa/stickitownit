@@ -110,7 +110,7 @@
 
 
                                     <li><a href="javascript:void(0)"><i
-                                                class="fas fa-cart-plus"></i><span>4</span></a></li>
+                                                class="fas fa-cart-plus"></i><span>{{ $cartCount }}</span></a></li>
                                 </ul>
                             </div>
                             <div class="cp-header-toggle-btn ml-35 mt--5 d-xl-none">

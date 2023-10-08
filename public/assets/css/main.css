@@ -12257,5 +12257,9 @@ html .ui-button.ui-state-disabled:active {
     transition: all 0.3s ease-out 0s;
 }
 
+.hidden{
+    display: none !important;
+}
+
 /*# sourceMappingURL=main.css.map */
 
