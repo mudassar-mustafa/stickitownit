@@ -88,7 +88,8 @@
         <!-- checkout area start here  -->
         <section class="cp-checkout-area pt-5 pb-90">
             <div class="container">
-                <form action="#">
+                <form id="place_order" action="{{ route('placeOrder') }}" enctype="multipart/form-data" data-stripe-publishable-key="{{ env('STRIPE_KEY') }}" method="POST">
+                    @csrf
                     <div class="row wow fadeInUp animated" data-wow-duration="1.5s">
                         <div class="col-xl-8">
                             <div class="cp-checkout-left mb-30 mr-10">
@@ -99,57 +100,58 @@
                                         <div class="row">
                                             <div class="col-lg-6">
                                                 <div class="cp-input-field">
-                                                    <label for="name">First name *</label>
-                                                    <input type="text" id="name" required>
+                                                    <label for="name">Name *</label>
+                                                    <input type="text" id="name" name="name" value="{{ !empty($user) ? $user->name : "" }}" required>
                                                     <i class="far fa-user"></i>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="cp-input-field">
-                                                    <label for="lname">Last Name *</label>
-                                                    <input type="text" required id="lname">
-                                                    <i class="far fa-user"></i>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="cp-input-field">
-                                                    <label for="phone">Phone *</label>
-                                                    <input type="text" required id="phone">
-                                                    <i class="far fa-phone"></i>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="cp-input-field">
                                                     <label for="email">Email address *</label>
-                                                    <input type="email" required id="email">
+                                                    <input type="email" required id="email" name="email" value="{{ !empty($user) ? $user->email : "" }}">
                                                     <i class="far fa-envelope-open"></i>
                                                 </div>
                                             </div>
                                             <div class="col-lg-4">
                                                 <div class="cp-input-field">
                                                     <label for="region">Country / Region *</label>
-                                                    <input type="text" required id="region">
+                                                    <input type="text" id="region">
                                                     <i class="far fa-place-of-worship"></i>
                                                 </div>
                                             </div>
                                             <div class="col-lg-4">
                                                 <div class="cp-input-field">
-                                                    <label for="city">Town / City *</label>
-                                                    <input type="text" required id="city">
+                                                    <label for="city">State *</label>
+                                                    <input type="text" id="city">
                                                     <i class="far fa-city"></i>
                                                 </div>
                                             </div>
                                             <div class="col-lg-4">
                                                 <div class="cp-input-field">
+                                                    <label for="city">Town / City *</label>
+                                                    <input type="text" id="city">
+                                                    <i class="far fa-city"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="cp-input-field">
                                                     <label for="zip">ZIP Code *</label>
-                                                    <input type="text" required id="zip">
+                                                    <input type="text" required id="zip" name="zip_code" value="{{ !empty($user) ? $user->zip_code : "" }}">
                                                     <i class="far fa-file-archive"></i>
                                                 </div>
                                             </div>
+                                            <div class="col-lg-6">
+                                                <div class="cp-input-field">
+                                                    <label for="phone">Phone *</label>
+                                                    <input type="text" required id="phone_number" name="phone_number" value="{{ !empty($user) ? $user->phone_number : "" }}">
+                                                    <i class="far fa-phone"></i>
+                                                </div>
+                                            </div>
+                                            
                                             <div class="col-lg-12">
                                                 <div class="cp-input-field">
                                                     <label for="address">Street address *</label>
-                                                    <input type="text" required id="address">
+                                                    <input type="text" required id="address" name="address" value="{{ !empty($user) ? $user->address : "" }}">
                                                     <i class="far fa-map-marker-alt"></i>
                                                 </div>
                                             </div>
@@ -174,7 +176,17 @@
                         <div class="col-xl-4">
                             <div class="cp-checkout-right mb-20 ml-10">
                                 <div class="cp-checkout-payment mb-40">
-                                    <label class="cp-checkout-payment-list">
+                                    <label for="card-element">
+                                        Credit or debit card
+                                    </label>
+                                    <div id="card-element">
+                                        <!-- a Stripe Element will be inserted here. -->
+                                    </div>
+                                  
+                                    <!-- Used to display form errors -->
+                                    <div id="card-errors"></div>
+
+                                    {{-- <label class="cp-checkout-payment-list">
                                         <input type="radio" checked="checked" name="payment">
                                         <span class="checkmark"></span>
                                         <span class="cp-checkout-payment-title">Check payments</span>
@@ -194,7 +206,7 @@
                                             <img src="assets/img/product/payment-getway.html" alt="payment-getway">
                                         </span>
                                         <a href="#">What is PayPal</a>
-                                    </label>
+                                    </label> --}}
                                     <div class="cp-checkout-payment-terms mb-30">
                                         <input type="checkbox" id="cp-terms">
                                         <label for="cp-terms">I have read and agree to the website <a href="#">Terms and
@@ -218,4 +230,43 @@
     </main>
 @endsection
 @push('js')
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+    $(document).ready(function() {
+        var stripe = Stripe($("#place_order").data('stripe-publishable-key'));
+        var elements = stripe.elements();
+        var card = elements.create('card');
+
+        // Add an instance of the card UI component into the `card-element` <div>
+        card.mount('#card-element');
+
+        const form = document.getElementById('place_order');
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            stripe.createToken(card).then(function(result) {
+                if (result.error) {
+                    // Inform the user if there was an error
+                    const errorElement = document.getElementById('card-errors');
+                    errorElement.textContent = result.error.message;
+                } else {
+                    // Send the token to your server
+                    
+                    stripeTokenHandler(result.token);
+                }
+            });
+        });
+    });
+
+    function stripeTokenHandler(token) {      
+        // Insert the token ID into the form so it gets submitted to the server
+        const form = document.getElementById('place_order');
+        const hiddenInput = document.createElement('input');
+        hiddenInput.setAttribute('type', 'hidden');
+        hiddenInput.setAttribute('name', 'stripeToken');
+        hiddenInput.setAttribute('value', token.id);
+        form.appendChild(hiddenInput);
+        //Submit the form
+        form.submit();  
+      }
+</script>
 @endpush

@@ -15,6 +15,7 @@
         "maatwebsite/excel": "^3.1",
         "psr/log": "^3.0",
         "spatie/laravel-permission": "^5.11",
+        "stripe/stripe-php": "^12.6",
         "yajra/laravel-datatables": "10.0"
     },
     "require-dev": {

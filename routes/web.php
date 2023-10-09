@@ -41,6 +41,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::post('addToCart', [ProductDetailController::class, 'addToCart'])->name('product.addToCart');
     Route::post('removeToCart', [CartController::class, 'removeToCart'])->name('product.removeToCart');
+    Route::post('placeOrder', [CartController::class, 'placeOrder'])->name('placeOrder');
+    Route::get('stripepayment', [CartController::class,'stripepayment'])->name('stripepayment');
 
     require __DIR__ . '/admin.php';
 
