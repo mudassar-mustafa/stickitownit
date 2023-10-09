@@ -109,7 +109,11 @@
                                     @endauth
 
 
-                                    <li><a href="javascript:void(0)"><i
+                                    @php
+                                        $userId = auth()->check() == true ? auth()->id() : 0;
+                                        $cartCount=  \App\Models\Cart::where('user_id', $userId)->count();
+                                    @endphp
+                                    <li><a href="{{ route('cart.index') }}"><i
                                                 class="fas fa-cart-plus"></i><span>{{ $cartCount }}</span></a></li>
                                 </ul>
                             </div>

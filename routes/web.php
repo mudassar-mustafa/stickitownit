@@ -28,7 +28,8 @@ Route::post('getAttributeValue', [ProductDetailController::class, 'getAttributeV
 Route::post('getProductGroupValue', [ProductDetailController::class, 'getProductGroupValue'])->name('product.getProductGroupValue');
 Route::get('faqs', [LandingController::class, 'faq'])->name('faqs');
 
-Route::get('cart', [CartController::class, 'cart'])->name('cart.cart');
+Route::get('cart', [CartController::class, 'cart'])->name('cart.index');
+Route::get('checkout', [CartController::class, 'checkout'])->name('checkout.index');
 
 Route::get('/dashboard', function () {
     return view('backend.pages.index');

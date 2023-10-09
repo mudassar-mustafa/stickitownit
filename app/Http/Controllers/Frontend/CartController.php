@@ -26,10 +26,10 @@ class CartController extends Controller
     public function cart()
     {
         $carts = [];
-        if(Auth::check() == true){
-            $carts =  $this->cartRepository->getAllCart();
+        if (Auth::check() == true) {
+            $carts = $this->cartRepository->getAllCart();
         }
-        
+
         return view('frontend.pages.product.cart', compact('carts'));
     }
 
@@ -37,14 +37,22 @@ class CartController extends Controller
      * @param Request $request
      * @param UtilService $utilService
      * @return JsonResponse
-    */
+     */
     public function removeToCart(Request $request, UtilService $utilService)
     {
         $status = $this->cartRepository->removeToCart($request->cartId);
-        
+
         return $utilService->makeResponse(200, "Cart item deleted successfully", $status, CommonEnum::SUCCESS_STATUS);
     }
 
-    
+    public function checkout()
+    {
+        $carts = [];
+        if (Auth::check() == true) {
+            $carts = $this->cartRepository->getAllCart();
+        }
+        return view('frontend.pages.product.checkout', compact('carts'));
+    }
+
 
 }

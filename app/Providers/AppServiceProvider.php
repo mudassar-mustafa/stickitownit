@@ -27,12 +27,10 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
         Paginator::useBootstrap();
-        $userId = Auth::check() == true ? Auth::user()->id : 0;
-        view()->composer('*', function ($view) use($userId){
+        view()->composer('*', function ($view){
             $view->with([
                 'categories' => Category::whereStatus('active')->orderBy('id', 'asc')->get(['id', 'name', 'slug', 'image']),
                 'pages' => Page::whereStatus('active')->orderBy('id', 'asc')->get(['id', 'slug', 'name']),
-                'cartCount' => Cart::where('user_id', $userId)->count(),
                 'settings' => []
             ]);
         });
