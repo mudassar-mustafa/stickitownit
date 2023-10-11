@@ -129,6 +129,18 @@
                 <span>Stickers</span>
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="{{ route('backend.pages.contact-us.index') }}">
+                <i class="bi bi-messenger"></i>
+                <span>Contact Us</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="{{ route('backend.pages.quote.index') }}">
+                <i class="bi bi-quote"></i>
+                <span>Get a Quote</span>
+            </a>
+        </li>
 
         {{-- <li class="nav-item">
           <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">

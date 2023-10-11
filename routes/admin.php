@@ -17,6 +17,8 @@ use App\Http\Controllers\Backend\BlogController;
 use App\Http\Controllers\Backend\BlogCategoryController;
 use App\Http\Controllers\Backend\BlogTagController;
 use App\Http\Controllers\Backend\ProductController;
+use App\Http\Controllers\Backend\ContactUsController;
+use App\Http\Controllers\Backend\QuoteController;
 
 Route::group(['prefix' => 'backend'], function () {
 
@@ -200,6 +202,18 @@ Route::group(['prefix' => 'backend'], function () {
         Route::get('/{id}/edit', 'edit')->name('backend.pages.sticker.edit');
         Route::post('/{id}/update', 'update')->name('backend.pages.sticker.update');
         Route::delete('/delete/{id}', 'destroy')->name('backend.pages.sticker.destroy');
+    });
+
+    //  Contact Us Routes
+    Route::controller(ContactUsController::class)->prefix('contact-us')->group(function () {
+        Route::get('/', 'index')->name('backend.pages.contact-us.index');
+        Route::delete('/delete/{id}', 'destroy')->name('backend.pages.contact-us.destroy');
+    });
+
+    //  Quote Us Routes
+    Route::controller(QuoteController::class)->prefix('quote')->group(function () {
+        Route::get('/', 'index')->name('backend.pages.quote.index');
+        Route::delete('/delete/{id}', 'destroy')->name('backend.pages.quote.destroy');
     });
 
 });

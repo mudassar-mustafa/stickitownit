@@ -84,7 +84,7 @@
                                     </span>
                                  </span>
                                         </a>
-                                        <a href="contact.html" class="cp-border-btn black">
+                                        <a href="{{ route('contact-us.index') }}" class="cp-border-btn black">
                                             Discover More
                                             <span class="cp-border-btn__inner">
                                     <span class="cp-border-btn__blobs">
@@ -226,7 +226,7 @@
                                     <h2 class="cp-about-title mb-70">We are just <br> <span>better Quality</span> <br> for over
                                         35 <br> <span>years</span> -</h2>
                                     <div class="cp-about-btn">
-                                        <a class="cp-btn-2" href="contact.html">
+                                        <a class="cp-btn-2" href="{{ route('contact-us.index') }}">
                                             Contact us
                                             <span class="cp-btn-2__inner">
                                     <span class="cp-btn-2__blobs">
@@ -359,6 +359,6 @@
 
     </main>
 @endsection
-@push('js')
+@push('niceSelect')
     <script src="{{ asset('assets/js/nice-select.min.js') }}"></script>
 @endpush

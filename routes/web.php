@@ -31,6 +31,12 @@ Route::get('faqs', [LandingController::class, 'faq'])->name('faqs');
 Route::get('cart', [CartController::class, 'cart'])->name('cart.index');
 Route::get('checkout', [CartController::class, 'checkout'])->name('checkout.index');
 
+Route::get('get-quote', [LandingController::class, 'getQuote'])->name('get-quote.index');
+Route::post('get-quote/store', [LandingController::class, 'getQuoteStore'])->name('get-quote.store');
+
+Route::get('contact-us', [LandingController::class, 'contactUs'])->name('contact-us.index');
+Route::post('contact-us/store', [LandingController::class, 'contactUsStore'])->name('contact-us.store');
+
 Route::get('/dashboard', function () {
     return view('backend.pages.index');
 })->middleware(['auth', 'verified'])->name('dashboard');

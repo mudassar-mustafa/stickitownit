@@ -4,8 +4,10 @@ namespace App\Providers;
 
 use App\Contracts\Backend\BrandContract;
 use App\Contracts\Backend\CategoryContract;
+use App\Contracts\Backend\ContactUsContract;
 use App\Contracts\Backend\FaqContract;
 use App\Contracts\Backend\FeatureContract;
+use App\Contracts\Backend\QuoteContract;
 use App\Contracts\Backend\UserContract;
 use App\Contracts\Backend\CountryContract;
 use App\Contracts\Backend\StateContract;
@@ -20,11 +22,13 @@ use App\Contracts\Backend\BlogTagContract;
 use App\Contracts\Backend\BlogContract;
 use App\Contracts\Backend\ProductContract;
 
-//Frontend 
+//Frontend
 use App\Contracts\Frontend\ProductDetailContract;
 use App\Contracts\Frontend\CartContract;
 
 
+use App\Repositories\Backend\ContactUsRepository;
+use App\Repositories\Backend\QuoteRepository;
 use Illuminate\Support\ServiceProvider;
 
 use App\Repositories\Backend\BrandRepository;
@@ -45,7 +49,7 @@ use App\Repositories\Backend\BlogTagRepository;
 use App\Repositories\Backend\BlogRepository;
 use App\Repositories\Backend\ProductRepository;
 
-//Frontend 
+//Frontend
 use App\Repositories\Frontend\ProductDetailRepository;
 use App\Repositories\Frontend\CartRepository;
 
@@ -72,6 +76,8 @@ class RepositoryServiceProvider extends ServiceProvider
         ProductContract::class => ProductRepository::class,
         ProductDetailContract::class => ProductDetailRepository::class,
         CartContract::class => CartRepository::class,
+        ContactUsContract::class => ContactUsRepository::class,
+        QuoteContract::class => QuoteRepository::class,
     ];
 
     /**

@@ -13,7 +13,8 @@
                                 @endforeach
                             @endif
                             <li><a href="{{ route('blogs.list') }}">Blogs</a></li>
-                            <li><a href="contact.html">Contact Us</a></li>
+                            <li><a href="{{ route('contact-us.index') }}">Contact Us</a></li>
+                            <li><a href="{{ route('get-quote.index') }}">Get a Quote</a></li>
                             <li><a href="{{ route('faqs') }}">FAQ</a></li>
                         </ul>
                     </div>

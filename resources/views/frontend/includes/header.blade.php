@@ -87,7 +87,7 @@
                                         @endforeach
                                     @endif
 
-                                    <li><a href="contact.html">Contact</a></li>
+                                    <li><a href="{{ route('contact-us.index') }}">Contact</a></li>
                                 </ul>
                             </nav>
                         </div>
