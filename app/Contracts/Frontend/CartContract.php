@@ -15,4 +15,12 @@ interface CartContract
     public function getAllCart();
 
     public function removeToCart($cartId);
+
+    public function getAllCountries();
+
+    public function getStates($countryId);
+
+    public function getCities($stateId);
+
+    public function createNewOrder(array $data);
 }

@@ -36,6 +36,7 @@ Route::post('get-quote/store', [LandingController::class, 'getQuoteStore'])->nam
 
 Route::get('contact-us', [LandingController::class, 'contactUs'])->name('contact-us.index');
 Route::post('contact-us/store', [LandingController::class, 'contactUsStore'])->name('contact-us.store');
+Route::get('thank-you/{id}', [CartController::class, 'thankYou'])->name('thank-you.index');
 
 Route::get('/dashboard', function () {
     return view('backend.pages.index');
@@ -48,7 +49,8 @@ Route::middleware('auth')->group(function () {
     Route::post('addToCart', [ProductDetailController::class, 'addToCart'])->name('product.addToCart');
     Route::post('removeToCart', [CartController::class, 'removeToCart'])->name('product.removeToCart');
     Route::post('placeOrder', [CartController::class, 'placeOrder'])->name('placeOrder');
-    Route::get('stripepayment', [CartController::class,'stripepayment'])->name('stripepayment');
+    Route::post('getStates', [CartController::class, 'getStates'])->name('getStates');
+    Route::post('getCities', [CartController::class, 'getCities'])->name('getCities');
 
     require __DIR__ . '/admin.php';
 

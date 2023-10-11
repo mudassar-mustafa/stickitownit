@@ -51,12 +51,23 @@ class CartController extends Controller
     public function checkout()
     {
         $carts = [];
+        $states = [];
+        $cities = [];
         $user = null;
         if (Auth::check() == true) {
             $carts = $this->cartRepository->getAllCart();
             $user = Auth::user();
+            if(isset($user->country_id)){
+                $states = $this->cartRepository->getStates($user->country_id);
+            }
+
+            if(isset($user->state_id)){
+                $cities = $this->cartRepository->getCities($user->state_id);
+            }
         }
-        return view('frontend.pages.product.checkout', compact('carts', 'user'));
+        $countries = $this->cartRepository->getAllCountries();
+    
+        return view('frontend.pages.product.checkout', compact('carts', 'user', 'countries', 'states', 'cities'));
     }
 
     public function placeOrder(Request $request, UtilService $utilService)
@@ -87,9 +98,12 @@ class CartController extends Controller
                         "source" => $token,
                         "description" => $description,
                 ]);
-                return $obj;
-                //$invoice_number = $this->CartRepository->createNewOrder($data,$Invoice_id);
-                //return Redirect::route('front.checkout.thank-you',$invoice_number);
+                $data['transaction_id'] = $obj['id'];
+                $data['transaction_slip_url'] = $obj['receipt_url'];
+                $data['checkOutType'] = "Sale";
+                $data['paymentMethod'] = "stripe";
+                $invoice_number = $this->cartRepository->createNewOrder($data);
+                return Redirect::route('thank-you.index',$invoice_number);
             } catch(\Stripe\Exception\CardException $e) {
                 return $utilService->logErrorAndRedirectToBack('placeOrder', $e->getError()->message);
             } catch (\Stripe\Exception\RateLimitException $e) {
@@ -118,51 +132,19 @@ class CartController extends Controller
         ]);
     }
 
-    public function stripepayment(){
-        $params = Session::get('paypal_cart_attribute');
-        if(!isset($params['stripeToken'])){
-            return $this->responseRedirectBack('Order Already Placed', 'error', true, true); 
-        }else{
-            $token='';
-            $description='';
-            $Amt=0;
-            $Invoice_id=0;
-            $status='';
-            try {
-                $Amt = round($Amt, 2);
-                $Amt = $Amt * 100;
-                Stripe\Stripe::setApiKey(config('services.stripe.secret'));
-                Stripe\Charge::create ([
-                        "amount" => $Amt,
-                        "currency" => "USD",
-                        "source" => $token,
-                        "description" => $description,
-                ]);
-                $invoice_number = $this->CartRepository->createNewOrder($params,$Invoice_id);
-                return Redirect::route('front.checkout.thank-you',$invoice_number);
-            } catch(\Stripe\Exception\CardException $e) {
-                // Since it's a decline, \Stripe\Exception\CardException will be caught
-                return $this->responseRedirectBack($e->getError()->message, 'error', true, true); 
-            } catch (\Stripe\Exception\RateLimitException $e) {
-                return $this->responseRedirectBack('Too many requests made to the API too quickly', 'error', true, true); 
-                // Too many requests made to the API too quickly
-            } catch (\Stripe\Exception\InvalidRequestException $e) {
-                return $this->responseRedirectBack($e->getError()->message, 'error', true, true);
-                // Invalid parameters were supplied to Stripe's API
-            } catch (\Stripe\Exception\AuthenticationException $e) {
-                return $this->responseRedirectBack('Authentication with Stripe\'s API failed', 'error', true, true);
-                // Authentication with Stripe's API failed
-                // (maybe you changed API keys recently)
-            } catch (\Stripe\Exception\ApiConnectionException $e) {
-                return $this->responseRedirectBack('Network communication with Stripe failed', 'error', true, true);
-                // Network communication with Stripe failed
-            } catch (\Stripe\Exception\ApiErrorException $e) {
-                return $this->responseRedirectBack('Error', 'error', true, true);
-                // Display a very generic error to the user, and maybe send
-                // yourself an email
-            }
-        }
-        
+    public function getStates(Request $request, UtilService $utilService){
+        $states = $this->cartRepository->getStates($request->country_id);
+        return $utilService->makeResponse(200, "States get successfully", $states, CommonEnum::SUCCESS_STATUS);
+    }
+
+    public function getCities(Request $request, UtilService $utilService){
+        $cities = $this->cartRepository->getCities($request->state_id);
+        return $utilService->makeResponse(200, "Cities get successfully", $cities, CommonEnum::SUCCESS_STATUS);
+    }
+
+    public function thankYou($id)
+    {
+        return view('frontend.pages.product.thank-you');
     }
 
 

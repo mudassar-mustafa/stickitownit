@@ -1,6 +1,22 @@
 @extends('frontend.layouts.app')
 @section('title','Checkout')
 @push('css')
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
+    <style>
+        .select2-container {
+            width: 100% !important;
+        }
+        .select2-container--default .select2-selection--single{
+            height: 57px !important;
+        }
+        .select2-container .select2-selection--single .select2-selection__rendered{
+            padding-top: 13px !important;
+        }
+        .select2-container--default .select2-selection--single .select2-selection__arrow{
+            top: 17px !important;
+        }
+
+    </style>
 @endpush
 @section('content')
     <main>
@@ -115,21 +131,42 @@
                                             <div class="col-lg-4">
                                                 <div class="cp-input-field">
                                                     <label for="region">Country / Region *</label>
-                                                    <input type="text" id="region">
+                                                    <select id="country" name="country_id" class="js-example-basic-single" onchange="getStates();" required>
+                                                        <option value="">Please Select Country</option>
+                                                        @if(!empty($countries) && count($countries) >0)
+                                                            @foreach($countries as $country)
+                                                                <option value="{{$country->id}}" {{isset($user->country_id) && $user->country_id == $country->id ? "selected" : ""}}>{{$country->name}}</option>
+                                                            @endforeach
+                                                        @endif
+                                                    </select>
                                                     <i class="far fa-place-of-worship"></i>
                                                 </div>
                                             </div>
                                             <div class="col-lg-4">
                                                 <div class="cp-input-field">
-                                                    <label for="city">State *</label>
-                                                    <input type="text" id="city">
+                                                    <label for="state">State *</label>
+                                                    <select id="state" name="state_id" class="js-example-basic-single" onchange="getCities();" required>
+                                                        <option value="">Please Select State</option>
+                                                        @if(!empty($states) && count($states) >0)
+                                                            @foreach($states as $state)
+                                                                <option value="{{$state->id}}" {{isset($user->state_id) && $user->state_id == $state->id ? "selected" : ""}}>{{$state->name}}</option>
+                                                            @endforeach
+                                                        @endif
+                                                    </select>
                                                     <i class="far fa-city"></i>
                                                 </div>
                                             </div>
                                             <div class="col-lg-4">
                                                 <div class="cp-input-field">
                                                     <label for="city">Town / City *</label>
-                                                    <input type="text" id="city">
+                                                    <select id="city" name="city_id" class="js-example-basic-single" required>
+                                                        <option value="">Please Select City</option>
+                                                        @if(!empty($cities) && count($cities) > 0 )
+                                                            @foreach($cities as $city)
+                                                                <option value="{{$city->name}}" {{isset($user->city_id) && $user->city_id == $city->id ? "selected" : ""}}>{{$city->name}}</option>
+                                                            @endforeach
+                                                        @endif
+                                                    </select>
                                                     <i class="far fa-city"></i>
                                                 </div>
                                             </div>
@@ -231,8 +268,15 @@
 @endsection
 @push('js')
 <script src="https://js.stripe.com/v3/"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
     $(document).ready(function() {
+
+        
+        $('#country').select2();
+        $('#state').select2();
+        $('#city').select2();
+
         var stripe = Stripe($("#place_order").data('stripe-publishable-key'));
         var elements = stripe.elements();
         var card = elements.create('card');
@@ -268,5 +312,60 @@
         //Submit the form
         form.submit();  
       }
+
+    async function getStates() {
+        var csrf_token = $('meta[name="csrf-token"]').attr('content');
+        const url = '{{route("getStates")}}';
+        var data = {
+            'country_id': $("#country").val(),
+            _token: csrf_token
+        };
+        try {
+            const result = await doAjax(url, data);
+            if (result['data'] != null) {
+                var html = '<option value="">Please Select State</option>';
+                $("#state").empty();
+                if(result['data'] != null){
+                    for (let index = 0; index < result['data'].length; index++) {
+                        html +='<option value='+result['data'][index]['id']+'>'+result['data'][index]['name']+'</option>';
+                    }
+                    $("#state").append(html);
+                    $("#state").select2();
+                }
+            } else {
+            }
+        } catch (error) {
+            console.log('Error! InsertAssignments:', error);
+        }
+
+    }
+
+    async function getCities() {
+        var csrf_token = $('meta[name="csrf-token"]').attr('content');
+        const url = '{{route("getCities")}}';
+        var data = {
+            'state_id': $("#state").val(),
+            _token: csrf_token
+        };
+        try {
+            const result = await doAjax(url, data);
+            if (result['data'] != null) {
+                var html = '<option value="">Please Select City</option>';
+                $("#city").empty();
+                if(result['data'] != null){
+                    for (let index = 0; index < result['data'].length; index++) {
+                        html +='<option value='+result['data'][index]['id']+'>'+result['data'][index]['name']+'</option>';
+                    }
+                    $("#city").append(html);
+                    $("#city").select2();
+                }
+            } else {
+            }
+        } catch (error) {
+            console.log('Error! InsertAssignments:', error);
+        }
+
+    }
+
 </script>
 @endpush
