@@ -1,5 +1,5 @@
 @extends('backend.layouts.app')
-@section('title','Products')
+@section('title','Orders')
 @push('css')
 @endpush
 @section('content')
@@ -11,13 +11,7 @@
                         <div class="card-header">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <h4 class="card-title"> Products</h4>
-                                </div>
-                                <div class="col-md-6">
-                                    <a href="{{route('backend.pages.product.create')}}" class="float-end">
-                                        <button type="button" class="btn btn-primary me-1 pull-right">Add New Product
-                                        </button>
-                                    </a>
+                                    <h4 class="card-title"> Orders</h4>
                                 </div>
                             </div>
                         </div>

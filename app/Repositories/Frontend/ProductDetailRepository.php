@@ -83,6 +83,8 @@ class ProductDetailRepository extends BaseRepository implements ProductDetailCon
                 $values = explode('-', $productAttributeGroupDescription);
                 $params['qty'] = $values[2];
             }
+            $productId  = ProductAttributeGroup::where('id', $params['product_attribute_group_id'])->value('product_id'); 
+            $params['seller_id'] = Product::where('id', $productId)->value('user_id');
             $productCart = new Cart;
             $productCart->product_attribute_group_id = $params['product_attribute_group_id'];
             $productCart->user_id = Auth::user()->id;
@@ -91,6 +93,7 @@ class ProductDetailRepository extends BaseRepository implements ProductDetailCon
             }
             $productCart->qty = $params['qty'];
             $productCart->product_type = $params['product_type'];
+            $productCart->seller_id = $params['seller_id'];
             $productCart->save();
             $status = 1;
         }

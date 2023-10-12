@@ -72,4 +72,13 @@ class ProductAttributeGroup extends Model
     {
         return $this->hasMany(Cart::class,'product_attribute_group_id','id');
     }
+
+
+    /**
+    * @return HasMany
+    */
+    public function order_sale_detail(): HasMany
+    {
+        return $this->hasMany(OrderSaleDetail::class, 'product_attribute_group_id', 'id');
+    }
 }

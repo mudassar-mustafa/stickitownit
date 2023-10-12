@@ -11,15 +11,6 @@ use App\DataTables\ProductDataTable;
 use App\DataTables\ProductVariationDataTable;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Maatwebsite\Excel\Facades\Excel;
-use App\Imports\YourImportClass; 
-use App\Models\Product;
-use App\Models\Category;
-use App\Models\Attribute;
-use App\Models\AttributeValue;
-use App\Models\ProductAttribute;
-use App\Models\ProductAttributeGroup;
-use App\Models\ProductAttributeValueGroup;
 
 class ProductController extends Controller
 {

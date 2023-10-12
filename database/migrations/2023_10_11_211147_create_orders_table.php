@@ -17,6 +17,7 @@ return new class extends Migration
             $table->integer('invoice_number')->nullable();
             $table->string('order_type')->nullable();
             $table->string('order_status')->nullable();
+            $table->string('payment_status')->nullable();
             $table->dateTime('order_date')->nullable();
             $table->dateTime('order_paid_date')->nullable();
             $table->dateTime('order_shipped_date')->nullable();

@@ -19,6 +19,8 @@ use App\Http\Controllers\Backend\BlogTagController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\ContactUsController;
 use App\Http\Controllers\Backend\QuoteController;
+use App\Http\Controllers\Backend\OrderController;
+
 
 Route::group(['prefix' => 'backend'], function () {
 
@@ -214,6 +216,12 @@ Route::group(['prefix' => 'backend'], function () {
     Route::controller(QuoteController::class)->prefix('quote')->group(function () {
         Route::get('/', 'index')->name('backend.pages.quote.index');
         Route::delete('/delete/{id}', 'destroy')->name('backend.pages.quote.destroy');
+    });
+
+    //  Brands Routes
+    Route::controller(OrderController::class)->prefix('orders')->group(function () {
+        Route::get('/', 'index')->name('backend.pages.order.index');
+        Route::delete('/delete/{id}', 'destroy')->name('backend.pages.order.destroy');
     });
 
 });
