@@ -82,25 +82,30 @@ class CartController extends Controller
             $Amt=0;
             $Invoice_id=0;
             $status='';
-            $carts = $this->cartRepository->getAllCart();
-            foreach ($carts as $key => $cart) {
-                $Amt += $cart->product_attribute_group_detail->price; 
+            if($data['checkOutType'] == "Sale"){
+                $carts = $this->cartRepository->getAllCart();
+                foreach ($carts as $key => $cart) {
+                    $Amt += $cart->product_attribute_group_detail->price; 
+                }
+                $description = "Sticker Purchase";
+            }else if($data['checkOutType'] == "Package"){
+                $Amt = Session::get('packagePrice');
+                $description = "Buy ".Session::get('packageName')." Package";
             }
-            $description = "Sticker Purchase";
+            
             $token = $data['stripeToken'];
             try {
                 $Amt = round($Amt, 2);
                 $Amt = $Amt * 100;
                 Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
                 $obj = Stripe\Charge::create ([
-                        "amount" => $Amt,
-                        "currency" => "USD",
-                        "source" => $token,
-                        "description" => $description,
+                    "amount" => $Amt,
+                    "currency" => "USD",
+                    "source" => $token,
+                    "description" => $description,
                 ]);
                 $data['transaction_id'] = $obj['id'];
                 $data['transaction_slip_url'] = $obj['receipt_url'];
-                $data['checkOutType'] = "Sale";
                 $data['paymentMethod'] = "stripe";
                 $invoice_number = $this->cartRepository->createNewOrder($data);
                 return Redirect::route('thank-you.index',$invoice_number);
@@ -145,6 +150,18 @@ class CartController extends Controller
     public function thankYou($id)
     {
         return view('frontend.pages.product.thank-you');
+    }
+
+    public function addToCartPackage(
+        Request $request, 
+        UtilService $utilService
+        ){
+            Session::put('packageId', $request->packageId);
+            Session::put('packagePrice', $request->packagePrice);
+            Session::put('packageName', $request->packageName);
+            Session::put('packageToken', $request->packageToken);
+            Session::put('status', "package");
+        return $utilService->makeResponse(200, "Package add in cart successfully", [], CommonEnum::SUCCESS_STATUS);
     }
 
 

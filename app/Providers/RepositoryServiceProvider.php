@@ -26,10 +26,10 @@ use App\Contracts\Backend\OrderContract;
 //Frontend
 use App\Contracts\Frontend\ProductDetailContract;
 use App\Contracts\Frontend\CartContract;
+use App\Contracts\Frontend\LandingContract;
 
 
-use App\Repositories\Backend\ContactUsRepository;
-use App\Repositories\Backend\QuoteRepository;
+
 use Illuminate\Support\ServiceProvider;
 
 use App\Repositories\Backend\BrandRepository;
@@ -54,7 +54,9 @@ use App\Repositories\Backend\OrderRepository;
 //Frontend
 use App\Repositories\Frontend\ProductDetailRepository;
 use App\Repositories\Frontend\CartRepository;
-
+use App\Repositories\Frontend\LandingRepository;
+use App\Repositories\Backend\ContactUsRepository;
+use App\Repositories\Backend\QuoteRepository;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -81,6 +83,7 @@ class RepositoryServiceProvider extends ServiceProvider
         ContactUsContract::class => ContactUsRepository::class,
         QuoteContract::class => QuoteRepository::class,
         OrderContract::class => OrderRepository::class,
+        LandingContract::class => LandingRepository::class,
     ];
 
     /**

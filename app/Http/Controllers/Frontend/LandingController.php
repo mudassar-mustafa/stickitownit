@@ -15,9 +15,22 @@ use App\Models\Quote;
 use App\Models\Sticker;
 use Illuminate\Http\Request;
 use App\Traits\UploadFile;
+use App\Contracts\Frontend\LandingContract;
+
 class LandingController extends Controller
 {
     use UploadFile;
+
+    /**
+     * @var CartContract
+     */
+    protected $landingRepository;
+
+    public function __construct(LandingContract $landingRepository)
+    {
+        $this->landingRepository = $landingRepository;
+    }
+
     public function index()
     {
         $features = Feature::orderBy('id', 'asc')->get(['id', 'name', 'short_description', 'image']);
@@ -107,5 +120,11 @@ class LandingController extends Controller
             "status" => CommonEnum::SUCCESS_STATUS,
             "message" => "Your Query has been saved received.We will contact you shortly."
         ]);
+    }
+
+    public function packages()
+    {
+        $packages = $this->landingRepository->getPackages();
+        return view('frontend.pages.packages', compact('packages'));
     }
 }

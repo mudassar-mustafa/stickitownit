@@ -27,6 +27,7 @@ Route::get('product/{slug}', [ProductDetailController::class, 'productDetail'])-
 Route::post('getAttributeValue', [ProductDetailController::class, 'getAttributeValue'])->name('product.getAttributeValue');
 Route::post('getProductGroupValue', [ProductDetailController::class, 'getProductGroupValue'])->name('product.getProductGroupValue');
 Route::get('faqs', [LandingController::class, 'faq'])->name('faqs');
+Route::get('packages', [LandingController::class, 'packages'])->name('packages');
 
 Route::get('cart', [CartController::class, 'cart'])->name('cart.index');
 Route::get('checkout', [CartController::class, 'checkout'])->name('checkout.index');
@@ -51,6 +52,7 @@ Route::middleware('auth')->group(function () {
     Route::post('placeOrder', [CartController::class, 'placeOrder'])->name('placeOrder');
     Route::post('getStates', [CartController::class, 'getStates'])->name('getStates');
     Route::post('getCities', [CartController::class, 'getCities'])->name('getCities');
+    Route::post('addToCartPackage', [CartController::class, 'addToCartPackage'])->name('addToCartPackage');
 
     require __DIR__ . '/admin.php';
 

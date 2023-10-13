@@ -27,7 +27,17 @@
                     <div class="col-xl-8">
 
                         <div class="cp-cart-left mb-80 mr-10">
-                            <h4 class="cp-checkout-title">Product Information</h4>
+                            @if (Session::has('status') && Session::get('status') == "package")
+                                <h4 class="cp-checkout-title">Package Information</h4>
+                            @else
+                                <h4 class="cp-checkout-title">Product Information</h4>    
+                            @endif
+                            @if (Session::has('status') && Session::get('status') == "package")  
+                            <div class="cp-cart-table mb-50">
+                                <h4>Package Name: {{ Session::get('packageName') }}</h4>
+                            </div>  
+                            
+                            @else
                             <div class="cp-cart-table mb-50">
                                 @php
                                     $cartTotal = 0;
@@ -81,21 +91,38 @@
                                     </tbody>
                                 </table>
                             </div>
+                            @endif
                         </div>
                     </div>
                     <div class="col-xl-4 pt-70">
-                        <div class="cp-cart-total-area mb-100 ml-10">
-                            <h4 class="cp-cart-subtotal">Cart Totals</h4>
-                            <div class="cp-cart-total d-flex align-items-center justify-content-between mb-20">
-                                <h5>Cart Totals</h5><span>{{ $cartTotal }}$</span>
+                        @if (Session::has('status') && Session::get('status') == "package")
+                            <div class="cp-cart-total-area mb-100 ml-10">
+                                <h4 class="cp-cart-subtotal">Package Totals</h4>
+                                <div class="cp-cart-total d-flex align-items-center justify-content-between mb-20">
+                                    <h5>Package Totals</h5><span>{{ Session::get('packagePrice') }}$</span>
+                                </div>
+                                <div class="cp-cart-free d-flex align-items-center justify-content-between">
+                                    <h5>Extra fee <span>( tax excl.)</span></h5><span>0$</span>
+                                </div>
+                                <div class="cp-cart-f-total d-flex align-items-center justify-content-between mb-30">
+                                    <h6>Total : </h6><span>{{ Session::get('packagePrice') }}$</span>
+                                </div>
                             </div>
-                            <div class="cp-cart-free d-flex align-items-center justify-content-between">
-                                <h5>Extra fee <span>( tax excl.)</span></h5><span>{{ $extraFee }}$</span>
-                            </div>
-                            <div class="cp-cart-f-total d-flex align-items-center justify-content-between mb-30">
-                                <h6>Total : </h6><span>{{ $cartTotal + $extraFee }}$</span>
-                            </div>
-                        </div>
+                        @else
+                            <div class="cp-cart-total-area mb-100 ml-10">
+                                <h4 class="cp-cart-subtotal">Cart Totals</h4>
+                                <div class="cp-cart-total d-flex align-items-center justify-content-between mb-20">
+                                    <h5>Cart Totals</h5><span>{{ $cartTotal }}$</span>
+                                </div>
+                                <div class="cp-cart-free d-flex align-items-center justify-content-between">
+                                    <h5>Extra fee <span>( tax excl.)</span></h5><span>{{ $extraFee }}$</span>
+                                </div>
+                                <div class="cp-cart-f-total d-flex align-items-center justify-content-between mb-30">
+                                    <h6>Total : </h6><span>{{ $cartTotal + $extraFee }}$</span>
+                                </div>
+                            </div>    
+                        @endif
+                        
                     </div>
                 </div>
             </div>
@@ -106,8 +133,11 @@
             <div class="container">
                 <form id="place_order" action="{{ route('placeOrder') }}" enctype="multipart/form-data" data-stripe-publishable-key="{{ env('STRIPE_KEY') }}" method="POST">
                     @csrf
+                    <input type="hidden" value="{{ Session::has('status') && Session::get('status') == "package" ? "Package" : "Sale" }}" name="checkOutType">
                     <div class="row wow fadeInUp animated" data-wow-duration="1.5s">
                         <div class="col-xl-8">
+                            @if (Session::has('status') && Session::get('status') == "package")
+                            @else
                             <div class="cp-checkout-left mb-30 mr-10">
 
                                 <div class="cp-checkout-field-area">
@@ -209,6 +239,8 @@
                                     </div>
                                 </div>
                             </div>
+                            @endif
+                            
                         </div>
                         <div class="col-xl-4">
                             <div class="cp-checkout-right mb-20 ml-10">
@@ -364,7 +396,6 @@
         } catch (error) {
             console.log('Error! InsertAssignments:', error);
         }
-
     }
 
 </script>

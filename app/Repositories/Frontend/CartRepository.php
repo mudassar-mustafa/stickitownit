@@ -12,6 +12,8 @@ use App\Models\State;
 use App\Models\City;
 use App\Models\Order;
 use App\Models\OrderSaleDetail;
+use App\Models\OrderPackageDetail;
+use App\Models\PackageSubscription;
 use App\Contracts\Frontend\CartContract;
 use Auth;
 
@@ -64,6 +66,16 @@ class CartRepository extends BaseRepository implements CartContract
 
     public function createNewOrder(array $data){
         $invoiceNumber = 0;
+        if($data['checkOutType'] == "Sale"){
+            $invoiceNumber = $this->saleCart($data);
+        }else if($data['checkOutType'] == "Package"){
+            $invoiceNumber = $this->packageCart($data);
+        }
+        return $invoiceNumber;
+        
+    }
+
+    public function saleCart(array $data){
         $getAllSeller = Cart::where('user_id', Auth::user()->id)->groupBy('seller_id')->pluck('seller_id')->toArray();
         $invoiceNumber = Order::max('invoice_number');
         $invoiceNumber = $invoiceNumber != null ? $invoiceNumber + 1 : 1;
@@ -133,9 +145,69 @@ class CartRepository extends BaseRepository implements CartContract
                 }
             }
         }
+    }
+
+    public function packageCart(array $data){
+        $invoiceNumber = Order::max('invoice_number');
+        $invoiceNumber = $invoiceNumber != null ? $invoiceNumber + 1 : 1;
+
+        $order = new Order;
+        $order->invoice_number = $invoiceNumber;
+        $order->order_type = $data['checkOutType'];
+        $order->order_status = "completed";
+        $order->payment_status = "completed";
+        $order->order_date = date('Y-m-d H:i:s');
+        $order->order_paid_date = date('Y-m-d H:i:s');
+        $order->buyer_id = Auth::user()->id;
+        $order->payment_method = $data['paymentMethod'];
+        if(isset($data['transaction_id'])){
+            $order->transaction_id = $data['transaction_id'];
+        }
+        if(isset($data['transaction_slip_url'])){
+            $order->transaction_slip_url = $data['transaction_slip_url'];
+        }
+        $order->order_total_amount = Session::get('packagePrice');
+        $order->save();
+
+        $orderPackageDetail = new OrderPackageDetail;
+        $orderPackageDetail->order_id = $order->id;
+        $orderPackageDetail->package_id = Session::get('packageId');
+        $orderPackageDetail->package_name = Session::get('packageName');
+        $orderPackageDetail->package_type = Session::get('packageType');
+        $orderPackageDetail->token = Session::get('packageToken');
+        $orderPackageDetail->save();
+
+        PackageSubscription::where('user_id', Auth::user()->id)->update('status', 'expired');
+        $startDate = date('Y-m-d H:i:s');
+        $endDate = date('Y-m-d H:i:s');
+        if(Session::get('packageType') == "weekly"){
+            $endDate = date('Y-m-d H:i:s', strtotime($startDate. ' + 7 day'));
+        }else if(Session::get('packageType') == "monthly"){
+            $endDate = date('Y-m-d H:i:s', strtotime($startDate. ' + 1 month'));
+        }else if(Session::get('packageType') == "quartely"){
+            $endDate = date('Y-m-d H:i:s', strtotime($startDate. ' + 6 month'));
+        }else if(Session::get('packageType') == "yearly"){
+            $endDate = date('Y-m-d H:i:s', strtotime($startDate. ' + 1 year'));
+        }
+        $packageSubscription = new PackageSubscription;
+        $packageSubscription->user_id = Auth::user()->id;
+        $packageSubscription->package_id = Session::get('packageId');
+        $packageSubscription->package_name = Session::get('packageName');
+        $packageSubscription->package_type = Session::get('packageType');
+        $packageSubscription->token = Session::get('packageToken');
+        $packageSubscription->start_date = $startDate;
+        $packageSubscription->end_date = $endDate;
+        $packageSubscription->status = "active";
+        $packageSubscription->save();
+
+        Session::forget('packageId');
+        Session::forget('packagePrice');
+        Session::forget('packageName');
+        Session::forget('packageToken');
+        Session::forget('status');
 
         return $invoiceNumber;
-        
+
     }
 
 }
