@@ -16,4 +16,6 @@ interface OrderContract
      */
     public function listOrder(string $order = 'id', string $sort = 'desc', array $columns = ['*']);
 
+    public function updateOrderStatus(array $data);
+
 }

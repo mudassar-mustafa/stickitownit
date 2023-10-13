@@ -42,7 +42,7 @@ class OrderDataTable extends DataTable
             })
             ->addColumn('order_status', function ($order) {
                 if($order->order_status == "shipped"){
-                    return '<span class="badge rounded-pill btn btn-waring">Shipped</span>';
+                    return '<span class="badge rounded-pill btn btn-warning">Shipped</span>';
                 }else if($order->order_status == "cancelled"){
                     return  '<span class="badge rounded-pill btn btn-danger">Cancelled</span>';
                 }else if($order->order_status == "delivered"){
@@ -56,6 +56,15 @@ class OrderDataTable extends DataTable
             )
             ->addColumn('action', function ($order) {
 
+                $updateStatus = "";
+                if($order->order_status == "cancelled" || $order->order_status == "delivered"){
+
+                }else{
+                    $updateStatus = '<button type="button" class="btn btn-primary" id="btnStatus'.$order->id.'" data-bs-toggle="modal" data-order_status ="'.$order->order_status.'"  onclick="updateStatus('.$order->id.');">Update Status</button>';
+                }
+
+                
+
                 $deleteAction = '<a form-alert-message="Kindly Confirm the removal of this Order" ' .
                     'form-id="chargeDelete' . $order->id . '" class="deleteModel" href="'
                     . route('backend.pages.order.destroy', $order->id) . '" data-toggle="tooltip" ' .
@@ -66,7 +75,7 @@ class OrderDataTable extends DataTable
                     'method' => 'DELETE', 'id' => 'chargeDelete' . $order->id . '']);
                 $deleteAction .= Form::close();
 
-                return $deleteAction;
+                return $updateStatus.$deleteAction;
             })->rawColumns(['action']);
     }
 

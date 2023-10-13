@@ -221,6 +221,7 @@ Route::group(['prefix' => 'backend'], function () {
     //  Brands Routes
     Route::controller(OrderController::class)->prefix('orders')->group(function () {
         Route::get('/', 'index')->name('backend.pages.order.index');
+        Route::post('/updateOrderStatus', 'updateOrderStatus')->name('backend.pages.order.updateOrderStatus');
         Route::delete('/delete/{id}', 'destroy')->name('backend.pages.order.destroy');
     });
 
