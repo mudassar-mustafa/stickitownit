@@ -16,6 +16,7 @@ use App\Models\OrderPackageDetail;
 use App\Models\PackageSubscription;
 use App\Contracts\Frontend\CartContract;
 use Auth;
+use Session;
 
 class CartRepository extends BaseRepository implements CartContract
 {
@@ -177,7 +178,11 @@ class CartRepository extends BaseRepository implements CartContract
         $orderPackageDetail->token = Session::get('packageToken');
         $orderPackageDetail->save();
 
-        PackageSubscription::where('user_id', Auth::user()->id)->update('status', 'expired');
+        $packageSubscription =  PackageSubscription::where('user_id', Auth::user()->id)->first();
+        if(!empty($packageSubscription)){
+            $packageSubscription->status = 'expired';
+            $packageSubscription->save();
+        }
         $startDate = date('Y-m-d H:i:s');
         $endDate = date('Y-m-d H:i:s');
         if(Session::get('packageType') == "weekly"){
@@ -195,6 +200,7 @@ class CartRepository extends BaseRepository implements CartContract
         $packageSubscription->package_name = Session::get('packageName');
         $packageSubscription->package_type = Session::get('packageType');
         $packageSubscription->token = Session::get('packageToken');
+        $packageSubscription->remaing_token = Session::get('packageToken');
         $packageSubscription->start_date = $startDate;
         $packageSubscription->end_date = $endDate;
         $packageSubscription->status = "active";

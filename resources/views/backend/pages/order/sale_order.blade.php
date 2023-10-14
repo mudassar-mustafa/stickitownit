@@ -67,8 +67,6 @@
     <script src="{{ asset('backend/vendor/sweetalert/sweetalert.min.js')}}"></script>
     <script>
         function drawCallBackHandler() {
-
-            console.log("Draw Call Back Called");
             $('[data-toggle="tooltip"]').tooltip();
             var confirmAction = $(".deleteModel");
             if (confirmAction.length) {
@@ -97,7 +95,6 @@
         }
 
         function updateStatus(orderId) {
-            debugger;
             $("#order_id").val('');
             $("#status").val('');
             $("#remarks").val('');

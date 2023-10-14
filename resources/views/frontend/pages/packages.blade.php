@@ -35,7 +35,7 @@
                                 <div class="cp-plan2-price"> <sup class="cp-plan2-currency">$</sup>{{ $package->price }}</div>
                             </div>
                             <div class="cp-plan-btn">
-                                <a href="javascript:void(0)" onclick="addToCart('{{ auth()->check() == true ? '1' : '0' }}', '{{ $package->id }}', '{{ $package->price }}', '{{ $package->name }}', '{{ $package->token }}')" class="cp-border-btn">Get Started Now
+                                <a href="javascript:void(0)" onclick="addToCart('{{ auth()->check() == true ? '1' : '0' }}', '{{ $package->id }}', '{{ $package->price }}', '{{ $package->name }}', '{{ $package->token }}', '{{ $package->package_type }}')" class="cp-border-btn">Get Started Now
                                     <span class="cp-border-btn__inner">
                                         <span class="cp-border-btn__blobs">
                                         <span class="cp-border-btn__blob"></span>
@@ -60,7 +60,7 @@
 @endsection
 @push('js')
 <script>
-    async function addToCart(user, packageId, packagePrice, packageName, packageToken) {
+    async function addToCart(user, packageId, packagePrice, packageName, packageToken, packageType) {
         if(user == "1"){
             var csrf_token = $('meta[name="csrf-token"]').attr('content');
             const url = '{{route("addToCartPackage")}}';
@@ -69,6 +69,7 @@
                 'packagePrice': packagePrice,
                 'packageName': packageName,
                 'packageToken': packageToken,
+                'packageType': packageType,
                 _token: csrf_token
             };
             try {

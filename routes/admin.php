@@ -20,6 +20,7 @@ use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\ContactUsController;
 use App\Http\Controllers\Backend\QuoteController;
 use App\Http\Controllers\Backend\OrderController;
+use App\Http\Controllers\Backend\PackageSubscriptionController;
 
 
 Route::group(['prefix' => 'backend'], function () {
@@ -220,9 +221,15 @@ Route::group(['prefix' => 'backend'], function () {
 
     //  Brands Routes
     Route::controller(OrderController::class)->prefix('orders')->group(function () {
-        Route::get('/', 'index')->name('backend.pages.order.index');
+        Route::get('/saleOrder', 'saleOrder')->name('backend.pages.order.sale_order');
+        Route::get('/packageOrder', 'packageOrder')->name('backend.pages.order.package_order');
         Route::post('/updateOrderStatus', 'updateOrderStatus')->name('backend.pages.order.updateOrderStatus');
         Route::delete('/delete/{id}', 'destroy')->name('backend.pages.order.destroy');
+    });
+
+    // Package Subscription  Routes
+    Route::controller(PackageSubscriptionController::class)->prefix('package-subscription')->group(function () {
+        Route::get('/', 'index')->name('backend.pages.package-subscription.index');
     });
 
 });

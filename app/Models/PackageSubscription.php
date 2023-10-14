@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class PackageSubscription extends Model
 {
     use HasFactory;
+
+    protected $table = 'package_subscriptions';
+
+    protected $guarded =[];
 }

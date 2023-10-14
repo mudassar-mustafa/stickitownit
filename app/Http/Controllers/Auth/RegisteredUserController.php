@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Package;
+use App\Models\PackageSubscription;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -47,6 +49,24 @@ class RegisteredUserController extends Controller
             'status' => 'inactive'
         ]);
         $user->assignRole(Role::findById(3));
+        $package = Package::where('name', strtolower('free'))->first();
+
+        $startDate = date('Y-m-d H:i:s');
+        $endDate = date('Y-m-d H:i:s', strtotime($startDate. ' + 7 day'));
+
+        $packageSubscription = new PackageSubscription;
+        $packageSubscription->user_id = $user->id;
+        $packageSubscription->package_id = $package->id;
+        $packageSubscription->package_name = $package->name;
+        $packageSubscription->package_type = $package->package_type;
+        $packageSubscription->token = $package->token;
+        $packageSubscription->remaing_token = $package->token;
+        $packageSubscription->start_date = $startDate;
+        $packageSubscription->end_date = $endDate;
+        $packageSubscription->status = "active";
+        $packageSubscription->save();
+
+
         event(new Registered($user));
 
 //        Auth::login($user);

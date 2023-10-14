@@ -159,6 +159,7 @@ class CartController extends Controller
             Session::put('packageId', $request->packageId);
             Session::put('packagePrice', $request->packagePrice);
             Session::put('packageName', $request->packageName);
+            Session::put('packageType', $request->packageType);
             Session::put('packageToken', $request->packageToken);
             Session::put('status', "package");
         return $utilService->makeResponse(200, "Package add in cart successfully", [], CommonEnum::SUCCESS_STATUS);

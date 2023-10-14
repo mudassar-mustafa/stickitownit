@@ -7,7 +7,7 @@ use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
 use Form;
 
-class OrderDataTable extends DataTable
+class PackageOrderDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -28,9 +28,6 @@ class OrderDataTable extends DataTable
             ->addColumn('buyer_id', function ($order) {
                 return empty($order->buyer_detail) ? "--" : "".$order->buyer_detail->name."(".$order->buyer_detail->id.")";
             })
-            ->addColumn('seller_id', function ($order) {
-                return empty($order->seller_detail) ? "--" : "".$order->seller_detail->name."(".$order->seller_detail->id.")";
-            })
             ->addColumn('order_date', function ($order) {
                 return empty($order->order_date) ? "--" : date('Y-m-d H:i:s', strtotime($order->order_date));
             })
@@ -41,29 +38,12 @@ class OrderDataTable extends DataTable
                 return empty($order->order_total_amount) ? "--" : $order->order_total_amount;
             })
             ->addColumn('order_status', function ($order) {
-                if($order->order_status == "shipped"){
-                    return '<span class="badge rounded-pill btn btn-warning">Shipped</span>';
-                }else if($order->order_status == "cancelled"){
-                    return  '<span class="badge rounded-pill btn btn-danger">Cancelled</span>';
-                }else if($order->order_status == "delivered"){
-                    return '<span class="badge rounded-pill btn btn-success">Delivered</span>';
-                }else{
-                    return '<span class="badge rounded-pill btn btn-secondary">Pending</span>';
-                }
+                return '<span class="badge rounded-pill btn btn-success">Completed</span>';
             })
             ->escapeColumns(
                 []
             )
             ->addColumn('action', function ($order) {
-
-                $updateStatus = "";
-                if($order->order_status == "cancelled" || $order->order_status == "delivered"){
-
-                }else{
-                    $updateStatus = '<button type="button" class="btn btn-primary" id="btnStatus'.$order->id.'" data-bs-toggle="modal" data-order_status ="'.$order->order_status.'"  onclick="updateStatus('.$order->id.');">Update Status</button>';
-                }
-
-                
 
                 $deleteAction = '<a form-alert-message="Kindly Confirm the removal of this Order" ' .
                     'form-id="chargeDelete' . $order->id . '" class="deleteModel" href="'
@@ -75,7 +55,7 @@ class OrderDataTable extends DataTable
                     'method' => 'DELETE', 'id' => 'chargeDelete' . $order->id . '']);
                 $deleteAction .= Form::close();
 
-                return $updateStatus.$deleteAction;
+                return $deleteAction;
             })->rawColumns(['action']);
     }
 
@@ -87,14 +67,10 @@ class OrderDataTable extends DataTable
      */
     public function query(Order $model)
     {
-        $buyerId = $this->buyerId;
-        $sellerId = $this->sellerId;
-        $order = $model->where('order_type', 'Sale')->newQuery();
-        if($buyerId != 0){
-            $order = $order->where('buyer_id', $buyerId);
-        }
-        if($sellerId != 0){
-            $order = $order->where('seller_id', $sellerId);
+        $userId = $this->userId;
+        $order = $model->where('order_type', 'Package')->newQuery();
+        if($userId != 0){
+            $order = $order->where('user_id', $userId);
         }
         return $order;
     }
@@ -128,8 +104,6 @@ class OrderDataTable extends DataTable
             Column::make('Order Status')->name('order_status')->data("order_status")
                 ->addClass('text-center'),
             Column::make('Buyer')->name('buyer_id')->data("buyer_id")
-                ->addClass('text-center'),
-            Column::make('Seller')->name('seller_id')->data("seller_id")
                 ->addClass('text-center'),
             Column::make('Order Date')->name('order_date')->data("order_date")
                 ->addClass('text-center'),

@@ -10,6 +10,7 @@ use App\Services\UtilService;
 use App\Http\Enums\CommonEnum;
 use Illuminate\Http\RedirectResponse;
 use App\DataTables\OrderDataTable;
+use App\DataTables\PackageOrderDataTable;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Auth;
@@ -29,7 +30,7 @@ class OrderController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(
+    public function saleOrder(
         UtilService    $utilService,
         OrderDataTable $dataTable
     )
@@ -43,9 +44,9 @@ class OrderController extends Controller
             if(Auth::user()->hasRole('Seller')){
                 $sellerId = Auth::user()->id;
             }
-            return $dataTable->with(['buyerId' => $buyerId, 'sellerId' => $sellerId])->render('backend.pages.order.index');
+            return $dataTable->with(['buyerId' => $buyerId, 'sellerId' => $sellerId])->render('backend.pages.order.sale_order');
         } catch (\Exception $exception) {
-            return $utilService->logErrorAndRedirectToBack('backend.pages.order.index', $exception->getMessage());
+            return $utilService->logErrorAndRedirectToBack('backend.pages.order.sale_order', $exception->getMessage());
         }
     }
 
@@ -65,6 +66,27 @@ class OrderController extends Controller
 
         } catch (\Exception $exception) {
             return $utilService->makeResponse(500, $exception->getMessage());
+        }
+    }
+
+
+    /**
+     * Display a listing of the resource.
+     */
+    public function packageOrder(
+        UtilService    $utilService,
+        PackageOrderDataTable $dataTable
+    )
+    {
+        try {
+            $userId = 0;
+            if(Auth::user()->hasRole('Customer')){
+                $userId = Auth::user()->id;
+            }
+            
+            return $dataTable->with(['userId' => $userId])->render('backend.pages.order.package_order');
+        } catch (\Exception $exception) {
+            return $utilService->logErrorAndRedirectToBack('backend.pages.order.package_order', $exception->getMessage());
         }
     }
 

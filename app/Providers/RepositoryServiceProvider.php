@@ -22,7 +22,7 @@ use App\Contracts\Backend\BlogTagContract;
 use App\Contracts\Backend\BlogContract;
 use App\Contracts\Backend\ProductContract;
 use App\Contracts\Backend\OrderContract;
-
+use App\Contracts\Backend\PackageSubscriptionContract;
 //Frontend
 use App\Contracts\Frontend\ProductDetailContract;
 use App\Contracts\Frontend\CartContract;
@@ -50,6 +50,7 @@ use App\Repositories\Backend\BlogTagRepository;
 use App\Repositories\Backend\BlogRepository;
 use App\Repositories\Backend\ProductRepository;
 use App\Repositories\Backend\OrderRepository;
+use App\Repositories\Backend\PackageSubscriptionRepository;
 
 //Frontend
 use App\Repositories\Frontend\ProductDetailRepository;
@@ -84,6 +85,7 @@ class RepositoryServiceProvider extends ServiceProvider
         QuoteContract::class => QuoteRepository::class,
         OrderContract::class => OrderRepository::class,
         LandingContract::class => LandingRepository::class,
+        PackageSubscriptionContract::class => PackageSubscriptionRepository::class,
     ];
 
     /**
