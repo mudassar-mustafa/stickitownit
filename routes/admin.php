@@ -23,7 +23,7 @@ use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\PackageSubscriptionController;
 
 
-Route::group(['prefix' => 'backend'], function () {
+Route::group(['prefix' => 'backend', 'middleware' => ['role:SuperAdmin|Admin|Seller']], function () {
 
 //  User Routes
     Route::controller(UserController::class)->prefix('users')->group(function () {
@@ -36,7 +36,7 @@ Route::group(['prefix' => 'backend'], function () {
     });
 
 //  Brands Routes
-    Route::middleware('role:SuperAdmin')->controller(BrandController::class)->prefix('brands')->group(function () {
+    Route::controller(BrandController::class)->prefix('brands')->group(function () {
         Route::get('/', 'index')->name('backend.pages.brand.index');
         Route::get('/create', 'create')->name('backend.pages.brand.create');
         Route::post('/store', 'store')->name('backend.pages.brand.store');
@@ -219,17 +219,23 @@ Route::group(['prefix' => 'backend'], function () {
         Route::delete('/delete/{id}', 'destroy')->name('backend.pages.quote.destroy');
     });
 
-    //  Brands Routes
-    Route::controller(OrderController::class)->prefix('orders')->group(function () {
-        Route::get('/saleOrder', 'saleOrder')->name('backend.pages.order.sale_order');
-        Route::get('/packageOrder', 'packageOrder')->name('backend.pages.order.package_order');
-        Route::post('/updateOrderStatus', 'updateOrderStatus')->name('backend.pages.order.updateOrderStatus');
-        Route::delete('/delete/{id}', 'destroy')->name('backend.pages.order.destroy');
-    });
 
+});
+
+
+Route::group(['prefix' => 'backend', 'middleware' => ['role:Customer']], function () {
     // Package Subscription  Routes
     Route::controller(PackageSubscriptionController::class)->prefix('package-subscription')->group(function () {
         Route::get('/', 'index')->name('backend.pages.package-subscription.index');
     });
+});
 
+Route::group(['prefix' => 'backend'], function () {
+    //  Order Routes
+    Route::controller(OrderController::class)->prefix('orders')->group(function () {
+        Route::get('/saleOrder', 'saleOrder')->name('backend.pages.order.sale_order')->middleware('role:SuperAdmin|Admin|Customer|Seller');
+        Route::get('/packageOrder', 'packageOrder')->name('backend.pages.order.package_order')->middleware('role:SuperAdmin|Admin|Customer');
+        Route::post('/updateOrderStatus', 'updateOrderStatus')->name('backend.pages.order.updateOrderStatus')->middleware('role:SuperAdmin|Admin|Seller');
+        Route::delete('/delete/{id}', 'destroy')->name('backend.pages.order.destroy')->middleware('role:SuperAdmin|Admin|Customer|Seller');
+    });
 });

@@ -70,7 +70,7 @@ class PackageOrderDataTable extends DataTable
         $userId = $this->userId;
         $order = $model->where('order_type', 'Package')->newQuery();
         if($userId != 0){
-            $order = $order->where('user_id', $userId);
+            $order = $order->where('buyer_id', $userId);
         }
         return $order;
     }

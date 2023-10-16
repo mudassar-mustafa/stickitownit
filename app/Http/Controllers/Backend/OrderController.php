@@ -36,6 +36,7 @@ class OrderController extends Controller
     )
     {
         try {
+            
             $buyerId = 0;
             if(Auth::user()->hasRole('Customer')){
                 $buyerId = Auth::user()->id;

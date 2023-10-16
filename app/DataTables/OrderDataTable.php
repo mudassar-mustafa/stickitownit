@@ -57,7 +57,7 @@ class OrderDataTable extends DataTable
             ->addColumn('action', function ($order) {
 
                 $updateStatus = "";
-                if($order->order_status == "cancelled" || $order->order_status == "delivered"){
+                if(($order->order_status == "cancelled" || $order->order_status == "delivered") || auth()->user()->hasrole('Customer') == true ){
 
                 }else{
                     $updateStatus = '<button type="button" class="btn btn-primary" id="btnStatus'.$order->id.'" data-bs-toggle="modal" data-order_status ="'.$order->order_status.'"  onclick="updateStatus('.$order->id.');">Update Status</button>';
