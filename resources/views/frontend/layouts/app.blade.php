@@ -23,6 +23,8 @@
     <link rel="stylesheet" href="{{ asset('assets/css/hover-reveal.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/default.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
+    <!-- Toastr -->
+    <link rel="stylesheet" href="{{ asset('assets/css/toastr.min.css') }}">
     @stack('css')
 </head>
 
@@ -70,6 +72,7 @@
 <script src="{{ asset('assets/js/hover-reveal.js') }}"></script>
 <script src="{{ asset('assets/js/tween-max.js') }}"></script>
 <script src="{{ asset('assets/js/main.js') }}"></script>
+<script src="{{ asset('assets/js/toastr.min.js') }}"></script>
 
 <script>
 async function doAjax(url, params = {}, method = 'POST') {
@@ -83,5 +86,28 @@ async function doAjax(url, params = {}, method = 'POST') {
 }
 </script>
 @stack('js')
+
+<script>
+    @if(Session::has('message'))
+    var type = "{{ Session::get('status') }}";
+    switch (type) {
+        case 'info':
+            toastr.info("{{ Session::get('message') }}");
+            break;
+
+        case 'warning':
+            toastr.warning("{{ Session::get('message') }}");
+            break;
+
+        case 'success':
+            toastr.success("{{ Session::get('message') }}");
+            break;
+
+        case 'error':
+            toastr.error("{{ Session::get('message') }}");
+            break;
+    }
+    @endif
+</script>
 </body>
 </html>

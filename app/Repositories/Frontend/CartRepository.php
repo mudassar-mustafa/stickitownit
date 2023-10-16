@@ -73,7 +73,7 @@ class CartRepository extends BaseRepository implements CartContract
             $invoiceNumber = $this->packageCart($data);
         }
         return $invoiceNumber;
-        
+
     }
 
     public function saleCart(array $data){
@@ -92,7 +92,7 @@ class CartRepository extends BaseRepository implements CartContract
                     $order->payment_status = "completed";
                     $order->order_date = date('Y-m-d H:i:s');
                     $order->order_paid_date = date('Y-m-d H:i:s');
-                    $order->buyer_id = Auth::user()->id; 
+                    $order->buyer_id = Auth::user()->id;
                     $order->seller_id = $sellerId;
                     $order->payment_method = $data['paymentMethod'];
                     if(isset($data['transaction_id'])){
@@ -115,9 +115,9 @@ class CartRepository extends BaseRepository implements CartContract
                     $order->save();
 
                     $orderTotalAmt = 0;
-            
+
                     foreach ($carts as $key => $cart) {
-                        $orderTotalAmt += $cart->product_attribute_group_detail->price; 
+                        $orderTotalAmt += $cart->product_attribute_group_detail->price;
                         $orderSaleDetail = new OrderSaleDetail;
                         $orderSaleDetail->order_id = $order->id;
                         $orderSaleDetail->product_attribute_group_id = $cart->product_attribute_group_id;
@@ -146,6 +146,7 @@ class CartRepository extends BaseRepository implements CartContract
                 }
             }
         }
+        return $invoiceNumber;
     }
 
     public function packageCart(array $data){

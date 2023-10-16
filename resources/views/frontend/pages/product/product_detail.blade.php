@@ -13,6 +13,7 @@
 @section('og-image', $product->main_image ?? "")
 @push('css')
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="{{ asset('assets/css/nice-select.css') }}">
     <style>
         .select2-container {
             width: 100% !important;
@@ -220,42 +221,8 @@
                                     <div class="tab-pane fade active show" id="pro-info-1" role="tabpanel">
                                         <div class="tabs-wrapper">
                                             <div class="product__details-des">
-                                                <p class="mb-25">Aenean dolor massa, rhoncus ut tortor in, pretium
-                                                    tempus
-                                                    neque.
-                                                    Vestibulum venenatis leo et dictum finibus. Nulla
-                                                    vulputate dolor sit amet tristique dapibus. Maecenas posuere
-                                                    luctus leo,
-                                                    non consequat felis ullamcorper non. Aliquam
-                                                    erat volutpat. Donec vitae porta enim. Cras eu volutpat dolor,
-                                                    vitae
-                                                    accumsan tellus. Donec pulvinar auctor nunc, et
-                                                    gravida elit porta non. Aliquam erat volutpat. Proin facilisis
-                                                    interdum
-                                                    felis, sit amet pretium purus feugiat ac. Donec
-                                                    in leo metus. Sed quis dui nec justo ullamcorper molestie.
-                                                    Mauris
-                                                    consequat lacinia est, eget tincidunt leo ornare sed</p>
-                                                <div class="cp-list mb-25">
-                                                    <ul>
-                                                        <li>Nunc nec porttitor turpis. In eu risus enim. In vitae
-                                                            mollis
-                                                            elit.
-                                                        </li>
-                                                        <li>Vivamus finibus vel mauris ut vehicula.</li>
-                                                        <li>Aliquam porttitor mauris sit amet orci. Aenean dignissim
-                                                            pellentesque felis
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <p class="mb-0">Korem epsum dolor sit amet, consectetuer adipiscing
-                                                    elit.
-                                                    Donec odio.
-                                                    Quisque volutpat mattis eros. Nullam malesuada
-                                                    erat ut turpis. Suspendisse urna viverra non, semper suscipit,
-                                                    posuere
-                                                    a, pede. Donec nec justo eget felis facilisis
-                                                    fermentum. Aliquam porttitor mauris sit amet orci.</p>
+                                                {!! $product->description !!}
+
                                             </div>
                                         </div>
                                     </div>
@@ -426,6 +393,7 @@
     </section>
     <!-- shop details area end  -->
 
+    @if(!empty($relatedProducts) && count($relatedProducts) > 0)
     <!-- shop related product area start  -->
     <section class="cp-related-product pt-145 pb-100 wow fadeInUp" data-wow-delay=".3s">
         <div class="container">
@@ -450,151 +418,28 @@
                     <div class="cp-related-product-wrap">
                         <div class="swiper-container cp-related-product-active">
                             <div class="swiper-wrapper">
-                                <div class="swiper-slide">
-                                    <div class="product-single">
-                                        <div class="product-thumb">
-                                            <a href="shop-details.html" class="image">
-                                                <img class="pic-1" src="assets/img/product/product-01.png"
-                                                     alt="product">
-                                                <img class="pic-2" src="assets/img/product/product-11.png"
-                                                     alt="product">
-                                            </a>
-                                            <ul class="product-links">
-                                                <li><a href="cart.html"><i class="fal fa-shopping-cart"></i></a>
-                                                </li>
-                                                <li><a href="assets/img/product/product-shop-1.html"
-                                                       data-bs-toggle="modal" data-bs-target="#productModalId"><i
-                                                            class="fal fa-eye"></i></a></li>
-                                                <li><a href="wishlist.html"><i class="fal fa-heart"></i></a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="product-description">
-                                            <h4 class="product-name">
-                                                <a href="shop-details.html">T-shirts & tank tops</a>
-                                            </h4>
-                                            <div class="product-price">
-                                                <span class="price-old">139.00$</span>
-                                                <span class="price-now">100.00$</span>
+                                @foreach($relatedProducts as $relatedProduct)
+                                    <div class="swiper-slide">
+                                        <div class="product-single">
+                                            <div class="product-thumb">
+                                                <a href="{{ route('product.productDetail',$relatedProduct->slug) }}"
+                                                   class="image">
+                                                    <img class="pic-1" src="{{ $relatedProduct->main_image }}"
+                                                         alt="{{ $relatedProduct->title }}">
+                                                    <img class="pic-2" src="{{ $relatedProduct->main_image }}"
+                                                         alt="{{ $relatedProduct->title }}">
+                                                </a>
+                                            </div>
+                                            <div class="product-description">
+                                                <h4 class="product-name">
+                                                    <a href="{{ route('product.productDetail',$relatedProduct->slug) }}">{{ $relatedProduct->title }}</a>
+                                                </h4>
+
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="product-single">
-                                        <div class="product-thumb">
-                                            <span class="product-badge product-badge-new">new</span>
-                                            <a href="shop-details.html" class="image">
-                                                <img class="pic-1" src="assets/img/product/product-06.png"
-                                                     alt="product">
-                                                <img class="pic-2" src="assets/img/product/product-11.png"
-                                                     alt="product">
-                                            </a>
-                                            <ul class="product-links">
-                                                <li><a href="cart.html"><i class="fal fa-shopping-cart"></i></a>
-                                                </li>
-                                                <li><a href="assets/img/product/product-shop-1.html"
-                                                       data-bs-toggle="modal" data-bs-target="#productModalId"><i
-                                                            class="fal fa-eye"></i></a></li>
-                                                <li><a href="wishlist.html"><i class="fal fa-heart"></i></a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="product-description">
-                                            <h4 class="product-name">
-                                                <a href="shop-details.html">White Woman T-Shirt.</a>
-                                            </h4>
-                                            <div class="product-price">
-                                                <span class="price-now">120.00$</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="product-single">
-                                        <div class="product-thumb">
-                                            <a href="shop-details.html" class="image">
-                                                <img class="pic-1" src="assets/img/product/product-10.png"
-                                                     alt="product">
-                                                <img class="pic-2" src="assets/img/product/product-09.png"
-                                                     alt="product">
-                                            </a>
-                                            <ul class="product-links">
-                                                <li><a href="cart.html"><i class="fal fa-shopping-cart"></i></a>
-                                                </li>
-                                                <li><a href="assets/img/product/product-shop-1.html"
-                                                       data-bs-toggle="modal" data-bs-target="#productModalId"><i
-                                                            class="fal fa-eye"></i></a></li>
-                                                <li><a href="wishlist.html"><i class="fal fa-heart"></i></a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="product-description">
-                                            <h4 class="product-name">
-                                                <a href="shop-details.html">Graphic T-Shirt Trendy</a>
-                                            </h4>
-                                            <div class="product-price">
-                                                <span class="price-now">12.00$</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="product-single">
-                                        <div class="product-thumb">
-                                            <span class="product-badge product-badge-sale">sale</span>
-                                            <a href="shop-details.html" class="image">
-                                                <img class="pic-1" src="assets/img/product/product-07.png"
-                                                     alt="product">
-                                                <img class="pic-2" src="assets/img/product/product-09.png"
-                                                     alt="product">
-                                            </a>
-                                            <ul class="product-links">
-                                                <li><a href="cart.html"><i class="fal fa-shopping-cart"></i></a>
-                                                </li>
-                                                <li><a href="assets/img/product/product-shop-1.html"
-                                                       data-bs-toggle="modal" data-bs-target="#productModalId"><i
-                                                            class="fal fa-eye"></i></a></li>
-                                                <li><a href="wishlist.html"><i class="fal fa-heart"></i></a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="product-description">
-                                            <h4 class="product-name">
-                                                <a href="shop-details.html">Dark Green T-Shirt</a>
-                                            </h4>
-                                            <div class="product-price">
-                                                <span class="price-now">100.00$</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="product-single">
-                                        <div class="product-thumb">
-                                            <span class="product-badge product-badge-best">best sale</span>
-                                            <a href="shop-details.html" class="image">
-                                                <img class="pic-1" src="assets/img/product/product-08.png"
-                                                     alt="product">
-                                                <img class="pic-2" src="assets/img/product/product-11.png"
-                                                     alt="product">
-                                            </a>
-                                            <ul class="product-links">
-                                                <li><a href="cart.html"><i class="fal fa-shopping-cart"></i></a>
-                                                </li>
-                                                <li><a href="assets/img/product/product-shop-1.html"
-                                                       data-bs-toggle="modal" data-bs-target="#productModalId"><i
-                                                            class="fal fa-eye"></i></a></li>
-                                                <li><a href="wishlist.html"><i class="fal fa-heart"></i></a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="product-description">
-                                            <h4 class="product-name">
-                                                <a href="shop-details.html">White T-Shirt</a>
-                                            </h4>
-                                            <div class="product-price">
-                                                <span class="price-old">120.00$</span>
-                                                <span class="price-now">100.00$</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                @endforeach
+
                             </div>
                         </div>
                     </div>
@@ -603,183 +448,16 @@
         </div>
     </section>
     <!-- shop related product area end  -->
+    @endif
 
-    <!-- shop modal start -->
-    <div class="modal fade" id="productModalId" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered product__modal" role="document">
-            <div class="modal-content">
-                <div class="product__modal-wrapper p-relative">
-                    <div class="product__modal-close p-absolute">
-                        <button data-bs-dismiss="modal">
-                            <i class="fal fa-times"></i>
-                        </button>
-                    </div>
-                    <div class="product__modal-inner">
-                        <div class="row">
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                                <div class="product__modal-box">
-                                    <div class="tab-content" id="modalTabContent">
-                                        <div class="tab-pane fade show active" id="nav1" role="tabpanel"
-                                             aria-labelledby="nav1-tab">
-                                            <div class="product__modal-img w-img">
-                                                <img src="assets/img/product/product-06.png" alt="img not found">
-                                            </div>
-                                        </div>
-                                        <div class="tab-pane fade" id="nav2" role="tabpanel"
-                                             aria-labelledby="nav2-tab">
-                                            <div class="product__modal-img w-img">
-                                                <img src="assets/img/product/product-07.png" alt="img not found">
-                                            </div>
-                                        </div>
-                                        <div class="tab-pane fade" id="nav3" role="tabpanel"
-                                             aria-labelledby="nav3-tab">
-                                            <div class="product__modal-img w-img">
-                                                <img src="assets/img/product/product-10.png" alt="img not found">
-                                            </div>
-                                        </div>
-                                        <div class="tab-pane fade" id="nav4" role="tabpanel"
-                                             aria-labelledby="nav4-tab">
-                                            <div class="product__modal-img w-img">
-                                                <img src="assets/img/product/product-12.png" alt="img not found">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <ul class="nav nav-tabs" id="modalTab" role="tablist">
-                                        <li class="nav-item" role="presentation">
-                                            <button class="nav-link active" id="nav1-tab" data-bs-toggle="tab"
-                                                    data-bs-target="#nav1" type="button" role="tab" aria-controls="nav1"
-                                                    aria-selected="true">
-                                                <img src="assets/img/product/product-06.png" alt="img not found">
-                                            </button>
-                                        </li>
-                                        <li class="nav-item" role="presentation">
-                                            <button class="nav-link" id="nav2-tab" data-bs-toggle="tab"
-                                                    data-bs-target="#nav2" type="button" role="tab" aria-controls="nav2"
-                                                    aria-selected="false">
-                                                <img src="assets/img/product/product-07.png" alt="img not found">
-                                            </button>
-                                        </li>
-                                        <li class="nav-item" role="presentation">
-                                            <button class="nav-link" id="nav3-tab" data-bs-toggle="tab"
-                                                    data-bs-target="#nav3" type="button" role="tab" aria-controls="nav3"
-                                                    aria-selected="false">
-                                                <img src="assets/img/product/product-10.png" alt="img not found">
-                                            </button>
-                                        </li>
-                                        <li class="nav-item" role="presentation">
-                                            <button class="nav-link" id="nav4-tab" data-bs-toggle="tab"
-                                                    data-bs-target="#nav4" type="button" role="tab" aria-controls="nav4"
-                                                    aria-selected="false">
-                                                <img src="assets/img/product/product-12.png" alt="img not found">
-                                            </button>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                                <div class="product__modal-content">
-                                    <h4>
-                                        <a href="shop-details.html">maranta lemon lime</a>
-                                    </h4>
-                                    <div class="product__modal-des mb-40">
-                                        <p>
-                                            Typi non habent claritatem insitam, est usus legentis
-                                            in iis qui facit eorum claritatem. Investigationes
-                                            demonstraverunt
-                                        </p>
-                                    </div>
-                                    <div class="product__stock">
-                                        <span>Availability :</span>
-                                        <span>In Stock</span>
-                                    </div>
-                                    <div class="product__stock sku mb-30">
-                                        <span>SKU :</span>
-                                        <span>Juicera C49J89: £875, Debenhams Plus</span>
-                                    </div>
-                                    <div class="product__review d-sm-flex">
-                                        <div class="rating rating__shop mb-15">
-                                            <ul>
-                                                <li>
-                                                    <a href="#"><i class="fal fa-star"></i></a>
-                                                </li>
-                                                <li>
-                                                    <a href="#"><i class="fal fa-star"></i></a>
-                                                </li>
-                                                <li>
-                                                    <a href="#"><i class="fal fa-star"></i></a>
-                                                </li>
-                                                <li>
-                                                    <a href="#"><i class="fal fa-star"></i></a>
-                                                </li>
-                                                <li>
-                                                    <a href="#"><i class="fal fa-star"></i></a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="product__add-review mb-15">
-                                            <span><a href="shop-details.html">1 Review</a></span>
-                                            <span><a href="shop-details.html">Add Review</a></span>
-                                        </div>
-                                    </div>
-                                    <div class="product__price">
-                                        <span>$59.00</span>
-                                    </div>
-                                    <div class="product__modal-form">
-                                        <div class="product-quantity-cart mb-30">
-                                            <div class="product-quantity-form">
-                                                <form action="#">
-                                                    <button class="cart-minus">
-                                                        <i class="far fa-minus"></i>
-                                                    </button>
-                                                    <input class="cart-input" type="text" value="1">
-                                                    <button class="cart-plus">
-                                                        <i class="far fa-plus"></i>
-                                                    </button>
-                                                </form>
-                                            </div>
-                                            <a href="cart.html" class="cp-border-btn">Add to Cart
-                                                <span class="cp-border-btn__inner">
-                                                <span class="cp-border-btn__blobs">
-                                                    <span class="cp-border-btn__blob"></span>
-                                                    <span class="cp-border-btn__blob"></span>
-                                                    <span class="cp-border-btn__blob"></span>
-                                                    <span class="cp-border-btn__blob"></span>
-                                                </span>
-                                            </span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="product__modal-links">
-                                        <ul>
-                                            <li>
-                                                <a href="#" title="Add to Wishlist"><i class="fal fa-heart"></i></a>
-                                            </li>
-                                            <li>
-                                                <a href="#" title="Compare"><i class="far fa-sliders-h"></i></a>
-                                            </li>
-                                            <li>
-                                                <a href="#" title="Print"><i class="fal fa-print"></i></a>
-                                            </li>
-                                            <li>
-                                                <a href="#" title="Share"><i class="fal fa-share-alt"></i></a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- shop modal end -->
+
 
 
     @include('frontend.includes.social')
 @endsection
 @push('js')
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
     <script>
         var sele
         $(document).ready(function () {
@@ -968,16 +646,20 @@
                     processData: false,
                     success: function (data) {
                         if (data.data == 1) {
-                            alert("Product added in cart successfully");
+                            toastr.success("Product added in cart successfully");
                             location.reload(true);
                         }else if(data.data == -1){
-                            alert("Product already add in cart");
+                            toastr.warning("Product already add in cart");
                         }else{
-                            alert("something Wrong");
+                            toastr.error("Something went Wrong.");
+
                         }
                     }
                 });
             }
         }
     </script>
+@endpush
+@push('niceSelect')
+    <script src="{{ asset('assets/js/nice-select.min.js') }}"></script>
 @endpush

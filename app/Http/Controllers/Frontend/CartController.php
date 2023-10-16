@@ -66,7 +66,7 @@ class CartController extends Controller
             }
         }
         $countries = $this->cartRepository->getAllCountries();
-    
+
         return view('frontend.pages.product.checkout', compact('carts', 'user', 'countries', 'states', 'cities'));
     }
 
@@ -75,7 +75,7 @@ class CartController extends Controller
         $data = $request->except('_token');
 
         if(!isset($data['stripeToken'])){
-            return $this->responseRedirectBack('Order Already Placed', 'error', true, true); 
+            return $this->responseRedirectBack('Order Already Placed', 'error', true, true);
         }else{
             $token='';
             $description='';
@@ -85,14 +85,14 @@ class CartController extends Controller
             if($data['checkOutType'] == "Sale"){
                 $carts = $this->cartRepository->getAllCart();
                 foreach ($carts as $key => $cart) {
-                    $Amt += $cart->product_attribute_group_detail->price; 
+                    $Amt += $cart->product_attribute_group_detail->price;
                 }
                 $description = "Sticker Purchase";
             }else if($data['checkOutType'] == "Package"){
                 $Amt = Session::get('packagePrice');
                 $description = "Buy ".Session::get('packageName')." Package";
             }
-            
+
             $token = $data['stripeToken'];
             try {
                 $Amt = round($Amt, 2);
@@ -108,6 +108,7 @@ class CartController extends Controller
                 $data['transaction_slip_url'] = $obj['receipt_url'];
                 $data['paymentMethod'] = "stripe";
                 $invoice_number = $this->cartRepository->createNewOrder($data);
+
                 return Redirect::route('thank-you.index',$invoice_number);
             } catch(\Stripe\Exception\CardException $e) {
                 return $utilService->logErrorAndRedirectToBack('placeOrder', $e->getError()->message);
@@ -153,7 +154,7 @@ class CartController extends Controller
     }
 
     public function addToCartPackage(
-        Request $request, 
+        Request $request,
         UtilService $utilService
         ){
             Session::put('packageId', $request->packageId);

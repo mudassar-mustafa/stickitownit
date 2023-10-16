@@ -36,7 +36,7 @@ Route::group(['prefix' => 'backend'], function () {
     });
 
 //  Brands Routes
-    Route::controller(BrandController::class)->prefix('brands')->group(function () {
+    Route::middleware('role:SuperAdmin')->controller(BrandController::class)->prefix('brands')->group(function () {
         Route::get('/', 'index')->name('backend.pages.brand.index');
         Route::get('/create', 'create')->name('backend.pages.brand.create');
         Route::post('/store', 'store')->name('backend.pages.brand.store');

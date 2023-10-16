@@ -138,6 +138,7 @@
                 } else {
                 }
             } catch (error) {
+
                 console.log('Error! InsertAssignments:', error);
             }
 
