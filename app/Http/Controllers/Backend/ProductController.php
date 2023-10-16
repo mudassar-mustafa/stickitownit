@@ -80,12 +80,12 @@ class ProductController extends Controller
             $brands = $this->productRepository->getBrands();
             $categories = $this->productRepository->getCategories();
             $attributes = [];
-            if(!empty($product) && $product->product_type == 'variation'){
-                $attributes = $this->productRepository->getAttributes();
-            }
-            
+//            if(!empty($product) && $product->product_type == 'variation'){
+//                $attributes = $this->productRepository->getAttributes();
+//            }
+
             return view('backend.pages.product.create', compact('brands', 'categories', 'attributes', 'product'));
-            
+
         // } catch (\Exception $exception) {
         //     return $utilService->logErrorAndRedirectToBack('backend.pages.product.edit', $exception->getMessage());
         // }
@@ -156,7 +156,7 @@ class ProductController extends Controller
                 'attributeName' => $request->attribute_name,
                 'attributeSelectedValues' => $attributeSelectedValues
             ];
-            
+
             return $utilService->makeResponse(200, "Attribute Value Get Successfully", $data, CommonEnum::SUCCESS_STATUS);
 
         } catch (\Exception $exception) {
@@ -169,7 +169,7 @@ class ProductController extends Controller
      * @param UtilService $utilService
      * @return JsonResponse
      */
-    public function getCombination(Request $request, UtilService $utilService) 
+    public function getCombination(Request $request, UtilService $utilService)
     {
         try {
             $getCombinationHtml= "";
@@ -182,7 +182,7 @@ class ProductController extends Controller
             $getCombinationHtml = view('backend.pages.product.partial.attribute_combination_partial', ['combinations'=> $combinations, 'productGroups' => $productGroups])->render();
 
             $data = $getCombinationHtml;
-            
+
             return $utilService->makeResponse(200, "Combination Value Get Successfully", $data, CommonEnum::SUCCESS_STATUS);
 
         } catch (\Exception $exception) {
@@ -190,7 +190,7 @@ class ProductController extends Controller
         }
     }
 
-    
+
 
     /**
      * Display a listing of the resource.

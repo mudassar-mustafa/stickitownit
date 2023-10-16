@@ -40,11 +40,11 @@ class ProductRepository extends BaseRepository implements ProductContract
     public function findProductById(int $id)
     {
         $product = Product::with([
-            'categories:id,name', 
-            'brand:id,name', 
-            'attributes:id,name',
-            'product_groups.attribute_values',
-            'attribute_values'
+            'categories:id,name',
+            'brand:id,name'
+//            'attributes:id,name',
+//            'product_groups.attribute_values',
+//            'attribute_values'
             ])->where('id', $id)->first();
         return $product;
     }
@@ -62,7 +62,7 @@ class ProductRepository extends BaseRepository implements ProductContract
             $product = new Product;
         }
 
-        
+
         $product->title = $params['title'];
         $product->slug = \Str::slug(strtolower($params['title']));
         $product->title = $params['title'];
@@ -79,21 +79,21 @@ class ProductRepository extends BaseRepository implements ProductContract
                 $product->shipping_fee = $params['shipping_fee'];
             }
         }
-        
+
         $product->user_id = Auth::user()->id;
         $product->save();
 
         if(isset($params['category_id']) && $params['category_id'][0] != null){
             $product->categories()->sync($params['category_id']);
         }
-        
+
 
         if($params['product_type'] == "normal"){
             $product->quantity = $params['quantity'];
             $product->price = $params['price'];
             $product->save();
         }else{
-            // Check and Store Attribute, Check and Store Attribute values,  Create and update product Attribute,  
+            // Check and Store Attribute, Check and Store Attribute values,  Create and update product Attribute,
 
             if($id == null){
                 $attributeIds = [];
@@ -110,7 +110,7 @@ class ProductRepository extends BaseRepository implements ProductContract
                         $attribute->save();
                         $attributeId = $attribute->id;
                     }
-    
+
                     foreach ($params['attribute_value_id'.$attributeName.''] as $key => $attributeValueName) {
                         $attributeValues = AttributeValue::where('name', strtolower($attributeValueName))->where('attribute_id', $attributeId)->where('status', 'active')->first();
                         if(empty($attributeValues)){
@@ -122,18 +122,18 @@ class ProductRepository extends BaseRepository implements ProductContract
                             $attributeValues->save();
                         }
                     }
-    
+
                     array_push($attributeIds, $attributeId);
-    
+
                     // $productAttribute = new ProductAttribute;
                     // $productAttribute->product_id = $product->id;
                     // $productAttribute->attribute_id = $attributeId;
                     // $productAttribute->save();
                 }
-    
+
                 $product->attributes()->sync($attributeIds);
-    
-                //Delete Product Attribute Group 
+
+                //Delete Product Attribute Group
                 $getProdcutGroupArray = ProductAttributeGroup::where('product_id', $product->id)->pluck('id')->toArray();
                 if(count($getProdcutGroupArray) > 0){
                     $deleteProductGroupArray = array_diff($getProdcutGroupArray, $params['combination_ids']);
@@ -142,16 +142,16 @@ class ProductRepository extends BaseRepository implements ProductContract
                         $product->product_groups()->whereIn('id', $deleteProductGroupArray)->delete();
                     }
                 }
-                
+
                 // Store Attribute Group and Attribute Value Group
                 $visibilityIds = explode(',', $params['visibility_ids']);
                 foreach ($params['combination_ids'] as $combKey => $value) {
-    
+
                     $productAttributeGroup = ProductAttributeGroup::where('id', $value)->first();
                     if(empty($productAttributeGroup)){
                         $productAttributeGroup = new ProductAttributeGroup;
                     }
-    
+
                     $productAttributeGroup->product_id = $product->id;
                     if(isset($params['combination_image'][$combKey]) && $params['combination_image'][$combKey] != null){
                         $productAttributeGroup->main_image = $params['combination_image'][$combKey];
@@ -162,39 +162,39 @@ class ProductRepository extends BaseRepository implements ProductContract
                     $productAttributeGroup->price = $params['combination_price'][$combKey];
                     $productAttributeGroup->visibilty = $visibilityIds[$combKey];
                     $productAttributeGroup->save();
-    
+
                     $getcombinationArray = explode('-', $params['combination'][$combKey]);
-    
-                    //Delete Product Attribute Group Value 
+
+                    //Delete Product Attribute Group Value
                     $getProdcutGroupValueArray = ProductAttributeValueGroup::where('product_id', $product->id)->where('product_group_id', $productAttributeGroup->id)->pluck('product_attribute_val_id')->toArray();
                     if(count($getProdcutGroupValueArray) > 0){
                         $getAttributeValueIds = AttributeValue::whereIn('name', $getcombinationArray)->pluck('id')->toArray();
                         $deleteProductGroupValueArray = array_diff($getProdcutGroupValueArray, $getAttributeValueIds);
-                        
+
                         if(count($deleteProductGroupValueArray) > 0){
                             ProductAttributeValueGroup::whereIn('product_attribute_val_id', $deleteProductGroupValueArray)->where('product_id', $product->id)->where('product_group_id', $productAttributeGroup->id)->delete();
                         }
                     }
-    
+
                     foreach ($getcombinationArray as $value) {
                         $getAttributeValueId = AttributeValue::where('name', strtolower($value))->where('status', 'active')->value('id');
-    
+
                         $productAttributeValueGroup = ProductAttributeValueGroup::where('product_id', $product->id)->where('product_group_id', $productAttributeGroup->id)->where('product_attribute_val_id', $getAttributeValueId)->first();
                         if(empty($productAttributeValueGroup)){
                             $productAttributeValueGroup = new ProductAttributeValueGroup;
                         }
-                        
+
                         $productAttributeValueGroup->product_id = $product->id;
                         $productAttributeValueGroup->product_group_id = $productAttributeGroup->id;
                         $productAttributeValueGroup->product_attribute_val_id = $getAttributeValueId;
                         $productAttributeValueGroup->save();
                     }
-    
+
                 }
             }
-            
+
             $product->save();
-            
+
         }
 
         return $product;
@@ -230,12 +230,12 @@ class ProductRepository extends BaseRepository implements ProductContract
                     \File::delete(public_path('/storage/uploads/products/' . $value->main_image));
                 }
             }
-            
+
             $product->attributes()->delete();
             $product->product_attribute_group()->delete();
             $product->attribute_values()->delete();
         }
-        
+
         return $this->delete($id);
     }
 
@@ -287,21 +287,21 @@ class ProductRepository extends BaseRepository implements ProductContract
         if ($i == count($arrays) - 1) {
             return $arrays[$i];
         }
-    
+
         // get combinations from subsequent arrays
         $tmp = $this->combinations($arrays, $i + 1);
-    
+
         $result = array();
-    
+
         // concat each array from tmp with each element from $arrays[$i]
         foreach ($arrays[$i] as $v) {
             foreach ($tmp as $t) {
-                $result[] = is_array($t) ? 
+                $result[] = is_array($t) ?
                     array_merge(array($v), $t) :
                     array($v, $t);
             }
         }
-    
+
         return $result;
     }
 
@@ -352,5 +352,5 @@ class ProductRepository extends BaseRepository implements ProductContract
         ProductAttributeGroup::where('id', $id)->delete();
         return true;
     }
-    
+
 }
