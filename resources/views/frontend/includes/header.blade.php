@@ -15,30 +15,6 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="cp-header2-top-item d-none d-xl-block">
-                        <div class="cp-header2-offer">
-                            <span>Black Friday Big Offer..?</span>
-                        </div>
-                    </div>
-                    <div class="cp-header2-top-item">
-                        <div class="cp-header2-order-currency d-flex align-items-center">
-                            <div class="cp-header2-order-tack">
-                                <a href="#">Order Tracking</a>
-                            </div>
-                            <div class="cp-header-lang">
-                                <div class="header__lang p-relative">
-                                    <a href="#"><span class="header__lang-selected-lang cp-lang-toggle"
-                                                      id="cp-header-lang-toggle">English</span></a>
-                                    <ul class="header__lang-list cp-lang-list">
-                                        <li><a href="#">Spanish</a></li>
-                                        <li><a href="#">English</a></li>
-                                        <li><a href="#">Arabic</a></li>
-                                        <li><a href="#">Japanize</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -47,7 +23,7 @@
                 <div class="cp-header2-bottom-wrap">
                     <div class="cp-header2-bottom-item">
                         <div class="logo">
-                            <a href="index.html"><img src="{{ asset('assets/img/logo/logo.png') }}" alt="logo"></a>
+                            <a href="{{ route('/') }}"><img src="{{ asset('assets/img/logo/logo.png') }}" alt="logo"></a>
                         </div>
                     </div>
                     <div class="cp-header2-bottom-item">
