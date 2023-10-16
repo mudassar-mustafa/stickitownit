@@ -25,7 +25,7 @@
                         <ul class="cp-footer-widget-link">
                             @if(!empty($categories) && count($categories) >0)
                                 @foreach($categories as $category)
-                                    <li><a href="javascript:void(0)">{{ $category->name }}</a></li>
+                                    <li><a href="{{ route('get.products-by-category',$category->slug) }}">{{ $category->name }}</a></li>
                                 @endforeach
                             @endif
                         </ul>

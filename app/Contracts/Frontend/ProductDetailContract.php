@@ -23,4 +23,11 @@ interface ProductDetailContract
     public function getProductGroupAttribute($productId, $selectedIds);
 
     public function addToCart(array $params);
+
+
+    /**
+     * @param string $slug
+     * @return mixed
+     */
+    public function getProductsByCategoryId($slug);
 }

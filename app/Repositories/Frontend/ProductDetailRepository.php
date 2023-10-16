@@ -58,9 +58,9 @@ class ProductDetailRepository extends BaseRepository implements ProductDetailCon
         foreach ($selectedAttributeValueId as $key => $value) {
             $getAttributeValues = AttributeValue::where('id', $value)->first();
             if($combinationString == ""){
-                $combinationString = $getAttributeValues->slug;    
+                $combinationString = $getAttributeValues->slug;
             }else{
-                $combinationString = $combinationString.'-'.$getAttributeValues->slug; 
+                $combinationString = $combinationString.'-'.$getAttributeValues->slug;
             }
         }
         if(count($selectedAttributeValueId) == 2){
@@ -83,7 +83,7 @@ class ProductDetailRepository extends BaseRepository implements ProductDetailCon
                 $values = explode('-', $productAttributeGroupDescription);
                 $params['qty'] = $values[2];
             }
-            $productId  = ProductAttributeGroup::where('id', $params['product_attribute_group_id'])->value('product_id'); 
+            $productId  = ProductAttributeGroup::where('id', $params['product_attribute_group_id'])->value('product_id');
             $params['seller_id'] = Product::where('id', $productId)->value('user_id');
             $productCart = new Cart;
             $productCart->product_attribute_group_id = $params['product_attribute_group_id'];
@@ -100,6 +100,13 @@ class ProductDetailRepository extends BaseRepository implements ProductDetailCon
 
         return $status;
 
+    }
+
+    public function getProductsByCategoryId($slug)
+    {
+        return Product::whereHas('categories', function ($q) use ($slug) {
+            $q->where('slug', $slug);
+        })->get(['id','slug','title','main_image']);
     }
 
 }

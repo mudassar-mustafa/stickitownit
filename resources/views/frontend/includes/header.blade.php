@@ -60,7 +60,7 @@
                                     </li>
                                     @if(!empty($categories) && count($categories) >0)
                                         @foreach($categories as $category)
-                                            <li><a href="#">{{ $category->name }}</a></li>
+                                            <li><a href="{{ route('get.products-by-category',$category->slug) }}">{{ $category->name }}</a></li>
                                         @endforeach
                                     @endif
 {{--                                    <li class="menu-item-has-children">--}}
