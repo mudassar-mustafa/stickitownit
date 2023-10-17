@@ -382,7 +382,8 @@ p {
 }
 
 .cp-footer-bg {
-    background: linear-gradient(90deg, var(--clr-theme-1) 0%, var(--clr-theme-2) 100%);
+    /*background: linear-gradient(90deg, var(--clr-theme-1) 0%, var(--clr-theme-2) 100%);*/
+    background-color: var(--clr-bg-12);
 }
 
 .black-bg {
@@ -555,7 +556,8 @@ p {
     --clr-common-border: #0b3d2c;
     --clr-common-placeholder: #777777;
     --clr-common-gray: #acacac;
-    --clr-theme-1: #FF3737;
+    /*--clr-theme-1: #FF3737;*/
+    --clr-theme-1: #73c100;
     --clr-theme-2: #FBD017;
     --clr-bg-1: #FFF9F9;
     --clr-bg-2: #F8F3FF;

@@ -86,7 +86,7 @@
                     </li>
                 </ul>
             </li>
-    
+
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#products-nav" data-bs-toggle="collapse" href="#"
                    aria-expanded="false">
@@ -110,7 +110,7 @@
                     </li>
                 </ul>
             </li>
-    
+
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('backend.pages.package.index') }}">
                     <i class="bi bi-stripe"></i>
@@ -140,19 +140,20 @@
                     <i class="bi bi-quote"></i>
                     <span>Get a Quote</span>
                 </a>
-            </li>    
+            </li>
+
         @endhasanyrole
 
         @hasanyrole('SuperAdmin|Admin|Seller|Customer')
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('backend.pages.order.sale_order') }}">
-                    <i class="bi bi-quote"></i>
+                    <i class="bi bi-database-check"></i>
                     <span>Sale Order</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('backend.pages.order.package_order') }}">
-                    <i class="bi bi-quote"></i>
+                    <i class="bi bi-database-check"></i>
                     <span>Package Order</span>
                 </a>
             </li>
@@ -161,12 +162,19 @@
         @hasanyrole('Customer')
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('backend.pages.package-subscription.index') }}">
-                    <i class="bi bi-quote"></i>
+                    <i class="bi bi-subscript"></i>
                     <span>Package Subscription</span>
                 </a>
             </li>
         @endhasanyrole
-        
+        @hasanyrole('SuperAdmin')
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="{{ route('backend.settings.index') }}">
+                <i class="bi bi-info"></i>
+                <span>Settings</span>
+            </a>
+        </li>
+        @endhasanyrole
 
         {{-- <li class="nav-item">
           <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">

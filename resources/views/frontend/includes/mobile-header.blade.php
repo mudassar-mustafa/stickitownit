@@ -7,7 +7,7 @@
                 <div class="row align-items-center">
                     <div class="col-9">
                         <a href="{{ route('/') }}">
-                            <img src="{{ asset('assets/img/logo/logo.png') }}" alt="Logo">
+                            <img width="100" src="{{ asset('storage/uploads/settings/'.$setting->logo_header) }}"  alt="Logo">
                         </a>
                     </div>
                     <div class="col-3 text-end">
@@ -28,7 +28,7 @@
                         <div class="irc-item-content">
                             <p>Call Now</p>
                             <div class="support-number">
-                                <a href="tel:98965963168">989 659 631 68</a>
+                                <a href="tel:{{ $setting->phone_number }}">{{ $setting->phone_number }}</a>
                             </div>
                         </div>
                     </div>
@@ -39,7 +39,7 @@
                         <div class="irc-item-content">
                             <p>Mail Us</p>
                             <div class="support-number">
-                                <a href="mailto:example@gmail.com">example@gmail.com</a>
+                                <a href="mailto:{{ $setting->email }}">{{ $setting->email }}/a>
                             </div>
                         </div>
                     </div>
@@ -50,7 +50,7 @@
                         <div class="irc-item-content">
                             <p>Location</p>
                             <div class="support-number">
-                                <a href="#" target="_blank">4517 Washington Ave.</a>
+                                <a href="#" target="_blank">{{ $setting->address }}</a>
                             </div>
                         </div>
                     </div>
@@ -60,15 +60,26 @@
                 <div class="footer-social">
                     <div class="social-links">
                         <ul>
-                            <li>
-                                <a target="_blank" href="#"><i class="fab fa-twitter"></i></a>
-                            </li>
-                            <li>
-                                <a target="_blank" href="#"><i class="fab fa-behance"></i></a>
-                            </li>
-                            <li>
-                                <a target="_blank" href="#"><i class="fab fa-linkedin"></i></a>
-                            </li>
+                            @if(!is_null($setting->facebook_url))
+                                <li><a target="_blank" href="{{$setting->facebook_url}}">facebook <i
+                                            class="fab fa-facebook-f"></i></a></li>
+                            @endif
+                            @if(!is_null($setting->twitter_url))
+                                <li><a target="_blank" href="{{$setting->twitter_url}}">Twitter <i
+                                            class="fab fa-twitter"></i></a></li>
+                            @endif
+                            @if(!is_null($setting->instagram_url))
+                                <li><a target="_blank" href="{{$setting->instagram_url}}">Instagram <i
+                                            class="fab fa-instagram"></i></a></li>
+                            @endif
+                            @if(!is_null($setting->youtube_url))
+                                <li><a target="_blank" href="{{$setting->youtube_url}}">YouTube <i
+                                            class="fab fa-youtube"></i></a></li>
+                            @endif
+                            @if(!is_null($setting->linkedin_url))
+                                <li><a target="_blank" href="{{$setting->linkedin_url}}">Linkedin <i
+                                            class="fab fa-linkedin-in"></i></a></li>
+                            @endif
                         </ul>
                     </div>
                 </div>

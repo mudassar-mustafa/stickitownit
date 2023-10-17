@@ -56,7 +56,7 @@
                                         <img src="{{ asset('assets/img/faq/faq-phone-icon.png') }}" alt="faq">
                                     </div>
                                     <h4>Call us now</h4>
-                                    <a href="tel:+910265362003">+91 0265 362 003</a>
+                                    <a href="tel:{{ $setting->phone_number }}">{{ $setting->phone_number }}</a>
                                 </div>
                             </div>
                         </div>

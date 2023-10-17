@@ -7,26 +7,6 @@
     <main>
         <!-- banner area start  -->
         <section class="cp-banner-area cp-bg-1 cp-banner-area1 p-relative cp-banner-height fix">
-            <div class="cp-banner-full-video d-none d-xl-block">
-                <div class="wrapper add-z-index-1000">
-                    <div class="video-info">
-                        <div class="video-intro">
-                            <input id="video_check" type="checkbox">
-                            <div class="intro-title">
-                                <h4 class="video-title">play reel</h4>
-                                <h4 class="video-title close-video-title">Close play reel</h4>
-                            </div>
-                            <div class="video">
-                                <video autoplay>
-                                    <source src="https://www.dropbox.com/s/jgeo7aa43ellilc/video.mp4?raw=1"
-                                            type="video/mp4">
-                                </video>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="zi-500 p-relative">
                 <div class="cp-banner-shape1 p-absolute"></div>
                 <div class="cp-banner-shape2 p-absolute"></div>
@@ -55,7 +35,7 @@
                                         </div>
                                         <div class="wow fadeInUp animated" data-wow-duration="3s">
                                             <div class="js-tilt w-img cp-banner-main-img">
-                                                <img src="{{ asset('assets/img/banner/banner-1.jpg') }}" alt="banner">
+                                                <img src="{{ asset('storage/uploads/settings/'.$setting->banner_one) }}" alt="banner">
                                             </div>
                                         </div>
                                     </div>
@@ -63,14 +43,10 @@
                             </div>
                             <div class="col-xl-7 col-lg-6 order-md-1">
                                 <div class="cp-banner-content mb-85">
-                                    <p class="cp-banner-subtitle mb-45 wow fadeInUp animated" data-wow-duration="1.5s"
-                                       data-wow-delay="0.8s">Free shipping on all U.S. <span>min orders
-                                 $50+</span></p>
                                     <h2 class="cp-banner-title mb-50 wow fadeInUp animated" data-wow-duration="1.5s"
-                                        data-wow-delay="1.1s"> Digital <br> Printing Services</h2>
+                                        data-wow-delay="1.1s"> {{ $setting->banner_tag_line }}</h2>
                                     <p class="cp-banner-text mb-60 wow fadeInUp animated" data-wow-duration="1.5s"
-                                       data-wow-delay="1.4s">ABC Printing Co, a solutions-driven graphic communications
-                                        company with a history of <br> success connecting brands with consumers.</p>
+                                       data-wow-delay="1.4s">{{$setting->banner_tag_line_description}}</p>
                                     <div class="cp-banner-btn cp-two-btn wow fadeInUp animated" data-wow-duration="1.5s"
                                          data-wow-delay="1.7s">
                                         <a href="#" class="cp-border-btn">

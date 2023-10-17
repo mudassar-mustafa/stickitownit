@@ -7,10 +7,10 @@
                     <div class="cp-header2-top-item">
                         <div class="cp-header2-info">
                             <ul>
-                                <li><a href="tel:+8801236985"><i class="far fa-phone-alt"></i> +88 0123 6985</a>
+                                <li><a href="tel:{{ $setting->phone_number }}"><i class="far fa-phone-alt"></i> {{ $setting->phone_number }}</a>
                                 </li>
-                                <li><a href="mailto:example@gmail.com"><i class="far fa-envelope"></i>
-                                        example@gmail.com</a>
+                                <li><a href="mailto:{{ $setting->email }}"><i class="far fa-envelope"></i>
+                                        {{ $setting->email }}</a>
                                 </li>
                             </ul>
                         </div>
@@ -23,7 +23,7 @@
                 <div class="cp-header2-bottom-wrap">
                     <div class="cp-header2-bottom-item">
                         <div class="logo">
-                            <a href="{{ route('/') }}"><img src="{{ asset('assets/img/logo/logo.png') }}" alt="logo"></a>
+                            <a href="{{ route('/') }}"><img width="100" src="{{ asset('storage/uploads/settings/'.$setting->logo_header) }}" alt="logo"></a>
                         </div>
                     </div>
                     <div class="cp-header2-bottom-item">
@@ -64,6 +64,7 @@
                                     @endif
 
                                     <li><a href="{{ route('contact-us.index') }}">Contact</a></li>
+                                    <li><a href="{{ route('packages') }}">Packages</a></li>
                                 </ul>
                             </nav>
                         </div>

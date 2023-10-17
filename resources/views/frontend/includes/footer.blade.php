@@ -25,7 +25,9 @@
                         <ul class="cp-footer-widget-link">
                             @if(!empty($categories) && count($categories) >0)
                                 @foreach($categories as $category)
-                                    <li><a href="{{ route('get.products-by-category',$category->slug) }}">{{ $category->name }}</a></li>
+                                    <li>
+                                        <a href="{{ route('get.products-by-category',$category->slug) }}">{{ $category->name }}</a>
+                                    </li>
                                 @endforeach
                             @endif
                         </ul>
@@ -34,33 +36,46 @@
                 <div class="col-xl-6 col-lg-10">
                     <div class="cp-footer-widget mb-50">
                         <h4 class="cp-footer-widget-title">Our Company</h4>
-                        <p class="mb-35">Printing for what’s to come. What’s more, we do it right! A full administration
-                            printing Get the latest news, events & more delivered to your inbox.</p>
-{{--                        <div class="cp-footer-email-form mb-45">--}}
-{{--                            <form action="#">--}}
-{{--                                <input type="email" placeholder="Enter Your Mail Address">--}}
-{{--                                <button type="submit" class="cp-btn">--}}
-{{--                                    Subscribe Now <i class="fal fa-paper-plane"></i>--}}
-{{--                                    <span class="cp-btn__inner">--}}
-{{--                                 <span class="cp-btn__blobs">--}}
-{{--                                    <span class="cp-btn__blob"></span>--}}
-{{--                                    <span class="cp-btn__blob"></span>--}}
-{{--                                    <span class="cp-btn__blob"></span>--}}
-{{--                                    <span class="cp-btn__blob"></span>--}}
-{{--                                 </span>--}}
-{{--                              </span>--}}
-{{--                                </button>--}}
-{{--                            </form>--}}
-{{--                        </div>--}}
+                        <p class="mb-35">{{ $setting->company_short_description }}</p>
+                        {{--                        <div class="cp-footer-email-form mb-45">--}}
+                        {{--                            <form action="#">--}}
+                        {{--                                <input type="email" placeholder="Enter Your Mail Address">--}}
+                        {{--                                <button type="submit" class="cp-btn">--}}
+                        {{--                                    Subscribe Now <i class="fal fa-paper-plane"></i>--}}
+                        {{--                                    <span class="cp-btn__inner">--}}
+                        {{--                                 <span class="cp-btn__blobs">--}}
+                        {{--                                    <span class="cp-btn__blob"></span>--}}
+                        {{--                                    <span class="cp-btn__blob"></span>--}}
+                        {{--                                    <span class="cp-btn__blob"></span>--}}
+                        {{--                                    <span class="cp-btn__blob"></span>--}}
+                        {{--                                 </span>--}}
+                        {{--                              </span>--}}
+                        {{--                                </button>--}}
+                        {{--                            </form>--}}
+                        {{--                        </div>--}}
                         <div class="cp-footer-social">
                             <ul>
-                                <li>
-                                    <a target="_blank" href="#">facebook <i class="fab fa-facebook-f"></i></a>
-                                </li>
-                                <li><a target="_blank" href="#">Twitter <i class="fab fa-twitter"></i></a></li>
-                                <li><a target="_blank" href="#">Instagram <i class="fab fa-instagram"></i></a></li>
-                                <li><a target="_blank" href="#">YouTube <i class="fab fa-youtube"></i></a></li>
-                                <li><a target="_blank" href="#">Linkedin <i class="fab fa-linkedin-in"></i></a></li>
+                                @if(!is_null($setting->facebook_url))
+                                    <li><a target="_blank" href="{{$setting->facebook_url}}">facebook <i
+                                                class="fab fa-facebook-f"></i></a></li>
+                                @endif
+                                @if(!is_null($setting->twitter_url))
+                                    <li><a target="_blank" href="{{$setting->twitter_url}}">Twitter <i
+                                                class="fab fa-twitter"></i></a></li>
+                                @endif
+                                @if(!is_null($setting->instagram_url))
+                                    <li><a target="_blank" href="{{$setting->instagram_url}}">Instagram <i
+                                                class="fab fa-instagram"></i></a></li>
+                                @endif
+                                @if(!is_null($setting->youtube_url))
+                                    <li><a target="_blank" href="{{$setting->youtube_url}}">YouTube <i
+                                                class="fab fa-youtube"></i></a></li>
+                                @endif
+                                @if(!is_null($setting->linkedin_url))
+                                    <li><a target="_blank" href="{{$setting->linkedin_url}}">Linkedin <i
+                                                class="fab fa-linkedin-in"></i></a></li>
+                                @endif
+
                             </ul>
                         </div>
                     </div>
@@ -73,17 +88,20 @@
             <div class="cp-copy-item-wrap d-flex align-items-center justify-content-between">
                 <div class="cp-copy-item">
                     <div class="cp-footer-logo mb-15">
-                        <a href="index.html"><img src="{{ asset('assets/img/logo/white-logo.png') }}" alt="white-logo"></a>
+                        <a href="{{ route('/') }}">
+                            <img width="150"
+                                src="{{ asset('storage/uploads/settings/'.$setting->logo_footer) }}"
+                                alt="white-logo"></a>
                     </div>
                 </div>
                 <div class="cp-copy-item">
                     <div class="cp-footer-payment m-img mb-15">
-                        <img src="{{ asset('assets/img/footer/pament-method.png') }}" alt="payment-method">
+                        <img src="{{ asset('assets/img/footer/stripe.png') }}" alt="payment-method" width="150">
                     </div>
                 </div>
                 <div class="cp-copy-item">
                     <div class="cp-copy-text mb-15 text-xl-end">
-                        <p class="mb-0 white-color">© 2023 <a href="https://devsleagues.com">Design & Developed by
+                        <p class="mb-0 black-color">© 2023 <a href="https://devsleagues.com">Design & Developed by
                                 Devsleagues</a>. All rights reserved.</p>
                     </div>
                 </div>

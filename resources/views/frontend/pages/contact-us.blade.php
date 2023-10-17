@@ -41,18 +41,16 @@
                                 purus ligula justo.</p>
                             <div class="cp-contact-info mb-50">
                                 <ul>
-                                    <li><i class="far fa-phone-alt"></i><a href="tel:+8801761111456">
-                                            +8801761111456 / +88017 45682 156</a></li>
-                                    <li><i class="fal fa-envelope"></i><a href="mailto:info@example.com">
-                                            info@example.com</a></li>
-                                    <li><i class="fal fa-home-lg-alt"></i><a target="_blank"
-                                                                             href="https://www.google.com/maps/@23.7739014,90.3640911,17z"> 23/6 Rupayan
-                                            Shelford Tower,16th Floor, <br> Shyamoli, Dhaka</a></li>
+                                    <li><i class="far fa-phone-alt"></i><a href="tel:{{ $setting->phone_number }}">{{ $setting->phone_number }}</a></li>
+                                    <li><i class="fal fa-envelope"></i><a href="mailto:{{ $setting->email }}">
+                                            {{ $setting->email }}</a></li>
+                                    <li><i class="fal fa-home-lg-alt"></i><a href="javascript:void(0)">
+                                            {{ $setting->address }}</a></li>
                                 </ul>
                             </div>
                             <h4 class="cp-contact-subtitle">Administrative Hours</h4>
-                            <p class="cp-contact-text mb-0">We’re available from 10 am – 7 pm EST,
-                                <br> 05 days a week.
+                            <p class="cp-contact-text mb-0">We’re available from {{ $setting->office_hours }},
+                                <br> {{ $setting->office_working_days }} a week.
                             </p>
                         </div>
                     </div>

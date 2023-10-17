@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Category;
 use App\Models\Page;
 use App\Models\Cart;
+use App\Models\Setting;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
@@ -27,11 +28,11 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
         Paginator::useBootstrap();
-        view()->composer('*', function ($view){
+        view()->composer('*', function ($view) {
             $view->with([
                 'categories' => Category::whereStatus('active')->orderBy('id', 'asc')->get(['id', 'name', 'slug', 'image']),
                 'pages' => Page::whereStatus('active')->orderBy('id', 'asc')->get(['id', 'slug', 'name']),
-                'settings' => []
+                'setting' => Setting::first()
             ]);
         });
     }

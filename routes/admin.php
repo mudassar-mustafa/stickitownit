@@ -23,6 +23,7 @@ use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\PackageSubscriptionController;
 use App\Http\Controllers\ACL\RolesController;
 use App\Http\Controllers\ACL\PermissionsController;
+use App\Http\Controllers\Backend\SettingController;
 
 Route::group(['prefix' => 'backend', 'middleware' => ['role:SuperAdmin|Admin|Seller']], function () {
 
@@ -243,8 +244,11 @@ Route::group(['prefix' => 'backend', 'middleware' => ['role:SuperAdmin|Admin|Sel
         Route::DELETE('destroy/{id?}', 'destroy')->name('backend.roles.destroy');
 
     });
-
-
+// Settings
+    Route::controller(SettingController::class)->prefix('settings')->group(static function () {
+        Route::GET('/', 'edit')->name('backend.settings.index');
+        Route::POST('update', 'update')->name('backend.settings.update');
+    });
 });
 
 
