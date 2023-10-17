@@ -127,7 +127,7 @@ class CartRepository extends BaseRepository implements CartContract
                         $orderSaleDetail->order_status = $order->order_status;
                         $orderSaleDetail->product_title =  $cart->product_attribute_group_detail->product->title;
                         $orderSaleDetail->product_short_description =  $cart->product_attribute_group_detail->short_description;
-                        $orderSaleDetail->product_type =  $cart->product_attribute_group_detail->product->prdocut_type;
+                        $orderSaleDetail->product_type =  $cart->product_attribute_group_detail->product->product_type;
                         $orderSaleDetail->product_image =  $cart->product_attribute_group_detail->main_image;
                         $orderSaleDetail->shipping_name = $data['name'];
                         $orderSaleDetail->shipping_email = $data['email'];
@@ -215,6 +215,10 @@ class CartRepository extends BaseRepository implements CartContract
 
         return $invoiceNumber;
 
+    }
+
+    public function getOrders($id){
+        return Order::where('invoice_number', $id)->first();
     }
 
 }

@@ -16,6 +16,9 @@ class OrderSaleDetail extends Model
 
     protected $guarded =[];
 
+
+    
+
     /**
     * @return BelongsTo
     */
@@ -30,5 +33,29 @@ class OrderSaleDetail extends Model
     public function product_attribute_group(): BelongsTo 
     {
         return $this->belongsTo(ProductAttributeGroup::class, 'product_attribute_group_id', 'id');
+    }
+
+    /**
+    * @return BelongsTo
+    */
+    public function shipping_country_detail(): BelongsTo 
+    {
+        return $this->belongsTo(Country::class, 'shipping_country_id', 'id');
+    }
+
+    /**
+    * @return BelongsTo
+    */
+    public function shipping_state_detail(): BelongsTo 
+    {
+        return $this->belongsTo(User::class, 'shipping_state_id', 'id');
+    }
+
+    /**
+    * @return BelongsTo
+    */
+    public function shipping_city_detail(): BelongsTo 
+    {
+        return $this->belongsTo(City::class, 'shipping_city_id', 'id');
     }
 }

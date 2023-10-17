@@ -23,4 +23,6 @@ interface CartContract
     public function getCities($stateId);
 
     public function createNewOrder(array $data);
+
+    public function getOrders($id);
 }

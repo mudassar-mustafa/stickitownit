@@ -266,5 +266,6 @@ Route::group(['prefix' => 'backend'], function () {
         Route::get('/packages/list', 'packageOrder')->name('backend.pages.order.package_order')->middleware('role:SuperAdmin|Admin|Customer');
         Route::post('/update-order-status', 'updateOrderStatus')->name('backend.pages.order.updateOrderStatus')->middleware('role:SuperAdmin|Admin|Seller');
         Route::delete('/delete/{id}', 'destroy')->name('backend.pages.order.destroy')->middleware('role:SuperAdmin|Admin|Customer|Seller');
+        Route::post('/getOrderDetail', 'getOrderDetail')->name('backend.pages.order.getOrderDetail')->middleware('role:SuperAdmin|Admin|Seller|Customer');
     });
 });

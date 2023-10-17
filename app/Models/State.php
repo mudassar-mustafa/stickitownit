@@ -31,4 +31,20 @@ class State extends Model
     {
         return $this->hasMany(City::class,'state_id','id');
     }
+
+    /**
+    * @return HasMany
+    */
+    public function order_billing_address_state(): HasMany
+    {
+        return $this->hasMany(Order::class,'billing_state_id','id');
+    }
+
+    /**
+    * @return HasMany
+    */
+    public function order_shipping_address_state(): HasMany
+    {
+        return $this->hasMany(OrderSaleDetail::class,'shipping_state_id','id');
+    }
 }
