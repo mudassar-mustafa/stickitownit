@@ -217,4 +217,8 @@ class CartRepository extends BaseRepository implements CartContract
 
     }
 
+    public function getOrders($id){
+        return Order::where('invoice_number', $id)->first();
+    }
+
 }

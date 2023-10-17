@@ -150,7 +150,8 @@ class CartController extends Controller
 
     public function thankYou($id)
     {
-        return view('frontend.pages.product.thank-you');
+        $order = $this->cartRepository->getOrders($id);
+        return view('frontend.pages.product.thank-you', compact('order'));
     }
 
     public function addToCartPackage(

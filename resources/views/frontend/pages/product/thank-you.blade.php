@@ -1,43 +1,42 @@
 @extends('frontend.layouts.app')
-@section('title','Checkout')
+@section('title','Thank You')
 @push('css')
 
 @endpush
 @section('content')
     <main>
         <!-- error area start here  -->
-        <section class="cp-error-area pt-150 pb-140">
-            <div class="container">
-            <div class="row justify-content-center wow fadeInUp animated" data-wow-duration="1.5s">
-                <div class="col-xl-6">
-                    <div class="cp-error-wrap t-center">
-                        <div class="cp-error-img mb-30 m-img">
-                        <img src="assets/img/bg/error.png" alt="error">
-                        </div>
-                        <h3 class="cp-error-title mb-15">
-                        Oops... Looks Like You Goto Lost
-                        </h3>
-                        <p class="mb-35">The page you are looking for might have been removed had its name changed or is
-                        temporarily
-                        unavailable.</p>
-                        <div class="cp-error-btn">
-                        <a href="index.html" class="cp-border-btn">
-                            Back To Home
-                            <span class="cp-border-btn__inner">
-                                <span class="cp-border-btn__blobs">
-                                    <span class="cp-border-btn__blob"></span>
-                                    <span class="cp-border-btn__blob"></span>
-                                    <span class="cp-border-btn__blob"></span>
-                                    <span class="cp-border-btn__blob"></span>
-                                </span>
-                            </span>
-                        </a>
-                        </div>
+        <div class="vh-100 d-flex justify-content-center align-items-center">
+            <div class="col-md-9">
+                <div class="border border-3 border-success"></div>
+                <div class="card  bg-white shadow p-5">
+                    <div class="mb-4 text-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="text-success" width="75" height="75"
+                            fill="currentColor" class="bi bi-check-circle" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                            <path
+                                d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z" />
+                        </svg>
+                    </div>
+                    <div class="text-center">
+                        <h1>Thank You !</h1>
+                        <p>
+                            Your order has been placed successfully. 
+                            <br>
+                            Inovice Number# {{ $order->invoice_number }}
+                        </p>
+                        @if (isset($order) && $order->order_type == "Sale")
+                            <a href="{{ route('backend.pages.order.sale_order') }}"><button type="button" class="btn btn-outline-success">Order Detail</button></a>    
+                        @endif
+
+                        @if (isset($order) && $order->order_type == "Package")
+                            <a href="{{ route('backend.pages.order.package_order') }}"><button type="button" class="btn btn-outline-success">Order Detail</button></a>    
+                        @endif
+                        
                     </div>
                 </div>
             </div>
-            </div>
-        </section>
+        </div>
         <!-- error area end here  -->
 
         @include('frontend.includes.social')
