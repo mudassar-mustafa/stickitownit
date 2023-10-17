@@ -61,7 +61,7 @@ class PackageDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Rate $model
+     * @param \App\Models\Package $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function query(Package $model)

@@ -69,7 +69,7 @@ class ProductDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Rate $model
+     * @param \App\Models\Product $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function query(Product $model)

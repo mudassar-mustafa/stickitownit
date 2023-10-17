@@ -62,7 +62,7 @@ class StateDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Rate $model
+     * @param \App\Models\State $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function query(State $model)

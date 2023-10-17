@@ -57,7 +57,7 @@ class PackageSubscriptionDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Rate $model
+     * @param \App\Models\PackageSubscription $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function query(PackageSubscription $model)

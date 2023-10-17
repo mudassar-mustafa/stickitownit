@@ -52,7 +52,7 @@ class AttributeDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Rate $model
+     * @param \App\Models\Attribute $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function query(Attribute $model)

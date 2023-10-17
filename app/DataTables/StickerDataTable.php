@@ -18,7 +18,7 @@ class StickerDataTable extends DataTable
     public function dataTable($query)
     {
         return datatables()->eloquent($query)
-            
+
             ->addColumn('image', function ($sticker) {
                 return ($sticker->image != null) ? '<img width="50" height="50" class="img-thumbnail"
                 id="img" src="'.$sticker->image.'"
@@ -51,7 +51,7 @@ class StickerDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Rate $model
+     * @param \App\Models\Sticker $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function query(Sticker $model)

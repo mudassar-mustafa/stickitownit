@@ -55,7 +55,7 @@ class CountryDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Rate $model
+     * @param \App\Models\Country $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function query(Country $model)

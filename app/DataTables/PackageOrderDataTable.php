@@ -62,7 +62,7 @@ class PackageOrderDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Rate $model
+     * @param \App\Models\Order $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function query(Order $model)

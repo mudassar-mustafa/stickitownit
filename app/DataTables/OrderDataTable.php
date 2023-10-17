@@ -60,10 +60,10 @@ class OrderDataTable extends DataTable
                 if(($order->order_status == "cancelled" || $order->order_status == "delivered") || auth()->user()->hasrole('Customer') == true ){
 
                 }else{
-                    $updateStatus = '<button type="button" class="btn btn-primary" id="btnStatus'.$order->id.'" data-bs-toggle="modal" data-order_status ="'.$order->order_status.'"  onclick="updateStatus('.$order->id.');">Update Status</button>';
+                    $updateStatus = '<button type="button" class="btn btn-primary" style="font-size: 10px;width: 100%; margin-bottom: 3px;" id="btnStatus'.$order->id.'" data-bs-toggle="modal" data-order_status ="'.$order->order_status.'"  onclick="updateStatus('.$order->id.');">Update Status</button>';
                 }
 
-                $orderDetail = '<button type="button" type="button" class="btn btn-primary" onclick="showOrderDetail('.$order->id.');">Order Detail</button>';
+                $orderDetail = '<button type="button" type="button" class="btn btn-info" style="font-size: 10px;width: 100%; color:#ffffff;" onclick="showOrderDetail('.$order->id.');">Order Detail</button>';
 
 
 
@@ -74,7 +74,7 @@ class OrderDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Rate $model
+     * @param \App\Models\Order $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function query(Order $model)
