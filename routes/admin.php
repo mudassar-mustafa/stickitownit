@@ -207,13 +207,13 @@ Route::group(['prefix' => 'backend', 'middleware' => ['role:SuperAdmin|Admin|Sel
         Route::delete('/delete/{id}', 'destroy')->name('backend.pages.sticker.destroy');
     });
 
-    //  Contact Us Routes
+//  Contact Us Routes
     Route::controller(ContactUsController::class)->prefix('contact-us')->group(function () {
         Route::get('/', 'index')->name('backend.pages.contact-us.index');
         Route::delete('/delete/{id}', 'destroy')->name('backend.pages.contact-us.destroy');
     });
 
-    //  Quote Us Routes
+//  Quote Us Routes
     Route::controller(QuoteController::class)->prefix('quote')->group(function () {
         Route::get('/', 'index')->name('backend.pages.quote.index');
         Route::delete('/delete/{id}', 'destroy')->name('backend.pages.quote.destroy');
@@ -224,18 +224,18 @@ Route::group(['prefix' => 'backend', 'middleware' => ['role:SuperAdmin|Admin|Sel
 
 
 Route::group(['prefix' => 'backend', 'middleware' => ['role:Customer']], function () {
-    // Package Subscription  Routes
+// Package Subscription  Routes
     Route::controller(PackageSubscriptionController::class)->prefix('package-subscription')->group(function () {
         Route::get('/', 'index')->name('backend.pages.package-subscription.index');
     });
 });
 
 Route::group(['prefix' => 'backend'], function () {
-    //  Order Routes
+//  Order Routes
     Route::controller(OrderController::class)->prefix('orders')->group(function () {
-        Route::get('/saleOrder', 'saleOrder')->name('backend.pages.order.sale_order')->middleware('role:SuperAdmin|Admin|Customer|Seller');
-        Route::get('/packageOrder', 'packageOrder')->name('backend.pages.order.package_order')->middleware('role:SuperAdmin|Admin|Customer');
-        Route::post('/updateOrderStatus', 'updateOrderStatus')->name('backend.pages.order.updateOrderStatus')->middleware('role:SuperAdmin|Admin|Seller');
+        Route::get('/sales/list', 'saleOrder')->name('backend.pages.order.sale_order')->middleware('role:SuperAdmin|Admin|Customer|Seller');
+        Route::get('/packages/list', 'packageOrder')->name('backend.pages.order.package_order')->middleware('role:SuperAdmin|Admin|Customer');
+        Route::post('/update-order-status', 'updateOrderStatus')->name('backend.pages.order.updateOrderStatus')->middleware('role:SuperAdmin|Admin|Seller');
         Route::delete('/delete/{id}', 'destroy')->name('backend.pages.order.destroy')->middleware('role:SuperAdmin|Admin|Customer|Seller');
     });
 });

@@ -19,26 +19,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('page/{slug}',[LandingController::class, 'page'])->name('page.index');
-Route::get('/', [LandingController::class, 'index'])->name('/');
-Route::get('blogs', [BlogController::class, 'index'])->name('blogs.list');
-Route::get('blog/{slug}', [BlogController::class, 'blogDetail'])->name('blog.detail');
-Route::get('products/{category}', [ProductDetailController::class, 'getProductsByCategory'])->name('get.products-by-category');
-Route::get('product/{slug}', [ProductDetailController::class, 'productDetail'])->name('product.productDetail');
-Route::post('getAttributeValue', [ProductDetailController::class, 'getAttributeValue'])->name('product.getAttributeValue');
-Route::post('getProductGroupValue', [ProductDetailController::class, 'getProductGroupValue'])->name('product.getProductGroupValue');
-Route::get('faqs', [LandingController::class, 'faq'])->name('faqs');
-Route::get('packages', [LandingController::class, 'packages'])->name('packages');
-
-Route::get('cart', [CartController::class, 'cart'])->name('cart.index');
-Route::get('checkout', [CartController::class, 'checkout'])->name('checkout.index');
-
-Route::get('get-quote', [LandingController::class, 'getQuote'])->name('get-quote.index');
-Route::post('get-quote/store', [LandingController::class, 'getQuoteStore'])->name('get-quote.store');
-
-Route::get('contact-us', [LandingController::class, 'contactUs'])->name('contact-us.index');
-Route::post('contact-us/store', [LandingController::class, 'contactUsStore'])->name('contact-us.store');
-Route::get('thank-you/{id}', [CartController::class, 'thankYou'])->name('thank-you.index');
+require __DIR__ . '/frontend.php';
 
 Route::get('/dashboard', function () {
     return view('backend.pages.index');
@@ -48,12 +29,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::post('addToCart', [ProductDetailController::class, 'addToCart'])->name('product.addToCart');
-    Route::post('removeToCart', [CartController::class, 'removeToCart'])->name('product.removeToCart');
-    Route::post('placeOrder', [CartController::class, 'placeOrder'])->name('placeOrder');
-    Route::post('getStates', [CartController::class, 'getStates'])->name('getStates');
-    Route::post('getCities', [CartController::class, 'getCities'])->name('getCities');
-    Route::post('addToCartPackage', [CartController::class, 'addToCartPackage'])->name('addToCartPackage');
+    Route::post('add-to-cart', [ProductDetailController::class, 'addToCart'])->name('product.addToCart');
+    Route::post('remove-to-cart', [CartController::class, 'removeToCart'])->name('product.removeToCart');
+    Route::post('place-order', [CartController::class, 'placeOrder'])->name('placeOrder');
+    Route::post('get-states', [CartController::class, 'getStates'])->name('getStates');
+    Route::post('get-cities', [CartController::class, 'getCities'])->name('getCities');
+    Route::post('add-to-cart-packages', [CartController::class, 'addToCartPackage'])->name('addToCartPackage');
 
     require __DIR__ . '/admin.php';
 
