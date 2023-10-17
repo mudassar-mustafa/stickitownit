@@ -21,7 +21,8 @@ use App\Http\Controllers\Backend\ContactUsController;
 use App\Http\Controllers\Backend\QuoteController;
 use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\PackageSubscriptionController;
-
+use App\Http\Controllers\ACL\RolesController;
+use App\Http\Controllers\ACL\PermissionsController;
 
 Route::group(['prefix' => 'backend', 'middleware' => ['role:SuperAdmin|Admin|Seller']], function () {
 
@@ -217,6 +218,30 @@ Route::group(['prefix' => 'backend', 'middleware' => ['role:SuperAdmin|Admin|Sel
     Route::controller(QuoteController::class)->prefix('quote')->group(function () {
         Route::get('/', 'index')->name('backend.pages.quote.index');
         Route::delete('/delete/{id}', 'destroy')->name('backend.pages.quote.destroy');
+    });
+
+// Permissions
+    Route::controller('PermissionsController')->prefix('permissions')->group(static function () {
+
+        Route::GET('/', 'index')->name('backend.permissions');
+        Route::GET('create', 'create')->name('backend.permissions.create');
+        Route::POST('store', 'store')->name('backend.permissions.store');
+        Route::GET('{id}/edit', 'edit')->name('backend.permissions.edit');
+        Route::POST('{id}/update', 'update')->name('backend.permissions.update');
+        Route::DELETE('destroy/{id?}', 'destroy')->name('backend.permissions.destroy');
+
+    });
+
+// Roles
+    Route::controller(RolesController::class)->prefix('roles')->group(static function () {
+
+        Route::GET('/', 'index')->name('backend.roles.index');
+        Route::GET('create', 'create')->name('backend.roles.create');
+        Route::POST('store', 'store')->name('backend.roles.store');
+        Route::GET('{id}/edit', 'edit')->name('backend.roles.edit');
+        Route::POST('{id}/update', 'update')->name('backend.roles.update');
+        Route::DELETE('destroy/{id?}', 'destroy')->name('backend.roles.destroy');
+
     });
 
 

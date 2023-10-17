@@ -47,4 +47,5 @@ class AclHelper
         return $permissions;
     }
 
-}
+
+    }

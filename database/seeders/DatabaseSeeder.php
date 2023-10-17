@@ -16,37 +16,37 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
-        DB::table('users')->insert([
-            'name' => 'Super Admin',
-            'email' => 'admin@stickitownit.com',
-            'password' => Hash::make('admin123'),
-            'status' => 'active',
-            'user_type' => 'super-admin',
-            'created_at' => Carbon::now(),
-        ]);
-
-        DB::table('users')->insert([
-            'name' => 'An Admin',
-            'email' => 'anotheradmin@stickitownit.com',
-            'password' => Hash::make('admin123'),
-            'status' => 'active',
-            'user_type' => 'admin',
-            'created_at' => Carbon::now(),
-        ]);
-
-        DB::table('users')->insert([
-            'name' => 'An Customer',
-            'email' => 'customer@stickitownit.com',
-            'password' => Hash::make('customer123'),
-            'status' => 'active',
-            'user_type' => 'customer',
-            'created_at' => Carbon::now(),
-        ]);
+//        DB::table('users')->insert([
+//            'name' => 'Super Admin',
+//            'email' => 'admin@stickitownit.com',
+//            'password' => Hash::make('admin123'),
+//            'status' => 'active',
+//            'user_type' => 'super-admin',
+//            'created_at' => Carbon::now(),
+//        ]);
+//
+//        DB::table('users')->insert([
+//            'name' => 'An Admin',
+//            'email' => 'anotheradmin@stickitownit.com',
+//            'password' => Hash::make('admin123'),
+//            'status' => 'active',
+//            'user_type' => 'admin',
+//            'created_at' => Carbon::now(),
+//        ]);
+//
+//        DB::table('users')->insert([
+//            'name' => 'An Customer',
+//            'email' => 'customer@stickitownit.com',
+//            'password' => Hash::make('customer123'),
+//            'status' => 'active',
+//            'user_type' => 'customer',
+//            'created_at' => Carbon::now(),
+//        ]);
 
         $this->call([
             PermissionsSeeder::class,
             RolesSeeder::class,
-            PackageSeeder::class
+//            PackageSeeder::class
         ]);
         // \App\Models\User::factory(10)->create();
 
