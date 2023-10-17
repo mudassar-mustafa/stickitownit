@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers\ACL;
 
-use App\Helpers\Helper;
+use App\DataTables\PermissionsDataTable;
 use App\Http\Controllers\Controller;
+use App\Http\Enums\CommonEnum;
+use App\Services\UtilService;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -15,23 +19,16 @@ class PermissionsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(
+        UtilService    $utilService,
+        PermissionsDataTable $dataTable
+    )
     {
         try {
-            if (request()->ajax()) {
-                return datatables(Permission::all())->addColumn('actions', static function ($data) {
-                    $buttons = '<div class="custom-control-inline">';
-                    /*if (auth()->user()->role === Config::get('app.ROLE_ADMIN')) {*/
-                    /*$buttons .= '<button title="edit" class="btn btn-icon rounded-circle btn-outline-primary mr-1 mb-1 waves-effect waves-light" onclick="window.location=' . "'" . route('permissions.edit', ['id' => $data->id]) . "'" . '"><i class="feather icon-edit-2"></i></button>';*/
-                    $buttons .= '<button title="delete" class="btn btn-icon rounded-circle btn-outline-danger  mb-1 waves-effect waves-light destroy-item" id="' . $data->id . '"><i class="feather icon-trash"></i></button>';
-                    /*}*/
-                    $buttons .= '</div>';
-                    return $buttons;
-                })->rawColumns(['actions', 'displayStatus'])->make(true);
-            }
-        } catch (Exception $ex) {
+            return $dataTable->render('backend.pages.acl.permissions.list');
+        } catch (\Exception $exception) {
+            return $utilService->logErrorAndRedirectToBack('backend.permissions.index', $exception->getMessage());
         }
-        return view('backend.pages.acl.permissions.list');
     }
 
     /**
@@ -39,7 +36,7 @@ class PermissionsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(): View
     {
         $roles = Role::all();
         return view('backend.pages.acl.permissions.add', ['roles' => $roles, 'title' => 'Add Permission']);
@@ -51,43 +48,39 @@ class PermissionsController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, UtilService $utilService): RedirectResponse
     {
-        $request->validate([
-            'name' => 'required|max:100',
-            'permissions' => 'required'
-        ]);
-        $moduleName = $request['name'];
-        $rolesArr = $request['roles'];
-        $isErrorFound = false;
-        $permissionsArr = array();
-        $i = 0;
-        foreach ($request['permissions'] as $permission) {
-            $per = Permission::create(['name' => $moduleName . '.' . $permission]);
-            if ($per == null) {
-                $isErrorFound = true;
-                break;
+        try {
+            $request->validate([
+                'name' => 'required|max:100',
+                'permissions' => 'required'
+            ]);
+            $moduleName = $request['name'];
+            $rolesArr = $request['roles'];
+            $isErrorFound = false;
+            $permissionsArr = array();
+            $i = 0;
+            foreach ($request['permissions'] as $permission) {
+                $per = Permission::create(['name' => $moduleName . '.' . $permission]);
+                if ($per == null) {
+                    $isErrorFound = true;
+                    break;
+                }
+                $permissionsArr[$i++] = $per;
             }
-            $permissionsArr[$i++] = $per;
-        }
-        if (isset($rolesArr)) {
-            foreach ($rolesArr as $roleId) {
-                $role = Role::findById($roleId);
-                $role->syncPermissions($permissionsArr);
+            if (isset($rolesArr)) {
+                foreach ($rolesArr as $roleId) {
+                    $role = Role::findById($roleId);
+                    $role->syncPermissions($permissionsArr);
+                }
             }
+            return redirect()->route("backend.permissions.index")->with([
+                "status" => CommonEnum::SUCCESS_STATUS,
+                "message" => "Permissions saved successfully."
+            ]);
+        } catch (\Exception $exception) {
+            return $utilService->logErrorAndRedirectToBack('backend.permissions.store', $exception->getMessage());
         }
-        return Helper::jsonMessage(!$isErrorFound, 'permissions', !$isErrorFound ? 'Permissions saved successfully' : 'Unable to save Permissions');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -113,19 +106,16 @@ class PermissionsController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function destroy($id, UtilService $utilService)
     {
         try {
-            $permission = Permission::findOrFail($id)->delete();
-            return Helper::jsonMessage($permission !== null, NULL, $permission !== null ? 'Record Successfully deleted' : 'Record not deleted');
-        } catch (Exception $e) {
-
+            Permission::findOrFail($id)->delete();
+            return redirect()->route("backend.permissions.index")->with([
+                "status" => CommonEnum::SUCCESS_STATUS,
+                "message" => "Record Successfully deleted."
+            ]);
+        } catch (\Exception $exception) {
+            return $utilService->logErrorAndRedirectToBack('backend.permissions.index', $exception->getMessage());
         }
     }
 }

@@ -221,9 +221,9 @@ Route::group(['prefix' => 'backend', 'middleware' => ['role:SuperAdmin|Admin|Sel
     });
 
 // Permissions
-    Route::controller('PermissionsController')->prefix('permissions')->group(static function () {
+    Route::controller(PermissionsController::class)->prefix('permissions')->group(static function () {
 
-        Route::GET('/', 'index')->name('backend.permissions');
+        Route::GET('/', 'index')->name('backend.permissions.index');
         Route::GET('create', 'create')->name('backend.permissions.create');
         Route::POST('store', 'store')->name('backend.permissions.store');
         Route::GET('{id}/edit', 'edit')->name('backend.permissions.edit');
