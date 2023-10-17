@@ -119,19 +119,6 @@
                             <p class="mb-50">ABC Printing Co, a solutions-driven graphic communications company with a
                                 history
                                 of success connecting brands with consumers.</p>
-                            <div class="cp-services-btn lh-1">
-                                <a class="cp-btn" href="services.html">
-                                    View All Services
-                                    <span class="cp-btn__inner">
-                              <span class="cp-btn__blobs">
-                                 <span class="cp-btn__blob"></span>
-                                 <span class="cp-btn__blob"></span>
-                                 <span class="cp-btn__blob"></span>
-                                 <span class="cp-btn__blob"></span>
-                              </span>
-                           </span>
-                                </a>
-                            </div>
                         </div>
                     </div>
                     @if(!empty($categories) && count($categories) > 0)

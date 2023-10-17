@@ -33,25 +33,25 @@
                 </div>
                 <div class="col-xl-6 col-lg-10">
                     <div class="cp-footer-widget mb-50">
-                        <h4 class="cp-footer-widget-title">Newsletter</h4>
+                        <h4 class="cp-footer-widget-title">Our Company</h4>
                         <p class="mb-35">Printing for what’s to come. What’s more, we do it right! A full administration
                             printing Get the latest news, events & more delivered to your inbox.</p>
-                        <div class="cp-footer-email-form mb-45">
-                            <form action="#">
-                                <input type="email" placeholder="Enter Your Mail Address">
-                                <button type="submit" class="cp-btn">
-                                    Subscribe Now <i class="fal fa-paper-plane"></i>
-                                    <span class="cp-btn__inner">
-                                 <span class="cp-btn__blobs">
-                                    <span class="cp-btn__blob"></span>
-                                    <span class="cp-btn__blob"></span>
-                                    <span class="cp-btn__blob"></span>
-                                    <span class="cp-btn__blob"></span>
-                                 </span>
-                              </span>
-                                </button>
-                            </form>
-                        </div>
+{{--                        <div class="cp-footer-email-form mb-45">--}}
+{{--                            <form action="#">--}}
+{{--                                <input type="email" placeholder="Enter Your Mail Address">--}}
+{{--                                <button type="submit" class="cp-btn">--}}
+{{--                                    Subscribe Now <i class="fal fa-paper-plane"></i>--}}
+{{--                                    <span class="cp-btn__inner">--}}
+{{--                                 <span class="cp-btn__blobs">--}}
+{{--                                    <span class="cp-btn__blob"></span>--}}
+{{--                                    <span class="cp-btn__blob"></span>--}}
+{{--                                    <span class="cp-btn__blob"></span>--}}
+{{--                                    <span class="cp-btn__blob"></span>--}}
+{{--                                 </span>--}}
+{{--                              </span>--}}
+{{--                                </button>--}}
+{{--                            </form>--}}
+{{--                        </div>--}}
                         <div class="cp-footer-social">
                             <ul>
                                 <li>
