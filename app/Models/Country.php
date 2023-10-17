@@ -23,4 +23,20 @@ class Country extends Model
         return $this->hasMany(State::class,'country_id','id');
     }
 
+    /**
+    * @return HasMany
+    */
+    public function order_billing_address_country(): HasMany
+    {
+        return $this->hasMany(Order::class,'billing_country_id','id');
+    }
+
+    /**
+    * @return HasMany
+    */
+    public function order_shipping_address_country(): HasMany
+    {
+        return $this->hasMany(OrderSaleDetail::class,'shipping_country_id','id');
+    }
+
 }

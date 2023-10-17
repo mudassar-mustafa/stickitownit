@@ -91,4 +91,26 @@ class OrderController extends Controller
         }
     }
 
+
+    /**
+     * @param Request $request
+     * @param UtilService $utilService
+     * @return JsonResponse
+     */
+    public function getOrderDetail(Request $request, UtilService $utilService)
+    {
+        try {
+            $orderDetailHtml= "";
+            $order = $this->orderRepository->getOrderDetail($request->orderId);
+
+            $orderDetailHtml = view('backend.pages.order.modal.order_detail', ['order' => $order])->render();
+
+
+            return $utilService->makeResponse(200, "Order Detail Get Successfully", $orderDetailHtml, CommonEnum::SUCCESS_STATUS);
+
+        } catch (\Exception $exception) {
+            return $utilService->makeResponse(500, $exception->getMessage());
+        }
+    }
+
 }

@@ -40,7 +40,7 @@
                                 <label for="status" class="form-label">Status</label>
                                 <select id="status" class="form-select" name="status">
                                     <option value="">Please Select Status</option>
-                                    <option value="shipped">Shipped</option>
+                                    <option value="printed">Printed</option>
                                     <option value="cancelled">Cancelled</option>
                                     <option value="delivered">Delivered</option>
                                 </select>
@@ -61,6 +61,23 @@
             </div>
           </div>
     </main>
+
+    <div class="modal fade" id="orderDetailModal" tabindex="-1">
+        <div class="modal-dialog modal-xl">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Order Details</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body showOrderDetail">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
 @endsection
 @push('scripts')
     {{$dataTable->scripts()}}
@@ -100,7 +117,7 @@
             $("#remarks").val('');
             $("#order_id").val(orderId);
             var orderStatus = $("#btnStatus"+orderId+"").data('order_status');
-            if(orderStatus == "shipped"){
+            if(orderStatus == "printed"){
                 $("#status option[value='cancelled']").prop("disabled",true);
             }
             $("#order_status_update_modal").modal('show');
@@ -132,6 +149,30 @@
                     }
                 }
             });
+        }
+
+        function showOrderDetail(orderId) {
+            var csrf_token = $('meta[name="csrf-token"]').attr('content');
+            $.ajax({
+                type: 'POST',
+                async: false,
+                url: '{{route("backend.pages.order.getOrderDetail")}}',
+                data: {
+                    orderId: orderId,
+                    _token: csrf_token
+                },
+                dataType: 'JSON',
+                success: function (data) {
+                    if (data.status == 'success') {
+                        $(".showOrderDetail").empty();
+                        $(".showOrderDetail").append(data.data);
+                        $("#orderDetailModal").modal('show');
+                    }else{
+                        swal("Error!", ""+data.message+"", "error");
+                    }
+                }
+            });
+                        
         }
     </script>
 @endpush

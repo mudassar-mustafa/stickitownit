@@ -18,4 +18,6 @@ interface OrderContract
 
     public function updateOrderStatus(array $data);
 
+    public function getOrderDetail($orderId);
+
 }
