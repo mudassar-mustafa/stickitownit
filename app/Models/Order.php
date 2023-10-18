@@ -17,10 +17,8 @@ class Order extends Model
     protected $guarded =[];
 
 
-    /**
-     * @return BelongsToMany
-     */
-    public function order_sale_details(): HasMany
+
+    public function order_sale_details()
     {
         return $this->belongsToMany(OrderSaleDetail::class, 'order_id', 'id');
     }
@@ -28,7 +26,7 @@ class Order extends Model
     /**
     * @return BelongsTo
     */
-    public function buyer_detail(): BelongsTo 
+    public function buyer_detail(): BelongsTo
     {
         return $this->belongsTo(User::class, 'buyer_id', 'id');
     }
@@ -36,7 +34,7 @@ class Order extends Model
     /**
     * @return BelongsTo
     */
-    public function seller_detail(): BelongsTo 
+    public function seller_detail(): BelongsTo
     {
         return $this->belongsTo(User::class, 'seller_id', 'id');
     }
@@ -44,7 +42,7 @@ class Order extends Model
     /**
     * @return BelongsTo
     */
-    public function billing_country_detail(): BelongsTo 
+    public function billing_country_detail(): BelongsTo
     {
         return $this->belongsTo(Country::class, 'billing_country_id', 'id');
     }
@@ -52,7 +50,7 @@ class Order extends Model
     /**
     * @return BelongsTo
     */
-    public function billing_state_detail(): BelongsTo 
+    public function billing_state_detail(): BelongsTo
     {
         return $this->belongsTo(User::class, 'billing_state_id', 'id');
     }
@@ -60,7 +58,7 @@ class Order extends Model
     /**
     * @return BelongsTo
     */
-    public function billing_city_detail(): BelongsTo 
+    public function billing_city_detail(): BelongsTo
     {
         return $this->belongsTo(City::class, 'billing_city_id', 'id');
     }

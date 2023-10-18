@@ -30,13 +30,13 @@
                             @if (Session::has('status') && Session::get('status') == "package")
                                 <h4 class="cp-checkout-title">Package Information</h4>
                             @else
-                                <h4 class="cp-checkout-title">Product Information</h4>    
+                                <h4 class="cp-checkout-title">Product Information</h4>
                             @endif
-                            @if (Session::has('status') && Session::get('status') == "package")  
+                            @if (Session::has('status') && Session::get('status') == "package")
                             <div class="cp-cart-table mb-50">
                                 <h4>Package Name: {{ Session::get('packageName') }}</h4>
-                            </div>  
-                            
+                            </div>
+
                             @else
                             <div class="cp-cart-table mb-50">
                                 @php
@@ -120,9 +120,9 @@
                                 <div class="cp-cart-f-total d-flex align-items-center justify-content-between mb-30">
                                     <h6>Total : </h6><span>{{ $cartTotal + $extraFee }}$</span>
                                 </div>
-                            </div>    
+                            </div>
                         @endif
-                        
+
                     </div>
                 </div>
             </div>
@@ -131,7 +131,7 @@
         <!-- checkout area start here  -->
         <section class="cp-checkout-area pt-5 pb-90">
             <div class="container">
-                <form id="place_order" action="{{ route('placeOrder') }}" enctype="multipart/form-data" data-stripe-publishable-key="{{ env('STRIPE_KEY') }}" method="POST">
+                <form id="place_order" action="{{ route('placeOrder') }}" enctype="multipart/form-data" data-stripe-publishable-key="{{ config('app.stripe')['STRIPE_KEY'] }}" method="POST">
                     @csrf
                     <input type="hidden" value="{{ Session::has('status') && Session::get('status') == "package" ? "Package" : "Sale" }}" name="checkOutType">
                     <div class="row wow fadeInUp animated" data-wow-duration="1.5s">
@@ -214,7 +214,7 @@
                                                     <i class="far fa-phone"></i>
                                                 </div>
                                             </div>
-                                            
+
                                             <div class="col-lg-12">
                                                 <div class="cp-input-field">
                                                     <label for="address">Street address *</label>
@@ -240,7 +240,7 @@
                                 </div>
                             </div>
                             @endif
-                            
+
                         </div>
                         <div class="col-xl-4">
                             <div class="cp-checkout-right mb-20 ml-10">
@@ -248,10 +248,10 @@
                                     <label for="card-element">
                                         Credit or debit card
                                     </label>
-                                    <div id="card-element">
+                                    <div id="card-element" class="mb-25 ml-25 mt-25 mr-25">
                                         <!-- a Stripe Element will be inserted here. -->
                                     </div>
-                                  
+
                                     <!-- Used to display form errors -->
                                     <div id="card-errors"></div>
 
@@ -304,7 +304,7 @@
 <script>
     $(document).ready(function() {
 
-        
+
         $('#country').select2();
         $('#state').select2();
         $('#city').select2();
@@ -326,14 +326,14 @@
                     errorElement.textContent = result.error.message;
                 } else {
                     // Send the token to your server
-                    
+
                     stripeTokenHandler(result.token);
                 }
             });
         });
     });
 
-    function stripeTokenHandler(token) {      
+    function stripeTokenHandler(token) {
         // Insert the token ID into the form so it gets submitted to the server
         const form = document.getElementById('place_order');
         const hiddenInput = document.createElement('input');
@@ -342,7 +342,7 @@
         hiddenInput.setAttribute('value', token.id);
         form.appendChild(hiddenInput);
         //Submit the form
-        form.submit();  
+        form.submit();
       }
 
     async function getStates() {
