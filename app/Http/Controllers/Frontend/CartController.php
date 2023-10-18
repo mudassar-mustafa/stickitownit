@@ -97,7 +97,7 @@ class CartController extends Controller
             try {
                 $Amt = round($Amt, 2);
                 $Amt = $Amt * 100;
-                Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+                Stripe\Stripe::setApiKey(config('app.stripe')['STRIPE_SECRET']);
                 $obj = Stripe\Charge::create ([
                     "amount" => $Amt,
                     "currency" => "USD",

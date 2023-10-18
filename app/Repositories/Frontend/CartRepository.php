@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Frontend;
 
+use App\Mail\OrderMail;
 use App\Models\Product;
 use App\Models\ProductAttributeValueGroup;
 use App\Models\AttributeValue;
@@ -16,6 +17,7 @@ use App\Models\OrderPackageDetail;
 use App\Models\PackageSubscription;
 use App\Contracts\Frontend\CartContract;
 use Auth;
+use Illuminate\Support\Facades\Mail;
 use Session;
 
 class CartRepository extends BaseRepository implements CartContract
@@ -142,7 +144,10 @@ class CartRepository extends BaseRepository implements CartContract
 
                     $order->order_total_amount = $orderTotalAmt;
                     $order->save();
+
                     Cart::where('user_id', Auth::user()->id)->where('seller_id', $sellerId)->delete();
+                    Mail::to($order->billing_email)->send(new OrderMail($order));
+                    Mail::to('stickitownit@gmail.com')->send(new OrderMail($order));
                 }
             }
         }
@@ -170,6 +175,7 @@ class CartRepository extends BaseRepository implements CartContract
         }
         $order->order_total_amount = Session::get('packagePrice');
         $order->save();
+
 
         $orderPackageDetail = new OrderPackageDetail;
         $orderPackageDetail->order_id = $order->id;
@@ -212,7 +218,8 @@ class CartRepository extends BaseRepository implements CartContract
         Session::forget('packageName');
         Session::forget('packageToken');
         Session::forget('status');
-
+        Mail::to(Auth::user()->email)->send(new OrderMail($order));
+        Mail::to('stickitownit@gmail.com')->send(new OrderMail($order));
         return $invoiceNumber;
 
     }
