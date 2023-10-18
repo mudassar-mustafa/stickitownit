@@ -35,12 +35,13 @@ class ProductDetailController extends Controller
     {
         $productAttributeValues = [];
         $product = $this->productDetailRepository->getProductDetail($slug);
+        $reviews = $this->productDetailRepository->getProductReview($product->id);
         $relatedProducts = [];
         if (!empty($product->categories)) {
             $relatedProducts = $this->productDetailRepository->getProductsByCategoryId($product->categories[0]->slug);
         }
 
-        return view('frontend.pages.product.product_detail', compact('product', 'productAttributeValues','relatedProducts'));
+        return view('frontend.pages.product.product_detail', compact('product', 'productAttributeValues','relatedProducts', 'reviews'));
     }
 
     /**

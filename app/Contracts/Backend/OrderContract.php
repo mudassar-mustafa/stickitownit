@@ -20,4 +20,6 @@ interface OrderContract
 
     public function getOrderDetail($orderId);
 
+    public function storeFeedback(array $params);
+
 }

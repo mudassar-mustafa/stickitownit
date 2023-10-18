@@ -101,6 +101,7 @@ class OrderController extends Controller
     {
         try {
             $orderDetailHtml= "";
+            
             $order = $this->orderRepository->getOrderDetail($request->orderId);
 
             $orderDetailHtml = view('backend.pages.order.modal.order_detail', ['order' => $order])->render();
@@ -112,5 +113,31 @@ class OrderController extends Controller
             return $utilService->makeResponse(500, $exception->getMessage());
         }
     }
+
+    /**
+     * @param Request $request
+     * @param UtilService $utilService
+     * @return JsonResponse
+     */
+    public function storeFeedback(Request $request, UtilService $utilService)
+    {
+        try {
+            $message = "";
+            $params = $request->except('_token');
+            $status = $this->orderRepository->storeFeedback($params);
+            if($status == "update"){
+                $message = "Feedback update Successfully";
+            }else{
+                $message = "Feedback save Successfully";
+            }
+
+            return $utilService->makeResponse(200, $message, [], CommonEnum::SUCCESS_STATUS);
+
+        } catch (\Exception $exception) {
+            return $utilService->makeResponse(500, $exception->getMessage());
+        }
+    }
+
+    
 
 }

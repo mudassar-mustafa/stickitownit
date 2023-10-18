@@ -40,6 +40,9 @@ class OrderDataTable extends DataTable
             ->addColumn('order_total_amount', function ($order) {
                 return empty($order->order_total_amount) ? "--" : $order->order_total_amount;
             })
+            ->addColumn('feedback', function ($order) {
+                return empty($order->order_review) ? "--" : $order->order_review[0]->rating." Stars";
+            })
             ->addColumn('order_status', function ($order) {
                 if($order->order_status == "printed"){
                     return '<span class="badge rounded-pill btn btn-warning">Printed</span>';
@@ -63,11 +66,16 @@ class OrderDataTable extends DataTable
                     $updateStatus = '<button type="button" class="btn btn-primary" style="font-size: 10px;width: 100%; margin-bottom: 3px;" id="btnStatus'.$order->id.'" data-bs-toggle="modal" data-order_status ="'.$order->order_status.'"  onclick="updateStatus('.$order->id.');">Update Status</button>';
                 }
 
+                $feedback = "";
+                if($order->order_status == "delivered" && auth()->user()->hasrole('Customer') == true && empty($order->order_review)){
+                    $feedback = '<button type="button" class="btn btn-primary" style="font-size: 10px;width: 100%; margin-bottom: 3px;" id="btnStatus'.$order->id.'" data-bs-toggle="modal" data-order_status ="'.$order->order_status.'"  onclick="updateFeedback('.$order->id.');">Feedback</button>';
+                }
+
                 $orderDetail = '<button type="button" type="button" class="btn btn-info" style="font-size: 10px;width: 100%; color:#ffffff;" onclick="showOrderDetail('.$order->id.');">Order Detail</button>';
 
 
 
-                return $updateStatus.$orderDetail;
+                return $updateStatus.$feedback.$orderDetail;
             })->rawColumns(['action']);
     }
 
@@ -128,6 +136,8 @@ class OrderDataTable extends DataTable
             Column::make('Payment Method')->name('payment_method')->data("payment_method")
                 ->addClass('text-center'),
             Column::make('Total Amount')->name('order_total_amount')->data("order_total_amount")
+                ->addClass('text-center'),
+            Column::make('Feedback')->name('feedback')->data("feedback")
                 ->addClass('text-center'),
             Column::computed('action')
                 ->exportable(false)

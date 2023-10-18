@@ -81,4 +81,12 @@ class ProductAttributeGroup extends Model
     {
         return $this->hasMany(OrderSaleDetail::class, 'product_attribute_group_id', 'id');
     }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function product_group_review_detail(): HasMany
+    {
+        return $this->belongsToMany(ProductReview::class, 'product_attribute_group_id', 'id');
+    }
 }

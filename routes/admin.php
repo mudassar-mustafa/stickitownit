@@ -24,6 +24,9 @@ use App\Http\Controllers\Backend\PackageSubscriptionController;
 use App\Http\Controllers\ACL\RolesController;
 use App\Http\Controllers\ACL\PermissionsController;
 use App\Http\Controllers\Backend\SettingController;
+use App\Http\Controllers\Backend\DashboardController;
+
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');;
 
 Route::group(['prefix' => 'backend', 'middleware' => ['role:SuperAdmin|Admin|Seller']], function () {
 
@@ -267,5 +270,6 @@ Route::group(['prefix' => 'backend'], function () {
         Route::post('/update-order-status', 'updateOrderStatus')->name('backend.pages.order.updateOrderStatus')->middleware('role:SuperAdmin|Admin|Seller');
         Route::delete('/delete/{id}', 'destroy')->name('backend.pages.order.destroy')->middleware('role:SuperAdmin|Admin|Customer|Seller');
         Route::post('/getOrderDetail', 'getOrderDetail')->name('backend.pages.order.getOrderDetail')->middleware('role:SuperAdmin|Admin|Seller|Customer');
+        Route::post('/storeFeedback', 'storeFeedback')->name('backend.pages.order.storeFeedback')->middleware('role:Customer');
     });
 });

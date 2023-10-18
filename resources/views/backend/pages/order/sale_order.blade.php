@@ -1,6 +1,44 @@
 @extends('backend.layouts.app')
 @section('title','Orders')
 @push('css')
+<style>
+    .rating {
+        display: inline-flex;
+        margin-top: -10px;
+        flex-direction: row-reverse;
+    }
+
+    .rating>input {
+        display: none
+    }
+
+    .rating>label {
+        position: relative;
+        width: 28px;
+        font-size: 35px;
+        color: #ff0000;
+        cursor: pointer;
+    }
+
+    .rating>label::before {
+        content: "\2605";
+        position: absolute;
+        opacity: 0
+    }
+
+    .rating>label:hover:before,
+    .rating>label:hover~label:before {
+        opacity: 1 !important
+    }
+
+    .rating>input:checked~label:before {
+        opacity: 1
+    }
+
+    .rating:hover>input:checked~label:before {
+        opacity: 0.4
+    }
+</style>
 @endpush
 @section('content')
     <main id="main" class="main">
@@ -54,6 +92,44 @@
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                       <button type="button" type="button" class="btn btn-primary" onclick="updateOrderStatus()">Update</button>
+                    </div>
+                </form>
+                
+              </div>
+            </div>
+          </div>
+
+          {{-- Feedback Modal --}}
+
+          <div class="modal fade" id="feedback_modal" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Order Feedback</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form>
+                    <div class="modal-body">
+                        <input type="hidden" value="" id="order_id">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                                <div class="rating"> 
+                                    <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label> 
+                                    <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label> 
+                                    <input type="radio" name="rating" value="3" id="3"><label for="3">☆</label> 
+                                    <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label> 
+                                    <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label> 
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <label for="name" class="form-label">Remarks</label>
+                                <textarea class="form-control" placeholder="Remarks" id="feedback_remarks" name="feedback_remarks" style="height: 100px;"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" type="button" class="btn btn-primary" onclick="storeFeedback()">Submit</button>
                     </div>
                 </form>
                 
@@ -173,6 +249,47 @@
                 }
             });
                         
+        }
+
+        function updateFeedback(orderId) {
+            $("#order_id").val(orderId);
+            $("#feedback_modal").modal('show');
+        }
+
+        function storeFeedback() {
+            var rating = $('input[name="rating"]:checked').val();
+            var remarks = $('#feedback_remarks').val();
+            if(rating == "" || rating == undefined){
+                swal("Error!", "Please select rating", "error");
+                return;
+            }
+
+            if(remarks == "" || remarks == undefined){
+                swal("Error!", "Please enter remarks", "error");
+                return;
+            }
+
+            var csrf_token = $('meta[name="csrf-token"]').attr('content');
+            $.ajax({
+                type: 'POST',
+                async: false,
+                url: '{{route("backend.pages.order.storeFeedback")}}',
+                data: {
+                    orderId: $("#order_id").val(),
+                    rating: rating,
+                    remarks: remarks,
+                    _token: csrf_token
+                },
+                dataType: 'JSON',
+                success: function (data) {
+                    if (data.status == 'success') {
+                        swal("Success!", ""+data.message+"", "success");
+                        location.reload(true);
+                    }else{
+                        swal("Error!", ""+data.message+"", "error");
+                    }
+                }
+            });
         }
     </script>
 @endpush

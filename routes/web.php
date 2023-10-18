@@ -21,9 +21,6 @@ use Illuminate\Support\Facades\Route;
 
 require __DIR__ . '/frontend.php';
 
-Route::get('/dashboard', function () {
-    return view('backend.pages.index');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

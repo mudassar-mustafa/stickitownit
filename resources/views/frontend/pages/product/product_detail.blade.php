@@ -211,7 +211,7 @@
                                href="#pro-info-1" role="tab" aria-selected="true">Description</a>
 
                             <a class="nav-item nav-link" id="pro-info-3-tab" data-bs-toggle="tab" href="#pro-info-3"
-                               role="tab" aria-selected="false">Reviews (3)</a>
+                               role="tab" aria-selected="false">Reviews ({{ isset($reviews) ? count($reviews) : 0 }})</a>
                         </div>
                     </nav>
                     <div class="row">
@@ -230,155 +230,27 @@
                                         <div class="row">
                                             <div class="col-xl-10">
                                                 <div class="tabs-wrapper">
-                                                    <div class="course-review-item mb-30">
-                                                        <div class="course-reviews-img">
-                                                            <a href="#"><img src="assets/img/news/author-3.png"
-                                                                             alt="image not found"></a>
-                                                        </div>
-                                                        <div class="course-review-list">
-                                                            <h5><a href="#">Sotapdi Kunda</a></h5>
-                                                            <div class="course-start-icon">
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <span>55 min ago</span>
-                                                            </div>
-                                                            <p>Very clean and organized with easy to follow
-                                                                tutorials,
-                                                                Exercises,
-                                                                and
-                                                                solutions.
-                                                                This course does start from the beginning with very
-                                                                little
-                                                                knowledge
-                                                                and
-                                                                gives a
-                                                                great overview of common tools used for data science
-                                                                and
-                                                                progresses
-                                                                into
-                                                                more
-                                                                complex concepts and ideas.
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="course-review-item mb-30">
-                                                        <div class="course-reviews-img">
-                                                            <a href="#"><img src="assets/img/news/author-2.jpg"
-                                                                             alt="image not found"></a>
-                                                        </div>
-                                                        <div class="course-review-list">
-                                                            <h5><a href="#">Samantha</a></h5>
-                                                            <div class="course-start-icon">
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <span>45 min ago</span>
-                                                            </div>
-                                                            <p>The course is good at explaining very basic intuition
-                                                                of the
-                                                                concepts. It
-                                                                will get
-                                                                you scratching the surface so to say. where this
-                                                                course is
-                                                                unique is
-                                                                the
-                                                                implementation methods are so well defined Thank you
-                                                                to the
-                                                                team !.
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-xl-10">
-                                                            <div class="product__details-comment ">
-                                                                <div class="comment-title mb-20">
-                                                                    <h3>Add a review</h3>
-                                                                    <p>Your email address will not be published.
-                                                                        Required
-                                                                        fields are
-                                                                        marked
-                                                                        *</p>
+                                                    @if (!empty($reviews) && count($reviews) > 0)
+                                                        @foreach ($reviews as $review)
+                                                            <div class="course-review-item mb-30">
+                                                                <div class="course-reviews-img">
+                                                                    <a href="#"><img src="assets/img/news/author-3.png"
+                                                                                    alt="{{ $review->user_detail->name }}"></a>
                                                                 </div>
-                                                                <div class="comment-rating mb-20">
-                                                                    <span>Overall ratings</span>
-                                                                    <ul>
-                                                                        <li><a href="#"><i
-                                                                                    class="fas fa-star"></i></a>
-                                                                        </li>
-                                                                        <li><a href="#"><i
-                                                                                    class="fas fa-star"></i></a>
-                                                                        </li>
-                                                                        <li><a href="#"><i
-                                                                                    class="fas fa-star"></i></a>
-                                                                        </li>
-                                                                        <li><a href="#"><i
-                                                                                    class="fas fa-star"></i></a>
-                                                                        </li>
-                                                                        <li><a href="#"><i
-                                                                                    class="fal fa-star"></i></a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                                <div class="comment-input-box">
-                                                                    <form action="#">
-                                                                        <div class="row">
-                                                                            <div class="col-xxl-6">
-                                                                                <div class="cp-input-field">
-                                                                                    <label for="name">Your full
-                                                                                        name</label>
-                                                                                    <input type="text" id="name">
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-xxl-6">
-                                                                                <div class="cp-input-field">
-                                                                                    <label for="email">Your email
-                                                                                        (required)</label>
-                                                                                    <input type="email" id="email"
-                                                                                           required>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-xxl-12">
-                                                                                <div class="cp-input-field">
-                                                                                    <label for="message">Write your
-                                                                                        review*</label>
-                                                                                    <textarea id="message" required
-                                                                                              cols="30"
-                                                                                              rows="10"></textarea>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-xxl-12">
-                                                                                <div class="comment-submit mt-10">
-                                                                                    <a href="about.html"
-                                                                                       class="cp-border-btn">
-                                                                                        Submit review
-                                                                                        <span
-                                                                                            class="cp-border-btn__inner">
-                                                                                        <span
-                                                                                            class="cp-border-btn__blobs">
-                                                                                            <span
-                                                                                                class="cp-border-btn__blob"></span>
-                                                                                            <span
-                                                                                                class="cp-border-btn__blob"></span>
-                                                                                            <span
-                                                                                                class="cp-border-btn__blob"></span>
-                                                                                            <span
-                                                                                                class="cp-border-btn__blob"></span>
-                                                                                        </span>
-                                                                                    </span>
-                                                                                    </a>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </form>
+                                                                <div class="course-review-list">
+                                                                    <h5><a href="#">{{ $review->user_detail->name }} ({{ $review->user_detail->id }})</a></h5>
+                                                                    <div class="course-start-icon">
+                                                                        @for($i =0; $i < $review->rating; $i++)
+                                                                        <i class="fas fa-star"></i>
+                                                                        @endfor
+                                                                    
+                                                                    </div>
+                                                                    <p>{{ $review->remarks }}</p>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    </div>
+                                                        @endforeach
+                                                    @endif
+                                                    
                                                 </div>
                                             </div>
                                         </div>

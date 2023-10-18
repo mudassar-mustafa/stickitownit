@@ -5,7 +5,9 @@ namespace App\Repositories\Backend;
 use App\Models\Order;
 use App\Models\OrderSaleDetail;
 use App\Models\OrderPackageDetail;
+use App\Models\ProductReview;
 use App\Contracts\Backend\OrderContract;
+use Auth;
 
 class OrderRepository extends BaseRepository implements OrderContract
 {
@@ -76,5 +78,33 @@ class OrderRepository extends BaseRepository implements OrderContract
         }
 
         return $order;
+    }
+
+    public function storeFeedback(array $params){
+        $status = "save";
+        $productReviews = ProductReview::where('order_id', $params['orderId'])->where('user_id', Auth::user()->id)->get();
+        if(!empty($productReviews) && count($productReviews) > 0){
+            foreach ($productReviews as $key => $productReview) {
+                $productReview->rating = $params['rating'];
+                $productReview->remarks = $params['remarks'];
+                $productReview->save();
+                
+            }
+            $status = "update";
+        }else{
+            $getOrderProductGroupIds = OrderSaleDetail::where('order_id', $params['orderId'])->pluck('product_attribute_group_id')->toArray(); 
+            foreach ($getOrderProductGroupIds as $key => $getOrderProductGroupId) {
+                $productReview = new ProductReview;
+                $productReview->order_id = $params['orderId'];
+                $productReview->product_attribute_group_id = $getOrderProductGroupId;
+                $productReview->rating = $params['rating'];
+                $productReview->remarks = $params['remarks'];
+                $productReview->user_id = Auth::user()->id;
+                $productReview->save();
+            }
+            
+        }
+
+        return $status;
     }
 }

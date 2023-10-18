@@ -22,7 +22,7 @@ class Order extends Model
      */
     public function order_sale_details(): HasMany
     {
-        return $this->belongsToMany(OrderSaleDetail::class, 'order_id', 'id');
+        return $this->HasMany(OrderSaleDetail::class, 'order_id', 'id');
     }
 
     /**
@@ -63,5 +63,13 @@ class Order extends Model
     public function billing_city_detail(): BelongsTo 
     {
         return $this->belongsTo(City::class, 'billing_city_id', 'id');
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function order_review(): HasMany
+    {
+        return $this->HasMany(ProductReview::class, 'order_id', 'id');
     }
 }

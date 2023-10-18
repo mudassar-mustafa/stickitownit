@@ -7,6 +7,7 @@ use App\Models\ProductAttributeValueGroup;
 use App\Models\AttributeValue;
 use App\Models\ProductAttributeGroup;
 use App\Models\Cart;
+use App\Models\ProductReview;
 use App\Contracts\Frontend\ProductDetailContract;
 use Auth;
 
@@ -30,6 +31,12 @@ class ProductDetailRepository extends BaseRepository implements ProductDetailCon
             'attributes:id,name,slug',
             'attributes.attribute_values:id,name,slug,attribute_id',
         ])->where('slug', $slug)->first();
+    }
+
+    public function getProductReview($productId){
+        return ProductReview::with(['user_detail:id,name,profile_image'])->whereHas('product_attribute_group_detail', function($q) use($productId){
+            $q->where('product_id', $productId);
+        })->get();
     }
 
     /**

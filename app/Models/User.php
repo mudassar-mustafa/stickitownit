@@ -89,4 +89,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(Order::class, 'seller_id', 'id');
     }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function review_user_detail(): HasMany
+    {
+        return $this->belongsToMany(ProductReview::class, 'user_id', 'id');
+    }
 }
