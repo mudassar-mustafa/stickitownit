@@ -11,7 +11,7 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="{{ asset('backend/img/favicon.png')}}" rel="icon">
+  <link href="{{ asset('storage/uploads/settings/'.$setting->logo_header) }}" rel="icon">
   <link href="{{ asset('backend/img/apple-touch-icon.png')}}" rel="apple-touch-icon">
 
   <!-- Google Fonts -->

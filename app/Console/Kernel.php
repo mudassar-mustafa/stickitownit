@@ -10,6 +10,7 @@ class Kernel extends ConsoleKernel
 
     protected $commands = [
         Commands\ProductImportCron::class,
+        Commands\PackageExpireCron::class,
     ];
     /**
      * Define the application's command schedule.
@@ -17,6 +18,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule): void
     {
         $schedule->command('productImport:cron')->hourly();
+        $schedule->command('packageExpire:cron')->hourly();
         // $schedule->command('inspire')->hourly();
     }
 

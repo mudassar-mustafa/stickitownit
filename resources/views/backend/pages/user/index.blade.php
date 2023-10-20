@@ -13,12 +13,12 @@
                                 <div class="col-md-6">
                                     <h4 class="card-title"> Users</h4>
                                 </div>
-                                <div class="col-md-6">
+                                {{-- <div class="col-md-6">
                                     <a href="{{route('backend.pages.users.create')}}" class="float-end">
                                         <button type="button" class="btn btn-primary me-1 pull-right">Add New User
                                         </button>
                                     </a>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                         <div class="card-body">

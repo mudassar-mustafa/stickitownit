@@ -19,7 +19,7 @@ class LandingRepository extends BaseRepository implements LandingContract
      * @return mixed
      */
     public function getPackages(){
-        return Package::where('status', 'active')->get();
+        return Package::where('status', 'active')->where('name', '!=', 'free')->get();
     }
 
 }

@@ -42,8 +42,9 @@ class UserController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(): View
+    public function create()
     {
+        return redirect()->back();
         return view('backend.pages.user.create');
     }
 

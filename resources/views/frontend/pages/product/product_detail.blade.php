@@ -186,7 +186,7 @@
                         @if ($product->product_type != "normal" && !empty($product->attributes))
                         <input class="form-control" type="file" id="uploadFile" name="uploadFile"onchange="uploadUserFile()">
                         <img src="" class="rounded mx-auto d-block hidden uploadImage" alt="" style="width: 200px; height:200px">
-                        <a href="javascript:void(0);" onclick="addToCart('{{ auth()->check() }}', 'sticker')" class="cp-border-btn cp-il hidden shopping-basket">
+                        <a href="javascript:void(0);" onclick="addToCart('{{ auth()->check() }}', '{{ auth()->check() == true && auth()->user()->hasRole('SuperAdmin|Admin|Seller') == true ? 'admin' : 'customer' }}', 'sticker')" class="cp-border-btn cp-il hidden shopping-basket">
                             <i class="fas fa-shopping-basket"></i>Add to
                             Cart
                             <span class="cp-border-btn__inner">
@@ -234,7 +234,7 @@
                                                         @foreach ($reviews as $review)
                                                             <div class="course-review-item mb-30">
                                                                 <div class="course-reviews-img">
-                                                                    <a href="#"><img src="assets/img/news/author-3.png"
+                                                                    <a href="#"><img src="https://ui-avatars.com/api/?name={{ $review->user_detail->name }}+&color=7F9CF5&background=EBF4FF"
                                                                                     alt="{{ $review->user_detail->name }}"></a>
                                                                 </div>
                                                                 <div class="course-review-list">
@@ -497,10 +497,14 @@
             fileReader.readAsDataURL(f);
         }
 
-        function addToCart(user, type){
+        function addToCart(user, userType, type){
             if(user == false){
                 window.location.href = "{{ url('/login') }}";
             }else{
+                if(userType == "admin"){
+                    toastr.info("Admin can't add product in cart.");
+                    return false;
+                }
                 var csrf_token = $('meta[name="csrf-token"]').attr('content');
                 var form_data = new FormData();
                 if(document.getElementById('uploadFile').files[0] != undefined){

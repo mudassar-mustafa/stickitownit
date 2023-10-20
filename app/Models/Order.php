@@ -28,7 +28,7 @@ class Order extends Model
     */
     public function buyer_detail(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'buyer_id', 'id');
+        return $this->belongsTo(User::class, 'buyer_id', 'id')->withTrashed();
     }
 
     /**
@@ -36,7 +36,7 @@ class Order extends Model
     */
     public function seller_detail(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'seller_id', 'id');
+        return $this->belongsTo(User::class, 'seller_id', 'id')->withTrashed();
     }
 
     /**
@@ -44,7 +44,7 @@ class Order extends Model
     */
     public function billing_country_detail(): BelongsTo
     {
-        return $this->belongsTo(Country::class, 'billing_country_id', 'id');
+        return $this->belongsTo(Country::class, 'billing_country_id', 'id')->withTrashed();
     }
 
     /**
@@ -52,7 +52,7 @@ class Order extends Model
     */
     public function billing_state_detail(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'billing_state_id', 'id');
+        return $this->belongsTo(User::class, 'billing_state_id', 'id')->withTrashed();
     }
 
     /**
@@ -60,7 +60,7 @@ class Order extends Model
     */
     public function billing_city_detail(): BelongsTo
     {
-        return $this->belongsTo(City::class, 'billing_city_id', 'id');
+        return $this->belongsTo(City::class, 'billing_city_id', 'id')->withTrashed();
     }
 
     /**

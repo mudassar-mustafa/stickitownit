@@ -41,7 +41,11 @@ class OrderDataTable extends DataTable
                 return empty($order->order_total_amount) ? "--" : $order->order_total_amount;
             })
             ->addColumn('feedback', function ($order) {
-                return empty($order->order_review) ? "--" : $order->order_review[0]->rating." Stars";
+                if(empty($order->order_review) || count($order->order_review) == 0 || is_null($order->order_review[0])){
+                    return "--";
+                }else{
+                    return $order->order_review[0]->rating." Stars";
+                }
             })
             ->addColumn('order_status', function ($order) {
                 if($order->order_status == "printed"){
