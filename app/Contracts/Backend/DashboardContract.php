@@ -22,4 +22,10 @@ interface DashboardContract
 
 
     public function getTotalUsers();
+
+    public function getCountries();
+
+    public function getStates($countryId);
+
+    public function getCities($stateId);
 }

@@ -174,6 +174,52 @@
                                                        value="{{ $user->phone_number }}">
                                             </div>
                                         </div>
+                                        <div class="row mb-3">
+                                            <label for="country_id" class="col-md-4 col-lg-3 col-form-label">Country</label>
+                                            <div class="col-md-8 col-lg-9">
+                                                <select id="country" class="form-select" name="country_id" onchange="getStates();">
+                                                    <option value="">Please Select Country</option>
+                                                    @if (!empty($countries) && count($countries) > 0)
+                                                        @foreach ($countries as $country)
+                                                            <option value="{{ $country->id }}" {{ isset($user->country_id) && $user->country_id == $country->id ? "selected" : ""  }}>{{ $country->name }}</option>
+                                                        @endforeach
+                                                    @endif
+                                                </select>
+                                                @if ($errors->has('country_id'))
+                                                    <div class="invalid-feedback">
+                                                        {{ $errors->first('country_id') }}
+                                                    </div>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <input type="hidden" value="{{ isset($user->city_id) ? $user->city_id : 0 }}" id="user_city_id">
+                                        <input type="hidden" value="{{ isset($user->state_id) ? $user->state_id : 0 }}" id="user_state_id">
+                                        <div class="row mb-3">
+                                            <label for="state_id" class="col-md-4 col-lg-3 col-form-label">State</label>
+                                            <div class="col-md-8 col-lg-9">
+                                                <select id="state" class="form-select" name="state_id" onchange="getCities();">
+                                                    <option value="">Please Select State</option>
+                                                </select>
+                                                @if ($errors->has('state_id'))
+                                                    <div class="invalid-feedback">
+                                                        {{ $errors->first('state_id') }}
+                                                    </div>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <label for="city_id" class="col-md-4 col-lg-3 col-form-label">City</label>
+                                            <div class="col-md-8 col-lg-9">
+                                                <select id="city" class="form-select" name="city_id">
+                                                    <option value="">Please Select City</option>
+                                                </select>
+                                                @if ($errors->has('city_id'))
+                                                    <div class="invalid-feedback">
+                                                        {{ $errors->first('city_id') }}
+                                                    </div>
+                                                @endif
+                                            </div>
+                                        </div>
                                         <div class="text-center">
                                             <button type="submit" class="btn btn-primary">Save Changes</button>
                                         </div>
@@ -251,4 +297,78 @@
 
 @endsection
 @push('scripts')
+
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#country').select2();
+        $('#state').select2();
+        $('#city').select2();
+        if($("#user_state_id").val() != 0 && $("#user_city_id").val() != 0){
+            getStates();
+            getCities();
+        }
+        
+    });
+    async function getStates() {
+        var csrf_token = $('meta[name="csrf-token"]').attr('content');
+        const url = '{{route("backend.pages.profile.getStates")}}';
+        var data = {
+            'country_id': $("#country").val(),
+            _token: csrf_token
+        };
+        try {
+            const result = await doAjax(url, data);
+            if (result['data'] != null) {
+                var html = '<option value="">Please Select State</option>';
+                $("#state").empty();
+                if(result['data'] != null){
+                    for (let index = 0; index < result['data'].length; index++) {
+                        if($("#user_state_id").val() != 0 && $("#user_state_id").val() == result['data'][index]['id']){
+                            html +='<option value='+result['data'][index]['id']+' selected>'+result['data'][index]['name']+'</option>';
+                        }else{
+                            html +='<option value='+result['data'][index]['id']+'>'+result['data'][index]['name']+'</option>';
+                        }
+                    }
+                    $("#state").append(html);
+                    $("#state").select2();
+                }
+            } else {
+            }
+        } catch (error) {
+            console.log('Error! InsertAssignments:', error);
+        }
+
+    }
+
+    async function getCities() {
+        var csrf_token = $('meta[name="csrf-token"]').attr('content');
+        const url = '{{route("backend.pages.profile.getCities")}}';
+        var data = {
+            'state_id': $("#state").val() == "" ? $("#user_state_id").val() : $("#state").val(),
+            _token: csrf_token
+        };
+        try {
+            const result = await doAjax(url, data);
+            if (result['data'] != null) {
+                var html = '<option value="">Please Select City</option>';
+                $("#city").empty();
+                if(result['data'] != null){
+                    for (let index = 0; index < result['data'].length; index++) {
+                        if($("#user_city_id").val() != 0 && $("#user_city_id").val() == result['data'][index]['id']){
+                            html +='<option value='+result['data'][index]['id']+' selected>'+result['data'][index]['name']+'</option>';
+                        }else{
+                            html +='<option value='+result['data'][index]['id']+'>'+result['data'][index]['name']+'</option>';
+                        }
+                    }
+                    $("#city").append(html);
+                    $("#city").select2();
+                }
+            } else {
+            }
+        } catch (error) {
+            console.log('Error! InsertAssignments:', error);
+        }
+    }
+</script>
 @endpush

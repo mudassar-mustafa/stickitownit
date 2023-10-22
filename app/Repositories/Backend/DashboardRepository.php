@@ -4,6 +4,9 @@ namespace App\Repositories\Backend;
 
 use App\Models\User;
 use App\Models\Order;
+use App\Models\Country;
+use App\Models\State;
+use App\Models\City;
 use App\Models\PackageSubscription;
 use Auth;
 use App\Contracts\Backend\DashboardContract;
@@ -47,6 +50,18 @@ class DashboardRepository extends BaseRepository implements DashboardContract
 
     public function getTotalUsers(){
         return User::where('user_type', 'Customer')->count();
+    }
+
+    public function getCountries(){
+        return Country::where('status', 'active')->get();
+    }
+
+    public function getStates($countryId){
+        return State::where('status', 'active')->where('country_id', $countryId)->get();
+    }
+
+    public function getCities($stateId){
+        return City::where('status', 'active')->where('state_id', $stateId)->get();
     }
 
 }

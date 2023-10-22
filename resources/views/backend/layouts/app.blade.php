@@ -77,6 +77,18 @@
   @stack('js_file')
   @stack('scripts')
 
+  <script>
+        async function doAjax(url, params = {}, method = 'POST') {
+            return $.ajax({
+                url: url,
+                type: method,
+                async: false,
+                dataType: 'json',
+                data: params
+            });
+        }
+    </script>
+
 <script>
 
     function readURL(input) {

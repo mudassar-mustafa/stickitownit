@@ -2,7 +2,6 @@
 
 use \App\Http\Controllers\Frontend\LandingController;
 use \App\Http\Controllers\Frontend\BlogController;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Frontend\ProductDetailController;
 use App\Http\Controllers\Frontend\CartController;
 
@@ -23,9 +22,6 @@ require __DIR__ . '/frontend.php';
 
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::post('add-to-cart', [ProductDetailController::class, 'addToCart'])->name('product.addToCart');
     Route::post('remove-to-cart', [CartController::class, 'removeToCart'])->name('product.removeToCart');
     Route::post('place-order', [CartController::class, 'placeOrder'])->name('placeOrder');
