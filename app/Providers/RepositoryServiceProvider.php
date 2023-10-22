@@ -28,6 +28,7 @@ use App\Contracts\Backend\DashboardContract;
 use App\Contracts\Frontend\ProductDetailContract;
 use App\Contracts\Frontend\CartContract;
 use App\Contracts\Frontend\LandingContract;
+use App\Contracts\Frontend\BlogPageContract;
 
 
 
@@ -53,13 +54,15 @@ use App\Repositories\Backend\ProductRepository;
 use App\Repositories\Backend\OrderRepository;
 use App\Repositories\Backend\PackageSubscriptionRepository;
 use App\Repositories\Backend\DashboardRepository;
+use App\Repositories\Backend\QuoteRepository;
+use App\Repositories\Backend\ContactUsRepository;
 
 //Frontend
 use App\Repositories\Frontend\ProductDetailRepository;
 use App\Repositories\Frontend\CartRepository;
 use App\Repositories\Frontend\LandingRepository;
-use App\Repositories\Backend\ContactUsRepository;
-use App\Repositories\Backend\QuoteRepository;
+use App\Repositories\Frontend\BlogPageRepository;
+
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -89,6 +92,7 @@ class RepositoryServiceProvider extends ServiceProvider
         LandingContract::class => LandingRepository::class,
         PackageSubscriptionContract::class => PackageSubscriptionRepository::class,
         DashboardContract::class => DashboardRepository::class,
+        BlogPageContract::class => BlogPageRepository::class,
     ];
 
     /**

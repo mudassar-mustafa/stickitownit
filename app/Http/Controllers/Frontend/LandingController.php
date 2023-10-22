@@ -10,7 +10,7 @@ use App\Contracts\Frontend\LandingContract;
 class LandingController extends Controller
 {
     /**
-     * @var CartContract
+     * @var LandingContract
      */
     protected $landingRepository;
 
