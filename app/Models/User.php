@@ -11,10 +11,11 @@ use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Traits\UploadFile;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles, SoftDeletes;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles, SoftDeletes, UploadFile;
 
     /**
      * The attributes that are mass assignable.
@@ -64,6 +65,30 @@ class User extends Authenticatable
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = Hash::make($value);
+    }
+
+    /**
+     * Always the icon when it is updated.
+     * @param $value
+     * @return string
+     */
+    public function setProfileImageAttribute($value)
+    {
+        $imageName = '';
+        if (!is_null($value) && $value !== '') {
+            $imageName =  $this->upload($value, 'profileImages');
+            $this->attributes['profile_image'] = $imageName;
+        }
+    }
+
+
+    /**
+     * @param $value
+     * @return string
+     */
+    public function getProfileImageAttribute($value): String
+    {
+        return asset('/storage/uploads/profileImages/' . $value);
     }
 
     /**

@@ -1,6 +1,26 @@
 @extends('backend.layouts.app')
 @section('title','Profile')
 @push('css')
+<style>
+    .btn_upload {
+        cursor: pointer;
+        display: inline-block;
+        overflow: hidden;
+        position: relative;
+        color: #fff;
+        background-color: #2a72d4;
+        border: 1px solid #166b8a;
+        padding: 5px 10px;
+    }
+    .btn_upload input {
+        cursor: pointer;
+        height: 100%;
+        position: absolute;
+        filter: alpha(opacity=1);
+        -moz-opacity: 0;
+        opacity: 0;
+    }
+</style>
 @endpush
 @section('content')
     <main id="main" class="main">
@@ -116,14 +136,14 @@
                                             <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile
                                                 Image</label>
                                             <div class="col-md-8 col-lg-9">
-                                                <img
-                                                    src="{{ !is_null($user->profile_pic) ? asset('backend/img/profile-img.jpg') : asset('backend/img/profile-img.jpg') }}"
+                                                <img class="ImgPreview" style="width: 120px;height: 120px;object-fit: fill;"
+                                                    src="{{ !is_null($user->profile_image) ? $user->profile_image : asset('backend/img/profile-img.jpg') }}"
                                                     alt="Profile">
                                                 <div class="pt-2">
-                                                    <a href="#" class="btn btn-primary btn-sm"
-                                                       title="Upload new profile image"><i class="bi bi-upload"></i></a>
-                                                    <a href="#" class="btn btn-danger btn-sm"
-                                                       title="Remove my profile image"><i class="bi bi-trash"></i></a>
+                                                    <span class="btn_upload btn btn-primary btn-sm">
+                                                        <input type="file" id="imag" title="" class="input-img" name="profile_image"/>
+                                                        <i class="bi bi-upload"></i>
+                                                        </span>
                                                 </div>
                                             </div>
                                         </div>
@@ -307,6 +327,22 @@
         if($("#user_state_id").val() != 0 && $("#user_city_id").val() != 0){
             getStates();
             getCities();
+        }
+
+        $("#imag").change(function() {
+
+            var imgControlName = ".ImgPreview";
+            readURL(this, imgControlName);
+        });
+
+        function readURL(input, imgControlName) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                $(imgControlName).prop('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
         }
         
     });
