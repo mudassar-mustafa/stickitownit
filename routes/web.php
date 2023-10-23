@@ -4,6 +4,7 @@ use \App\Http\Controllers\Frontend\LandingController;
 use \App\Http\Controllers\Frontend\BlogController;
 use App\Http\Controllers\Frontend\ProductDetailController;
 use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\Frontend\SocialController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -17,6 +18,9 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get('auth/google', [SocialController::class, 'signInwithGoogle']);
+Route::get('callback/google', [SocialController::class, 'callbackToGoogle']);
 
 require __DIR__ . '/frontend.php';
 

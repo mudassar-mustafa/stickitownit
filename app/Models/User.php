@@ -29,6 +29,7 @@ class User extends Authenticatable
         'phone_number',
         'user_type',
         'status',
+        'google_user_id',
         'cnic',
         'country_id',
         'state_id',

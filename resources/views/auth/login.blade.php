@@ -72,6 +72,7 @@
                                 </div>
                                 <div class="cp-sign-btn mt-35 mb-30">
                                     <button type="submit" class="cp-border2-btn">Sign In</button>
+                                    <a href="{{ url('auth/google') }}"><button type="button" class="cp-border2-btn">Google Login</button></a>
                                 </div>
                                 <div class="no-account">
                                     <span>Don't have an account? <a href="{{ route('register') }}">Sign Up</a></span>

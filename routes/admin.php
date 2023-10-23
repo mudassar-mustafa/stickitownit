@@ -29,6 +29,18 @@ use App\Http\Controllers\ProfileController;
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');;
 
+
+Route::group(['prefix' => 'backend', 'middleware' => ['role:SuperAdmin|Admin|Seller|Customer']], function () {
+    //  Profile Routes
+    Route::controller(ProfileController::class)->group(function () {
+        Route::get('/profile', 'edit')->name('profile.edit');
+        Route::patch('/profile', 'update')->name('profile.update');
+        Route::delete('/profile',  'destroy')->name('profile.destroy');
+        Route::post('/getStates', 'getStates')->name('backend.pages.profile.getStates');
+        Route::post('/getCities', 'getCities')->name('backend.pages.profile.getCities');
+    });
+});
+
 Route::group(['prefix' => 'backend', 'middleware' => ['role:SuperAdmin|Admin|Seller']], function () {
 
 //  User Routes
@@ -39,15 +51,6 @@ Route::group(['prefix' => 'backend', 'middleware' => ['role:SuperAdmin|Admin|Sel
         Route::get('/{id}/edit', 'edit')->name('backend.pages.users.edit');
         Route::post('/{id}/update', 'update')->name('backend.pages.users.update');
         Route::delete('/delete/{id}', 'destroy')->name('backend.pages.users.destroy');
-    });
-
-    //  Profile Routes
-    Route::controller(ProfileController::class)->group(function () {
-        Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-        Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-        Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-        Route::post('/getStates', 'getStates')->name('backend.pages.profile.getStates');
-        Route::post('/getCities', 'getCities')->name('backend.pages.profile.getCities');
     });
 
 //  Brands Routes
