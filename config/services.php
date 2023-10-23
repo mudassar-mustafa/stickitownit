@@ -33,7 +33,7 @@ return [
     'google' => [
         'client_id' => '121553683732-qjeo56nou8ld9sdhshmkt4gqnr0l8jdo.apps.googleusercontent.com',
         'client_secret' => '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',
-        'redirect' => 'http://localhost:8000/callback/google',
+        'redirect' => 'https://stickitownit.com/callback/google',
       ],
 
 ];
