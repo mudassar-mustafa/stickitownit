@@ -30,6 +30,7 @@
 
   <!-- Template Main CSS File -->
   <link href="{{ asset('backend/css/style.css')}}" rel="stylesheet">
+  <link rel="stylesheet" href="{{ asset('assets/css/toastr.min.css') }}">
 
   @stack('css_file')
   @stack('css')
@@ -73,6 +74,7 @@
 
   <!-- Template Main JS File -->
   <script src="{{ asset('backend/js/main.js')}}"></script>
+  <script src="{{ asset('assets/js/toastr.min.js') }}"></script>
 
   @stack('js_file')
   @stack('scripts')
@@ -144,6 +146,18 @@
         }
     }
 </script>
+
+@if (Session::has('status') && Session::get('status') == "success")
+    <script>
+        toastr.success("{{ Session::get('message') }}");
+    </script>
+@endif
+
+@if (Session::has('status') && Session::get('status') == "error")
+    <script>
+        toastr.success("{{ Session::get('message') }}");
+    </script>
+@endif
 
 </body>
 
