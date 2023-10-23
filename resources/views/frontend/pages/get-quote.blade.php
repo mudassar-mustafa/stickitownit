@@ -192,9 +192,10 @@
                                                 <div class="cp-input-field">
                                                     <label for="fileupload">Upload File Here</label>
                                                     <div class="cp-input-wrap cp-file t-center">
-                                                        <h5>Drag file here or click the button below</h5>
+                                                        <img src="" style="height: 200px; width: 200px; display:none;" class="ImgPreview">
+                                                        <h5 class="hide">Drag file here or click the button below</h5>
                                                         <input type="file" id="fileupload" name="file">
-                                                        <button class="cp-border2-btn">Upload File Here</button>
+                                                        <button class="cp-border2-btn hide">Upload File Here</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -233,6 +234,24 @@
     <script>
         $(document).ready(function () {
             $('.js-example-basic-single').select2();
+            $("#fileupload").change(function() {
+                debugger;
+                var imgControlName = ".ImgPreview";
+                $(".hide").css('display','none');
+                $(imgControlName).css('display','inline');
+                readURL(this, imgControlName);
+
+            });
+
+            function readURL(input, imgControlName) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                    $(imgControlName).prop('src', e.target.result);
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
         });
     </script>
 @endpush
