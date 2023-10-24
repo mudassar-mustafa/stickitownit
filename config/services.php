@@ -34,6 +34,10 @@ return [
         'client_id' => '121553683732-qjeo56nou8ld9sdhshmkt4gqnr0l8jdo.apps.googleusercontent.com',
         'client_secret' => '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',
         'redirect' => 'https://stickitownit.com/callback/google',
-      ],
+    ],
+
+    'leonardo' => [
+        'LEONARDO_API_KEY' => env('LEONARDO_API_KEY')
+    ]
 
 ];

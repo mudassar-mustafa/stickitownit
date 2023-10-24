@@ -26,5 +26,75 @@ class Helper
         return response()->json($message);
     }
 
+    public function getGenerations($generationId){
+
+
+        $curl = curl_init();
+        $token = 'Bearer ' . config('services.leonardo')['LEONARDO_API_KEY'];
+        curl_setopt_array($curl, [
+            CURLOPT_URL => "https://cloud.leonardo.ai/api/rest/v1/generations/c99e7e5a-01ba-4394-bf74-ba8c58e08290",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => [
+                "accept: application/json",
+                "authorization: $token"
+            ],
+        ]);
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        if ($err) {
+            return "cURL Error #:" . $err;
+        } else {
+            return json_decode($response,true);
+        }
+    }
+
+    public function createGeneration(array $params){
+
+
+        $curl = curl_init();
+        $token = 'Bearer ' . config('services.leonardo')['LEONARDO_API_KEY'];
+        curl_setopt_array($curl, [
+            CURLOPT_URL => "https://cloud.leonardo.ai/api/rest/v1/generations",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => json_encode([
+                'height' => 512,
+                'modelId' => '6bef9f1b-29cb-40c7-b9df-32b51c1f67d3',
+                'prompt' => 'An oil painting of a cat',
+                'width' => 512,
+                'num_images' => 1
+            ]),
+            CURLOPT_HTTPHEADER => [
+                "accept: application/json",
+                "authorization: $token",
+                "content-type: application/json"
+            ],
+        ]);
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        if ($err) {
+            return "cURL Error #:" . $err;
+        } else {
+            return json_decode($response,true);
+        }
+    }
+
 
 }
