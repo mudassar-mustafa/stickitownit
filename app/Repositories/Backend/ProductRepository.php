@@ -41,10 +41,8 @@ class ProductRepository extends BaseRepository implements ProductContract
     {
         $product = Product::with([
             'categories:id,name',
-            'brand:id,name'
-//            'attributes:id,name',
-//            'product_groups.attribute_values',
-//            'attribute_values'
+            'brand:id,name',
+            'normal_product_groups:id,product_id,main_image,short_description,quantity,price'
             ])->where('id', $id)->first();
         return $product;
     }
@@ -66,19 +64,19 @@ class ProductRepository extends BaseRepository implements ProductContract
         $product->title = $params['title'];
         $product->slug = \Str::slug(strtolower($params['title']));
         $product->title = $params['title'];
-        $product->short_description = $params['short_description'];
-        $product->description = $params['description'];
-        if(isset($params['main_image'])){
-            $product->main_image = $params['main_image'];
-        }
         $product->brand_id = $params['brand_id'];
         $product->product_type = $params['product_type'];
+        $product->description = $params['description'];
         if(isset($params['shipping_type'])){
             $product->shipping_type = $params['shipping_type'];
             if($params['shipping_type'] == "fixed"){
                 $product->shipping_fee = $params['shipping_fee'];
             }
         }
+        if(isset($params['main_image'])){
+            $product->main_image = $params['main_image'];
+        }
+        $product->short_description = $params['short_description'];
 
         $product->user_id = Auth::user()->id;
         $product->save();
@@ -89,9 +87,23 @@ class ProductRepository extends BaseRepository implements ProductContract
 
 
         if($params['product_type'] == "normal"){
-            $product->quantity = $params['quantity'];
-            $product->price = $params['price'];
-            $product->save();
+
+            $productAttributeGroup = ProductAttributeGroup::where('product_id', $product->id)->first();
+            if(empty($productAttributeGroup)){
+                $productAttributeGroup = new ProductAttributeGroup;
+            }
+
+            $productAttributeGroup->product_id = $product->id;
+            if(isset($params['main_image'])){
+                $productAttributeGroup->main_image = $params['main_image'];
+            }
+            $productAttributeGroup->short_description = $params['short_description'];
+            $productAttributeGroup->quantity = $params['quantity'];
+            $productAttributeGroup->sku = "product-".$product->id."";
+            $productAttributeGroup->price = $params['price'];
+            $productAttributeGroup->visibilty = true;
+            $productAttributeGroup->save();
+            
         }else{
             // Check and Store Attribute, Check and Store Attribute values,  Create and update product Attribute,
 

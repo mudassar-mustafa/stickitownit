@@ -89,7 +89,7 @@
                         <h4 class="product-name">{{ $product->title ?? "" }}</h4>
                         @if ($product->product_type == "normal")
                             <div class="product-price">
-                                <span class="price-now">${{ $product->price }}</span>
+                                <span class="price-now">${{ $product->normal_product_groups->price }}</span>
                             </div>
                         @endif
 
@@ -179,7 +179,7 @@
                         @if ($product->product_type == "normal")
                             <div class="product-d-meta tags mb-10">
                                 <span>Available :</span>
-                                <span>{{ $product->quantity }}</span>
+                                <span>{{ $product->normal_product_groups->quantity }}</span>
                             </div>
                         @endif
 

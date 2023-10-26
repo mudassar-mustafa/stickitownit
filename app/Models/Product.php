@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use App\Traits\UploadFile;
 
 class Product extends Model
@@ -24,14 +25,14 @@ class Product extends Model
      * @param $value
      * @return string
      */
-    // public function setMainImageAttribute($value)
-    // {
-    //     $imageName = '';
-    //     if (!is_null($value) && $value !== '') {
-    //         $imageName =  $this->upload($value, 'products');
-    //         $this->attributes['main_image'] = $imageName;
-    //     }
-    // }
+    public function setMainImageAttribute($value)
+    {
+        $imageName = '';
+        if (!is_null($value) && $value !== '') {
+            $imageName =  $this->upload($value, 'products');
+            $this->attributes['main_image'] = $imageName;
+        }
+    }
 
 
     /**
@@ -74,6 +75,16 @@ class Product extends Model
     public function product_groups(): HasMany
     {
         return $this->hasMany(ProductAttributeGroup::class,'product_id','id');
+    }
+
+    /**
+    * @return HasOne
+    */
+    public function normal_product_groups(): HasOne
+    {
+        return $this->hasOne(ProductAttributeGroup::class,'product_id','id')->whereHas('product', function($q) {
+            $q->where('product_type', 'normal');
+        });
     }
 
     /**

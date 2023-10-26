@@ -30,6 +30,7 @@ class ProductDetailRepository extends BaseRepository implements ProductDetailCon
             'categories:id,name,slug',
             'attributes:id,name,slug',
             'attributes.attribute_values:id,name,slug,attribute_id',
+            'normal_product_groups:id,product_id,main_image,short_description,quantity,price'
         ])->where('slug', $slug)->first();
     }
 
