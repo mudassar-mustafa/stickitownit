@@ -58,8 +58,6 @@ class Helper
 
     public static function createGeneration(array $params){
 
-        dd("11111");
-
         $curl = curl_init();
         $token = 'Bearer ' . config('services.leonardo')['LEONARDO_API_KEY'];
         curl_setopt_array($curl, [

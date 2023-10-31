@@ -103,8 +103,8 @@ class LandingController extends Controller
         $params['prompt'] = 'An oil painting of a cat';
         $params['width'] = 512;
         $params['num_images'] = 1;
-        Helper::createGeneration($params);
-        return "dfdsf";
+        $data = Helper::createGeneration($params);
+        return $data;
     }
 
     public function leonardoApiCallBack()
