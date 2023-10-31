@@ -7,6 +7,7 @@ use App\Http\Enums\CommonEnum;
 use Illuminate\Http\Request;
 use App\Contracts\Frontend\LandingContract;
 use App\Helpers\Helper;
+
 class LandingController extends Controller
 {
     /**
@@ -107,7 +108,7 @@ class LandingController extends Controller
         return $data;
     }
 
-    public function leonardoApiCallBack()
+    public function leonardoApiCallBack(Request $request)
     {
         \Log::info("function hit");
         return "dfdsf";
