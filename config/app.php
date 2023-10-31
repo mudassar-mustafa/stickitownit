@@ -191,6 +191,7 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        'Helper' => App\Helpers\Helper::class,
     ])->toArray(),
 
     'stripe' => [

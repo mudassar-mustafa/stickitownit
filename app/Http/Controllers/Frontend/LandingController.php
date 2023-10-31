@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Enums\CommonEnum;
 use Illuminate\Http\Request;
 use App\Contracts\Frontend\LandingContract;
-
+use App\Helpers\Helper;
 class LandingController extends Controller
 {
     /**
@@ -93,5 +93,23 @@ class LandingController extends Controller
     {
         $packages = $this->landingRepository->getPackages();
         return view('frontend.pages.packages', compact('packages'));
+    }
+
+    public function leonardoApi()
+    {
+        $params = [];
+        $params['height'] = 512;
+        $params['modelId'] = '6bef9f1b-29cb-40c7-b9df-32b51c1f67d3';
+        $params['prompt'] = 'An oil painting of a cat';
+        $params['width'] = 512;
+        $params['num_images'] = 1;
+        Helper::createGeneration($params);
+        return "dfdsf";
+    }
+
+    public function leonardoApiCallBack()
+    {
+        \Log::info("function hit");
+        return "dfdsf";
     }
 }

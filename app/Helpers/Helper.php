@@ -26,9 +26,8 @@ class Helper
         return response()->json($message);
     }
 
-    public function getGenerations($generationId){
-
-
+    public static function getGenerations($generationId){
+        dd("sdasds");
         $curl = curl_init();
         $token = 'Bearer ' . config('services.leonardo')['LEONARDO_API_KEY'];
         curl_setopt_array($curl, [
@@ -57,8 +56,9 @@ class Helper
         }
     }
 
-    public function createGeneration(array $params){
+    public static function createGeneration(array $params){
 
+        dd("11111");
 
         $curl = curl_init();
         $token = 'Bearer ' . config('services.leonardo')['LEONARDO_API_KEY'];
@@ -71,11 +71,11 @@ class Helper
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => "POST",
             CURLOPT_POSTFIELDS => json_encode([
-                'height' => 512,
-                'modelId' => '6bef9f1b-29cb-40c7-b9df-32b51c1f67d3',
-                'prompt' => 'An oil painting of a cat',
-                'width' => 512,
-                'num_images' => 1
+                'height' => $params['height'],
+                'modelId' => $params['modelId'],
+                'prompt' => $params['prompt'],
+                'width' => $params['width'],
+                'num_images' => $params['num_images']
             ]),
             CURLOPT_HTTPHEADER => [
                 "accept: application/json",

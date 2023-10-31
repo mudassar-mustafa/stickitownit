@@ -19,8 +19,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+Route::get('/cache', function() {
+    $exitCode = Artisan::call('config:cache');
+    return 'Cache cleared';
+});
+
 Route::get('auth/google', [SocialController::class, 'signInwithGoogle']);
 Route::get('callback/google', [SocialController::class, 'callbackToGoogle']);
+
+
+Route::get('leonardoApi', [LandingController::class, 'leonardoApi'])->name('leonardoApi');
+Route::get('leonardoApiCallBack', [LandingController::class, 'leonardoApiCallBack'])->name('leonardoApiCallBack');
 
 require __DIR__ . '/frontend.php';
 
