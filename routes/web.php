@@ -42,7 +42,8 @@ Route::middleware('auth')->group(function () {
     Route::post('get-states', [CartController::class, 'getStates'])->name('getStates');
     Route::post('get-cities', [CartController::class, 'getCities'])->name('getCities');
     Route::post('add-to-cart-packages', [CartController::class, 'addToCartPackage'])->name('addToCartPackage');
-
+    Route::get('generation', [LandingController::class, 'createGeneration'])->name('create.generation');
+    Route::post('store/generation', [LandingController::class, 'storeGeneration'])->name('store.generation');
     require __DIR__ . '/admin.php';
 
 

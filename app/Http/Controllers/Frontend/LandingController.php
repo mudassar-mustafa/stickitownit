@@ -4,9 +4,12 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Http\Enums\CommonEnum;
+use App\Models\Generation;
 use Illuminate\Http\Request;
 use App\Contracts\Frontend\LandingContract;
 use App\Helpers\Helper;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class LandingController extends Controller
 {
@@ -96,14 +99,14 @@ class LandingController extends Controller
         return view('frontend.pages.packages', compact('packages'));
     }
 
-    public function leonardoApi()
+    public function leonardoApi($data)
     {
         $params = [];
         $params['height'] = 512;
         $params['modelId'] = '6bef9f1b-29cb-40c7-b9df-32b51c1f67d3';
-        $params['prompt'] = 'An oil painting of a cat';
+        $params['prompt'] = $data['project'] . ' ' . $data['prompt_text'];
         $params['width'] = 512;
-        $params['num_images'] = 1;
+        $params['num_images'] = (int)$data['no_of_images'];
         $data = Helper::createGeneration($params);
         return $data;
     }
@@ -112,5 +115,44 @@ class LandingController extends Controller
     {
         \Log::info("function hit");
         return "dfdsf";
+    }
+
+    public function createGeneration()
+    {
+        return view('frontend.pages.generation');
+    }
+
+    public function storeGeneration(Request $request): \Illuminate\Http\JsonResponse
+    {
+        $request->validate([
+            'project' => 'required',
+            'prompt_text' => 'required',
+            'no_of_images' => 'required',
+        ]);
+        $response = $this->leonardoApi($request->all());
+
+        if ($response['success'] === false) {
+            return response()->json([
+                'error' => $response['data'],
+                'validation' => false,
+                'success' => false
+            ]);
+        } else {
+            $generationId = $response['data']['sdGenerationJob']['generationId'];
+            $usedTokens = $response['data']['sdGenerationJob']['apiCreditCost'];
+            Generation::create([
+                'user_id' => Auth::id(),
+                'leonardo_generation_id' => $generationId,
+                'used_tokens' => $usedTokens,
+                'status' => 'pending'
+            ]);
+            return response()->json([
+                'success' => true,
+                'message' => 'Your generation have been created successfully.',
+                'generationId' => $generationId,
+                'usedTokens' => $usedTokens,
+                'remainingToken' => ''
+            ]);
+        }
     }
 }

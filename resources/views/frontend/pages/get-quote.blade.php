@@ -214,7 +214,17 @@
                                         </div>
                                     </div>
                                     <div class="cp-quote-btn mb-10">
-                                        <button type="submit" class="cp-border2-btn">Sent Quote</button>
+                                        <button type="submit" class="cp-border-btn mt-15">
+                                            Sent Quote
+                                            <span class="cp-border-btn__inner">
+                                            <span class="cp-border-btn__blobs">
+                                                <span class="cp-border-btn__blob"></span>
+                                                <span class="cp-border-btn__blob"></span>
+                                                <span class="cp-border-btn__blob"></span>
+                                                <span class="cp-border-btn__blob"></span>
+                                            </span>
+                                        </span>
+                                        </button>
                                     </div>
                                 </form>
                             </div>

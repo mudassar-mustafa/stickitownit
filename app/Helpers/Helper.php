@@ -26,12 +26,13 @@ class Helper
         return response()->json($message);
     }
 
-    public static function getGenerations($generationId){
-        dd("sdasds");
+    public static function getGenerations($generationId)
+    {
+
         $curl = curl_init();
         $token = 'Bearer ' . config('services.leonardo')['LEONARDO_API_KEY'];
         curl_setopt_array($curl, [
-            CURLOPT_URL => "https://cloud.leonardo.ai/api/rest/v1/generations/c99e7e5a-01ba-4394-bf74-ba8c58e08290",
+            CURLOPT_URL => "https://cloud.leonardo.ai/api/rest/v1/generations/$generationId",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,
@@ -40,7 +41,8 @@ class Helper
             CURLOPT_CUSTOMREQUEST => "GET",
             CURLOPT_HTTPHEADER => [
                 "accept: application/json",
-                "authorization: $token"
+                "authorization: $token",
+                "content-type: application/json"
             ],
         ]);
 
@@ -50,13 +52,14 @@ class Helper
         curl_close($curl);
 
         if ($err) {
-            return "cURL Error #:" . $err;
+            return ['success' => false, 'data' => $err];
         } else {
-            return json_decode($response,true);
+            return ['success' => true, 'data' => json_decode($response, true)];
         }
     }
 
-    public static function createGeneration(array $params){
+    public static function createGeneration(array $params)
+    {
 
         $curl = curl_init();
         $token = 'Bearer ' . config('services.leonardo')['LEONARDO_API_KEY'];
@@ -88,9 +91,9 @@ class Helper
         curl_close($curl);
 
         if ($err) {
-            return "cURL Error #:" . $err;
+            return ['success' => false, 'data' => $err];
         } else {
-            return json_decode($response,true);
+            return ['success' => true, 'data' => json_decode($response, true)];
         }
     }
 

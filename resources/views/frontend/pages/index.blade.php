@@ -2,6 +2,12 @@
 @section('title','Home')
 @push('css')
     <link rel="stylesheet" href="{{ asset('assets/css/nice-select.css') }}">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+    </style>
 @endpush
 @section('content')
     <main>
@@ -49,8 +55,8 @@
                                        data-wow-delay="1.4s">{{$setting->banner_tag_line_description}}</p>
                                     <div class="cp-banner-btn cp-two-btn wow fadeInUp animated" data-wow-duration="1.5s"
                                          data-wow-delay="1.7s">
-                                        <a href="#" class="cp-border-btn">
-                                            Our Services
+                                        <a href="#generations" class="cp-border-btn">
+                                            Generations
                                             <span class="cp-border-btn__inner">
                                     <span class="cp-border-btn__blobs">
                                        <span class="cp-border-btn__blob"></span>
@@ -169,7 +175,7 @@
         <!-- feature area start end  -->
 
         <!-- about area start here  -->
-        <section class="cp-about-area p-relative pb-115 fix">
+        <section class="cp-about-area p-relative pb-115 fix" id="generations">
             <div class="cp-about-shape-img five m-img cp-bg-move-y">
                 <img src="{{ asset('assets/img/about/about-squre.png') }}" alt="img not found">
             </div>
@@ -189,8 +195,8 @@
                                     <h2 class="cp-about-title mb-70">We are just <br> <span>better Quality</span> <br> for over
                                         35 <br> <span>years</span> -</h2>
                                     <div class="cp-about-btn">
-                                        <a class="cp-btn-2" href="{{ route('contact-us.index') }}">
-                                            Contact us
+                                        <a class="cp-btn-2" href="{{ route('create.generation') }}">
+                                           Generations
                                             <span class="cp-btn-2__inner">
                                     <span class="cp-btn-2__blobs">
                                        <span class="cp-btn-2__blob"></span>
@@ -282,7 +288,7 @@
         </section>
         <!-- news area end here  -->
 
-        <div class="cp-brand-area pb-130">
+        <div class="cp-brand-area pb-130" >
             <div class="container">
                 <div class="row wow fadeInUp animated" data-wow-duration="1.5s" data-wow-delay="0.3">
                     <div class="col-xl-12">
