@@ -30,7 +30,7 @@ Route::get('callback/google', [SocialController::class, 'callbackToGoogle']);
 
 
 Route::get('leonardoApi', [LandingController::class, 'leonardoApi'])->name('leonardoApi');
-Route::get('leonardoApiCallBack', [LandingController::class, 'leonardoApiCallBack'])->name('leonardoApiCallBack');
+Route::post('leonardoApiCallBack', [LandingController::class, 'leonardoApiCallBack'])->name('leonardoApiCallBack');
 
 require __DIR__ . '/frontend.php';
 
