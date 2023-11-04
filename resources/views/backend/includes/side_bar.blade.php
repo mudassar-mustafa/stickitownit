@@ -157,6 +157,12 @@
                     <span>Package Order</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{{ route('backend.pages.generations.index') }}">
+                    <i class="bi bi-database-check"></i>
+                    <span>Image Generations</span>
+                </a>
+            </li>
         @endhasanyrole
 
         @hasanyrole('Customer')

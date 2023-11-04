@@ -49,6 +49,7 @@ class GetLeonardoGenerations extends Command
                                         file_put_contents(public_path('uploads/generations') . '/' . $imageName, file_get_contents($url));
                                         GenerationImage::create([
                                             'generation_id' => $generation->id,
+                                            'user_id' => $generation->user_id,
                                             'image' => $imageName,
                                         ]);
 

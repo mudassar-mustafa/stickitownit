@@ -40,6 +40,7 @@ class SettingController extends Controller
                 'address' => 'required',
                 'office_hours' => 'required',
                 'office_working_days' => 'required',
+                'number_of_images' => 'required',
             ]);
             if ($request->has('logo_header')) {
                 $logo_header = $this->upload($request->logo_header, 'settings');
@@ -60,7 +61,7 @@ class SettingController extends Controller
                 'phone_number' => $request->phone_number,
                 'address' => $request->address,
                 'office_hours' => $request->office_hours,
-                'office_working_days' => $request->office_working_days,
+                'number_of_images' => $request->number_of_images,
             ]);
         } elseif ($request->tab === 'banner_settings') {
             $status = 'banner-settings';

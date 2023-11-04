@@ -6,6 +6,7 @@ use App\Models\Product;
 use App\Models\ProductAttributeValueGroup;
 use App\Models\AttributeValue;
 use App\Models\ProductAttributeGroup;
+use App\Models\Category;
 use App\Models\Cart;
 use App\Models\ProductReview;
 use App\Contracts\Frontend\ProductDetailContract;
@@ -115,6 +116,10 @@ class ProductDetailRepository extends BaseRepository implements ProductDetailCon
         return Product::whereHas('categories', function ($q) use ($slug) {
             $q->where('slug', $slug);
         })->get(['id','slug','title','main_image']);
+    }
+
+    public function getCategoryBySlug($slug){
+        return Category::where('slug', $slug)->first();
     }
 
 }

@@ -86,6 +86,18 @@
                                     @enderror
                                 </div>
 
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <label for="description" class="form-label">Description</label>
+                                    <textarea class="form-control" name="description" style="height: 100px;" id="floatingTextarea">
+                                        {!! old('description', !empty($category) ? $category->description : "") !!}
+                                      </textarea>
+                                    @if ($errors->has('description'))
+                                        <div class="invalid-feedback">
+                                            {{ $errors->first('description') }}
+                                        </div>
+                                    @endif
+                                </div>
+
                                 <div class="float-end">
                                     <button type="submit" class="btn btn-primary float-end">Submit</button>
                                 </div>

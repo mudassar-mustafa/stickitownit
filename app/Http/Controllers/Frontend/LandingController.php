@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Http\Enums\CommonEnum;
 use App\Models\Generation;
+use App\Models\PackageSubscription;
 use Illuminate\Http\Request;
 use App\Contracts\Frontend\LandingContract;
 use App\Helpers\Helper;
@@ -26,7 +27,7 @@ class LandingController extends Controller
     public function index()
     {
         $features = $this->landingRepository->getFeatures();
-        $faqs = $this->landingRepository->getFaqs();
+        $faqs = $this->landingRepository->getFaqs(2);
         $blogs = $this->landingRepository->getBlogs();
         $stickers = $this->landingRepository->getStickers();
         return view('frontend.pages.index', compact('features', 'faqs', 'blogs', 'stickers'));
@@ -99,17 +100,6 @@ class LandingController extends Controller
         return view('frontend.pages.packages', compact('packages'));
     }
 
-    public function leonardoApi($data)
-    {
-        $params = [];
-        $params['height'] = 512;
-        $params['modelId'] = '6bef9f1b-29cb-40c7-b9df-32b51c1f67d3';
-        $params['prompt'] = $data['project'] . ' ' . $data['prompt_text'];
-        $params['width'] = 512;
-        $params['num_images'] = (int)$data['no_of_images'];
-        $data = Helper::createGeneration($params);
-        return $data;
-    }
 
     public function leonardoApiCallBack(Request $request)
     {
@@ -129,28 +119,57 @@ class LandingController extends Controller
             'prompt_text' => 'required',
             'no_of_images' => 'required',
         ]);
-        $response = $this->leonardoApi($request->all());
+        $packageSubscription = PackageSubscription::where('user_id', Auth::user()->id)->where('status', 'active')->first();
+        if(!empty($packageSubscription) && $packageSubscription->remaing_token > 0){
+            $params = $request->except('_token');
 
-        if ($response['success'] === false) {
+            $params['modelId'] = '6bef9f1b-29cb-40c7-b9df-32b51c1f67d3';
+            $params['height'] = '512';
+            $params['width'] = '512';
+            $response = Helper::createGeneration($params);
+
+            if ($response['success'] === false) {
+                return response()->json([
+                    'error' => $response['data'],
+                    'validation' => false,
+                    'success' => false,
+                    'message' => 'Something Wrong',
+                ]);
+            } else {
+                if(isset($response['data']) && isset($response['data']['sdGenerationJob'])){
+                    $generationId = $response['data']['sdGenerationJob']['generationId'];
+                    $usedTokens = $response['data']['sdGenerationJob']['apiCreditCost'];
+                    Generation::create([
+                        'user_id' => Auth::id(),
+                        'leonardo_generation_id' => $generationId,
+                        'used_tokens' => $usedTokens,
+                        'status' => 'pending'
+                    ]);
+                    $packageSubscription->remaing_token = $packageSubscription->remaing_token - $usedTokens;
+                    $packageSubscription->save();
+                    return response()->json([
+                        'success' => true,
+                        'message' => 'Your generation have been created successfully.',
+                        'generationId' => $generationId,
+                        'usedTokens' => $usedTokens,
+                        'remainingToken' => ''
+                    ]);
+                }else{
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Your generation was not created try again.',
+                        'generationId' => "",
+                        'usedTokens' => "",
+                        'remainingToken' => ''
+                    ]);
+                }
+            }
+        }else{
             return response()->json([
-                'error' => $response['data'],
-                'validation' => false,
-                'success' => false
-            ]);
-        } else {
-            $generationId = $response['data']['sdGenerationJob']['generationId'];
-            $usedTokens = $response['data']['sdGenerationJob']['apiCreditCost'];
-            Generation::create([
-                'user_id' => Auth::id(),
-                'leonardo_generation_id' => $generationId,
-                'used_tokens' => $usedTokens,
-                'status' => 'pending'
-            ]);
-            return response()->json([
-                'success' => true,
-                'message' => 'Your generation have been created successfully.',
-                'generationId' => $generationId,
-                'usedTokens' => $usedTokens,
+                'success' => false,
+                'message' => 'Please subcribe package.',
+                'generationId' => "",
+                'usedTokens' => "",
                 'remainingToken' => ''
             ]);
         }

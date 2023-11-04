@@ -188,9 +188,11 @@
                                                     <label for="no_of_images">Number of Images * </label>
                                                     <select id="no_of_images" name="no_of_images"
                                                             class="js-example-basic-single">
-                                                        <option value="1">1</option>
-                                                        <option value="2">2</option>
-                                                        <option value="3">3</option>
+                                                        @if (isset($setting->number_of_images))
+                                                            @for ($i = 1; $i <= $setting->number_of_images; $i++)
+                                                                <option value="{{ $i }}">{{ $i }}</option>  
+                                                            @endfor
+                                                        @endif
                                                     </select>
                                                     <span class="text-danger" id="no_of_imagesErrorMsg"></span>
                                                 </div>
@@ -252,6 +254,7 @@
 
         $('#SubmitForm').on('submit', function (e) {
             e.preventDefault();
+            debugger;
             $('.loading').show();
             let project = $('#project').val();
             let prompt_text = $('#prompt_text').val();
@@ -271,6 +274,8 @@
                         $('#successMsg').show().css('color', 'green').html(response.message + '<br>' + "Used Tokens:" + response.usedTokens + '<br>' + 'Generations Id' + response.generationId);
                     } else {
                         $('#successMsg').show().css('color', 'red').html('Something went wrong while generation your request .Please try again.');
+                        
+                        toastr.error(response.message);
                     }
                     $('.loading').hide();
                 },

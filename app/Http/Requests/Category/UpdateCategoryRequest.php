@@ -28,6 +28,7 @@ class UpdateCategoryRequest extends FormRequest
         return [
             'name' => 'required|string|max:255|unique:categories,id,' . $this->id,
             'status' => ['string', 'max:255'],
+            'description' => ['string', 'nullable'],
             'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
             'icon' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ];

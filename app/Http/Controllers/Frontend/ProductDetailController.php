@@ -26,9 +26,10 @@ class ProductDetailController extends Controller
     public function getProductsByCategory($slug)
     {
 
+        $category = $this->productDetailRepository->getCategoryBySlug($slug);
         $products = $this->productDetailRepository->getProductsByCategoryId($slug);
         $stickers = Sticker::whereStatus('active')->orderBy('id', 'asc')->get(['image']);
-        return view('frontend.pages.product.index', compact('products', 'slug', 'stickers'));
+        return view('frontend.pages.product.index', compact('products', 'slug', 'stickers', 'category'));
     }
 
     public function productDetail($slug)

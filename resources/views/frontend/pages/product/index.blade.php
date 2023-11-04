@@ -30,6 +30,10 @@
                                         </li>
                                         <li class="trail-item trail-end"><span>{{ucfirst($slug)}}</span></li>
                                     </ul>
+                                    @if (!empty($category) && isset($category->description) && $category->description != "")
+                                    <p>{{ $category->description }}</p>    
+                                    @endif
+                                    
                                 </nav>
                             </div>
                         </div>

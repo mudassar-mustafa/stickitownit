@@ -346,10 +346,12 @@
         }
 
         async function getAttributeValue(key, attributeId) {
-            $('#uploadFile').val('');
-            $(".uploadImage").prop("src", "");
-            $('.uploadImage').addClass('hidden');
-            $(".shopping-basket").addClass('hidden');
+            if(key == 1){
+                $('#uploadFile').val('');
+                $(".uploadImage").prop("src", "");
+                $('.uploadImage').addClass('hidden');
+                $(".shopping-basket").addClass('hidden');
+            }
             var selectedIds = [];
             $(".attributes").each(function () {
                 if ($(this).find(':selected').val() != undefined) {
@@ -439,11 +441,15 @@
                 const result = await doAjax(url, data);
                 if (result['data'] != null) {
                     $(".variable_product_price").removeClass('hidden');
-                    $(".variable_product_amount").text('$' + result['data']['price'] + '');
+                    var description = result['data']['short_description'];
+                    var descriptionArray = description.split("-");
+                    var qty = parseInt(descriptionArray[2]);
+                    var unitPrice = parseFloat(result['data']['price']) / qty;
+                    $(".variable_product_amount").html('$'+ result['data']['price'] +'/<small>$'+unitPrice.toFixed(2)+'</small>');
                     $("#product_attribute_group_id").val(result['data']['id']);
                 } else {
                     $(".variable_product_price").addClass('hidden');
-                    $(".variable_product_amount").text('');
+                    $(".variable_product_amount").html('');
                 }
             } catch (error) {
                 console.log('Error! InsertAssignments:', error);

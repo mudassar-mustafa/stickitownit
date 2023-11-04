@@ -157,6 +157,14 @@
                                                        value="{{ $setting->office_working_days }}">
                                             </div>
                                         </div>
+                                        <div class="row mb-3">
+                                            <label for="number_of_images" class="col-md-4 col-lg-3 col-form-label">Number Of Images</label>
+                                            <div class="col-md-8 col-lg-9">
+                                                <input name="number_of_images" type="text" class="form-control"
+                                                       id="number_of_images"
+                                                       value="{{ $setting->number_of_images }}">
+                                            </div>
+                                        </div>
                                         <div class="text-center">
                                             <button type="submit" class="btn btn-primary">Save Changes</button>
                                         </div>

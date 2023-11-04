@@ -41,8 +41,13 @@ class LandingRepository extends BaseRepository implements LandingContract
      /**
      * @return mixed
      */
-    public function getFaqs(){
-        return FAQ::whereStatus('active')->orderBy('id', 'asc')->get(['name', 'short_description']);
+    public function getFaqs($limit = null){
+        $faqs = FAQ::whereStatus('active')->orderBy('id', 'asc');
+        if($limit != null){
+            $faqs = $faqs->inRandomOrder()->take($limit);    
+        }
+        $faqs = $faqs->get(['name', 'short_description']);
+        return $faqs;
     }
 
     /**

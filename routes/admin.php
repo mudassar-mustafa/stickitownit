@@ -25,9 +25,10 @@ use App\Http\Controllers\ACL\RolesController;
 use App\Http\Controllers\ACL\PermissionsController;
 use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\DashboardController;
+use App\Http\Controllers\Backend\ImageGenerationController;
 use App\Http\Controllers\ProfileController;
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');;
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 
 Route::group(['prefix' => 'backend', 'middleware' => ['role:SuperAdmin|Admin|Seller|Customer']], function () {
@@ -284,5 +285,11 @@ Route::group(['prefix' => 'backend'], function () {
         Route::delete('/delete/{id}', 'destroy')->name('backend.pages.order.destroy')->middleware('role:SuperAdmin|Admin|Customer|Seller');
         Route::post('/getOrderDetail', 'getOrderDetail')->name('backend.pages.order.getOrderDetail')->middleware('role:SuperAdmin|Admin|Seller|Customer');
         Route::post('/storeFeedback', 'storeFeedback')->name('backend.pages.order.storeFeedback')->middleware('role:Customer');
+    });
+
+    //  Stickers Routes
+    Route::controller(ImageGenerationController::class)->prefix('generations')->group(function () {
+        Route::get('/', 'index')->name('backend.pages.generations.index')->middleware('role:SuperAdmin|Admin|Customer|Seller');
+        Route::get('/download/{id}', 'download')->name('backend.pages.generations.download')->middleware('role:SuperAdmin|Admin|Customer|Seller');
     });
 });

@@ -13,8 +13,10 @@ return new class extends Migration {
         Schema::create('generation_images', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('generation_id')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable();
                 $table->mediumText('image')->nullable();
             $table->foreign('generation_id')->references('id')->on('generations')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

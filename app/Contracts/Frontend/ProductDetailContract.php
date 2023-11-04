@@ -36,4 +36,10 @@ interface ProductDetailContract
      * @return mixed
      */
     public function getProductReview($productId);
+
+    /**
+     * @param string $slug
+     * @return mixed
+     */
+    public function getCategoryBySlug($slug);
 }

@@ -74,9 +74,9 @@ class Helper
             CURLOPT_POSTFIELDS => json_encode([
                 'height' => $params['height'],
                 'modelId' => $params['modelId'],
-                'prompt' => $params['prompt'],
+                'prompt' => $params['prompt_text'],
                 'width' => $params['width'],
-                'num_images' => $params['num_images']
+                'num_images' => $params['no_of_images']
             ]),
             CURLOPT_HTTPHEADER => [
                 "accept: application/json",
