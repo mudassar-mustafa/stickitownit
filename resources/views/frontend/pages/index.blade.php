@@ -294,7 +294,7 @@
             <div class="container">
                 <div class="row wow fadeInUp animated" data-wow-duration="1.5s" data-wow-delay="0.3">
                     <div class="col-xl-12">
-                        <div class="cp-news3-left">
+                        <div >
                             <div class="cp-news3-title-wrap mb-40">
                                 <div class="cp-section-title text-center">
                                     <h3 class="cp-subtitle mb-15 wow fadeInUp animated sticker-slider-heading" data-wow-delay="0.3s">What we

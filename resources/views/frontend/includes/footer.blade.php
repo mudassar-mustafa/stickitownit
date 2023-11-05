@@ -1,6 +1,6 @@
 <!-- footer area start  -->
 <footer>
-    <div class="cp-footer-wrap cp-bg-6 pt-145 pb-85">
+    <div class="cp-footer-wrap cp-bg-6 pt-45 pb-30">
         <div class="container">
             <div class="row">
             <div class="col-xl-6 col-lg-10">
@@ -12,7 +12,9 @@
                                     src="{{ asset('storage/uploads/settings/'.$setting->logo_footer) }}"
                                     alt="white-logo"></a>
                         </div>
-                        <p class="mb-35 ">{{ $setting->company_short_description }}</p>
+                        <div class="footer-description pr-20">
+                            <p class="mb-35 ">{{ $setting->company_short_description }}</p>
+                        </div>
                         
                         <div class="cp-footer-social">
                             <ul>
@@ -40,7 +42,7 @@
                             </ul>
                         </div>
                         <div class="cp-copy-item">
-                            <div class="cp-footer-payment m-img mb-15">
+                            <div class=" m-img mb-15">
                                 <img src="{{ asset('assets/img/footer/stripe.png') }}" alt="payment-method" width="150">
                             </div>
                         </div>
@@ -83,9 +85,9 @@
             </div>
         </div>
     </div>
-    <div class="cp-copy-right cp-footer-bg pt-35 pb-20">
+    <div class="cp-copy-right cp-footer-bg pt-20 pb-5">
         <div class="container">
-            <div class="cp-copy-item-wrap d-flex align-items-center justify-content-between">
+            <div class="cp-copy-item-wrap d-flex align-items-center justify-content-center">
                 
                 <div class="cp-copy-item text-center">
                     <div class="cp-copy-text mb-15">

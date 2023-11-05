@@ -2523,6 +2523,8 @@ div.mean-container a.meanmenu-reveal {
 @media only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
     .page-title-area {
         height: 250px;
+        padding-top: 145px;
+        /* margin-top: 300px; */
     }
 }
 
@@ -4873,6 +4875,7 @@ div.mean-container a.meanmenu-reveal {
     border: 1px solid var(--clr-border-3);
     padding: 30px 10px;
     line-height: 1;
+    height: 100%    ;
 }
 
 .cp-faq-img-content h4 {
@@ -12322,4 +12325,37 @@ html .ui-button.ui-state-disabled:active {
 }
 .text-center{
     text-align: center;
+}
+
+@media (min-width: 1200px){
+    .footer-description{
+        max-width: 560px;
+    }
+}
+.footer-description{
+    text-wrap: wrap;
+}
+
+.google-sign-in-button{
+    background-color: #cc3c34;
+    color: white;
+    font-weight: 700;
+}
+.google-sign-in-button:hover {
+    background-color: white;
+    color: #cc3c34;
+    border-color: #cc3c34;
+    font-weight: 700;
+}
+.generator-button{
+    border: 1px solid #ebebeb;
+    padding: 5px 15px;
+    border-radius: 5px;
+    margin-left: 1rem;
+}
+.generator-button:hover{
+    border-color: var(--clr-theme-1);
+}
+.padding-right-0{
+    padding-right: 0;
 }

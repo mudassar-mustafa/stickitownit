@@ -57,7 +57,7 @@
                                     <img src="{{ asset('assets/img/faq/faq-2.jpg') }}" alt="faq">
                                 </div>
                             </div> -->
-                            <div class="cp-faq-img-item mb-30">
+                            <div class="cp-faq-img-item">
                                 <div class="cp-faq-img-content">
                                     <div class="cp-faq-img-icon m-img">
                                         <img src="{{ asset('assets/img/faq/faq-phone-icon.png') }}" alt="faq">
