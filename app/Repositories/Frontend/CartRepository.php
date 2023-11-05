@@ -33,23 +33,27 @@ class CartRepository extends BaseRepository implements CartContract
      * @param string $slug
      * @return mixed
      */
-    public function getAllCart(){
+    public function getAllCart()
+    {
         return Cart::with(['user:id,name', 'product_attribute_group_detail:id,product_id,main_image,short_description,quantity,price', 'product_attribute_group_detail.product:id,title,slug'])->where('user_id', Auth::user()->id)->get();
     }
 
-    public function removeToCart($cartId){
+    public function removeToCart($cartId)
+    {
         $status = true;
         Cart::where('id', $cartId)->delete();
         return $status;
     }
 
-    public function getAllCountries(){
+    public function getAllCountries()
+    {
         return Country::where('status', 'active')->get();
     }
 
-    public function getStates($countryId){
-        $states =  State::where('status', 'active');
-        if($countryId != 0){
+    public function getStates($countryId)
+    {
+        $states = State::where('status', 'active');
+        if ($countryId != 0) {
             $states = $states->where('country_id', $countryId);
         }
 
@@ -57,9 +61,10 @@ class CartRepository extends BaseRepository implements CartContract
         return $states;
     }
 
-    public function getCities($stateId){
-        $cities =  City::where('status', 'active');
-        if($stateId != 0){
+    public function getCities($stateId)
+    {
+        $cities = City::where('status', 'active');
+        if ($stateId != 0) {
             $cities = $cities->where('state_id', $stateId);
         }
 
@@ -67,18 +72,20 @@ class CartRepository extends BaseRepository implements CartContract
         return $cities;
     }
 
-    public function createNewOrder(array $data){
+    public function createNewOrder(array $data)
+    {
         $invoiceNumber = 0;
-        if($data['checkOutType'] == "Sale"){
+        if ($data['checkOutType'] == "Sale") {
             $invoiceNumber = $this->saleCart($data);
-        }else if($data['checkOutType'] == "Package"){
+        } else if ($data['checkOutType'] == "Package") {
             $invoiceNumber = $this->packageCart($data);
         }
         return $invoiceNumber;
 
     }
 
-    public function saleCart(array $data){
+    public function saleCart(array $data)
+    {
         $getAllSeller = Cart::where('user_id', Auth::user()->id)->groupBy('seller_id')->pluck('seller_id')->toArray();
         $invoiceNumber = Order::max('invoice_number');
         $invoiceNumber = $invoiceNumber != null ? $invoiceNumber + 1 : 1;
@@ -86,7 +93,7 @@ class CartRepository extends BaseRepository implements CartContract
         if (!empty($getAllSeller)) {
             foreach ($getAllSeller as $key => $sellerId) {
                 $carts = Cart::where('user_id', Auth::user()->id)->where('seller_id', $sellerId)->get();
-                if(!empty($carts)){
+                if (!empty($carts)) {
                     $order = new Order;
                     $order->invoice_number = $invoiceNumber;
                     $order->order_type = $data['checkOutType'];
@@ -97,13 +104,13 @@ class CartRepository extends BaseRepository implements CartContract
                     $order->buyer_id = Auth::user()->id;
                     $order->seller_id = $sellerId;
                     $order->payment_method = $data['paymentMethod'];
-                    if(isset($data['transaction_id'])){
+                    if (isset($data['transaction_id'])) {
                         $order->transaction_id = $data['transaction_id'];
                     }
-                    if(isset($data['transaction_slip_url'])){
+                    if (isset($data['transaction_slip_url'])) {
                         $order->transaction_slip_url = $data['transaction_slip_url'];
                     }
-                    if(isset($data['notes'])){
+                    if (isset($data['notes'])) {
                         $order->notes = $data['notes'];
                     }
                     $order->billing_name = $data['name'];
@@ -127,10 +134,10 @@ class CartRepository extends BaseRepository implements CartContract
                         $orderSaleDetail->price = $cart->product_attribute_group_detail->price;
                         $orderSaleDetail->shipping = $cart->shipping_amount;
                         $orderSaleDetail->order_status = $order->order_status;
-                        $orderSaleDetail->product_title =  $cart->product_attribute_group_detail->product->title;
-                        $orderSaleDetail->product_short_description =  $cart->product_attribute_group_detail->short_description;
-                        $orderSaleDetail->product_type =  $cart->product_attribute_group_detail->product->product_type;
-                        $orderSaleDetail->product_image =  $cart->product_attribute_group_detail->main_image;
+                        $orderSaleDetail->product_title = $cart->product_attribute_group_detail->product->title;
+                        $orderSaleDetail->product_short_description = $cart->product_attribute_group_detail->short_description;
+                        $orderSaleDetail->product_type = $cart->product_attribute_group_detail->product->product_type;
+                        $orderSaleDetail->product_image = $cart->product_attribute_group_detail->main_image;
                         $orderSaleDetail->shipping_name = $data['name'];
                         $orderSaleDetail->shipping_email = $data['email'];
                         $orderSaleDetail->shipping_phone = $data['phone_number'];
@@ -154,7 +161,8 @@ class CartRepository extends BaseRepository implements CartContract
         return $invoiceNumber;
     }
 
-    public function packageCart(array $data){
+    public function packageCart(array $data)
+    {
         $invoiceNumber = Order::max('invoice_number');
         $invoiceNumber = $invoiceNumber != null ? $invoiceNumber + 1 : 1;
 
@@ -167,10 +175,10 @@ class CartRepository extends BaseRepository implements CartContract
         $order->order_paid_date = date('Y-m-d H:i:s');
         $order->buyer_id = Auth::user()->id;
         $order->payment_method = $data['paymentMethod'];
-        if(isset($data['transaction_id'])){
+        if (isset($data['transaction_id'])) {
             $order->transaction_id = $data['transaction_id'];
         }
-        if(isset($data['transaction_slip_url'])){
+        if (isset($data['transaction_slip_url'])) {
             $order->transaction_slip_url = $data['transaction_slip_url'];
         }
         $order->order_total_amount = Session::get('packagePrice');
@@ -185,21 +193,17 @@ class CartRepository extends BaseRepository implements CartContract
         $orderPackageDetail->token = Session::get('packageToken');
         $orderPackageDetail->save();
 
-        $packageSubscription =  PackageSubscription::where('user_id', Auth::user()->id)->first();
-        if(!empty($packageSubscription)){
-            $packageSubscription->status = 'expired';
-            $packageSubscription->save();
-        }
+        PackageSubscription::where('user_id', Auth::user()->id)->update(['status' => 'expired']);
         $startDate = date('Y-m-d H:i:s');
         $endDate = date('Y-m-d H:i:s');
-        if(Session::get('packageType') == "weekly"){
-            $endDate = date('Y-m-d H:i:s', strtotime($startDate. ' + 7 day'));
-        }else if(Session::get('packageType') == "monthly"){
-            $endDate = date('Y-m-d H:i:s', strtotime($startDate. ' + 1 month'));
-        }else if(Session::get('packageType') == "quartely"){
-            $endDate = date('Y-m-d H:i:s', strtotime($startDate. ' + 6 month'));
-        }else if(Session::get('packageType') == "yearly"){
-            $endDate = date('Y-m-d H:i:s', strtotime($startDate. ' + 1 year'));
+        if (Session::get('packageType') == "weekly") {
+            $endDate = date('Y-m-d H:i:s', strtotime($startDate . ' + 7 day'));
+        } else if (Session::get('packageType') == "monthly") {
+            $endDate = date('Y-m-d H:i:s', strtotime($startDate . ' + 1 month'));
+        } else if (Session::get('packageType') == "quartely") {
+            $endDate = date('Y-m-d H:i:s', strtotime($startDate . ' + 6 month'));
+        } else if (Session::get('packageType') == "yearly") {
+            $endDate = date('Y-m-d H:i:s', strtotime($startDate . ' + 1 year'));
         }
         $packageSubscription = new PackageSubscription;
         $packageSubscription->user_id = Auth::user()->id;
@@ -224,7 +228,8 @@ class CartRepository extends BaseRepository implements CartContract
 
     }
 
-    public function getOrders($id){
+    public function getOrders($id)
+    {
         return Order::where('invoice_number', $id)->first();
     }
 

@@ -19,6 +19,7 @@
     </style>
 @endpush
 @section('content')
+    <div class="loading" style="display: none">Loading&#8230;</div>
     <main>
         <!-- cart area start here  -->
         <section class="cp-cart-area pt-20">
@@ -334,6 +335,7 @@
     });
 
     function stripeTokenHandler(token) {
+        $('.loading').show();
         // Insert the token ID into the form so it gets submitted to the server
         const form = document.getElementById('place_order');
         const hiddenInput = document.createElement('input');
@@ -397,6 +399,7 @@
             console.log('Error! InsertAssignments:', error);
         }
     }
+
 
 </script>
 @endpush

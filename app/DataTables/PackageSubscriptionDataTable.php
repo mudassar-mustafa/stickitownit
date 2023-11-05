@@ -99,7 +99,7 @@ class PackageSubscriptionDataTable extends DataTable
                 ->addClass('text-center'),
             Column::make('End Date')->name('end_date')->data("end_date")
                 ->addClass('text-center'),
-            Column::make('Remaing Token')->name('remaing_token')->data("remaing_token")
+            Column::make('Remaining Token')->name('remaing_token')->data("remaing_token")
                 ->addClass('text-center'),
             Column::make('Status')->name('status')->data("status")
                 ->addClass('text-center'),

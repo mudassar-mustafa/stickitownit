@@ -3,7 +3,7 @@
 @push('css')
 @endpush
 @section('content')
-
+    <div class="loading" style="display: none">Loading&#8230;</div>
     <!-- page title area start  -->
     <section class="page-title-area breadcrumb-spacing cp-bg-14">
         <div class="container">
@@ -107,7 +107,7 @@
                             <h6>Total : </h6><span>{{ $cartTotal + $extraFee }}$</span>
                         </div>
                         <div class="cp-cart-checkout-btn">
-                            <a href="{{ route('checkout.index') }}" class="cp-border2-btn">
+                            <a href="javascript:void(0)" class="cp-border2-btn" onclick="checkout()">
                                 Checkout
                             </a>
                         </div>
@@ -143,6 +143,13 @@
             }
 
         }
+
+        function checkout(){
+            $('.loading').show();
+            {{   session()->forget(['status']) }}
+            window.location.href = '{{ route('checkout.index') }}'
+        }
+
     </script>
 
 @endpush

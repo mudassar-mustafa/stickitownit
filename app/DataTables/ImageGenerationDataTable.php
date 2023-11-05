@@ -30,7 +30,7 @@ class ImageGenerationDataTable extends DataTable
             ->addColumn('action', function ($generationImage) {
 
                 $image  = ($generationImage->image != null) ? $generationImage->image : '#';
-                $downloadBtn = '<a href="'. $image .'" class="btn btn-primary" style="font-size: 10px;width: 100%; margin-bottom: 3px;">Download</a>';
+                $downloadBtn = '<a href="'. $image .'" download class="btn btn-primary" style="font-size: 10px;width: 100%; margin-bottom: 3px;">Download</a>';
 
 
                 return $downloadBtn;

@@ -25,7 +25,8 @@ class ProductDetailRepository extends BaseRepository implements ProductDetailCon
      * @param string $slug
      * @return mixed
      */
-    public function getProductDetail($slug){
+    public function getProductDetail($slug)
+    {
         return Product::with([
             'product_images:id,product_id,filename,name',
             'categories:id,name,slug',
@@ -35,8 +36,9 @@ class ProductDetailRepository extends BaseRepository implements ProductDetailCon
         ])->where('slug', $slug)->first();
     }
 
-    public function getProductReview($productId){
-        return ProductReview::with(['user_detail:id,name,profile_image'])->whereHas('product_attribute_group_detail', function($q) use($productId){
+    public function getProductReview($productId)
+    {
+        return ProductReview::with(['user_detail:id,name,profile_image'])->whereHas('product_attribute_group_detail', function ($q) use ($productId) {
             $q->where('product_id', $productId);
         })->get();
     }
@@ -45,59 +47,62 @@ class ProductDetailRepository extends BaseRepository implements ProductDetailCon
      * @param integer $productId
      * @return mixed
      */
-    public function getProductAttributeValue($productId, $attributeId, $index, $selectedIds){
+    public function getProductAttributeValue($productId, $attributeId, $index, $selectedIds)
+    {
 
 
-        $productAttributeValueGroupIdArray = ProductAttributeValueGroup::where('product_id', $productId)->whereHas('attribute_values', function($q) use($attributeId){
+        $productAttributeValueGroupIdArray = ProductAttributeValueGroup::where('product_id', $productId)->whereHas('attribute_values', function ($q) use ($attributeId) {
             $q->where('attribute_id', $attributeId);
         });
-        if($index != "0"){
+        if ($index != "0") {
             $selectedAttributeValueId = explode(',', $selectedIds);
             $getProductAttributeValueGroup = ProductAttributeValueGroup::where('product_id', $productId)->whereIn('product_attribute_val_id', $selectedAttributeValueId)->groupBy('product_group_id')->pluck('product_group_id')->toArray();
             $productAttributeValueGroupIdArray = $productAttributeValueGroupIdArray->whereIn('product_group_id', $getProductAttributeValueGroup);
         }
         $productAttributeValueGroupIdArray = $productAttributeValueGroupIdArray->groupBy('product_attribute_val_id')->pluck('product_attribute_val_id')->toArray();
 
-        return AttributeValue::whereIn('id', $productAttributeValueGroupIdArray)->get();
+        return AttributeValue::whereIn('id', $productAttributeValueGroupIdArray)->get(['id', 'name', 'slug', 'attribute_id']);
     }
 
-    public function getProductGroupAttribute($productId, $selectedIds){
+    public function getProductGroupAttribute($productId, $selectedIds)
+    {
         $selectedAttributeValueId = explode(',', $selectedIds);
         $combinationString = "";
         foreach ($selectedAttributeValueId as $key => $value) {
-            $getAttributeValues = AttributeValue::where('id', $value)->first();
-            if($combinationString == ""){
+            $getAttributeValues = AttributeValue::where('id', $value)->first(['id', 'slug']);
+            if ($combinationString == "") {
                 $combinationString = $getAttributeValues->slug;
-            }else{
-                $combinationString = $combinationString.'-'.$getAttributeValues->slug;
+            } else {
+                $combinationString = $combinationString . '-' . $getAttributeValues->slug;
             }
         }
-        if(count($selectedAttributeValueId) == 2){
-            $combinationString = $combinationString.'-';
-            return ProductAttributeGroup::where('product_id', $productId)->where('short_description','like','%'.$combinationString.'%')->get();
-        }else{
-            return ProductAttributeGroup::where('product_id', $productId)->where('short_description',$combinationString)->first();
+        if (count($selectedAttributeValueId) == 2) {
+            $combinationString = $combinationString . '-';
+            return ProductAttributeGroup::where('product_id', $productId)->where('short_description', 'like', '%' . $combinationString . '%')->get(['id', 'main_image', 'price', 'product_id', 'short_description', 'sku']);
+        } else {
+            return ProductAttributeGroup::where('product_id', $productId)->where('short_description', $combinationString)->first(['id', 'main_image', 'price', 'product_id', 'short_description', 'sku']);
         }
     }
 
-    public function addToCart(array $params){
+    public function addToCart(array $params)
+    {
         $status = 0;
         $productCart = Cart::where('product_attribute_group_id', $params['product_attribute_group_id'])->where('user_id', Auth::user()->id)->first();
-        if(!empty($productCart)){
+        if (!empty($productCart)) {
             $status = -1;
-        }else{
-            if($params['product_type'] == "sticker"){
+        } else {
+            if ($params['product_type'] == "sticker") {
                 $productAttributeGroupDescription = ProductAttributeGroup::where('id', $params['product_attribute_group_id'])->value('short_description');
 
                 $values = explode('-', $productAttributeGroupDescription);
                 $params['qty'] = $values[2];
             }
-            $productId  = ProductAttributeGroup::where('id', $params['product_attribute_group_id'])->value('product_id');
+            $productId = ProductAttributeGroup::where('id', $params['product_attribute_group_id'])->value('product_id');
             $params['seller_id'] = Product::where('id', $productId)->value('user_id');
             $productCart = new Cart;
             $productCart->product_attribute_group_id = $params['product_attribute_group_id'];
             $productCart->user_id = Auth::user()->id;
-            if(isset($params['image'])){
+            if (isset($params['image'])) {
                 $productCart->image_path = $params['image'];
             }
             $productCart->qty = $params['qty'];
@@ -115,10 +120,11 @@ class ProductDetailRepository extends BaseRepository implements ProductDetailCon
     {
         return Product::whereHas('categories', function ($q) use ($slug) {
             $q->where('slug', $slug);
-        })->get(['id','slug','title','main_image']);
+        })->get(['id', 'slug', 'title', 'main_image']);
     }
 
-    public function getCategoryBySlug($slug){
+    public function getCategoryBySlug($slug)
+    {
         return Category::where('slug', $slug)->first();
     }
 
