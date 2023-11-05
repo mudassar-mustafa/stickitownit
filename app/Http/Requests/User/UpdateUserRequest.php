@@ -34,7 +34,7 @@ class UpdateUserRequest extends FormRequest
             'email' => ['email', 'max:255', Rule::unique(User::class, 'id')->ignore($this->user()->id)],
             'status' => ['string', 'max:255'],
             'phone_number' => ['required'],
-            'cnic' => ['required'],
+            'cnic' => ['nullable'],
             'password' => $this->has('password') && !is_null($this->password) ? ['required', Password::min(8)
                 ->letters()
                 ->mixedCase()

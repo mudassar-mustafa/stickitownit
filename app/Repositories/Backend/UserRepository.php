@@ -55,6 +55,9 @@ class UserRepository extends BaseRepository implements UserContract
     public function updateUser($id, array $params)
     {
         $params['user_type'] = 'customer';
+        if(!isset($params['password']) && is_null($params['password'])){
+            unset($params['password']);
+        }
         return $this->update($params, $id);
 
     }
