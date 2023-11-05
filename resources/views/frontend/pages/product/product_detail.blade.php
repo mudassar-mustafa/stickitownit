@@ -11,6 +11,7 @@
 @section('og-url','https://stickitownit.com')
 @section('og-site-name','Stickitownit')
 @section('og-image', $product->main_image ?? "")
+
 @push('css')
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="{{ asset('assets/css/nice-select.css') }}">
@@ -21,6 +22,7 @@
 
     </style>
 @endpush
+
 @section('content')
     <div class="loading" style="display: none">Loading&#8230;</div>
     <!-- shop details area start  -->
@@ -95,18 +97,6 @@
                             </div>
                         @endif
 
-                        {{-- <div class="product-category-review">
-                            <div class="product-d-review">
-                                <div class="rating">
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <a href="#"><i class="far fa-star"></i></a>
-                                </div>
-                                <span>(20 Customer Review)</span>
-                            </div>
-                        </div> --}}
                         @if (!empty($product->short_description))
                             <p class="mb-30">{{ $product->short_description }}</p>
                         @endif
@@ -338,9 +328,8 @@
     @endif
 
 
-
-
     @include('frontend.includes.social')
+
 @endsection
 @push('js')
 
@@ -377,7 +366,7 @@
 
         }
 
-        var sele
+        var sele;
         $(document).ready(function () {
             $('.js-example-basic-single').select2({
                 templateResult: formatState,
