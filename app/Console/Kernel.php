@@ -20,7 +20,7 @@ class Kernel extends ConsoleKernel
     {
 //        $schedule->command('productImport:cron')->hourly();
         $schedule->command('packageExpire:cron')->hourly();
-        $schedule->command('leonardo:generations')->everyTwoMinutes();
+        $schedule->command('leonardo:generations')->everyFifteenMinutes();
         // $schedule->command('inspire')->hourly();
     }
 
