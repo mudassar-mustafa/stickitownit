@@ -9,16 +9,18 @@ class Kernel extends ConsoleKernel
 {
 
     protected $commands = [
-        Commands\ProductImportCron::class,
+//        Commands\ProductImportCron::class,
         Commands\PackageExpireCron::class,
+        Commands\GetLeonardoGenerations::class,
     ];
     /**
      * Define the application's command schedule.
      */
     protected function schedule(Schedule $schedule): void
     {
-        $schedule->command('productImport:cron')->hourly();
+//        $schedule->command('productImport:cron')->hourly();
         $schedule->command('packageExpire:cron')->hourly();
+        $schedule->command('leonardo:generations')->everyTwoMinutes();
         // $schedule->command('inspire')->hourly();
     }
 
