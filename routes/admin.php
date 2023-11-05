@@ -174,6 +174,10 @@ Route::group(['prefix' => 'backend', 'middleware' => ['role:SuperAdmin|Admin|Sel
         Route::get('/{id}/variation/edit', 'variationEdit')->name('backend.pages.product.variationEdit');
         Route::post('/update/variation', 'updateVariation')->name('backend.pages.product.updateVariation');
         Route::delete('/delete/variation/{id}', 'destroyVariation')->name('backend.pages.product.destroyVariation');
+
+        Route::post('/upload', 'upload')->name('backend.pages.product.media.upload');
+        Route::get('/fetch/{id}', 'fetch')->name('backend.pages.product.media.fetch');
+        Route::get('/media/delete', 'deleteMedia')->name('backend.pages.product.media.delete');
     });
 
 //  Attribute Routes

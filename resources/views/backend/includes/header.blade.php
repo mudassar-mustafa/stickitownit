@@ -2,7 +2,7 @@
 
     <div class="d-flex align-items-center justify-content-between">
         <a href="{{ url('/') }}" class="logo d-flex align-items-center">
-            <img src="{{ asset('storage/uploads/settings/'.$setting->logo_header) }}" alt="" style="max-height:150px;margin-top:30px;">
+            <img src="{{ asset('storage/uploads/settings/'.$setting->logo_header) }}" alt="" style="max-height: 154px; margin-top: 36px;">
         </a>
         <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
@@ -15,7 +15,7 @@
             <li class="nav-item dropdown pe-3">
 
                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                    <img src="{{ asset('backend/img/profile-img.jpg')}}" alt="Profile" class="rounded-circle">
+                    <img src="{{ !is_null(auth()->user()->profile_image) ? auth()->user()->profile_image : asset('backend/img/profile-img.jpg') }}" alt="Profile" class="rounded-circle">
                     <span class="d-none d-md-block dropdown-toggle ps-2">{{ auth()->user()->name }}</span>
                 </a><!-- End Profile Iamge Icon -->
 

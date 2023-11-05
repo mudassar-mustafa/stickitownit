@@ -15,35 +15,10 @@ class ProductImage extends Model
 
     protected $guarded = [];
 
-
-    /**
-     * Always the icon when it is updated.
-     * @param $value
-     * @return string
-     */
-    public function setFileNameAttribute($value)
-    {
-        $imageName = '';
-        if (!is_null($value) && $value !== '') {
-            $imageName =  $this->upload($value, 'product/thumbnail');
-            $this->attributes['filename'] = $imageName;
-        }
-    }
-
-
-    /**
-     * @param $value
-     * @return string
-     */
-    public function getFileNameAttribute($value): String
-    {
-        return asset('/storage/uploads/product/thumbnail' . $value);
-    }
-
     /**
     * @return BelongsTo
     */
-    public function product(): BelongsTo 
+    public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class);
     }

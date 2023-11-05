@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Backend;
 
+use App\Models\BlogPhoto;
 use App\Models\Product;
 use App\Models\Brand;
 use App\Models\Category;
@@ -11,10 +12,14 @@ use App\Models\ProductAttribute;
 use App\Models\ProductAttributeGroup;
 use App\Models\ProductAttributeValueGroup;
 use App\Contracts\Backend\ProductContract;
+use App\Models\ProductImage;
+use App\Traits\UploadFile;
 use Auth;
 
 class ProductRepository extends BaseRepository implements ProductContract
 {
+    use UploadFile;
+
     protected $model;
 
     public function __construct(Product $model)
@@ -43,7 +48,7 @@ class ProductRepository extends BaseRepository implements ProductContract
             'categories:id,name',
             'brand:id,name',
             'normal_product_groups:id,product_id,main_image,short_description,quantity,price'
-            ])->where('id', $id)->first();
+        ])->where('id', $id)->first();
         return $product;
     }
 
@@ -54,26 +59,27 @@ class ProductRepository extends BaseRepository implements ProductContract
     public function createProduct($id, array $params)
     {
 
-        if($id != null){
+        if ($id != null) {
             $product = Product::where('id', $id)->first();
-        }else{
+        } else {
             $product = new Product;
         }
 
-
+        $media_product_id = $params['media_product_id'];
+        unset($params['media_product_id']);
         $product->title = $params['title'];
         $product->slug = \Str::slug(strtolower($params['title']));
         $product->title = $params['title'];
         $product->brand_id = $params['brand_id'];
         $product->product_type = $params['product_type'];
         $product->description = $params['description'];
-        if(isset($params['shipping_type'])){
+        if (isset($params['shipping_type'])) {
             $product->shipping_type = $params['shipping_type'];
-            if($params['shipping_type'] == "fixed"){
+            if ($params['shipping_type'] == "fixed") {
                 $product->shipping_fee = $params['shipping_fee'];
             }
         }
-        if(isset($params['main_image'])){
+        if (isset($params['main_image'])) {
             $product->main_image = $params['main_image'];
         }
         $product->short_description = $params['short_description'];
@@ -81,40 +87,40 @@ class ProductRepository extends BaseRepository implements ProductContract
         $product->user_id = Auth::user()->id;
         $product->save();
 
-        if(isset($params['category_id']) && $params['category_id'][0] != null){
+        if (isset($params['category_id']) && $params['category_id'][0] != null) {
             $product->categories()->sync($params['category_id']);
         }
 
 
-        if($params['product_type'] == "normal"){
+        if ($params['product_type'] == "normal") {
 
             $productAttributeGroup = ProductAttributeGroup::where('product_id', $product->id)->first();
-            if(empty($productAttributeGroup)){
+            if (empty($productAttributeGroup)) {
                 $productAttributeGroup = new ProductAttributeGroup;
             }
 
             $productAttributeGroup->product_id = $product->id;
-            if(isset($params['main_image'])){
+            if (isset($params['main_image'])) {
                 $productAttributeGroup->main_image = $params['main_image'];
             }
             $productAttributeGroup->short_description = $params['short_description'];
             $productAttributeGroup->quantity = $params['quantity'];
-            $productAttributeGroup->sku = "product-".$product->id."";
+            $productAttributeGroup->sku = "product-" . $product->id . "";
             $productAttributeGroup->price = $params['price'];
             $productAttributeGroup->visibilty = true;
             $productAttributeGroup->save();
-            
-        }else{
+
+        } else {
             // Check and Store Attribute, Check and Store Attribute values,  Create and update product Attribute,
 
-            if($id == null){
+            if ($id == null) {
                 $attributeIds = [];
                 foreach ($params['attribute_ids'] as $key => $attributeName) {
                     $attributeId = 0;
                     $attribute = Attribute::where('name', strtolower($attributeName))->where('status', 'active')->first();
-                    if(!empty($attribute)){
+                    if (!empty($attribute)) {
                         $attributeId = $attribute->id;
-                    }else{
+                    } else {
                         $attribute = new Attribute;
                         $attribute->name = $attributeName;
                         $attribute->slug = \Str::slug(strtolower($attributeName));
@@ -123,9 +129,9 @@ class ProductRepository extends BaseRepository implements ProductContract
                         $attributeId = $attribute->id;
                     }
 
-                    foreach ($params['attribute_value_id'.$attributeName.''] as $key => $attributeValueName) {
+                    foreach ($params['attribute_value_id' . $attributeName . ''] as $key => $attributeValueName) {
                         $attributeValues = AttributeValue::where('name', strtolower($attributeValueName))->where('attribute_id', $attributeId)->where('status', 'active')->first();
-                        if(empty($attributeValues)){
+                        if (empty($attributeValues)) {
                             $attributeValues = new AttributeValue;
                             $attributeValues->attribute_id = $attributeId;
                             $attributeValues->name = $attributeValueName;
@@ -147,9 +153,9 @@ class ProductRepository extends BaseRepository implements ProductContract
 
                 //Delete Product Attribute Group
                 $getProdcutGroupArray = ProductAttributeGroup::where('product_id', $product->id)->pluck('id')->toArray();
-                if(count($getProdcutGroupArray) > 0){
+                if (count($getProdcutGroupArray) > 0) {
                     $deleteProductGroupArray = array_diff($getProdcutGroupArray, $params['combination_ids']);
-                    if(count($deleteProductGroupArray) > 0){
+                    if (count($deleteProductGroupArray) > 0) {
                         $product->product_attribute_group()->detach($deleteProductGroupArray);
                         $product->product_groups()->whereIn('id', $deleteProductGroupArray)->delete();
                     }
@@ -160,12 +166,12 @@ class ProductRepository extends BaseRepository implements ProductContract
                 foreach ($params['combination_ids'] as $combKey => $value) {
 
                     $productAttributeGroup = ProductAttributeGroup::where('id', $value)->first();
-                    if(empty($productAttributeGroup)){
+                    if (empty($productAttributeGroup)) {
                         $productAttributeGroup = new ProductAttributeGroup;
                     }
 
                     $productAttributeGroup->product_id = $product->id;
-                    if(isset($params['combination_image'][$combKey]) && $params['combination_image'][$combKey] != null){
+                    if (isset($params['combination_image'][$combKey]) && $params['combination_image'][$combKey] != null) {
                         $productAttributeGroup->main_image = $params['combination_image'][$combKey];
                     }
                     $productAttributeGroup->short_description = $params['combination'][$combKey];
@@ -179,11 +185,11 @@ class ProductRepository extends BaseRepository implements ProductContract
 
                     //Delete Product Attribute Group Value
                     $getProdcutGroupValueArray = ProductAttributeValueGroup::where('product_id', $product->id)->where('product_group_id', $productAttributeGroup->id)->pluck('product_attribute_val_id')->toArray();
-                    if(count($getProdcutGroupValueArray) > 0){
+                    if (count($getProdcutGroupValueArray) > 0) {
                         $getAttributeValueIds = AttributeValue::whereIn('name', $getcombinationArray)->pluck('id')->toArray();
                         $deleteProductGroupValueArray = array_diff($getProdcutGroupValueArray, $getAttributeValueIds);
 
-                        if(count($deleteProductGroupValueArray) > 0){
+                        if (count($deleteProductGroupValueArray) > 0) {
                             ProductAttributeValueGroup::whereIn('product_attribute_val_id', $deleteProductGroupValueArray)->where('product_id', $product->id)->where('product_group_id', $productAttributeGroup->id)->delete();
                         }
                     }
@@ -192,7 +198,7 @@ class ProductRepository extends BaseRepository implements ProductContract
                         $getAttributeValueId = AttributeValue::where('name', strtolower($value))->where('status', 'active')->value('id');
 
                         $productAttributeValueGroup = ProductAttributeValueGroup::where('product_id', $product->id)->where('product_group_id', $productAttributeGroup->id)->where('product_attribute_val_id', $getAttributeValueId)->first();
-                        if(empty($productAttributeValueGroup)){
+                        if (empty($productAttributeValueGroup)) {
                             $productAttributeValueGroup = new ProductAttributeValueGroup;
                         }
 
@@ -209,6 +215,7 @@ class ProductRepository extends BaseRepository implements ProductContract
 
         }
 
+        ProductImage::whereProductId($media_product_id)->update(['product_id' => $product->id]);
         return $product;
 
     }
@@ -234,9 +241,11 @@ class ProductRepository extends BaseRepository implements ProductContract
         if ($product->main_image) {
             \File::delete(public_path('/storage/uploads/products/' . $product->main_image));
         }
+
+
         $product->categories()->detach();
 
-        if($product->type == "variation"){
+        if ($product->type == "variation") {
             foreach ($product->product_groups as $key => $value) {
                 if ($product->main_image) {
                     \File::delete(public_path('/storage/uploads/products/' . $value->main_image));
@@ -248,51 +257,65 @@ class ProductRepository extends BaseRepository implements ProductContract
             $product->attribute_values()->delete();
         }
 
+        $productPhotos = ProductImage::whereProductId($id)->get();
+        foreach ($productPhotos as $photo) {
+            if ($photo->filename) {
+                \File::delete(public_path('/storage/uploads/products/images/' . $photo->filename));
+            }
+            $photo->delete();
+        }
+
         return $this->delete($id);
     }
 
     /**
      * @return mixed
      */
-    public function getBrands(){
+    public function getBrands()
+    {
         return Brand::where('status', 'active')->get();
     }
 
     /**
      * @return mixed
      */
-    public function getCategories(){
+    public function getCategories()
+    {
         return Category::where('status', 'active')->get();
     }
 
     /**
      * @return mixed
      */
-    public function getAttributes(){
+    public function getAttributes()
+    {
         return Attribute::with(['attribute_values:id,name,attribute_id'])->where('status', 'active')->get();
     }
 
     /**
      * @return mixed
      */
-    public function getAttributeValues($attributeName){
-        return AttributeValue::whereHas('attribute', function($q) use($attributeName){
+    public function getAttributeValues($attributeName)
+    {
+        return AttributeValue::whereHas('attribute', function ($q) use ($attributeName) {
             $q->where('name', strtolower($attributeName));
         })->where('status', 'active')->get();
     }
 
-    public function getCombination($attributeArray){
+    public function getCombination($attributeArray)
+    {
 
         $attributeValueArray = [];
         foreach ($attributeArray as $key => $value) {
-            array_push($attributeValueArray,$value[1]);
+            array_push($attributeValueArray, $value[1]);
         }
         $combination_array = $this->combinations($attributeValueArray);
         return $combination_array;
     }
 
 
-    public function combinations($arrays, $i = 0) {
+    public function combinations($arrays, $i = 0)
+    {
         if (!isset($arrays[$i])) {
             return array();
         }
@@ -320,10 +343,11 @@ class ProductRepository extends BaseRepository implements ProductContract
     /**
      * @return mixed
      */
-    public function getProducAttributeValue($productId, $attributeName){
+    public function getProducAttributeValue($productId, $attributeName)
+    {
         $productAttributeValueGroupIds = ProductAttributeValueGroup::where('product_id', $productId)->groupBy('product_attribute_val_id')->pluck('product_attribute_val_id')->toArray();
 
-        return AttributeValue::whereIn('id',$productAttributeValueGroupIds)->whereHas('attribute', function($q) use($attributeName){
+        return AttributeValue::whereIn('id', $productAttributeValueGroupIds)->whereHas('attribute', function ($q) use ($attributeName) {
             $q->where('name', strtolower($attributeName));
         })->pluck('name')->toArray();
     }
@@ -332,18 +356,20 @@ class ProductRepository extends BaseRepository implements ProductContract
     /**
      * @return mixed
      */
-    public function getProductGroups($productId){
+    public function getProductGroups($productId)
+    {
         return ProductAttributeGroup::where('product_id', $productId)->get();
     }
 
     /**
      * @param array $params
      * @return mixed
-    */
-    public function updateProductVariation(array $params){
+     */
+    public function updateProductVariation(array $params)
+    {
         $productAttributeGroup = ProductAttributeGroup::where('id', $params['id'])->first();
-        if(!empty($productAttributeGroup)){
-            if(isset($params['image']) && $params['image'] != null){
+        if (!empty($productAttributeGroup)) {
+            if (isset($params['image']) && $params['image'] != null) {
                 $productAttributeGroup->main_image = $params['image'];
             }
 
@@ -359,9 +385,107 @@ class ProductRepository extends BaseRepository implements ProductContract
      * @param $id
      * @return bool
      */
-    public function deleteProductVariation($id){
+    public function deleteProductVariation($id)
+    {
         ProductAttributeValueGroup::where('product_group_id', $id)->delete();
         ProductAttributeGroup::where('id', $id)->delete();
+        return true;
+    }
+
+
+    /**
+     * @return mixed
+     */
+    function uploadImages(array $params)
+    {
+
+
+        $image = $params['file'];
+        $name_new = $image->getClientOriginalName();
+        $fileName = $this->upload($image, 'products/images');
+        if (session()->has('product_id') && !is_null(session()->get('product_id'))) {
+            $product_id = session()->get('product_id');
+        }
+
+
+        ProductImage::create([
+            'product_id' => $product_id,
+            'name' => $name_new,
+            'fileName' => $fileName,
+            'order' => 1,
+        ]);
+
+        return response()->json(['success' => $fileName]);
+    }
+
+    /**
+     * @return mixed
+     */
+    function fetch($id)
+    {
+        $images = ProductImage::whereProductId($id)->orderBy('order', 'asc')->get();
+
+        $output = '<div class="row"><ul class="nav nav-pills source-code">';
+
+        foreach ($images->chunk(5) as $imageData) {
+            $output .= '<div class="col-md-1"></div>';
+            foreach ($imageData as $image) {
+
+                $output .= '<div class="col-md-2">
+                    <li id="image_li_' . $image->id . '"
+                        class="ui-sortable-handle mr-2 mt-2">
+                        <div  class="custom-control custom-checkbox image-checkbox">
+                        <div class="col-md-12">
+                         <input type="checkbox"
+                               class="custom-control-input"
+                               id="ck' . $image->id . '"
+                               data-id="' . $image->id . '"
+                               data-image="' . $image->filename . '"
+                        >
+</div>
+                        <div class="col-md-12">
+                             <label
+                            class="custom-control-label"
+                            for="ck' . $image->id . '">
+                            <a href="javascript:void(0);"
+                               class="img-link" style="cursor: move">
+                                <img
+                                    src="' . asset('storage/uploads/products/images/' . $image->filename) . '"
+                                    alt=""
+                                    class="img-thumbnail"
+                                    width="175"
+                                    height="175"
+                                    style="height:175px;"/>
+                                <button type="button"
+                                        class="btn btn-link btn btn-primary remove_image"
+                                        id="' . $image->id . '" data-name="' . $image->filename . '">
+                                            Remove
+                                </button>
+                            </a>
+                            </label>
+</div>
+
+
+                        </div>
+                    </li>
+                </div>';
+            }
+            $output .= '<div class="col-md-1"></div>';
+        }
+        $output .= ' </ul></div>';
+        return $output;
+    }
+
+    /**
+     * @return mixed
+     */
+    function deleteMedia(array $params)
+    {
+        ProductImage::where('id', (int)$params['id'])->delete();
+        if ($params['name']) {
+            \File::delete(public_path('storage/uploads/products/images/' . $params['name']));
+        }
+
         return true;
     }
 

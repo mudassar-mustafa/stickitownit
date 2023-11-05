@@ -117,7 +117,7 @@
                                     <div class="cp-services-img w-img">
                                         <img src="{{ $category->image }}" alt="{{ $category->name }}">
                                     </div>
-                                    <h4 class="cp-services-title"><a href="#">{{ $category->name }}</a></h4>
+                                    <h4 class="cp-services-title"><a href="{{ route('get.products-by-category',$category->slug) }}">{{ $category->name }}</a></h4>
                                 </div>
                             </div>
                         @endforeach
@@ -312,9 +312,9 @@
                                         @foreach($stickers as $key=>$sticker)
                                             <div class="swiper-slide">
                                                 <div class="cp-brand-img">
-                                                    <img 
+                                                    <img
                                                         class="what-we-are-printing-image"
-                                                        src="{{$sticker->image}}" 
+                                                        src="{{$sticker->image}}"
                                                         alt="{{$key+1}}.png"
                                                     >
                                                 </div>

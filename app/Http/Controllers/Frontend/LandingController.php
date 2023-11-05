@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Enums\CommonEnum;
 use App\Models\Generation;
 use App\Models\PackageSubscription;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 use App\Contracts\Frontend\LandingContract;
 use App\Helpers\Helper;
@@ -120,12 +121,13 @@ class LandingController extends Controller
             'no_of_images' => 'required',
         ]);
         $packageSubscription = PackageSubscription::where('user_id', Auth::user()->id)->where('status', 'active')->first();
-        if(!empty($packageSubscription) && $packageSubscription->remaing_token > 0){
+        if (!empty($packageSubscription) && $packageSubscription->remaing_token > 0) {
             $params = $request->except('_token');
 
-            $params['modelId'] = '6bef9f1b-29cb-40c7-b9df-32b51c1f67d3';
-            $params['height'] = '512';
-            $params['width'] = '512';
+            $setting = Setting::first(['model_id', 'width', 'height']);
+            $params['modelId'] = $setting->model_id;
+            $params['height'] = $setting->height;
+            $params['width'] = $setting->width;
             $response = Helper::createGeneration($params);
 
             if ($response['success'] === false) {
@@ -136,7 +138,7 @@ class LandingController extends Controller
                     'message' => 'Something Wrong',
                 ]);
             } else {
-                if(isset($response['data']) && isset($response['data']['sdGenerationJob'])){
+                if (isset($response['data']) && isset($response['data']['sdGenerationJob'])) {
                     $generationId = $response['data']['sdGenerationJob']['generationId'];
                     $usedTokens = $response['data']['sdGenerationJob']['apiCreditCost'];
                     Generation::create([
@@ -154,7 +156,7 @@ class LandingController extends Controller
                         'usedTokens' => $usedTokens,
                         'remainingToken' => ''
                     ]);
-                }else{
+                } else {
                     return response()->json([
                         'success' => false,
                         'message' => 'Your generation was not created try again.',
@@ -164,10 +166,10 @@ class LandingController extends Controller
                     ]);
                 }
             }
-        }else{
+        } else {
             return response()->json([
                 'success' => false,
-                'message' => 'Please subcribe package.',
+                'message' => 'Please subscribe package.',
                 'generationId' => "",
                 'usedTokens' => "",
                 'remainingToken' => ''

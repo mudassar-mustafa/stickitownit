@@ -9,6 +9,8 @@
 
 @section('title',   $productTitle)
 @push('css')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.js"></script>
 @endpush
 @section('content')
     <main id="main" class="main">
@@ -23,20 +25,24 @@
                                 $productCardTitle = "Add New Product";
                                 if(!empty($product)){
                                     $productCardTitle = "Update ".$product->title." Product";
+                                    $route = route('backend.pages.product.update',$product->id);
+                                }else{
+                                    $route = route('backend.pages.product.store');
                                 }
                             @endphp
                             <h5 class="card-title">{{ $productCardTitle }}</h5>
                             <!-- Vertical Form -->
-                            @if (!empty($product))
-                            <form class="row g-3" action="{{route('backend.pages.product.update',$product->id)}}"
-                                method="POST" enctype="multipart/form-data" onsubmit="return checkFormBeforSubmit()">
-                            @else
-                            <form class="row g-3" action="{{route('backend.pages.product.store')}}" method="POST" enctype="multipart/form-data" onsubmit="return checkFormBeforSubmit()">
-                            @endif
-                            
+                            <form class="row g-3" action="{{$route}}"
+                                  method="POST" enctype="multipart/form-data"
+                                  onsubmit="return checkFormBeforSubmit()"
+                            >
+
                                 @csrf
-                                <input type="hidden" value="{{ !empty($product) ? $product->id : 0 }}" id="product_id"> 
-                                
+                                <input type="hidden" name="media_product_id" value="{{$product_id}}"
+                                       id="media_product_id">
+                                <input type="hidden" value="{{ !empty($product) ? $product->id : 0 }}"
+                                       id="product_id">
+
                                 <input type="hidden" value="" id="visibility_ids" name="visibility_ids">
                                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                     <label for="title" class="form-label">Title</label>
@@ -49,14 +55,16 @@
                                     @endif
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                    <label for="main_image" class="form-label">{{ __('Main Image 300 X 300 pixel') }}
+                                    <label for="main_image"
+                                           class="form-label">{{ __('Main Image 300 X 300 pixel') }}
                                         <span class="mandatorySign"> *</span>
                                     </label>
                                     <input value="{{old('main_image')}}" type="file"
-                                        class="form-control @error('main_image') is-invalid @enderror"
-                                        onchange="readURL(this)" id="main_image"
-                                        name="main_image" style="padding: 9px; cursor: pointer">
-                                    <img  class="img-thumbnail" style="{{ !empty($product) ? "display:block" : "display:none" }}; height: 100px !important;"
+                                           class="form-control @error('main_image') is-invalid @enderror"
+                                           onchange="readURL(this)" id="main_image"
+                                           name="main_image" style="padding: 9px; cursor: pointer">
+                                    <img class="img-thumbnail"
+                                         style="{{ !empty($product) ? "display:block" : "display:none" }}; height: 100px !important;"
                                          id="img" src="{{ !empty($product) ? $product->main_image : "#" }}"
                                          alt="your main_image"/>
                                     @error('main_image')
@@ -67,8 +75,10 @@
                                 </div>
 
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <label for="short_description" class="form-label">Short Description</label>
-                                    <input type="text" class="form-control" id="short_description" name="short_description"
+                                    <label for="short_description" class="form-label">Short
+                                        Description</label>
+                                    <input type="text" class="form-control" id="short_description"
+                                           name="short_description"
                                            value="{{ old('short_description', !empty($product) ? $product->short_description : "") }}">
                                     @if ($errors->has('short_description'))
                                         <div class="invalid-feedback">
@@ -94,17 +104,18 @@
                                         @php
                                             $selectedCategoryId = 0;
                                             if(!empty($product) && !empty($product->categories) && count($product->categories) > 0){
-                                                $selectedCategoryId = $product->categories[0]['id']; 
+                                                $selectedCategoryId = $product->categories[0]['id'];
                                             }else{
                                                 $selectedCategoryId = old('category_id');
                                             }
                                         @endphp
                                         @if (!empty($categories))
                                             @foreach ($categories as $category)
-                                                <option value ="{{ $category->id }}" {{ $selectedCategoryId == $category->id ? "selected" : ""  }}>{{ $category->name }}</option>
+                                                <option
+                                                    value="{{ $category->id }}" {{ $selectedCategoryId == $category->id ? "selected" : ""  }}>{{ $category->name }}</option>
                                             @endforeach
                                         @endif
-                                      </select>
+                                    </select>
                                     @if ($errors->has('category_id'))
                                         <div class="invalid-feedback">
                                             {{ $errors->first('category_id') }}
@@ -113,22 +124,23 @@
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                     <label for="brand_id" class="form-label">Brand</label>
-                                    <select class="brand_id form-select" name="brand_id">
+                                    <select class="brand_id form-select" name="brand_id" id="brand_id">
                                         <option value=""> Please Select Brand</option>
                                         @php
                                             $selectedBrandId = 0;
                                             if(!empty($product)){
-                                                $selectedBrandId = $product->brand->id; 
+                                                $selectedBrandId = $product->brand->id;
                                             }else{
                                                 $selectedBrandId = old('brand_id');
                                             }
                                         @endphp
                                         @if (!empty($brands))
                                             @foreach ($brands as $brand)
-                                                <option value ="{{ $brand->id }}" {{ $selectedBrandId == $brand->id ? "selected" : ""  }}>{{ $brand->name }}</option>
+                                                <option
+                                                    value="{{ $brand->id }}" {{ $selectedBrandId == $brand->id ? "selected" : ""  }}>{{ $brand->name }}</option>
                                             @endforeach
                                         @endif
-                                      </select>
+                                    </select>
                                     @if ($errors->has('brand_id'))
                                         <div class="invalid-feedback">
                                             {{ $errors->first('brand_id') }}
@@ -136,22 +148,32 @@
                                     @endif
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    
+
                                     <label for="product_type" class="form-label">Product Type</label>
-                                    <select id="product_type" class="form-select" name="product_type" onchange="getProductFields()">
+                                    <select id="product_type" class="form-select" name="product_type"
+                                            onchange="getProductFields()">
                                         @php
                                             $selectedProductType = "";
                                             $editForm = false;
                                             if(!empty($product)){
-                                                $selectedProductType = $product->product_type; 
+                                                $selectedProductType = $product->product_type;
                                                 $editForm = true;
                                             }else{
                                                 $selectedProductType = old('product_type');
                                             }
                                         @endphp
-                                        <option value="" {{ $selectedProductType == "" ? "selected" : "" }} {{ $editForm == true ? $selectedProductType == "" ? "" : "disabled" : "" }} >Please Select Product Type</option>
-                                        <option value="normal" {{ $selectedProductType == "normal" ? "selected" : "" }} {{ $editForm == true ? $selectedProductType == "normal" ? "" : "disabled" : "" }}>Normal</option>
-                                        <option value="variation" {{ $selectedProductType == "variation" ? "selected" : "" }} {{ $editForm == true ? $selectedProductType == "variation" ? "" : "disabled" : "" }}>Variation</option>
+                                        <option
+                                            value="" {{ $selectedProductType == "" ? "selected" : "" }} {{ $editForm == true ? $selectedProductType == "" ? "" : "disabled" : "" }} >
+                                            Please Select Product Type
+                                        </option>
+                                        <option
+                                            value="normal" {{ $selectedProductType == "normal" ? "selected" : "" }} {{ $editForm == true ? $selectedProductType == "normal" ? "" : "disabled" : "" }}>
+                                            Normal
+                                        </option>
+                                        <option
+                                            value="variation" {{ $selectedProductType == "variation" ? "selected" : "" }} {{ $editForm == true ? $selectedProductType == "variation" ? "" : "disabled" : "" }}>
+                                            Variation
+                                        </option>
                                     </select>
                                     @if ($errors->has('product_type'))
                                         <div class="invalid-feedback">
@@ -163,15 +185,18 @@
                                 @include('backend.pages.product.partial.attribute_partial')
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 appendAttributeValues">
                                 </div>
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 {{ !empty($product) && $product->product_type == "variation" ? "hidden" : "hidden" }} variation_product_fields">
+                                <div
+                                    class="col-lg-12 col-md-12 col-sm-12 col-xs-12 {{ !empty($product) && $product->product_type == "variation" ? "hidden" : "hidden" }} variation_product_fields">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="auto_combination" onchange="getAutoCombination()">
+                                        <input class="form-check-input" type="checkbox"
+                                               id="auto_combination" onchange="getAutoCombination()">
                                         <label class="form-check-label" for="gridCheck1">
-                                          Auto Combination
+                                            Auto Combination
                                         </label>
                                     </div>
                                 </div>
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 append_combinations {{ !empty($product) && $product->product_type == "variation" ? "hidden" : "hidden" }} variation_product_fields">
+                                <div
+                                    class="col-lg-12 col-md-12 col-sm-12 col-xs-12 append_combinations {{ !empty($product) && $product->product_type == "variation" ? "hidden" : "hidden" }} variation_product_fields">
                                     <div class="row">
                                         <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12">
                                             Visibility
@@ -198,18 +223,28 @@
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                     <label for="shipping_type" class="form-label">Shipping Type</label>
-                                    <select id="shipping_type" class="form-select" name="shipping_type" onchange="getShippingFields()">
+                                    <select id="shipping_type" class="form-select" name="shipping_type"
+                                            onchange="getShippingFields()">
                                         @php
                                             $selectedShippingType = "";
                                             if(!empty($product)){
-                                                $selectedShippingType = $product->shipping_type; 
+                                                $selectedShippingType = $product->shipping_type;
                                             }else{
                                                 $selectedShippingType = old('shipping_type');
                                             }
                                         @endphp
-                                        <option value="" {{ $selectedShippingType == "" ? "selected" : "" }}>Please Shipping Type</option>
-                                        <option value="free" {{ $selectedShippingType == "free" ? "selected" : "" }}>Free</option>
-                                        <option value="fixed" {{ $selectedShippingType == "fixed" ? "selected" : "" }}>Flat Shipping</option>
+                                        <option
+                                            value="" {{ $selectedShippingType == "" ? "selected" : "" }}>
+                                            Please Shipping Type
+                                        </option>
+                                        <option
+                                            value="free" {{ $selectedShippingType == "free" ? "selected" : "" }}>
+                                            Free
+                                        </option>
+                                        <option
+                                            value="fixed" {{ $selectedShippingType == "fixed" ? "selected" : "" }}>
+                                            Flat Shipping
+                                        </option>
                                     </select>
                                     @if ($errors->has('shipping_type'))
                                         <div class="invalid-feedback">
@@ -219,7 +254,8 @@
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 hidden shipping_fields">
                                     <label for="shipping_fee" class="form-label">Shipping Fee</label>
-                                    <input type="number" step="any" class="form-control" id="shipping_fee" name="shipping_fee"
+                                    <input type="number" step="any" class="form-control" id="shipping_fee"
+                                           name="shipping_fee"
                                            value="{{ old('shipping_fee', !empty($product) ? $product->shipping_fee : "") }}">
                                     @if ($errors->has('shipping_fee'))
                                         <div class="invalid-feedback">
@@ -233,13 +269,19 @@
                                         @php
                                             $selectedStatus = "active";
                                             if(!empty($product)){
-                                                $selectedStatus = $product->status; 
+                                                $selectedStatus = $product->status;
                                             }else{
                                                 $selectedStatus = old('status');
                                             }
                                         @endphp
-                                        <option {{ $selectedStatus == "active" ? "selected" : "" }} value="active">Active</option>
-                                        <option {{ $selectedStatus == "inactive" ? "selected" : "" }} value="inactive">Inactive</option>
+                                        <option
+                                            {{ $selectedStatus == "active" ? "selected" : "" }} value="active">
+                                            Active
+                                        </option>
+                                        <option
+                                            {{ $selectedStatus == "inactive" ? "selected" : "" }} value="inactive">
+                                            Inactive
+                                        </option>
                                     </select>
                                     @if ($errors->has('status'))
                                         <div class="invalid-feedback">
@@ -247,11 +289,43 @@
                                         </div>
                                     @endif
                                 </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-xs-12">
+                                    <div class="card mb-4">
+                                        <div class="card-header"><strong>Galleries</strong>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="example">
+                                                <div id="dropzoneForm" class="dropzone">
+                                                    <input type="hidden" value="{{$product_id}}"
+                                                           id="product_id"
+                                                           name="product_id">
+                                                </div>
+                                                <div class="float-end mt-2">
+                                                    <button type="button" class="btn btn-dark float-end"
+                                                            id="submit-all">Upload
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-header"><strong>Uploaded Images</strong>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="example">
+                                                <div class="card-body">
+                                                    <div class="example" id="uploaded_image">
+                                                        <div class="row">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="float-end">
                                     <button type="submit" class="btn btn-primary float-end">Submit</button>
                                 </div>
                             </form><!-- Vertical Form -->
-
                         </div>
                     </div>
                 </div>
@@ -260,189 +334,285 @@
     </main>
 @endsection
 @push('scripts')
-<script>
-    var attributeArray = [];
-    $(document).ready(function() {
-        $('.category_id').select2();
-        $('.brand_id').select2();
-        $('.attribute_id').select2({
-            placeholder: "Select Attribute",
-            tags: true,
-            createTag: function (params) {
-                var term = $.trim(params.term);
+    <style>
+        .remove_image {
+            background: var(--bs-link-color);
+            margin-top: 10px;
+            color: white;
+            text-decoration: none;
+            display: grid;
+            width: 100%;
+        }
 
-                if (term === '') {
-                return null;
+        .mr-2 {
+            margin-right: 2px;
+        }
+
+        .btn-link:hover {
+            color: #ffffff;
+        }
+    </style>
+    <script>
+
+
+        var attributeArray = [];
+        $(document).ready(function () {
+            $('.category_id').select2();
+            $('.brand_id').select2();
+            $('.attribute_id').select2({
+                placeholder: "Select Attribute",
+                tags: true,
+                createTag: function (params) {
+                    var term = $.trim(params.term);
+
+                    if (term === '') {
+                        return null;
+                    }
+
+                    return {
+                        id: term[0].toUpperCase() + term.slice(1),
+                        text: term[0].toUpperCase() + term.slice(1),
+                        newTag: true // add additional parameters
+                    }
                 }
-
-                return {
-                id: term[0].toUpperCase() + term.slice(1),
-                text: term[0].toUpperCase() + term.slice(1),
-                newTag: true // add additional parameters
-                }
-            }
-        });
-        // if($("#attribute_name_string").val() != ""){
-        //     var attributeList = $("#attribute_name_string").val().split(',');
-        //     attributeList.forEach(element => {
-        //         var attribute = [];
-        //         attribute.push(element);
-        //         attribute.push(null);
-        //         attributeArray.push(attribute);
-        //         getAttributeValue(element);
-                
-        //     });
-        // }
-
-        // if($("#product_id") != 0 && $('#product_type').find(":selected").val() == "variation"){
-        //     $("#auto_combination").prop('checked', true);
-        //     getAutoCombination();
-        // }
-        
-
-        $('.attribute_id').on('select2:select', function (e) {
-
-            var data = e.params.data.text;
-            var attribute = [];
-            attribute.push(data);
-            attribute.push(null);
-            attributeArray.push(attribute);
-            getAttributeValue(data);
-            
-        });
-        $('.attribute_id').on('select2:unselect', function (e) {
-
-            var data = e.params.data.text;
-            attributeArray = $.grep(attributeArray, function(n) {
-                return n[0] != data;
             });
-            $(".attribure_value"+data+"").remove();
+            // if($("#attribute_name_string").val() != ""){
+            //     var attributeList = $("#attribute_name_string").val().split(',');
+            //     attributeList.forEach(element => {
+            //         var attribute = [];
+            //         attribute.push(element);
+            //         attribute.push(null);
+            //         attributeArray.push(attribute);
+            //         getAttributeValue(element);
+
+            //     });
+            // }
+
+            // if($("#product_id") != 0 && $('#product_type').find(":selected").val() == "variation"){
+            //     $("#auto_combination").prop('checked', true);
+            //     getAutoCombination();
+            // }
+
+
+            $('.attribute_id').on('select2:select', function (e) {
+
+                var data = e.params.data.text;
+                var attribute = [];
+                attribute.push(data);
+                attribute.push(null);
+                attributeArray.push(attribute);
+                getAttributeValue(data);
+
+            });
+            $('.attribute_id').on('select2:unselect', function (e) {
+
+                var data = e.params.data.text;
+                attributeArray = $.grep(attributeArray, function (n) {
+                    return n[0] != data;
+                });
+                $(".attribure_value" + data + "").remove();
+            });
         });
-    });
 
-    function getProductFields(){
-        if( $('#product_type').find(":selected").val() == "normal"){
-            $(".normal_product_fields").removeClass('hidden');
-            $(".variation_product_fields").addClass('hidden');
-        }else{
-            $(".normal_product_fields").addClass('hidden');
-            $(".variation_product_fields").removeClass('hidden');
-        }
-    }
-
-    function getShippingFields(){
-        if( $('#shipping_type').find(":selected").val() == "free"){
-            $(".shipping_fields").addClass('hidden');
-        }else{
-            $(".shipping_fields").removeClass('hidden');
-        }
-    }
-
-    function getAttributeValue(data) {
-        var csrf_token = $('meta[name="csrf-token"]').attr('content');
-        $.ajax({
-            type: 'POST',
-            async: false,
-            url: '{{route("backend.pages.product.getAttributeValues")}}',
-            data: {
-            attribute_name: data,
-            product_id: $("#product_id").val(),
-            _token: csrf_token
-            },
-            dataType: 'JSON',
-            success: function (data) {
-                if (data.status == 'success') {
-                    if(data.data.getAttributeValueHtml != ''){
-                        $(".appendAttributeValues").append(data.data.getAttributeValueHtml);
-                    }
-                    $('.attribute_value_id'+ data.data.attributeName +'').select2({
-                        placeholder: "Select Attribute Value",
-                        tags: true,
-                        createTag: function (params) {
-                            var term = $.trim(params.term);
-
-                            if (term === '') {
-                            return null;
-                            }
-
-                            return {
-                            id: term[0].toUpperCase() + term.slice(1),
-                            text: term[0].toUpperCase() + term.slice(1),
-                            newTag: true // add additional parameters
-                            }
-                        }
-                    });
-
-                    if( $("#product_id").val() != 0){
-                        var attributeSelectedValues = data.data.attributeSelectedValues;
-                        for(var i = 0; i<attributeArray.length; i++ ){
-                            if(attributeArray[i][0] == data.data.attributeName){
-                                attributeArray[i][1] = attributeSelectedValues;
-                                return;
-                            }
-                        }
-                    }
-                }
-            }
-        });   
-    }
-
-    function updateAttributeValueArray(attributeName){
-        var data = $(".attribute_value_id"+attributeName+"").val();
-        for(var i = 0; i<attributeArray.length; i++ ){
-            if(attributeArray[i][0] == attributeName){
-                attributeArray[i][1] = data;
-                return;
+        function getProductFields() {
+            if ($('#product_type').find(":selected").val() == "normal") {
+                $(".normal_product_fields").removeClass('hidden');
+                $(".variation_product_fields").addClass('hidden');
+            } else {
+                $(".normal_product_fields").addClass('hidden');
+                $(".variation_product_fields").removeClass('hidden');
             }
         }
-    }
 
-    function getAutoCombination() {
-        if ($("#auto_combination").is(':checked')) {
+        function getShippingFields() {
+            if ($('#shipping_type').find(":selected").val() == "free") {
+                $(".shipping_fields").addClass('hidden');
+            } else {
+                $(".shipping_fields").removeClass('hidden');
+            }
+        }
+
+        function getAttributeValue(data) {
             var csrf_token = $('meta[name="csrf-token"]').attr('content');
-        $.ajax({
-            type: 'POST',
-            async: false,
-            url: '{{route("backend.pages.product.getCombination")}}',
-            data: {
-                attributeArray: attributeArray,
-                product_id: $("#product_id").val(), 
-                _token: csrf_token
-            },
-            dataType: 'JSON',
-            success: function (data) {
-                if (data.status == 'success') {
-                    if(data.data != ''){
-                        $(".append_combinations").append(data.data);
+            $.ajax({
+                type: 'POST',
+                async: false,
+                url: '{{route("backend.pages.product.getAttributeValues")}}',
+                data: {
+                    attribute_name: data,
+                    product_id: $("#product_id").val(),
+                    _token: csrf_token
+                },
+                dataType: 'JSON',
+                success: function (data) {
+                    if (data.status == 'success') {
+                        if (data.data.getAttributeValueHtml != '') {
+                            $(".appendAttributeValues").append(data.data.getAttributeValueHtml);
+                        }
+                        $('.attribute_value_id' + data.data.attributeName + '').select2({
+                            placeholder: "Select Attribute Value",
+                            tags: true,
+                            createTag: function (params) {
+                                var term = $.trim(params.term);
+
+                                if (term === '') {
+                                    return null;
+                                }
+
+                                return {
+                                    id: term[0].toUpperCase() + term.slice(1),
+                                    text: term[0].toUpperCase() + term.slice(1),
+                                    newTag: true // add additional parameters
+                                }
+                            }
+                        });
+
+                        if ($("#product_id").val() != 0) {
+                            var attributeSelectedValues = data.data.attributeSelectedValues;
+                            for (var i = 0; i < attributeArray.length; i++) {
+                                if (attributeArray[i][0] == data.data.attributeName) {
+                                    attributeArray[i][1] = attributeSelectedValues;
+                                    return;
+                                }
+                            }
+                        }
                     }
                 }
-            }
-        });
-        }else{
-            $(".remove_combinations").remove();
+            });
         }
-        
-    }
 
-    function checkFormBeforSubmit() {
-        visibility_check_box = [];
-        $('.visibility').each(function() {
-            if($(this).is(":checked")){
-              visibility_check_box.push('1');
-            }else{
-              visibility_check_box.push('0');
+        function updateAttributeValueArray(attributeName) {
+            var data = $(".attribute_value_id" + attributeName + "").val();
+            for (var i = 0; i < attributeArray.length; i++) {
+                if (attributeArray[i][0] == attributeName) {
+                    attributeArray[i][1] = data;
+                    return;
+                }
             }
+        }
+
+        function getAutoCombination() {
+            if ($("#auto_combination").is(':checked')) {
+                var csrf_token = $('meta[name="csrf-token"]').attr('content');
+                $.ajax({
+                    type: 'POST',
+                    async: false,
+                    url: '{{route("backend.pages.product.getCombination")}}',
+                    data: {
+                        attributeArray: attributeArray,
+                        product_id: $("#product_id").val(),
+                        _token: csrf_token
+                    },
+                    dataType: 'JSON',
+                    success: function (data) {
+                        if (data.status == 'success') {
+                            if (data.data != '') {
+                                $(".append_combinations").append(data.data);
+                            }
+                        }
+                    }
+                });
+            } else {
+                $(".remove_combinations").remove();
+            }
+
+        }
+
+        function checkFormBeforSubmit() {
+            visibility_check_box = [];
+            $('.visibility').each(function () {
+                if ($(this).is(":checked")) {
+                    visibility_check_box.push('1');
+                } else {
+                    visibility_check_box.push('0');
+                }
+            });
+            var visibility_ids = visibility_check_box.join();
+            $("#visibility_ids").val(visibility_ids);
+
+            return true;
+        }
+
+        function deleteVaration(id) {
+            $(".remove_combination" + id + "").remove();
+        }
+
+
+    </script>
+
+    <script type="text/javascript">
+        load_images();
+        Dropzone.options.dropzoneForm = {
+            url: "{{ route('backend.pages.product.media.upload') }}",
+            autoProcessQueue: false,
+            parallelUploads: 10,
+            maxFilesize: 5,
+            acceptedFiles: ".png,.jpg,.jpeg",
+
+            init: function () {
+                var submitButton = document.querySelector("#submit-all");
+                myDropzone = this;
+
+                this.on("thumbnail", function (file) {
+                    if (file.size <= 1024 * 1024 * 1024 * 1024 * 1024) {
+
+                    } else {
+                        $('.loading').hide();
+                        toastr.error("Maximum upload file size is 5mb.");
+                    }
+                });
+
+                submitButton.addEventListener('click', function () {
+                    $('.loading').show();
+                    // enable auto process queue after uploading started
+                    myDropzone.options.autoProcessQueue = true;
+                    // queue processing
+                    myDropzone.processQueue();
+                });
+                this.on('sendingmultiple', function (data, xhr, formData) {
+
+                    formData.append("product_id", $("#media_product_id").val());
+                });
+
+                this.on("complete", function () {
+                    if (this.getQueuedFiles().length == 0 && this.getUploadingFiles().length == 0) {
+
+                    }
+                    load_images();
+                });
+                // disable queue auto processing on upload complete
+                this.on("queuecomplete", function () {
+                    myDropzone.options.autoProcessQueue = false;
+                });
+
+
+            }
+
+        };
+
+
+        function load_images() {
+            $.ajax({
+                url: "{{ route('backend.pages.product.media.fetch',$product_id) }}",
+                success: function (data) {
+                    $('#uploaded_image').html(data);
+                    $('.loading').hide();
+                }
+            })
+        }
+
+        $(document).on('click', '.remove_image', function () {
+            $('.loading').show();
+            var id = $(this).attr('id');
+            var name = $(this).attr('data-name');
+            $.ajax({
+                url: "{{ route('backend.pages.product.media.delete') }}",
+                data: {name: name, id: id},
+                success: function (data) {
+                    load_images();
+                }
+            })
         });
-        var visibility_ids = visibility_check_box.join();
-        $("#visibility_ids").val(visibility_ids);
 
-        return true;
-    }
-
-    function deleteVaration(id) {
-        $(".remove_combination"+id+"").remove();
-    }
-
-
-</script>
+    </script>
 @endpush

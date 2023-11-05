@@ -76,11 +76,11 @@
                         <div class="cp-section-title mb-35">
                            <span class="cp-subtitle mb-15 wow fadeInUp animated" data-wow-delay="0.3s">First &
                               Quality Service</span>
-                            <h2 class="cp-title wow fadeInUp animated" data-wow-delay="0.4s">how<span>Decoding Stickitownit:</span>Explore Our FAQs</h2>
+                            <h2 class="cp-title wow fadeInUp animated" data-wow-delay="0.4s"><span>Decoding Stickitownit:</span>Explore Our FAQs</h2>
                         </div>
                         <p class="cp-faq-text mb-40 wow fadeInUp animated" data-wow-delay="0.5s">
-                            We take pSeek answers to your most pressing questions about Stickitownit. Our FAQs 
-                            cover everything from creating custom designs to our unique on-demand printing process. 
+                            We take pSeek answers to your most pressing questions about Stickitownit. Our FAQs
+                            cover everything from creating custom designs to our unique on-demand printing process.
                             Discover clarity and ease here."
                         </p>
                         <div class="accordion" id="accordionExample">

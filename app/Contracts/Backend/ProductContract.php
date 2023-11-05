@@ -86,4 +86,22 @@ interface ProductContract
      * @return bool
      */
     public function deleteProductVariation($id);
+
+
+
+    /**
+     * @return mixed
+     */
+    public function uploadImages(array $params);
+
+    /**
+     * @return mixed
+     */
+    public function fetch($id);
+
+    /**
+     * @return mixed
+     */
+    public function deleteMedia(array $params);
+
 }

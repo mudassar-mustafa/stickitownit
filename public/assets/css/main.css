@@ -2896,7 +2896,8 @@ div.mean-container a.meanmenu-reveal {
     06. banner css
 ----------------------------------------*/
 .cp-banner-content-space {
-    padding-top: 120px;
+    /*padding-top: 120px;*/
+    padding-top: 40px;
     padding-bottom: 40px;
 }
 
@@ -4542,7 +4543,7 @@ div.mean-container a.meanmenu-reveal {
     position: absolute;
     width: 46px;
     height: 46px;
-    background: var(--clr-common-white);
+    /*background: var(--clr-common-white);*/
     border-radius: 50%;
     z-index: -1;
     left: 14px;

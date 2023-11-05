@@ -28,7 +28,7 @@ class ProductController extends Controller
      * Display a listing of the resource.
      */
     public function index(
-        UtilService    $utilService,
+        UtilService      $utilService,
         ProductDataTable $dataTable
     )
     {
@@ -44,25 +44,33 @@ class ProductController extends Controller
      */
     public function create(): View
     {
+
         $brands = $this->productRepository->getBrands();
         $categories = $this->productRepository->getCategories();
         $attributes = $this->productRepository->getAttributes();
-        return view('backend.pages.product.create', compact('brands', 'categories', 'attributes'));
+
+        $product_id = substr(str_shuffle(str_repeat($x = '0123456789', ceil(10 / strlen($x)))), 1, 10);
+
+        if (session()->has('product_id') && !is_null(session()->get('product_id'))) {
+            $product_id = session()->get('product_id');
+        } else {
+            session()->put('product_id', $product_id);
+        }
+        return view('backend.pages.product.create', compact('brands', 'categories', 'attributes', 'product_id'));
     }
 
     /**
-     * @param StoreProductRequest $request
+     * @param Request $request
      * @param UtilService $utilService
      * @return RedirectResponse
      */
     public function store(Request $request, UtilService $utilService)
     {
         try {
-            //return $request;
-            //$data = $request->validated();
-            $data = $request->except('_token');
-            $this->productRepository->createProduct(null ,$data);
 
+            $data = $request->except('_token');
+            $this->productRepository->createProduct(null, $data);
+            session()->forget(['product_id']);
             return redirect()->route("backend.pages.product.index")->with([
                 "status" => CommonEnum::SUCCESS_STATUS,
                 "message" => "Product has been added successfully."
@@ -74,27 +82,25 @@ class ProductController extends Controller
 
     public function edit($id, UtilService $utilService)
     {
-        // try {
+        try {
+
             $product = $this->productRepository->findProductById($id);
-            //return $product;
             $brands = $this->productRepository->getBrands();
             $categories = $this->productRepository->getCategories();
             $attributes = [];
-//            if(!empty($product) && $product->product_type == 'variation'){
-//                $attributes = $this->productRepository->getAttributes();
-//            }
+            session()->put('product_id', $product->id);
+            $product_id = $product->id;
+            return view('backend.pages.product.create', compact('brands', 'categories', 'attributes', 'product', 'product_id'));
 
-            return view('backend.pages.product.create', compact('brands', 'categories', 'attributes', 'product'));
-
-        // } catch (\Exception $exception) {
-        //     return $utilService->logErrorAndRedirectToBack('backend.pages.product.edit', $exception->getMessage());
-        // }
+        } catch (\Exception $exception) {
+            return $utilService->logErrorAndRedirectToBack('backend.pages.product.edit', $exception->getMessage());
+        }
 
     }
 
     /**
      * @param $id
-     * @param UpdateProductRequest $request
+     * @param Request $request
      * @param UtilService $utilService
      * @return RedirectResponse
      */
@@ -105,7 +111,7 @@ class ProductController extends Controller
             //$data = $request->validated();
             $data = $request->except('_token');
             $this->productRepository->createProduct($id, $data);
-
+            session()->forget(['product_id']);
             return redirect()->route("backend.pages.product.index")->with([
                 "status" => CommonEnum::SUCCESS_STATUS,
                 "message" => "Product has been updated successfully."
@@ -133,23 +139,22 @@ class ProductController extends Controller
     }
 
 
-
     /**
      * @param Request $request
      * @param UtilService $utilService
      * @return JsonResponse
      */
-    public function getAttributeValues(Request $request, UtilService $utilService) : JsonResponse
+    public function getAttributeValues(Request $request, UtilService $utilService): JsonResponse
     {
         try {
-            $getAttributeValueHtml= "";
+            $getAttributeValueHtml = "";
             $attributeValues = $this->productRepository->getAttributeValues($request->attribute_name);
             $attributeSelectedValues = [];
-            if($request->product_id != 0){
+            if ($request->product_id != 0) {
                 $attributeSelectedValues = $this->productRepository->getProducAttributeValue($request->product_id, $request->attribute_name);
             }
 
-            $getAttributeValueHtml = view('backend.pages.product.partial.attribute_value_partial', ['attributeValues'=> $attributeValues,  'attributeName' => $request->attribute_name, 'attributeSelectedValues' => $attributeSelectedValues])->render();
+            $getAttributeValueHtml = view('backend.pages.product.partial.attribute_value_partial', ['attributeValues' => $attributeValues, 'attributeName' => $request->attribute_name, 'attributeSelectedValues' => $attributeSelectedValues])->render();
 
             $data = [
                 'getAttributeValueHtml' => $getAttributeValueHtml,
@@ -172,14 +177,14 @@ class ProductController extends Controller
     public function getCombination(Request $request, UtilService $utilService)
     {
         try {
-            $getCombinationHtml= "";
+            $getCombinationHtml = "";
             $combinations = $this->productRepository->getCombination($request->attributeArray);
             $productGroups = [];
-            if($request->product_id != 0){
+            if ($request->product_id != 0) {
                 $productGroups = $this->productRepository->getProductGroups($request->product_id);
             }
 
-            $getCombinationHtml = view('backend.pages.product.partial.attribute_combination_partial', ['combinations'=> $combinations, 'productGroups' => $productGroups])->render();
+            $getCombinationHtml = view('backend.pages.product.partial.attribute_combination_partial', ['combinations' => $combinations, 'productGroups' => $productGroups])->render();
 
             $data = $getCombinationHtml;
 
@@ -191,14 +196,13 @@ class ProductController extends Controller
     }
 
 
-
     /**
      * Display a listing of the resource.
      */
     public function variationEdit(
-        UtilService    $utilService,
+        UtilService               $utilService,
         ProductVariationDataTable $dataTable,
-        $id
+                                  $id
     )
     {
         try {
@@ -227,7 +231,7 @@ class ProductController extends Controller
 
     /**
      * @param $id
-     * @param UpdateProductRequest $request
+     * @param Request $request
      * @param UtilService $utilService
      * @return RedirectResponse
      */
@@ -241,5 +245,37 @@ class ProductController extends Controller
         } catch (\Exception $exception) {
             return $utilService->makeResponse(500, $exception->getMessage());
         }
+    }
+
+
+    function upload(Request $request, UtilService $utilService)
+    {
+        try {
+            return response()->json(['success' => $this->productRepository->uploadImages($request->all())]);
+        } catch (\Exception $exception) {
+            return $utilService->logErrorAndRedirectToBack('backend.pages.product.media.upload', $exception->getMessage());
+        }
+
+    }
+
+    function fetch($id, UtilService $utilService)
+    {
+
+        try {
+            echo $this->productRepository->fetch($id);
+        } catch (\Exception $exception) {
+            return $utilService->logErrorAndRedirectToBack('backend.pages.product.media.fetch', $exception->getMessage());
+        }
+
+    }
+
+    function deleteMedia(Request $request, UtilService $utilService)
+    {
+        try {
+            return $this->productRepository->deleteMedia($request->all());
+        } catch (\Exception $exception) {
+            return $utilService->logErrorAndRedirectToBack('backend.pages.product.media.delete', $exception->getMessage());
+        }
+
     }
 }

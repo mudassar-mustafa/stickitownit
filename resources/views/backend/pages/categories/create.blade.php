@@ -78,9 +78,7 @@
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <label for="description" class="form-label">Description</label>
-                                    <textarea class="form-control" name="description">
-                                        {!! old('description') !!}
-                                      </textarea>
+                                    <textarea class="form-control" rows="10" name="description" id="description">{{old('description')}}</textarea>
                                     @if ($errors->has('description'))
                                         <div class="invalid-feedback">
                                             {{ $errors->first('description') }}

@@ -48,7 +48,7 @@
                                                     data-bs-target="#pro-{{ $key + 1 }}" type="button" role="tab"
                                                     aria-controls="pro-{{ $key + 1 }}"
                                                     aria-selected="false">
-                                                <img src="{{ $productImage->filename }}"
+                                                <img src="{{ asset('storage/uploads/products/images/' . $productImage->filename) }}"
                                                      alt="{{ $productImage->name }}">
                                             </button>
                                         </li>
@@ -66,7 +66,7 @@
                                     @foreach ($product->product_images as $key => $productImage)
                                         <div class="tab-pane fade" id="pro-{{ $key + 1 }}" role="tabpanel"
                                              aria-labelledby="pro-{{ $key + 1 }}-tab">
-                                            <img class="active" src="{{ $productImage->filename }}"
+                                            <img src="{{ asset('storage/uploads/products/images/' . $productImage->filename) }}"
                                                  alt="{{ $productImage->name }}">
                                         </div>
                                     @endforeach
@@ -243,14 +243,14 @@
                                                                         @for($i =0; $i < $review->rating; $i++)
                                                                         <i class="fas fa-star"></i>
                                                                         @endfor
-                                                                    
+
                                                                     </div>
                                                                     <p>{{ $review->remarks }}</p>
                                                                 </div>
                                                             </div>
                                                         @endforeach
                                                     @endif
-                                                    
+
                                                 </div>
                                             </div>
                                         </div>
@@ -328,12 +328,45 @@
     @include('frontend.includes.social')
 @endsection
 @push('js')
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <style>
+        .select2-results__option {
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
     <script>
+
+        function formatState(state) {
+            if (!state.id) {
+                return state.text;
+            }
+
+            var text = state.text.split('(');
+            if (text.length > 0) {
+                if(text[1] !== undefined){
+                    var $state = $(
+                        `<span>${text[0]}</span><span class="float-end">$ (${text[1]}</span>`
+                    );
+                }else{
+                    var $state = $(
+                        `<span>${text[0]}</span>`
+                    );
+                }
+
+                return $state;
+            } else {
+                return state;
+            }
+
+        }
         var sele
         $(document).ready(function () {
-            $('.js-example-basic-single').select2();
+            $('.js-example-basic-single').select2({
+                templateResult: formatState,
+                templateSelection: formatState
+            });
         });
         window.onload = function () {
             setTimeout(myFunc, 1000);
@@ -396,6 +429,7 @@
                         }
                     }
 
+
                     $("#attribute_" + key + "").append(html);
                     if (key == "0") {
                         var attributeId = $("#attribute_1").data('attribute_id');
@@ -428,6 +462,7 @@
             }
 
         }
+
 
 
         async function getProductGroupValue(selectedIds) {

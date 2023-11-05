@@ -161,8 +161,32 @@
                                             <label for="number_of_images" class="col-md-4 col-lg-3 col-form-label">Number Of Images</label>
                                             <div class="col-md-8 col-lg-9">
                                                 <input name="number_of_images" type="text" class="form-control"
-                                                       id="number_of_images"
+                                                       id="number_of_images" required
                                                        value="{{ $setting->number_of_images }}">
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <label for="model_id" class="col-md-4 col-lg-3 col-form-label">Model ID</label>
+                                            <div class="col-md-8 col-lg-9">
+                                                <input name="model_id" type="text" class="form-control"
+                                                       id="model_id" required
+                                                       value="{{ $setting->model_id }}">
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <label for="width" class="col-md-4 col-lg-3 col-form-label">Width</label>
+                                            <div class="col-md-8 col-lg-9">
+                                                <input name="width" type="text" class="form-control"
+                                                       id="width" required
+                                                       value="{{ $setting->width }}">
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <label for="height" class="col-md-4 col-lg-3 col-form-label">Height</label>
+                                            <div class="col-md-8 col-lg-9">
+                                                <input name="height" type="text" class="form-control"
+                                                       id="height" required
+                                                       value="{{ $setting->height }}">
                                             </div>
                                         </div>
                                         <div class="text-center">
