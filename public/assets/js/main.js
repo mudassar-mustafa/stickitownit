@@ -686,6 +686,7 @@
     var brandActive = new Swiper(".cp-brand-active", {
         slidesPerView: 5,
         spaceBetween: 140,
+        centeredSlides: true,
         loop: true,
         rtl: rtl_setting,
         pagination: {
@@ -979,9 +980,9 @@
 
     // news active js
     var cpnews3 = new Swiper(".cp-news3-active", {
-        slidesPerView: 2,
+        slidesPerView: 3,
         spaceBetween: 30,
-        loop: false,
+        loop: true,
         rtl: rtl_setting,
         navigation: {
             nextEl: '.cp-news3-button-next',
