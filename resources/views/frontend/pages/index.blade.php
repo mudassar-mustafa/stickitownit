@@ -89,9 +89,9 @@
 
         <!-- services area start here  -->
         <section class="cp-services-area pb-85 p-relative z-index-1 mt--140">
-            <div class="cp-services-bottom-img p-absolute m-img cp-bg-move-x d-none d-xl-block">
+            <!-- <div class="cp-services-bottom-img p-absolute m-img cp-bg-move-x d-none d-xl-block">
                 <img src="{{ asset('assets/img/service/services-7.png') }}" alt="img not found">
-            </div>
+            </div> -->
             <div class="container">
                 <div class="row align-items-end">
                     <div class="col-xl-6 col-lg-10 d-xl-none">
@@ -236,10 +236,9 @@
                                     <h2 class="cp-title mb-40 wow fadeInUp animated" data-wow-delay="0.4s">read our
                                         <span>latest
                                  news</span></h2>
-                                    <p class="wow fadeInUp animated" data-wow-delay="0.5s">It’s safe to say that when it
-                                        comes to
-                                        custom. we know what we’re doing at Printed.com. Ad
-                                        mei modus quodsi.</p>
+                                    <p class="wow fadeInUp animated" data-wow-delay="0.5s">
+                                        Stay Informed and Inspired – Explore Our Latest Blogs
+                                    </p>
                                 </div>
                             </div>
                             <div class="cp-news3-nav cp-slider-round-button-wrap d-flex zi-5 p-relative mb-60">
@@ -261,9 +260,12 @@
                                             <div class="swiper-slide">
                                                 <div class="cp-news3-item">
                                                     <div class="cp-news3-img w-img">
-                                                        <a href="{{ route('blog.detail',$blog->slug) }}"><img
+                                                        <a href="{{ route('blog.detail',$blog->slug) }}">
+                                                            <img
+                                                                class="cp-news-card-image"
                                                                 src="{{ $blog->image }}"
-                                                                alt="{{ $blog->name }}"></a>
+                                                                alt="{{ $blog->name }}">
+                                                            </a>
                                                     </div>
                                                     <div class="cp-news3-content">
                                                         <span
@@ -295,7 +297,7 @@
                         <div class="cp-news3-left">
                             <div class="cp-news3-title-wrap mb-40">
                                 <div class="cp-section-title text-center">
-                                    <h3 class="cp-subtitle mb-15 wow fadeInUp animated " data-wow-delay="0.3s">What we
+                                    <h3 class="cp-subtitle mb-15 wow fadeInUp animated sticker-slider-heading" data-wow-delay="0.3s">What we
                                         are printing</h3>
                                 </div>
                             </div>
@@ -309,8 +311,12 @@
                                     @if(!empty($stickers) && count($stickers) > 0)
                                         @foreach($stickers as $key=>$sticker)
                                             <div class="swiper-slide">
-                                                <div class="cp-brand-img m-img">
-                                                    <img src="{{$sticker->image}}" alt="{{$key+1}}.png">
+                                                <div class="cp-brand-img">
+                                                    <img 
+                                                        class="what-we-are-printing-image"
+                                                        src="{{$sticker->image}}" 
+                                                        alt="{{$key+1}}.png"
+                                                    >
                                                 </div>
                                             </div>
                                         @endforeach
