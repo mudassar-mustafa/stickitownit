@@ -22,7 +22,7 @@
     </style>
 @endpush
 @section('content')
-
+    <div class="loading" style="display: none">Loading&#8230;</div>
     <!-- shop details area start  -->
     <section class="shop-details-area pt-150 pb-110 fix">
         <div class="container">
@@ -48,8 +48,9 @@
                                                     data-bs-target="#pro-{{ $key + 1 }}" type="button" role="tab"
                                                     aria-controls="pro-{{ $key + 1 }}"
                                                     aria-selected="false">
-                                                <img src="{{ asset('storage/uploads/products/images/' . $productImage->filename) }}"
-                                                     alt="{{ $productImage->name }}">
+                                                <img
+                                                    src="{{ asset('storage/uploads/products/images/' . $productImage->filename) }}"
+                                                    alt="{{ $productImage->name }}">
                                             </button>
                                         </li>
                                     @endforeach
@@ -66,8 +67,9 @@
                                     @foreach ($product->product_images as $key => $productImage)
                                         <div class="tab-pane fade" id="pro-{{ $key + 1 }}" role="tabpanel"
                                              aria-labelledby="pro-{{ $key + 1 }}-tab">
-                                            <img src="{{ asset('storage/uploads/products/images/' . $productImage->filename) }}"
-                                                 alt="{{ $productImage->name }}">
+                                            <img
+                                                src="{{ asset('storage/uploads/products/images/' . $productImage->filename) }}"
+                                                alt="{{ $productImage->name }}">
                                         </div>
                                     @endforeach
                                 @endif
@@ -117,8 +119,9 @@
                                         <div class="cp-input-field">
                                             <label for="attribute_{{ $key }}">{{ $attribute->name }}</label>
                                             <select id="attribute_{{ $key }}" class="attributes js-example-basic-single"
-                                                    data-attribute_id="{{ $attribute->id }}"  data-attribute_name="{{ $attribute->name }}" data-key ="{{ $key }}"
-                                            onchange="updateAttributeValue('{{ $key }}')">
+                                                    data-attribute_id="{{ $attribute->id }}"
+                                                    data-attribute_name="{{ $attribute->name }}" data-key="{{ $key }}"
+                                                    onchange="updateAttributeValue('{{ $key }}')">
                                             </select>
                                         </div>
                                     </div>
@@ -184,12 +187,16 @@
                         @endif
 
                         @if ($product->product_type != "normal" && !empty($product->attributes))
-                        <input class="form-control" type="file" id="uploadFile" name="uploadFile"onchange="uploadUserFile()">
-                        <img src="" class="rounded d-block hidden uploadImage py-4" alt="" style="width: 200px; height:200px">
-                        <a href="javascript:void(0);" onclick="addToCart('{{ auth()->check() }}', '{{ auth()->check() == true && auth()->user()->hasRole('SuperAdmin|Admin|Seller') == true ? 'admin' : 'customer' }}', 'sticker')" class="cp-border-btn cp-il hidden shopping-basket">
-                            <i class="fas fa-shopping-basket"></i>Add to
-                            Cart
-                            <span class="cp-border-btn__inner">
+                            <input class="form-control" type="file" id="uploadFile" name="uploadFile"
+                                   onchange="uploadUserFile()">
+                            <img src="" class="rounded d-block hidden uploadImage py-4" alt=""
+                                 style="width: 200px; height:200px">
+                            <a href="javascript:void(0);"
+                               onclick="addToCart('{{ auth()->check() }}', '{{ auth()->check() == true && auth()->user()->hasRole('SuperAdmin|Admin|Seller') == true ? 'admin' : 'customer' }}', 'sticker')"
+                               class="cp-border-btn cp-il hidden shopping-basket">
+                                <i class="fas fa-shopping-basket"></i>Add to
+                                Cart
+                                <span class="cp-border-btn__inner">
                             <span class="cp-border-btn__blobs">
                                 <span class="cp-border-btn__blob"></span>
                                 <span class="cp-border-btn__blob"></span>
@@ -197,7 +204,7 @@
                                 <span class="cp-border-btn__blob"></span>
                             </span>
                         </span>
-                        </a>
+                            </a>
                         @endif
 
                     </div>
@@ -211,7 +218,8 @@
                                href="#pro-info-1" role="tab" aria-selected="true">Description</a>
 
                             <a class="nav-item nav-link" id="pro-info-3-tab" data-bs-toggle="tab" href="#pro-info-3"
-                               role="tab" aria-selected="false">Reviews ({{ isset($reviews) ? count($reviews) : 0 }})</a>
+                               role="tab" aria-selected="false">Reviews ({{ isset($reviews) ? count($reviews) : 0 }}
+                                )</a>
                         </div>
                     </nav>
                     <div class="row">
@@ -234,14 +242,16 @@
                                                         @foreach ($reviews as $review)
                                                             <div class="course-review-item mb-30">
                                                                 <div class="course-reviews-img">
-                                                                    <a href="#"><img src="https://ui-avatars.com/api/?name={{ $review->user_detail->name }}+&color=7F9CF5&background=EBF4FF"
-                                                                                    alt="{{ $review->user_detail->name }}"></a>
+                                                                    <a href="#"><img
+                                                                            src="https://ui-avatars.com/api/?name={{ $review->user_detail->name }}+&color=7F9CF5&background=EBF4FF"
+                                                                            alt="{{ $review->user_detail->name }}"></a>
                                                                 </div>
                                                                 <div class="course-review-list">
-                                                                    <h5><a href="#">{{ $review->user_detail->name }} ({{ $review->user_detail->id }})</a></h5>
+                                                                    <h5><a href="#">{{ $review->user_detail->name }}
+                                                                            ({{ $review->user_detail->id }})</a></h5>
                                                                     <div class="course-start-icon">
                                                                         @for($i =0; $i < $review->rating; $i++)
-                                                                        <i class="fas fa-star"></i>
+                                                                            <i class="fas fa-star"></i>
                                                                         @endfor
 
                                                                     </div>
@@ -266,60 +276,60 @@
     <!-- shop details area end  -->
 
     @if(!empty($relatedProducts) && count($relatedProducts) > 0)
-    <!-- shop related product area start  -->
-    <section class="cp-related-product pt-145 pb-100 wow fadeInUp" data-wow-delay=".3s">
-        <div class="container">
-            <div class="row mb-30">
-                <div class="col-md-10">
-                    <div class="cp-section-title mb-30">
-                        <h2 class="cp-subhead lh-1">Related products</h2>
+        <!-- shop related product area start  -->
+        <section class="cp-related-product pt-145 pb-100 wow fadeInUp" data-wow-delay=".3s">
+            <div class="container">
+                <div class="row mb-30">
+                    <div class="col-md-10">
+                        <div class="cp-section-title mb-30">
+                            <h2 class="cp-subhead lh-1">Related products</h2>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div
+                            class="cp-testimonial2-nav cp-slider-round-button-wrap d-flex justify-content-lg-end p-relative cp mb-20">
+                            <div class="cp-slider-round-button cp-product-button-prev"><i
+                                    class="fas fa-chevron-left"></i></div>
+                            <div class="cp-slider-round-button cp-product-button-next"><i
+                                    class="fas fa-chevron-right"></i></div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-2">
-                    <div
-                        class="cp-testimonial2-nav cp-slider-round-button-wrap d-flex justify-content-lg-end p-relative cp mb-20">
-                        <div class="cp-slider-round-button cp-product-button-prev"><i
-                                class="fas fa-chevron-left"></i></div>
-                        <div class="cp-slider-round-button cp-product-button-next"><i
-                                class="fas fa-chevron-right"></i></div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xl-12">
-                    <div class="cp-related-product-wrap">
-                        <div class="swiper-container cp-related-product-active">
-                            <div class="swiper-wrapper">
-                                @foreach($relatedProducts as $relatedProduct)
-                                    <div class="swiper-slide">
-                                        <div class="product-single">
-                                            <div class="product-thumb">
-                                                <a href="{{ route('product.productDetail',$relatedProduct->slug) }}"
-                                                   class="image">
-                                                    <img class="pic-1" src="{{ $relatedProduct->main_image }}"
-                                                         alt="{{ $relatedProduct->title }}">
-                                                    <img class="pic-2" src="{{ $relatedProduct->main_image }}"
-                                                         alt="{{ $relatedProduct->title }}">
-                                                </a>
-                                            </div>
-                                            <div class="product-description">
-                                                <h4 class="product-name">
-                                                    <a href="{{ route('product.productDetail',$relatedProduct->slug) }}">{{ $relatedProduct->title }}</a>
-                                                </h4>
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="cp-related-product-wrap">
+                            <div class="swiper-container cp-related-product-active">
+                                <div class="swiper-wrapper">
+                                    @foreach($relatedProducts as $relatedProduct)
+                                        <div class="swiper-slide">
+                                            <div class="product-single">
+                                                <div class="product-thumb">
+                                                    <a href="{{ route('product.productDetail',$relatedProduct->slug) }}"
+                                                       class="image">
+                                                        <img class="pic-1" src="{{ $relatedProduct->main_image }}"
+                                                             alt="{{ $relatedProduct->title }}">
+                                                        <img class="pic-2" src="{{ $relatedProduct->main_image }}"
+                                                             alt="{{ $relatedProduct->title }}">
+                                                    </a>
+                                                </div>
+                                                <div class="product-description">
+                                                    <h4 class="product-name">
+                                                        <a href="{{ route('product.productDetail',$relatedProduct->slug) }}">{{ $relatedProduct->title }}</a>
+                                                    </h4>
 
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                @endforeach
+                                    @endforeach
 
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-    <!-- shop related product area end  -->
+        </section>
+        <!-- shop related product area end  -->
     @endif
 
 
@@ -345,11 +355,11 @@
 
             var text = state.text.split('(');
             if (text.length > 0) {
-                if(text[1] !== undefined){
+                if (text[1] !== undefined) {
                     var $state = $(
                         `<span>${text[0]}</span><span class="float-end">$ (${text[1]}</span>`
                     );
-                }else{
+                } else {
                     var $state = $(
                         `<span>${text[0]}</span>`
                     );
@@ -361,6 +371,7 @@
             }
 
         }
+
         var sele
         $(document).ready(function () {
             $('.js-example-basic-single').select2({
@@ -379,7 +390,7 @@
         }
 
         async function getAttributeValue(key, attributeId) {
-            if(key == 1){
+            if (key == 1) {
                 $('#uploadFile').val('');
                 $(".uploadImage").prop("src", "");
                 $('.uploadImage').addClass('hidden');
@@ -464,7 +475,6 @@
         }
 
 
-
         async function getProductGroupValue(selectedIds) {
 
             var csrf_token = $('meta[name="csrf-token"]').attr('content');
@@ -482,7 +492,7 @@
                     var descriptionArray = description.split("-");
                     var qty = parseInt(descriptionArray[2]);
                     var unitPrice = parseFloat(result['data']['price']) / qty;
-                    $(".variable_product_amount").html('$'+ result['data']['price'] +'/<small>$'+unitPrice.toFixed(2)+'</small>');
+                    $(".variable_product_amount").html('$' + result['data']['price'] + '/<small>$' + unitPrice.toFixed(2) + '</small>');
                     $("#product_attribute_group_id").val(result['data']['id']);
                 } else {
                     $(".variable_product_price").addClass('hidden');
@@ -518,11 +528,11 @@
 
         function uploadUserFile() {
             var ext = $('#uploadFile').val().split('.').pop().toLowerCase();
-            if ($.inArray(ext, ['png', 'jpg', 'jepg']) == -1){
+            if ($.inArray(ext, ['png', 'jpg', 'jepg']) == -1) {
                 $.growl.error({
-                title: "Error",
-                message: "Please add Only PNG,JPG.",
-                duration: 3200
+                    title: "Error",
+                    message: "Please add Only PNG,JPG.",
+                    duration: 3200
                 });
                 $('#uploadFile').val('');
                 return false;
@@ -530,7 +540,7 @@
             var files = $('#uploadFile')[0].files[0];
             var f = files;
             var fileReader = new FileReader();
-            fileReader.onload = (function(e) {
+            fileReader.onload = (function (e) {
                 var file = e.target;
 
                 $(".uploadImage").prop("src", e.target.result);
@@ -540,17 +550,18 @@
             fileReader.readAsDataURL(f);
         }
 
-        function addToCart(user, userType, type){
-            if(user == false){
+        function addToCart(user, userType, type) {
+            $('.loading').show();
+            if (user == false) {
                 window.location.href = "{{ url('/login') }}";
-            }else{
-                if(userType == "admin"){
+            } else {
+                if (userType == "admin") {
                     toastr.info("Admin can't add product in cart.");
                     return false;
                 }
                 var csrf_token = $('meta[name="csrf-token"]').attr('content');
                 var form_data = new FormData();
-                if(document.getElementById('uploadFile').files[0] != undefined){
+                if (document.getElementById('uploadFile').files[0] != undefined) {
                     form_data.append("image", document.getElementById('uploadFile').files[0]);
                 }
                 form_data.append("product_attribute_group_id", $("#product_attribute_group_id").val());
@@ -566,13 +577,14 @@
                     success: function (data) {
                         if (data.data == 1) {
                             toastr.success("Product added in cart successfully");
-                            location.reload(true);
-                        }else if(data.data == -1){
+                            window.location.href = '{{ route('cart.index') }}';
+                        } else if (data.data == -1) {
                             toastr.warning("Product already add in cart");
-                        }else{
+                        } else {
                             toastr.error("Something went Wrong.");
 
                         }
+                        $('.loading').hide();
                     }
                 });
             }

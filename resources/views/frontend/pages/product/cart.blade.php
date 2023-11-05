@@ -14,7 +14,7 @@
                         <div class="breadcrumb-menu d-flex justify-content-center">
                             <nav aria-label="Breadcrumbs" class="breadcrumb-trail breadcrumbs">
                                 <ul class="trail-items">
-                                    <li class="trail-item trail-begin"><a href="index.html"><span>Home</span></a>
+                                    <li class="trail-item trail-begin"><a href="{{ route('/') }}"><span>Home</span></a>
                                     </li>
                                     <li class="trail-item trail-end"><span>Cart</span></li>
                                 </ul>
