@@ -271,7 +271,7 @@
                 },
                 success: function (response) {
                     if (response.success) {
-                        $('#successMsg').show().css('background-color', 'green').css('color','#ffffff').html(response.message + '<br>' + "Used Tokens:" + response.usedTokens + '<br>' + 'Generations Id' + response.generationId);
+                        $('#successMsg').show().css('background-color', 'green').css('color','#ffffff').html(response.message + '<br>' + "Used Tokens: " + response.usedTokens + '<br>' + 'Generations Id: ' + response.generationId);
                     } else {
                         $('#successMsg').show().css('background-color', 'red').css('color','#ffffff').html(response.message);
                     }
