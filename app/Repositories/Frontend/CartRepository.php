@@ -153,7 +153,7 @@ class CartRepository extends BaseRepository implements CartContract
                     $order->save();
 
                     Cart::where('user_id', Auth::user()->id)->where('seller_id', $sellerId)->delete();
-                    Mail::to($order->billing_email)->send(new OrderMail($order));
+                    Mail::to(Auth::user()->email)->send(new OrderMail($order));
                     Mail::to('stickitownit@gmail.com')->send(new OrderMail($order));
                 }
             }
