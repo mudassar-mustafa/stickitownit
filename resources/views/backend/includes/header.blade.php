@@ -2,7 +2,7 @@
 
     <div class="d-flex align-items-center justify-content-between">
         <a href="{{ url('/') }}" class="logo d-flex align-items-center">
-            <img src="{{ asset('storage/uploads/settings/'.$setting->logo_header) }}" alt="" style="max-height: 154px; margin-top: 36px;">
+            <img src="{{ asset('storage/uploads/settings/'.$setting->logo_header) }}" alt="" style="max-height: 60px;">
         </a>
         <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
