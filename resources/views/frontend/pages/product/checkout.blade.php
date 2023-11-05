@@ -25,7 +25,9 @@
         <section class="cp-cart-area pt-20">
             <div class="container">
                 <div class="row wow fadeInUp animated" data-wow-duration="1.5s">
-                    <div class="col-xl-8">
+
+                    <!-- Product Information -->
+                    <div class="col-xl-12 padding-right-0">
 
                         <div class="cp-cart-left mb-80 mr-10">
                             @if (Session::has('status') && Session::get('status') == "package")
@@ -95,36 +97,7 @@
                             @endif
                         </div>
                     </div>
-                    <div class="col-xl-4 pt-70">
-                        @if (Session::has('status') && Session::get('status') == "package")
-                            <div class="cp-cart-total-area mb-100 ml-10">
-                                <h4 class="cp-cart-subtotal">Package Totals</h4>
-                                <div class="cp-cart-total d-flex align-items-center justify-content-between mb-20">
-                                    <h5>Package Totals</h5><span>{{ Session::get('packagePrice') }}$</span>
-                                </div>
-                                <div class="cp-cart-free d-flex align-items-center justify-content-between">
-                                    <h5>Extra fee <span>( tax excl.)</span></h5><span>0$</span>
-                                </div>
-                                <div class="cp-cart-f-total d-flex align-items-center justify-content-between mb-30">
-                                    <h6>Total : </h6><span>{{ Session::get('packagePrice') }}$</span>
-                                </div>
-                            </div>
-                        @else
-                            <div class="cp-cart-total-area mb-100 ml-10">
-                                <h4 class="cp-cart-subtotal">Cart Totals</h4>
-                                <div class="cp-cart-total d-flex align-items-center justify-content-between mb-20">
-                                    <h5>Cart Totals</h5><span>{{ $cartTotal }}$</span>
-                                </div>
-                                <div class="cp-cart-free d-flex align-items-center justify-content-between">
-                                    <h5>Extra fee <span>( tax excl.)</span></h5><span>{{ $extraFee }}$</span>
-                                </div>
-                                <div class="cp-cart-f-total d-flex align-items-center justify-content-between mb-30">
-                                    <h6>Total : </h6><span>{{ $cartTotal + $extraFee }}$</span>
-                                </div>
-                            </div>
-                        @endif
-
-                    </div>
+                    <!-- Product Information -->
                 </div>
             </div>
         </section>
@@ -136,7 +109,9 @@
                     @csrf
                     <input type="hidden" value="{{ Session::has('status') && Session::get('status') == "package" ? "Package" : "Sale" }}" name="checkOutType">
                     <div class="row wow fadeInUp animated" data-wow-duration="1.5s">
-                        <div class="col-xl-8">
+
+                        <!-- Billing Detail -->
+                        <div class="col-xl-12">
                             @if (Session::has('status') && Session::get('status') == "package")
                             @else
                             <div class="cp-checkout-left mb-30 mr-10">
@@ -144,22 +119,32 @@
                                 <div class="cp-checkout-field-area">
                                     <div class="cp-checkout-box mb-30">
                                         <h4 class="cp-checkout-title">Billing Details</h4>
+                                    </div>
+                                    <div class="generator-button:hover">
                                         <div class="row">
-                                            <div class="col-lg-6">
+                                            <div class="col-lg-4 padding-right-0">
                                                 <div class="cp-input-field">
                                                     <label for="name">Name *</label>
                                                     <input type="text" id="name" name="name" value="{{ !empty($user) ? $user->name : "" }}" required>
                                                     <i class="far fa-user"></i>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-6">
+                                            <div class="col-lg-4 padding-right-0">
                                                 <div class="cp-input-field">
                                                     <label for="email">Email address *</label>
                                                     <input type="email" required id="email" name="email" value="{{ !empty($user) ? $user->email : "" }}">
                                                     <i class="far fa-envelope-open"></i>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-4">
+                                            <div class="col-lg-4 padding-right-0">
+                                                <div class="cp-input-field">
+                                                    <label for="phone">Phone *</label>
+                                                    <input type="text" required id="phone_number" name="phone_number" value="{{ !empty($user) ? $user->phone_number : "" }}">
+                                                    <i class="far fa-phone"></i>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-4 padding-right-0">
                                                 <div class="cp-input-field">
                                                     <label for="region">Country / Region *</label>
                                                     <select id="country" name="country_id" class="js-example-basic-single" onchange="getStates();" required>
@@ -173,7 +158,7 @@
                                                     <i class="far fa-place-of-worship"></i>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-4">
+                                            <div class="col-lg-4 padding-right-0">
                                                 <div class="cp-input-field">
                                                     <label for="state">State *</label>
                                                     <select id="state" name="state_id" class="js-example-basic-single" onchange="getCities();" required>
@@ -187,7 +172,7 @@
                                                     <i class="far fa-city"></i>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-4">
+                                            <div class="col-lg-4 padding-right-0">
                                                 <div class="cp-input-field">
                                                     <label for="city">Town / City *</label>
                                                     <select id="city" name="city_id" class="js-example-basic-single" required>
@@ -201,22 +186,16 @@
                                                     <i class="far fa-city"></i>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-6">
+                                            <div class="col-lg-4 padding-right-0">
                                                 <div class="cp-input-field">
                                                     <label for="zip">ZIP Code *</label>
                                                     <input type="text" required id="zip" name="zip_code" value="{{ !empty($user) ? $user->zip_code : "" }}">
                                                     <i class="far fa-file-archive"></i>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-6">
-                                                <div class="cp-input-field">
-                                                    <label for="phone">Phone *</label>
-                                                    <input type="text" required id="phone_number" name="phone_number" value="{{ !empty($user) ? $user->phone_number : "" }}">
-                                                    <i class="far fa-phone"></i>
-                                                </div>
-                                            </div>
+                                            
 
-                                            <div class="col-lg-12">
+                                            <div class="col-lg-8 padding-right-0">
                                                 <div class="cp-input-field">
                                                     <label for="address">Street address *</label>
                                                     <input type="text" required id="address" name="address" value="{{ !empty($user) ? $user->address : "" }}">
@@ -225,15 +204,15 @@
                                             </div>
 
                                         </div>
-                                    </div>
-                                    <div class="cp-checkout-box mb-30">
-                                        <h4 class="cp-checkout-subtitle">Additional Information</h4>
-                                        <div class="row">
-                                            <div class="col-lg-12">
-                                                <div class="cp-input-field textarea">
-                                                    <label for="message">Order notes (optional)</label>
-                                                    <textarea id="message" cols="30" rows="10"></textarea>
-                                                    <i class="far fa-clipboard"></i>
+                                        <div class="cp-checkout-box mb-30">
+                                            <h4 class="cp-checkout-subtitle">Additional Information</h4>
+                                            <div class="row">
+                                                <div class="col-lg-12 padding-right-0">
+                                                    <div class="cp-input-field textarea">
+                                                        <label for="message">Order notes (optional)</label>
+                                                        <textarea id="message" cols="30" rows="10"></textarea>
+                                                        <i class="far fa-clipboard"></i>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -243,7 +222,43 @@
                             @endif
 
                         </div>
-                        <div class="col-xl-4">
+                        <!-- Billing Detail -->
+
+                        <!-- Cart Information -->
+                        <div class="col-xl-6 padding-right-0">
+                            @if (Session::has('status') && Session::get('status') == "package")
+                                <div class="cp-cart-total-area mb-40 ">
+                                    <h4 class="cp-cart-subtotal">Package Totals</h4>
+                                    <div class="cp-cart-total d-flex align-items-center justify-content-between mb-20">
+                                        <h5>Package Totals</h5><span>{{ Session::get('packagePrice') }}$</span>
+                                    </div>
+                                    <div class="cp-cart-free d-flex align-items-center justify-content-between">
+                                        <h5>Extra fee <span>( tax excl.)</span></h5><span>0$</span>
+                                    </div>
+                                    <div class="cp-cart-f-total d-flex align-items-center justify-content-between mb-30">
+                                        <h6>Total : </h6><span>{{ Session::get('packagePrice') }}$</span>
+                                    </div>
+                                </div>
+                            @else
+                                <div class="cp-cart-total-area mb-40">
+                                    <h4 class="cp-cart-subtotal">Cart Totals</h4>
+                                    <div class="cp-cart-total d-flex align-items-center justify-content-between mb-20">
+                                        <h5>Cart Totals</h5><span>{{ $cartTotal }}$</span>
+                                    </div>
+                                    <div class="cp-cart-free d-flex align-items-center justify-content-between">
+                                        <h5>Extra fee <span>( tax excl.)</span></h5><span>{{ $extraFee }}$</span>
+                                    </div>
+                                    <div class="cp-cart-f-total d-flex align-items-center justify-content-between ">
+                                        <h6>Total : </h6><span>{{ $cartTotal + $extraFee }}$</span>
+                                    </div>
+                                </div>
+                            @endif
+
+                        </div>
+                        <!-- Cart Information -->
+
+                        <!-- Card Information -->
+                        <div class="col-xl-6 padding-right-0">
                             <div class="cp-checkout-right mb-20 ml-10">
                                 <div class="cp-checkout-payment mb-40">
                                     <label for="card-element">
@@ -282,12 +297,13 @@
                                         <label for="cp-terms">I have read and agree to the website <a href="#">Terms and
                                                 conditions</a></label>
                                     </div>
-                                    <div class="cp-checkout-btn t-center">
+                                    <div class="cp-checkout-btn t-center pt-25">
                                         <button type="submit" class="cp-border2-btn">Proceed to Checkout</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <!-- Card Information -->
                     </div>
                 </form>
             </div>

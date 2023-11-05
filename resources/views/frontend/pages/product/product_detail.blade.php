@@ -189,7 +189,12 @@
                         @if ($product->product_type != "normal" && !empty($product->attributes))
                             <input class="form-control" type="file" id="uploadFile" name="uploadFile"
                                    onchange="uploadUserFile()">
-                            <img src="" class="rounded d-block hidden uploadImage py-4" alt=""
+                            <div class="my-2 d-flex align-items-center">
+                                Don’t have a design? Try our Ai Stickers Generator
+                                <a class="generator-button" id="pro-info-3-tab" data-bs-toggle="tab" href="#pro-info-3"
+                                   role="tab" aria-selected="false">Link</a>
+                            </div>
+                            <img src="" class="rounded d-block hidden uploadImage pt-2 pb-4" alt=""
                                  style="width: 200px; height:200px">
                             <a href="javascript:void(0);"
                                onclick="addToCart('{{ auth()->check() }}', '{{ auth()->check() == true && auth()->user()->hasRole('SuperAdmin|Admin|Seller') == true ? 'admin' : 'customer' }}', 'sticker')"
