@@ -36,6 +36,16 @@
                                     
                                 </nav>
                             </div>
+                            <p class="my-2">
+                                “If you’re looking for custom stickers that are both high-quality and affordable, 
+                                look no further than our printing services. Our stickers are made from one of our 
+                                four durable sticker materials and individually cut to ensure a perfect fit for your 
+                                design. Not only are our stickers waterproof and scratch-resistant, but they’re also 
+                                built to stay beautiful on any smooth surface. Whether you need custom stickers for 
+                                your club, business, or just for fun, we offer free shipping on all orders. So why wait? 
+                                Order now and make your next design project stand out with our custom-printed stickers full 
+                                of magic.”
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -56,9 +66,9 @@
                                     <div class="product-single">
                                         <div class="product-thumb">
                                             <a href="{{ route('product.productDetail',$product->slug) }}" class="image">
-                                                <img class="pic-1" src="{{ $product->main_image }}"
+                                                <img class="pic-1 sticker-page-image" src="{{ $product->main_image }}"
                                                      alt="{{ $product->title }}">
-                                                <img class="pic-2" src="{{ $product->main_image }}"
+                                                <img class="pic-2 sticker-page-image" src="{{ $product->main_image }}"
                                                      alt="{{ $product->title }}">
                                             </a>
                                         </div>
@@ -85,7 +95,7 @@
                         <div class="cp-news3-left">
                             <div class="cp-news3-title-wrap mb-40">
                                 <div class="cp-section-title text-center">
-                                    <h3 class="cp-subtitle mb-15 wow fadeInUp animated " data-wow-delay="0.3s">What we
+                                    <h3 class="cp-subtitle mb-15 wow fadeInUp animated sticker-slider-heading" data-wow-delay="0.3s">What we
                                         are printing</h3>
                                 </div>
                             </div>
@@ -99,8 +109,8 @@
                                     @if(!empty($stickers) && count($stickers) > 0)
                                         @foreach($stickers as $key=>$sticker)
                                             <div class="swiper-slide">
-                                                <div class="cp-brand-img m-img">
-                                                    <img src="{{$sticker->image}}" alt="{{$key+1}}.png">
+                                                <div class="cp-brand-img">
+                                                    <img src="{{$sticker->image}}" alt="{{$key+1}}.png" class="what-we-are-printing-image">
                                                 </div>
                                             </div>
                                         @endforeach

@@ -114,10 +114,13 @@
                                             <div class="swiper-slide">
                                                 <article>
                                                     <div class="cp-news-item">
-                                                        <div class="cp-news-img fix p-relative w-img">
+                                                        <div class="cp-news-img fix p-relative ">
                                                             <div class="cp-img-overlay wow"></div>
                                                             <a href="{{ route('blog.detail',$blog->slug) }}">
-                                                                <img src="{{ $blog->image }}" alt="{{ $blog->name }}">
+                                                                <img 
+                                                                    src="{{ $blog->image }}" 
+                                                                    alt="{{ $blog->name }}"
+                                                                >
                                                             </a>
                                                         </div>
                                                         <div class="cp-news-content one">
@@ -125,7 +128,7 @@
                                                                 <span>{{date('F j, Y', strtotime($blog->created_at))}}</span>
                                                             </div>
                                                             <h3 class="cp-news-title"><a
-                                                                    href="{{ route('blog.detail',$blog->slug) }}">{{ $blog->name }}</a>
+                                                                href="{{ route('blog.detail',$blog->slug) }}">{{ $blog->name }}</a>
                                                             </h3>
                                                             <h5 class="cp-news-post-by">Author : <a
                                                                     href="javascript:void(0)">{{ $blog->author_name }}</a>

@@ -26,14 +26,21 @@
             <div class="col-xl-6 col-lg-10">
                 <div class="cp-faq-img-wrap mb-20 wow fadeInLeft animated" data-wow-delay="0.3s">
                     <div class="row">
+                        <div class="video-container">
+                            <video src="{{ asset('assets/video/template-video.mp4') }}" autoplay loop muted>
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-sm-6">
-                            <div class="cp-faq-img-item p-relative w-img mb-30">
+                            <!-- <div class="cp-faq-img-item p-relative w-img mb-30">
                                 <div class="cp-img-overlay wow"></div>
                                 <div class="cp-img-blur">
                                     <img src="{{ asset('assets/img/faq/faq-1.jpg') }}" alt="faq">
                                     <img src="{{ asset('assets/img/faq/faq-1.jpg') }}" alt="faq">
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="cp-faq-img-item p-relative w-img mb-30 js-tilt">
                                 <div class="cp-img-overlay wow"></div>
                                 <div class="cp-img-blur">
@@ -43,13 +50,13 @@
                             </div>
                         </div>
                         <div class="col-sm-6">
-                            <div class="cp-faq-img-item p-relative w-img mb-30 js-tilt">
+                            <!-- <div class="cp-faq-img-item p-relative w-img mb-30 js-tilt">
                                 <div class="cp-img-overlay wow"></div>
                                 <div class="cp-img-blur cp-min-height-445">
                                     <img src="{{ asset('assets/img/faq/faq-2.jpg') }}" alt="faq">
                                     <img src="{{ asset('assets/img/faq/faq-2.jpg') }}" alt="faq">
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="cp-faq-img-item mb-30">
                                 <div class="cp-faq-img-content">
                                     <div class="cp-faq-img-icon m-img">
@@ -69,16 +76,13 @@
                         <div class="cp-section-title mb-35">
                            <span class="cp-subtitle mb-15 wow fadeInUp animated" data-wow-delay="0.3s">First &
                               Quality Service</span>
-                            <h2 class="cp-title wow fadeInUp animated" data-wow-delay="0.4s">how <span>your
-                                 products</span> come to life</h2>
+                            <h2 class="cp-title wow fadeInUp animated" data-wow-delay="0.4s">how<span>Decoding Stickitownit:</span>Explore Our FAQs</h2>
                         </div>
-                        <p class="cp-faq-text mb-40 wow fadeInUp animated" data-wow-delay="0.5s">ABC Printing
-                            Co, a
-                            solutions-driven graphic communications company
-                            with a history of success connecting brands with consumers. What’s more, we do it
-                            right!
-                            A
-                            full administration printing background.</p>
+                        <p class="cp-faq-text mb-40 wow fadeInUp animated" data-wow-delay="0.5s">
+                            We take pSeek answers to your most pressing questions about Stickitownit. Our FAQs 
+                            cover everything from creating custom designs to our unique on-demand printing process. 
+                            Discover clarity and ease here."
+                        </p>
                         <div class="accordion" id="accordionExample">
                             @if(!empty($faqs) && count($faqs) > 0)
                                 @foreach($faqs as $key=>$faq)

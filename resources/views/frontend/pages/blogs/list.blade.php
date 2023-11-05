@@ -17,13 +17,13 @@
                                     <div class="cp-news-item white-bg mb-40 wow fadeInUp animated"
                                          data-wow-duration="1.{{$key}}s"
                                          data-wow-delay="0.{{$key}}">
-                                        <div class="cp-news-img fix p-relative w-img">
+                                        <div class="cp-news-img fix p-relative w-img blogs-card-div">
                                             <div class="cp-img-overlay wow"></div>
                                             <a href="{{ route('blog.detail',$blog->slug) }}">
-                                                <img src="{{ $blog->image }}" alt="{{ $blog->name }}">
+                                                <img src="{{ $blog->image }}" alt="{{ $blog->name }}"  class="blogs-card-div-img">
                                             </a>
                                         </div>
-                                        <div class="cp-news-content one">
+                                        <div class="cp-news-content one blog-card-description-container">
                                             <div class="cp-news1-meta">
                                                 <span>{{date('F j, Y', strtotime($blog->created_at))}}</span>
                                             </div>

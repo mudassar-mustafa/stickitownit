@@ -23,7 +23,9 @@
                 <div class="cp-header2-bottom-wrap">
                     <div class="cp-header2-bottom-item">
                         <div class="logo">
-                            <a href="{{ route('/') }}"><img width="100" src="{{ asset('storage/uploads/settings/'.$setting->logo_header) }}" alt="logo"></a>
+                            <a href="{{ route('/') }}">
+                                <img class="my-3 width-17" src="{{ asset('storage/uploads/settings/'.$setting->logo_header) }}" alt="logo">
+                            </a>
                         </div>
                     </div>
                     <div class="cp-header2-bottom-item">

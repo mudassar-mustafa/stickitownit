@@ -185,7 +185,7 @@
 
                         @if ($product->product_type != "normal" && !empty($product->attributes))
                         <input class="form-control" type="file" id="uploadFile" name="uploadFile"onchange="uploadUserFile()">
-                        <img src="" class="rounded mx-auto d-block hidden uploadImage" alt="" style="width: 200px; height:200px">
+                        <img src="" class="rounded d-block hidden uploadImage py-4" alt="" style="width: 200px; height:200px">
                         <a href="javascript:void(0);" onclick="addToCart('{{ auth()->check() }}', '{{ auth()->check() == true && auth()->user()->hasRole('SuperAdmin|Admin|Seller') == true ? 'admin' : 'customer' }}', 'sticker')" class="cp-border-btn cp-il hidden shopping-basket">
                             <i class="fas fa-shopping-basket"></i>Add to
                             Cart
@@ -374,21 +374,23 @@
             try {
                 const result = await doAjax(url, data);
                 if (result['data']['productAttributeValues'] != null) {
+                    let productAttributeValues = JSON.parse(JSON.stringify(result['data']))
+                    console.log('response: ', productAttributeValues)
                     var html = "";
                     for (let index = 0; index < result['data']['productAttributeValues'].length; index++) {
                         if (index == 0) {
                             if (key == 2) {
-                                html += '<option value= ' + result['data']['productAttributeValues'][index]['id'] + ' selected>' + result['data']['productAttributeValues'][index]['name'] + ' <span style="float:right;">(' + result['data']['groupData'][index]['price'] + ')</span></option>';
+                                html += '<option style="display:flex; justify-content:space-between;" value= ' + result['data']['productAttributeValues'][index]['id'] + ' selected>' + result['data']['productAttributeValues'][index]['name'] + '<span style="float:right;">(' + result['data']['groupData'][index]['price'] + ')</span></option>';
                             } else {
-                                html += '<option value= ' + result['data']['productAttributeValues'][index]['id'] + ' selected>' + result['data']['productAttributeValues'][index]['name'] + '</option>';
+                                html += '<option style="display:flex; justify-content:space-between;" value= ' + result['data']['productAttributeValues'][index]['id'] + ' selected>' + result['data']['productAttributeValues'][index]['name'] + '</option>';
                             }
 
                         } else {
 
                             if (key == 2) {
-                                html += '<option value= ' + result['data']['productAttributeValues'][index]['id'] + '>' + result['data']['productAttributeValues'][index]['name'] + ' <span style="float:right;">(' + result['data']['groupData'][index]['price'] + ')</span></option>';
+                                html += '<option style="display:flex; justify-content:space-between;" value= ' + result['data']['productAttributeValues'][index]['id'] + '>' + result['data']['productAttributeValues'][index]['name'] + ' <span style="float:right;">(' + result['data']['groupData'][index]['price'] + ')</span></option>';
                             } else {
-                                html += '<option value= ' + result['data']['productAttributeValues'][index]['id'] + '>' + result['data']['productAttributeValues'][index]['name'] + '</option>';
+                                html += '<option style="display:flex; justify-content:space-between;" value= ' + result['data']['productAttributeValues'][index]['id'] + '>' + result['data']['productAttributeValues'][index]['name'] + '</option>';
                             }
 
                         }

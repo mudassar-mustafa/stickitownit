@@ -2120,8 +2120,8 @@ p {
 
 @media only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
     .mobile-space {
-        padding-top: 25px;
-        padding-bottom: 25px;
+        padding-top: 15px;
+        padding-bottom: 15px;
     }
 }
 
@@ -2896,7 +2896,7 @@ div.mean-container a.meanmenu-reveal {
     06. banner css
 ----------------------------------------*/
 .cp-banner-content-space {
-    padding-top: 230px;
+    padding-top: 120px;
     padding-bottom: 40px;
 }
 
@@ -2913,7 +2913,7 @@ div.mean-container a.meanmenu-reveal {
 }
 
 .cp-banner-height {
-    min-height: 1200px;
+    min-height: max-content;
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
@@ -4768,6 +4768,18 @@ div.mean-container a.meanmenu-reveal {
     .cp-faq-img-item .cp-img-blur {
         min-height: 280px;
     }
+}
+
+.video-container {
+    border-radius: 1rem;
+    padding-bottom: 41.6%;
+    height: 0;
+    overflow: hidden;
+    margin-bottom: 1rem;
+}
+
+.video-container video{
+    border-radius: 1rem;
 }
 
 .cp-faq-wrap .accordion-item {
@@ -7747,6 +7759,11 @@ div.mean-container a.meanmenu-reveal {
 .cp-news3-content {
     background: #ffffff;
     padding: 0 30px 30px 30px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
 }
 
 .cp-news3-active {
@@ -7760,6 +7777,7 @@ div.mean-container a.meanmenu-reveal {
     display: inline-block;
     transform: translateY(-21px);
     font-size: 14px;
+    width: max-content;
 }
 
 .cp-news3-bg2 {
@@ -7796,6 +7814,11 @@ div.mean-container a.meanmenu-reveal {
 
 .cp-news3-img {
     overflow: hidden;
+}
+
+.cp-news-card-image{
+    height: 400px;
+    object-fit: cover;
 }
 
 .cp-news3-item:hover .cp-news3-img img {
@@ -12265,3 +12288,37 @@ html .ui-button.ui-state-disabled:active {
 
 /*# sourceMappingURL=main.css.map */
 
+
+.what-we-are-printing-image{
+    width: 200px;
+}
+
+.sticker-slider-heading{
+    font-size: 2.5rem;
+}
+
+.sticker-page-image{
+    object-fit: contain;
+}
+
+.blogs-card-div{
+    height: 28rem;
+
+}
+.blogs-card-div-img{
+    height: 27rem !important;
+    object-fit: cover !important;
+}
+.blog-card-description-container{
+    height: 230px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.width-17{
+    width: 17rem;
+}
+.text-center{
+    text-align: center;
+}
