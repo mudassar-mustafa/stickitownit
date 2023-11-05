@@ -190,7 +190,7 @@
                                                             class="js-example-basic-single">
                                                         @if (isset($setting->number_of_images))
                                                             @for ($i = 1; $i <= $setting->number_of_images; $i++)
-                                                                <option value="{{ $i }}">{{ $i }}</option>  
+                                                                <option value="{{ $i }}">{{ $i }}</option>
                                                             @endfor
                                                         @endif
                                                     </select>
@@ -271,11 +271,9 @@
                 },
                 success: function (response) {
                     if (response.success) {
-                        $('#successMsg').show().css('color', 'green').html(response.message + '<br>' + "Used Tokens:" + response.usedTokens + '<br>' + 'Generations Id' + response.generationId);
+                        $('#successMsg').show().css('background-color', 'green').css('color','#ffffff').html(response.message + '<br>' + "Used Tokens:" + response.usedTokens + '<br>' + 'Generations Id' + response.generationId);
                     } else {
-                        $('#successMsg').show().css('color', 'red').html('Something went wrong while generation your request .Please try again.');
-                        
-                        toastr.error(response.message);
+                        $('#successMsg').show().css('background-color', 'red').css('color','#ffffff').html(response.message);
                     }
                     $('.loading').hide();
                 },

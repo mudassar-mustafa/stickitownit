@@ -126,8 +126,9 @@ class LandingController extends Controller
 
             $setting = Setting::first(['model_id', 'width', 'height']);
             $params['modelId'] = $setting->model_id;
-            $params['height'] = $setting->height;
-            $params['width'] = $setting->width;
+            $params['height'] = (int)$setting->height;
+            $params['width'] = (int)$setting->width;
+
             $response = Helper::createGeneration($params);
 
             if ($response['success'] === false) {
@@ -135,7 +136,7 @@ class LandingController extends Controller
                     'error' => $response['data'],
                     'validation' => false,
                     'success' => false,
-                    'message' => 'Something Wrong',
+                    'message' => 'Something went wrong while generation your request .Please try again.',
                 ]);
             } else {
                 if (isset($response['data']) && isset($response['data']['sdGenerationJob'])) {
@@ -169,7 +170,7 @@ class LandingController extends Controller
         } else {
             return response()->json([
                 'success' => false,
-                'message' => 'Please subscribe package.',
+                'message' => 'Please subscribe your package.',
                 'generationId' => "",
                 'usedTokens' => "",
                 'remainingToken' => ''
