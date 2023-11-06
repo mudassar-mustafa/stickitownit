@@ -12471,7 +12471,7 @@ html .ui-button.ui-state-disabled:active {
 .vertical-slider .slider__image {
     width: 100%;
     height: 100%;
-    border-radius: 30px;
+    /*border-radius: 30px;*/
     overflow: hidden;
 }
 
@@ -12480,7 +12480,7 @@ html .ui-button.ui-state-disabled:active {
     width: 100%;
     height: 100%;
     -o-object-fit: cover;
-    object-fit: cover;
+    object-fit: contain;
 }
 
 @media (max-width: 767.98px) {
