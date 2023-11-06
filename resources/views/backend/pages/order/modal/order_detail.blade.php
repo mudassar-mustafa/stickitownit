@@ -142,30 +142,7 @@
                     </div>
                   </div>
                 </div>
-                
-                <!-- <div class="d-flex justify-content-between pt-5">
-                    <p class="fw-bold mb-0">Shipping Detail</p>
-                    <p class="fw-bold mb-0">Billing Detail</p>
-                </div>
-
-                <div class="d-flex justify-content-between mb-5">
-                    <p class="text-muted mb-0">{{ $order->order_sale_details[0]->shipping_address }},
-                        {{ isset($order->order_sale_details[0]->shipping_city_detail) ? $order->order_sale_details[0]->shipping_city_detail->name : "" }},
-                        {{ isset($order->order_sale_details[0]->shipping_state_detail) ? $order->order_sale_details[0]->shipping_state_detail->name : "" }},
-                        {{ isset($order->order_sale_details[0]->shipping_country_detail) ? $order->order_sale_details[0]->shipping_country_detail->name : "" }}
-                    </p>
-
-                    <p class="text-muted mb-0">{{ $order->billing_address }},
-                        {{ isset($order->billing_city_detail) ? $order->billing_city_detail->name : "" }},
-                        {{ isset($order->billing_state_detail) ? $order->billing_state_detail->name : "" }},
-                        {{ isset($order->billing_country_detail) ? $order->billing_country_detail->name :"" }}
-                    </p>
-                </div> -->
-
             </div>
-
-
-
 
             <div class="card-footer border-0 px-4"
                 style="background-color: #73c100; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
