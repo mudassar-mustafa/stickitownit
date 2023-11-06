@@ -1,4 +1,3 @@
-
 <!-- side toggle start -->
 <div class="fix">
     <div class="side-info">
@@ -7,7 +6,8 @@
                 <div class="row align-items-center">
                     <div class="col-9">
                         <a href="{{ route('/') }}">
-                            <img width="100" src="{{ asset('storage/uploads/settings/'.$setting->logo_header) }}"  alt="Logo">
+                            <img width="100" src="{{ asset('storage/uploads/settings/'.$setting->logo_header) }}"
+                                 alt="Logo">
                         </a>
                     </div>
                     <div class="col-3 text-end">
@@ -61,23 +61,23 @@
                     <div class="social-links">
                         <ul>
                             @if(!is_null($setting->facebook_url))
-                                <li><a target="_blank" href="{{$setting->facebook_url}}">facebook <i
+                                <li><a target="_blank" href="{{$setting->facebook_url}}"> <i
                                             class="fab fa-facebook-f"></i></a></li>
                             @endif
                             @if(!is_null($setting->twitter_url))
-                                <li><a target="_blank" href="{{$setting->twitter_url}}">Twitter <i
+                                <li><a target="_blank" href="{{$setting->twitter_url}}"> <i
                                             class="fab fa-twitter"></i></a></li>
                             @endif
                             @if(!is_null($setting->instagram_url))
-                                <li><a target="_blank" href="{{$setting->instagram_url}}">Instagram <i
+                                <li><a target="_blank" href="{{$setting->instagram_url}}"> <i
                                             class="fab fa-instagram"></i></a></li>
                             @endif
                             @if(!is_null($setting->youtube_url))
-                                <li><a target="_blank" href="{{$setting->youtube_url}}">YouTube <i
+                                <li><a target="_blank" href="{{$setting->youtube_url}}"> <i
                                             class="fab fa-youtube"></i></a></li>
                             @endif
                             @if(!is_null($setting->linkedin_url))
-                                <li><a target="_blank" href="{{$setting->linkedin_url}}">Linkedin <i
+                                <li><a target="_blank" href="{{$setting->linkedin_url}}"> <i
                                             class="fab fa-linkedin-in"></i></a></li>
                             @endif
                         </ul>
