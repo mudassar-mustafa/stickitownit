@@ -12513,7 +12513,7 @@ html .ui-button.ui-state-disabled:active {
         color: black;
     }
 
-    .swiper-slide {
+    .vertical-slider .swiper-slide {
         width: 100% !important;
     }
 }
