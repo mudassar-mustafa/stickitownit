@@ -310,7 +310,7 @@
                                 <div class="swiper-wrapper">
                                     @if(!empty($stickers) && count($stickers) > 0)
                                         @foreach($stickers as $key=>$sticker)
-                                            <div class="swiper-slide">
+                                            <div class="swiper-slide sticker-slider-gap">
                                                 <div class="cp-brand-img">
                                                     <img
                                                         class="what-we-are-printing-image"

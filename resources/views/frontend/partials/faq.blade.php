@@ -33,7 +33,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-6">
+                        <div class="col-sm-6 pe-0">
                             <!-- <div class="cp-faq-img-item p-relative w-img mb-30">
                                 <div class="cp-img-overlay wow"></div>
                                 <div class="cp-img-blur">
@@ -49,15 +49,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-6">
-                            <!-- <div class="cp-faq-img-item p-relative w-img mb-30 js-tilt">
-                                <div class="cp-img-overlay wow"></div>
-                                <div class="cp-img-blur cp-min-height-445">
-                                    <img src="{{ asset('assets/img/faq/faq-2.jpg') }}" alt="faq">
-                                    <img src="{{ asset('assets/img/faq/faq-2.jpg') }}" alt="faq">
-                                </div>
-                            </div> -->
-                            <div class="cp-faq-img-item">
+                        <div class="col-sm-6 pe-0">
+                            <!-- <div class="cp-faq-img-item"> -->
                                 <div class="cp-faq-img-content">
                                     <div class="cp-faq-img-icon m-img">
                                         <img src="{{ asset('assets/img/faq/faq-phone-icon.png') }}" alt="faq">
@@ -65,7 +58,7 @@
                                     <h4>Call us now</h4>
                                     <a href="tel:{{ $setting->phone_number }}">{{ $setting->phone_number }}</a>
                                 </div>
-                            </div>
+                            <!-- </div> -->
                         </div>
                     </div>
                 </div>
