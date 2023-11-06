@@ -39,7 +39,7 @@
                         <div class="irc-item-content">
                             <p>Mail Us</p>
                             <div class="support-number">
-                                <a href="mailto:{{ $setting->email }}">{{ $setting->email }}/a>
+                                <a href="mailto:{{ $setting->email }}">{{ $setting->email }}</a>
                             </div>
                         </div>
                     </div>
