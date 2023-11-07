@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/cache', function() {
-    $exitCode = Artisan::call('config:cache');
+    $exitCode = Artisan::call('optimize:clear');
     return 'Cache cleared';
 });
 
