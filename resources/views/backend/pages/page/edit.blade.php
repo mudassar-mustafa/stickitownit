@@ -14,6 +14,7 @@
                             <h5 class="card-title">Update {{ $page->name }} Page</h5>
                             <!-- Vertical Form -->
                             <form class="row g-3" action="{{route('backend.pages.page.update',$page->id)}}"
+                                  enctype="multipart/form-data"
                                   method="POST">
                                 @csrf
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -38,7 +39,7 @@
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <label for="body" class="form-label">Body</label>
-                                    <textarea class="tinymce-editor body" name="body">
+                                    <textarea class="body" name="body" id="description">
                                         {!! old('body', $page->body) !!}
                                       </textarea>
                                     @if ($errors->has('body'))
@@ -98,4 +99,32 @@
     </main>
 @endsection
 @push('scripts')
+    <!-- include summernote css/js -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.20/summernote-bs5.min.css"
+          integrity="sha512-ngQ4IGzHQ3s/Hh8kMyG4FC74wzitukRMIcTOoKT3EyzFZCILOPF0twiXOQn75eDINUfKBYmzYn2AA8DkAk8veQ=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.20/summernote-bs5.min.js"
+            integrity="sha512-6F1RVfnxCprKJmfulcxxym1Dar5FsT/V2jiEUvABiaEiFWoQ8yHvqRM/Slf0qJKiwin6IDQucjXuolCfCKnaJQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#description').summernote({
+                fontSizes: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30'],
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'italic', 'underline', 'clear']],
+                    ['font', ['fontsize', 'color']],
+                    ['font', ['fontname']],
+                    ['para', ['paragraph', 'ul', 'ol']],
+                    ['insert', ['link', 'image', 'doc', 'video', 'picture', 'hr']], // image and doc are customized buttons
+                    ['misc', ['codeview', 'fullscreen']],
+                ],
+                height: 400,
+            });
+            var noteBar = $('.note-toolbar');
+            noteBar.find('[data-toggle]').each(function () {
+                $(this).attr('data-bs-toggle', $(this).attr('data-toggle')).removeAttr('data-toggle');
+            });
+        });
+    </script>
 @endpush

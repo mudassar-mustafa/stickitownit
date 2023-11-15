@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('excerpt');
             $table->string('slug');
-            $table->text('body');
+            $table->longText('body');
             $table->text('meta_description')->nullable();
             $table->text('meta_keyword')->nullable();
             $table->string('status')->default('active');
