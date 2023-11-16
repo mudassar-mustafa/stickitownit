@@ -41,7 +41,8 @@
                                         </div>
                                         <div class="wow fadeInUp animated" data-wow-duration="3s">
                                             <div class="js-tilt w-img cp-banner-main-img">
-                                                <img src="{{ asset('storage/uploads/settings/'.$setting->banner_one) }}" alt="banner">
+                                                <img src="{{ asset('storage/uploads/settings/'.$setting->banner_one) }}"
+                                                     alt="banner">
                                             </div>
                                         </div>
                                     </div>
@@ -87,82 +88,45 @@
         </section>
         <!-- banner area end  -->
 
-        <!-- services area start here  -->
-        <section class="cp-services-area pb-85 p-relative z-index-1 mt--140">
-            <!-- <div class="cp-services-bottom-img p-absolute m-img cp-bg-move-x d-none d-xl-block">
-                <img src="{{ asset('assets/img/service/services-7.png') }}" alt="img not found">
-            </div> -->
+
+        <section class="cp-services2-area pt-25">
             <div class="container">
-                <div class="row align-items-end">
-                    <div class="col-xl-6 col-lg-10 d-xl-none">
-                        <div class="cp-services-title-wrap space cp-section-title mb-30 ml-30">
-                            <span class="cp-subtitle mb-15">Our Main Services</span>
-                            <h2 class="cp-title mb-25">Premier One-stop Custom <span>Print Solutions</span></h2>
-                            <p class="mb-50">ABC Printing Co, a solutions-driven graphic communications company with a
-                                history
-                                of success connecting brands with consumers.</p>
-                        </div>
-                    </div>
-                    @if(!empty($categories) && count($categories) > 0)
+
+                <div class="cp-services2-item-wrap">
+                    <div class="row">
+                        @if(!empty($categories) && count($categories) > 0)
+                            @if(count($categories) === 2)
+                                <div class="col-xl-3 col-lg-4 col-md-6"></div>
+                            @endif
+                            @foreach($categories as $key=>$category)
+                                <div class="col-xl-3 col-lg-4 col-md-6">
+                                    <div class="product-single ">
+                                        <div class="product-thumb bg-white-color">
+                                            <a href="{{ route('get.products-by-category',$category->slug) }}" class="image">
+                                                <img class="pic-1" src="{{ $category->image }}" alt="{{ $category->name }}">
+                                                <img class="pic-2" src="{{ $category->image }}" alt="{{ $category->name }}">
+                                            </a>
+
+                                        </div>
+                                        <div class="product-description">
+                                            <h4 class="product-name">
+                                                <a href="{{ route('get.products-by-category',$category->slug) }}">{{ $category->name }}</a>
+                                            </h4>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        @endif
+
                         @if(count($categories) === 2)
                             <div class="col-xl-3 col-lg-4 col-md-6"></div>
                         @endif
-                        @foreach($categories as $key=>$category)
 
-                            <div class="col-xl-3 col-lg-4 col-md-6">
-                                <div class="cp-services-item t-center mb-30 wow fadeInUp animated"
-                                     data-wow-duration="1.5s"
-                                     data-wow-delay=".3s">
-                                    <span class="cp-services-num">0{{ $key+1 }}</span>
-                                    <div class="cp-services-img w-img">
-                                        <img src="{{ $category->image }}" alt="{{ $category->name }}">
-                                    </div>
-                                    <h4 class="cp-services-title"><a href="{{ route('get.products-by-category',$category->slug) }}">{{ $category->name }}</a></h4>
-                                </div>
-                            </div>
-                        @endforeach
-                    @endif
-
-                    @if(count($categories) === 2)
-                        <div class="col-xl-3 col-lg-4 col-md-6"></div>
-                    @endif
-                </div>
-            </div>
-        </section>
-        <!-- services area end here  -->
-
-        <!-- about area start here  -->
-        <section class="cp-about-area p-relative pb-115 fix" id="generations">
-            <div class="cp-about-shape-img five m-img cp-bg-move-y">
-                <img src="{{ asset('assets/img/about/about-squre.png') }}" alt="img not found">
-            </div>
-            <div class="container">
-                <div class="row justify-content-center align-items-center">
-                    <div class="col-xl-8">
-                        <div class="cp-about-wrap fade-jr p-relative">
-                            <div class="cp-about-shape one p-absolute d-none d-xl-block cp-round-rotation2"></div>
-                            <div class="cp-about-shape two p-absolute d-none d-xl-block cp-round-rotation1"></div>
-                            <div class="cp-about-shape three p-absolute cp-round-rotation1"></div>
-
-                            <div
-                                class="js-tilt cp-about-inner ml-5 mr-5 t-center d-flex align-items-center justify-content-center"
-                                data-background="assets/img/about/generation.jpg">
-                                <div class="cp-about-content">
-                                    <span class="cp-about-subtitle mb-15"></span>
-                                    <h2 class="cp-about-title mb-70"></h2>
-                                    <div class="cp-about-btn">
-                                        <a class="cp-btn-2 generation-btn" href="{{ route('create.generation') }}">
-                                            Create
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
         </section>
-        <!-- about area end here  -->
 
         <!-- feature area start here  -->
         <section class="cp-feature-area p-relative cp-bg-2 zi-1 pt-145 pb-105">
@@ -205,9 +169,38 @@
             </div>
         </section>
         <!-- feature area start end  -->
+        <!-- about area start here  -->
+        <section class="cp-about-area p-relative pb-115 fix" id="generations">
+            <div class="cp-about-shape-img five m-img cp-bg-move-y">
+                <img src="{{ asset('assets/img/about/about-squre.png') }}" alt="img not found">
+            </div>
+            <div class="container">
+                <div class="row justify-content-center align-items-center">
+                    <div class="col-xl-8">
+                        <div class="cp-about-wrap fade-jr p-relative">
+                            <div class="cp-about-shape one p-absolute d-none d-xl-block cp-round-rotation2"></div>
+                            <div class="cp-about-shape two p-absolute d-none d-xl-block cp-round-rotation1"></div>
+                            <div class="cp-about-shape three p-absolute cp-round-rotation1"></div>
 
-
-
+                            <div
+                                class="js-tilt cp-about-inner ml-5 mr-5 t-center d-flex align-items-center justify-content-center"
+                                data-background="assets/img/about/generation.jpg">
+                                <div class="cp-about-content">
+                                    <span class="cp-about-subtitle mb-15"></span>
+                                    <h2 class="cp-about-title mb-70"></h2>
+                                    <div class="cp-about-btn">
+                                        <a class="cp-btn-2 generation-btn" href="{{ route('create.generation') }}">
+                                            Create
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- about area end here  -->
 
 
         <!-- news area end here  -->
@@ -253,7 +246,7 @@
                                                                 class="cp-news-card-image"
                                                                 src="{{ $blog->image }}"
                                                                 alt="{{ $blog->name }}">
-                                                            </a>
+                                                        </a>
                                                     </div>
                                                     <div class="cp-news3-content">
                                                         <span
@@ -278,14 +271,15 @@
         </section>
         <!-- news area end here  -->
 
-        <div class="cp-brand-area pb-130" >
+        <div class="cp-brand-area pb-130">
             <div class="container">
                 <div class="row wow fadeInUp animated" data-wow-duration="1.5s" data-wow-delay="0.3">
                     <div class="col-xl-12">
-                        <div >
+                        <div>
                             <div class="cp-news3-title-wrap mb-40">
                                 <div class="cp-section-title text-center">
-                                    <h3 class="cp-subtitle mb-15 wow fadeInUp animated sticker-slider-heading" data-wow-delay="0.3s">What we
+                                    <h3 class="cp-subtitle mb-15 wow fadeInUp animated sticker-slider-heading"
+                                        data-wow-delay="0.3s">What we
                                         are printing</h3>
                                 </div>
                             </div>
