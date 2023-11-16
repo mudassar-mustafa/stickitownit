@@ -34,17 +34,19 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="cp-contact-content mb-70 wow fadeInUp animated" data-wow-duration="1.5s">
-                            <h3 class="cp-contact-title mb-20">Let's Talk to us.</h3>
-                            <p class="cp-contact-text mb-50">Etiam convallis, felis quis dapibus dictum, libero mauris
-                                luctus
-                                nunc, <br> fringilla purus ligula non justo. Non fringilla
-                                purus ligula justo.</p>
+                            <h3 class="cp-contact-title mb-20">Ready to connect? </h3>
+                            <p class="cp-contact-text mb-50">Reach out to us for any inquiries, feedback, or assistance.
+                                We're here to listen and help – let's start the conversation.</p>
                             <div class="cp-contact-info mb-50">
                                 <ul>
-                                    <li><i class="far fa-phone-alt"></i><a href="tel:{{ $setting->phone_number }}">{{ $setting->phone_number }}</a></li>
-                                    <li><i class="fal fa-envelope"></i><a href="mailto:{{ $setting->email }}">
+                                    <li class="contact-us-border"><i class="far fa-phone-alt"></i>
+                                        <a href="tel:{{ $setting->phone_number }}">{{ $setting->phone_number }}</a>
+                                    </li>
+                                    <li class="contact-us-border"><i class="fal fa-envelope"></i><a
+                                            href="mailto:{{ $setting->email }}">
                                             {{ $setting->email }}</a></li>
-                                    <li><i class="fal fa-home-lg-alt"></i><a href="javascript:void(0)">
+                                    <li class="contact-us-border"><i class="fal fa-home-lg-alt"></i><a
+                                            href="javascript:void(0)">
                                             {{ $setting->address }}</a></li>
                                 </ul>
                             </div>
@@ -58,7 +60,7 @@
                         <div class="cp-contact-form-wrap mb-70 wow fadeInUp animated" data-wow-duration="1.5s">
                             <h3 class="cp-contact-title mb-25">Send us a message</h3>
                             <div class="cp-contact-form">
-                                <form action="{{ route('contact-us.store') }}" method="POST" >
+                                <form action="{{ route('contact-us.store') }}" method="POST">
                                     @csrf
                                     <div class="cp-input-field">
                                         <label for="name">Your Name (required)</label>

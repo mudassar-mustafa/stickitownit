@@ -4179,7 +4179,7 @@ div.mean-container a.meanmenu-reveal {
     left: 0;
     width: 100%;
     height: 100%;
-    background: var(--clr-theme-1);
+    /*background: var(--clr-theme-1);*/
     opacity: 0.65;
     z-index: -1;
 }
@@ -10215,7 +10215,8 @@ html .ui-button.ui-state-disabled:active {
     position: relative;
     padding: 40px 30px;
     background: var(--clr-bg-14);
-    min-height: 375px;
+    /*min-height: 375px;*/
+    min-height: 293px;
     max-width: 330px;
     margin: auto;
 }
@@ -12516,4 +12517,43 @@ html .ui-button.ui-state-disabled:active {
     .vertical-slider .swiper-slide {
         width: 100% !important;
     }
+}
+
+.pt-56{
+    padding-top: 56px;
+}
+
+.contact-us-border{
+    border: 1px solid #00000030;
+    padding: 17px;
+}
+.upload-btn{
+    padding: 27px 20px;
+    border: none !important;
+}
+.upload-btn button{
+    background: linear-gradient(90deg, var(--clr-theme-1) 0%, var(--clr-theme-2) 84.51%);
+    color: var(--clr-common-white);
+
+}
+
+.color-green {
+    color: var(--clr-theme-1);
+
+}
+
+.small-label{
+    font-size: 13px;
+    text-align: center;
+    padding-left: 3px;
+}
+.generation-btn{
+    background: linear-gradient(90deg, var(--clr-theme-1) 0%, var(--clr-theme-2) 84.51%);
+    color: var(--clr-common-white);
+}
+.cp-about-btn{
+    padding-top: 199px;
+}
+.mt-minus-19{
+    margin-top: -19px;
 }

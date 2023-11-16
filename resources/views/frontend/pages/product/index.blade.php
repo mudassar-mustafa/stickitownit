@@ -1,5 +1,5 @@
 @extends('frontend.layouts.app')
-@section('title',ucfirst($slug) ?? 'Produce Digital Printing With Business Growing')
+@section('title',ucfirst(str_replace('-','',$slug)) ?? 'Produce Digital Printing With Business Growing')
 @section('description','Our mission is to take the pain out of sticker printing and make it simple, fast, and affordable without compromising quality.')
 @section('keywords','Stickers, Labels, Printing, Digital Printing')
 @section('canonical','https://stickitownit.com')
@@ -17,18 +17,18 @@
     <main>
 
         <!-- page title area start  -->
-        <section class="page-title-area breadcrumb-spacing cp-bg-14">
+        <section class="page-title-area breadcrumb-spacing cp-bg-12">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-xxl-9">
                         <div class="page-title-wrapper t-center">
-                            <h3 class="page-title mb-10">{{ucfirst($slug)}}</h3>
+                            <h3 class="page-title mb-10">{{ucfirst(str_replace('-','',$slug))}}</h3>
                             <div class="breadcrumb-menu d-flex justify-content-center">
                                 <nav aria-label="Breadcrumbs" class="breadcrumb-trail breadcrumbs">
                                     <ul class="trail-items">
                                         <li class="trail-item trail-begin"><a href="{{ route('/') }}"><span>Home</span></a>
                                         </li>
-                                        <li class="trail-item trail-end"><span>{{ucfirst($slug)}}</span></li>
+                                        <li class="trail-item trail-end"><span>{{ucfirst(str_replace('-','',$slug))}}</span></li>
                                     </ul>
 
 
@@ -48,7 +48,7 @@
         <!-- page title area start  -->
 
         <!-- product area start  -->
-        <div class="product-area pt-140 pb-130">
+        <div class="product-area pt-56 pb-10">
             <div class="container">
                 <div class="cp-product-wrap mb-60 wow fadeInUp animated" data-wow-duration="1.5s" data-wow-delay="0.3s">
 

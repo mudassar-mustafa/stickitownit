@@ -119,51 +119,52 @@ affordable without compromising quality.')
                             </div>
                         @endif
 
-                        <h4 class="product-name">{{ $product->title ?? "" }}</h4>
-                        @if ($product->product_type == "normal")
-                            <div class="product-price">
-                                <span class="price-now">${{ $product->normal_product_groups->price }}</span>
-                            </div>
-                        @endif
+                       <div class="cp-bg-14 contact-us-border">
+                           <h4 class="product-name">{{ $product->title ?? "" }}</h4>
+                           @if ($product->product_type == "normal")
+                               <div class="product-price">
+                                   <span class="price-now">${{ $product->normal_product_groups->price }}</span>
+                               </div>
+                           @endif
 
-                        @if (!empty($product->short_description))
-                            <p class="mb-30">{{ $product->short_description }}</p>
-                        @endif
-                        <input type="hidden" value="" id="product_attribute_group_id">
-                        @if ($product->product_type != "normal" && !empty($product->attributes))
-                            <div class="row">
-                                @foreach ($product->attributes as $key => $attribute)
-                                    <div
-                                        class="{{ $key + 1 == count($product->attributes) ? "col-lg-12 col-md-12 col-sm-12 col-xs-12" : "col-lg-6 col-md-6 col-sm-12 col-xs-12" }}">
-                                        <div class="cp-input-field">
-                                            <label for="attribute_{{ $key }}">{{ $attribute->name }}</label>
-                                            <select id="attribute_{{ $key }}" class="attributes js-example-basic-single"
-                                                    data-attribute_id="{{ $attribute->id }}"
-                                                    data-attribute_name="{{ $attribute->name }}" data-key="{{ $key }}"
-                                                    onchange="updateAttributeValue('{{ $key }}')">
-                                            </select>
-                                        </div>
-                                    </div>
-                                @endforeach
-                            </div>
-                            <div class="product-price hidden variable_product_price" style="float: right;">
-                                <span class="price-now variable_product_amount"></span>
-                            </div>
-                        @endif
+                           @if (!empty($product->short_description))
+                               <p class="mb-30">{{ $product->short_description }}</p>
+                           @endif
+                           <input type="hidden" value="" id="product_attribute_group_id">
+                           @if ($product->product_type != "normal" && !empty($product->attributes))
+                               <div class="row">
+                                   @foreach ($product->attributes as $key => $attribute)
+                                       <div
+                                           class="{{ $key + 1 == count($product->attributes) ? "col-lg-12 col-md-12 col-sm-12 col-xs-12" : "col-lg-6 col-md-6 col-sm-12 col-xs-12" }}">
+                                           <div class="cp-input-field">
+                                               <label for="attribute_{{ $key }}">{{ $attribute->name }}{{ $attribute->name === 'Size' ? ' (Inches)' : '' }}</label>
+                                               <select id="attribute_{{ $key }}" class="attributes js-example-basic-single"
+                                                       data-attribute_id="{{ $attribute->id }}"
+                                                       data-attribute_name="{{ $attribute->name }}" data-key="{{ $key }}"
+                                                       onchange="updateAttributeValue('{{ $key }}')">
+                                               </select>
+                                           </div>
+                                       </div>
+                                   @endforeach
+                               </div>
+                               <div class="product-price hidden variable_product_price" style="float: right;">
+                                   <span class="price-now variable_product_amount"></span>
+                               </div>
+                           @endif
 
-                        @if ($product->product_type == "normal")
-                            <div class="product-quantity-cart mb-30">
-                                <div class="product-quantity-form">
-                                    <form action="#">
-                                        <button class="cart-minus"><i class="far fa-minus"></i></button>
-                                        <input class="cart-input" type="text" value="1">
-                                        <button class="cart-plus"><i class="far fa-plus"></i></button>
-                                    </form>
-                                </div>
-                                <a href="cart.html" class="cp-border-btn cp-il">
-                                    <i class="fas fa-shopping-basket"></i>Add to
-                                    Cart
-                                    <span class="cp-border-btn__inner">
+                           @if ($product->product_type == "normal")
+                               <div class="product-quantity-cart mb-30">
+                                   <div class="product-quantity-form">
+                                       <form action="#">
+                                           <button class="cart-minus"><i class="far fa-minus"></i></button>
+                                           <input class="cart-input" type="text" value="1">
+                                           <button class="cart-plus"><i class="far fa-plus"></i></button>
+                                       </form>
+                                   </div>
+                                   <a href="cart.html" class="cp-border-btn cp-il">
+                                       <i class="fas fa-shopping-basket"></i>Add to
+                                       Cart
+                                       <span class="cp-border-btn__inner">
                                 <span class="cp-border-btn__blobs">
                                     <span class="cp-border-btn__blob"></span>
                                     <span class="cp-border-btn__blob"></span>
@@ -171,56 +172,76 @@ affordable without compromising quality.')
                                     <span class="cp-border-btn__blob"></span>
                                 </span>
                             </span>
-                                </a>
-                            </div>
-                        @endif
+                                   </a>
+                               </div>
+                           @endif
 
-                        @if ($product->product_type == "normal")
-                            <div class="product-d-meta sku mb-10">
-                                <span>SKU :</span>
-                                <span>001</span>
-                            </div>
-                        @endif
+                           @if ($product->product_type == "normal")
+                               <div class="product-d-meta sku mb-10">
+                                   <span>SKU :</span>
+                                   <span>001</span>
+                               </div>
+                           @endif
 
-                        @php
-                            $categoryString = "";
-                            if(!empty($product->categories)){
-                            foreach ($product->categories as $key => $category) {
-                            if($categoryString == ""){
-                            $categoryString = $category->name;
-                            }else{
-                            $categoryString = $categoryString.', '.$category->name;
-                            }
-                            }
-                            }
-                        @endphp
-                        <div class="product-d-meta ockcategories mb-10">
-                            <span>Catagories :</span>
-                            <span>{{ $categoryString }}</span>
-                        </div>
-                        @if ($product->product_type == "normal")
-                            <div class="product-d-meta tags mb-10">
-                                <span>Available :</span>
-                                <span>{{ $product->normal_product_groups->quantity }}</span>
-                            </div>
-                        @endif
+                           @php
+                               $categoryString = "";
+                               if(!empty($product->categories)){
+                               foreach ($product->categories as $key => $category) {
+                               if($categoryString == ""){
+                               $categoryString = $category->name;
+                               }else{
+                               $categoryString = $categoryString.', '.$category->name;
+                               }
+                               }
+                               }
+                           @endphp
+                           <div class="product-d-meta ockcategories mb-10">
+                               <span>Total Price: </span>
+{{--                               <span>Categories :</span>--}}
+{{--                               <span>{{ $categoryString }}</span>--}}
+                           </div>
+                           @if ($product->product_type == "normal")
+                               <div class="product-d-meta tags mb-10">
+                                   <span>Available :</span>
+                                   <span>{{ $product->normal_product_groups->quantity }}</span>
+                               </div>
+                           @endif
 
-                        @if ($product->product_type != "normal" && !empty($product->attributes))
-                            <input class="form-control" type="file" id="uploadFile" name="uploadFile"
-                                   onchange="uploadUserFile()">
-                            <div class="my-2 d-flex align-items-center">
-                                Don’t have a design? Try our Ai Stickers Generator
-                                <a class="generator-button" id="pro-info-3-tab" data-bs-toggle="tab" href="#pro-info-3"
-                                   role="tab" aria-selected="false">Link</a>
-                            </div>
-                            <img src="" class="rounded d-block hidden uploadImage pt-2 pb-4" alt=""
-                                 style="width: 200px; height:200px">
-                            <a href="javascript:void(0);"
-                               onclick="addToCart('{{ auth()->check() }}', '{{ auth()->check() == true && auth()->user()->hasRole('SuperAdmin|Admin|Seller') == true ? 'admin' : 'customer' }}', 'sticker')"
-                               class="cp-border-btn cp-il hidden shopping-basket">
-                                <i class="fas fa-shopping-basket"></i>Add to
-                                Cart
-                                <span class="cp-border-btn__inner">
+                           @if ($product->product_type != "normal" && !empty($product->attributes))
+                               <div class="cp-input-wrap cp-file t-center upload-btn">
+                                   <input class="form-control" type="file" id="uploadFile" name="uploadFile"
+                                            onchange="uploadUserFile()">
+                                   <button class="cp-border2-btn hide ">Upload File</button>
+
+                               </div>
+                               <div class="text-center mt-minus-19">
+                                   <div>or</div>
+                                   <a href="{{ route('create.generation') }}"  class="color-green col-12 col-sm-auto col-lg-12 col-xl-auto mb-2"> Try our Ai Stickers Generator </a>
+
+                               </div>
+{{--                               <div class="my-2 d-flex align-items-center">--}}
+{{--                                   Try our Ai Stickers Generator--}}
+
+{{--                                   <a href="{{ route('create.generation') }}" class="cp-border-btn mt-15">--}}
+{{--                                       Link--}}
+{{--                                       <span class="cp-border-btn__inner">--}}
+{{--                                            <span class="cp-border-btn__blobs">--}}
+{{--                                                <span class="cp-border-btn__blob"></span>--}}
+{{--                                                <span class="cp-border-btn__blob"></span>--}}
+{{--                                                <span class="cp-border-btn__blob"></span>--}}
+{{--                                                <span class="cp-border-btn__blob"></span>--}}
+{{--                                            </span>--}}
+{{--                                        </span>--}}
+{{--                                   </a>--}}
+{{--                               </div>--}}
+                               <img src="" class="rounded d-block hidden uploadImage pt-2 pb-4" alt=""
+                                    style="width: 200px; height:200px">
+                               <a href="javascript:void(0);"
+                                  onclick="addToCart('{{ auth()->check() }}', '{{ auth()->check() == true && auth()->user()->hasRole('SuperAdmin|Admin|Seller') == true ? 'admin' : 'customer' }}', 'sticker')"
+                                  class="cp-border-btn cp-il hidden shopping-basket">
+                                   <i class="fas fa-shopping-basket"></i>Add to
+                                   Cart
+                                   <span class="cp-border-btn__inner">
                             <span class="cp-border-btn__blobs">
                                 <span class="cp-border-btn__blob"></span>
                                 <span class="cp-border-btn__blob"></span>
@@ -228,8 +249,9 @@ affordable without compromising quality.')
                                 <span class="cp-border-btn__blob"></span>
                             </span>
                         </span>
-                            </a>
-                        @endif
+                               </a>
+                           @endif
+                       </div>
 
                     </div>
                 </div>
@@ -382,8 +404,9 @@ affordable without compromising quality.')
             var text = state.text.split('(');
             if (text.length > 0) {
                 if (text[1] !== undefined) {
+                    var text2 = text[1].split(')');
                     var $state = $(
-                        `<span>${text[0]}</span><span class="float-end">$ (${text[1]}</span>`
+                        `<span>${text[0]}</span><span class="float-end">$ ${text2[0]}</span>`
                     );
                 } else {
                     var $state = $(
@@ -534,8 +557,8 @@ affordable without compromising quality.')
                     var descriptionArray = description.split("-");
                     var qty = parseInt(descriptionArray[2]);
                     var unitPrice = parseFloat(result['data']['price']) / qty;
-                    $(".variable_product_amount").html('$' + result['data']['price'] + '/<small>$' + unitPrice.toFixed(2) +
-                        '</small>');
+                    $(".variable_product_amount").html('$' + result['data']['price'] + '<br><small class="small-label">$' + unitPrice.toFixed(2) +
+                        ' each</small>');
                     $("#product_attribute_group_id").val(result['data']['id']);
                 } else {
                     $(".variable_product_price").addClass('hidden');

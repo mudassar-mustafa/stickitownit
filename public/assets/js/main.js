@@ -688,6 +688,7 @@
         spaceBetween: 140,
         centeredSlides: true,
         loop: true,
+        autoplay:true,
         rtl: rtl_setting,
         pagination: {
             el: ".swiper-pagination",

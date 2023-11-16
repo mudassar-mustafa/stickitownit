@@ -131,6 +131,38 @@
         </section>
         <!-- services area end here  -->
 
+        <!-- about area start here  -->
+        <section class="cp-about-area p-relative pb-115 fix" id="generations">
+            <div class="cp-about-shape-img five m-img cp-bg-move-y">
+                <img src="{{ asset('assets/img/about/about-squre.png') }}" alt="img not found">
+            </div>
+            <div class="container">
+                <div class="row justify-content-center align-items-center">
+                    <div class="col-xl-8">
+                        <div class="cp-about-wrap fade-jr p-relative">
+                            <div class="cp-about-shape one p-absolute d-none d-xl-block cp-round-rotation2"></div>
+                            <div class="cp-about-shape two p-absolute d-none d-xl-block cp-round-rotation1"></div>
+                            <div class="cp-about-shape three p-absolute cp-round-rotation1"></div>
+
+                            <div
+                                class="js-tilt cp-about-inner ml-5 mr-5 t-center d-flex align-items-center justify-content-center"
+                                data-background="assets/img/about/generation.jpg">
+                                <div class="cp-about-content">
+                                    <span class="cp-about-subtitle mb-15"></span>
+                                    <h2 class="cp-about-title mb-70"></h2>
+                                    <div class="cp-about-btn">
+                                        <a class="cp-btn-2 generation-btn" href="{{ route('create.generation') }}">
+                                            Create
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- about area end here  -->
 
         <!-- feature area start here  -->
         <section class="cp-feature-area p-relative cp-bg-2 zi-1 pt-145 pb-105">
@@ -174,52 +206,8 @@
         </section>
         <!-- feature area start end  -->
 
-        <!-- about area start here  -->
-        <section class="cp-about-area p-relative pb-115 fix" id="generations">
-            <div class="cp-about-shape-img five m-img cp-bg-move-y">
-                <img src="{{ asset('assets/img/about/about-squre.png') }}" alt="img not found">
-            </div>
-            <div class="container">
-                <div class="row justify-content-center align-items-center">
-                    <div class="col-xl-8">
-                        <div class="cp-about-wrap fade-jr p-relative">
-                            <div class="cp-about-shape one p-absolute d-none d-xl-block cp-round-rotation2"></div>
-                            <div class="cp-about-shape two p-absolute d-none d-xl-block cp-round-rotation1"></div>
-                            <div class="cp-about-shape three p-absolute cp-round-rotation1"></div>
 
-                            <div
-                                class="js-tilt cp-about-inner ml-5 mr-5 t-center d-flex align-items-center justify-content-center"
-                                data-background="assets/img/about/about-round.jpg">
-                                <div class="cp-about-content">
-                                    <span class="cp-about-subtitle mb-15">About Our Company</span>
-                                    <h2 class="cp-about-title mb-70">We are just <br> <span>better Quality</span> <br> for over
-                                        35 <br> <span>years</span> -</h2>
-                                    <div class="cp-about-btn">
-                                        <a class="cp-btn-2" href="{{ route('create.generation') }}">
-                                           Generations
-                                            <span class="cp-btn-2__inner">
-                                    <span class="cp-btn-2__blobs">
-                                       <span class="cp-btn-2__blob"></span>
-                                       <span class="cp-btn-2__blob"></span>
-                                       <span class="cp-btn-2__blob"></span>
-                                       <span class="cp-btn-2__blob"></span>
-                                    </span>
-                                 </span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- about area end here  -->
 
-        <!-- faq area start here  -->
-
-        @include('frontend.partials.faq')
-        <!-- faq area end here  -->
 
 
         <!-- news area end here  -->
