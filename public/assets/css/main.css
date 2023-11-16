@@ -2510,6 +2510,7 @@ div.mean-container a.meanmenu-reveal {
 ----------------------------------------*/
 .page-title-area {
     /*height: 300px;*/
+    height: 160px;
     display: flex;
     align-items: center;
     background-size: cover;
@@ -2535,7 +2536,8 @@ div.mean-container a.meanmenu-reveal {
 }
 
 .page-title {
-    font-size: 60px;
+    /*font-size: 60px;*/
+    font-size: 48px;
     font-weight: 600;
     line-height: 1.1;
     text-transform: capitalize;
@@ -12520,7 +12522,7 @@ html .ui-button.ui-state-disabled:active {
 }
 
 .pt-56{
-    padding-top: 56px;
+    padding-top: 50px;
 }
 
 .contact-us-border{
