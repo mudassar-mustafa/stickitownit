@@ -1,5 +1,5 @@
 @extends('frontend.layouts.app')
-@section('title',ucfirst(str_replace('-','',$slug)) ?? 'Produce Digital Printing With Business Growing')
+@section('title',ucfirst(str_replace('-',' ',$slug)) ?? 'Produce Digital Printing With Business Growing')
 @section('description','Our mission is to take the pain out of sticker printing and make it simple, fast, and affordable without compromising quality.')
 @section('keywords','Stickers, Labels, Printing, Digital Printing')
 @section('canonical','https://stickitownit.com')
@@ -22,13 +22,13 @@
                 <div class="row justify-content-center">
                     <div class="col-xxl-9">
                         <div class="page-title-wrapper t-center">
-                            <h3 class="page-title mb-10">{{ucfirst(str_replace('-','',$slug))}}</h3>
+                            <h3 class="page-title mb-10">{{ucfirst(str_replace('-',' ',$slug))}}</h3>
                             <div class="breadcrumb-menu d-flex justify-content-center">
                                 <nav aria-label="Breadcrumbs" class="breadcrumb-trail breadcrumbs">
                                     <ul class="trail-items">
                                         <li class="trail-item trail-begin"><a href="{{ route('/') }}"><span>Home</span></a>
                                         </li>
-                                        <li class="trail-item trail-end"><span>{{ucfirst(str_replace('-','',$slug))}}</span></li>
+                                        <li class="trail-item trail-end"><span>{{ucfirst(str_replace('-',' ',$slug))}}</span></li>
                                     </ul>
 
 
