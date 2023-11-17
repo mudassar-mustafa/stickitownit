@@ -4122,15 +4122,15 @@ div.mean-container a.meanmenu-reveal {
 ----------------------------------------*/
 .cp-about-inner {
     -webkit-border-radius: 920px;
-    -moz-border-radius: 920px;
-    border-radius: 920px;
+    /* -moz-border-radius: 920px;
+    border-radius: 920px; */
     overflow: hidden;
     position: relative;
     background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;
     z-index: 1;
-    height: 918px;
+    height: 800px;
     width: 918px;
     margin: 35px auto;
 }
@@ -12553,6 +12553,7 @@ html .ui-button.ui-state-disabled:active {
 }
 .cp-about-btn{
     padding-top: 199px;
+
 }
 .mt-minus-19{
     margin-top: -19px;
@@ -12560,3 +12561,26 @@ html .ui-button.ui-state-disabled:active {
 .bg-white-color{
     background: white !important;
 }
+.cp-services-img.w-img img {
+    height: 332px;
+    object-fit: cover;
+}
+
+.round-to-banner{
+    background-size: cover;
+    background-position: top center;
+    background-repeat: no-repeat;
+}
+@media only screen and (max-width: 1300px){
+    .round-to-banner{
+        background-size: contain !important;
+    }
+    .cp-about-btn{
+        padding-top: 0 !important;
+    }
+}
+/* @media screen and (max-width: 768px) {
+    .round-to-banner {
+        background-size: contain;
+    }
+} */

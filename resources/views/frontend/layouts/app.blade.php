@@ -37,7 +37,6 @@
 </p>
 <![endif]-->
 
-@include('frontend.includes.preloader')
 @include('frontend.includes.cursor')
 @include('frontend.includes.header')
 @include('frontend.includes.mobile-header')
