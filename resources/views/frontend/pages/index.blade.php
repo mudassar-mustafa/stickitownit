@@ -131,44 +131,37 @@
         <!-- services area end here  -->
 
 
-        <!-- <section class="cp-services2-area pt-25">
+        <!-- about area start here  -->
+        <section class="p-relative fix round-to-banner" id="generations" data-background="assets/img/about/generation.jpg">
+            {{--            <div class="cp-about-shape-img five m-img cp-bg-move-y">--}}
+            {{--                <img src="{{ asset('assets/img/about/about-squre.png') }}" alt="img not found">--}}
+            {{--            </div>--}}
             <div class="container">
+                <div class="row justify-content-center align-items-center">
+                    <div class="col-xl-8">
+                        <div class="cp-about-wrap fade-jr p-relative">
+                            {{--                            <div class="cp-about-shape one p-absolute d-none d-xl-block cp-round-rotation2"></div>--}}
+                            {{--                            <div class="cp-about-shape two p-absolute d-none d-xl-block cp-round-rotation1"></div>--}}
+                            {{--                            <div class="cp-about-shape three p-absolute cp-round-rotation1"></div>--}}
 
-                <div class="cp-services2-item-wrap">
-                    <div class="row">
-                        @if(!empty($categories) && count($categories) > 0)
-                            @if(count($categories) === 2)
-                                <div class="col-xl-3 col-lg-4 col-md-6"></div>
-                            @endif
-                            @foreach($categories as $key=>$category)
-                                <div class="col-xl-3 col-lg-4 col-md-6">
-                                    <div class="product-single ">
-                                        <div class="product-thumb bg-white-color">
-                                            <a href="{{ route('get.products-by-category',$category->slug) }}" class="image">
-                                                <img class="pic-1" src="{{ $category->image }}" alt="{{ $category->name }}">
-                                                <img class="pic-2" src="{{ $category->image }}" alt="{{ $category->name }}">
-                                            </a>
-
-                                        </div>
-                                        <div class="product-description">
-                                            <h4 class="product-name">
-                                                <a href="{{ route('get.products-by-category',$category->slug) }}">{{ $category->name }}</a>
-                                            </h4>
-
-                                        </div>
+                            <div class="js-tilt cp-about-inner ml-5 mr-5 t-center d-flex align-items-center justify-content-center">
+                                <div class="cp-about-content">
+                                    <span class="cp-about-subtitle mb-15"></span>
+                                    <h2 class="cp-about-title mb-70"></h2>
+                                    <div class="cp-about-btn">
+                                        <a class="cp-btn-2 generation-btn" href="{{ route('create.generation') }}">
+                                            Create
+                                        </a>
                                     </div>
                                 </div>
-                            @endforeach
-                        @endif
-
-                        @if(count($categories) === 2)
-                            <div class="col-xl-3 col-lg-4 col-md-6"></div>
-                        @endif
-
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </section> -->
+        </section>
+        <!-- about area end here  -->
+
 
         <!-- feature area start here  -->
         <section class="cp-feature-area p-relative cp-bg-2 zi-1 pt-145 pb-105">
@@ -212,37 +205,6 @@
         </section>
         <!-- feature area start end  -->
 
-
-        <!-- about area start here  -->
-        <section class="p-relative fix round-to-banner" id="generations" data-background="assets/img/about/generation.jpg">
-{{--            <div class="cp-about-shape-img five m-img cp-bg-move-y">--}}
-{{--                <img src="{{ asset('assets/img/about/about-squre.png') }}" alt="img not found">--}}
-{{--            </div>--}}
-            <div class="container">
-                <div class="row justify-content-center align-items-center">
-                    <div class="col-xl-8">
-                        <div class="cp-about-wrap fade-jr p-relative">
-{{--                            <div class="cp-about-shape one p-absolute d-none d-xl-block cp-round-rotation2"></div>--}}
-{{--                            <div class="cp-about-shape two p-absolute d-none d-xl-block cp-round-rotation1"></div>--}}
-{{--                            <div class="cp-about-shape three p-absolute cp-round-rotation1"></div>--}}
-
-                            <div class="js-tilt cp-about-inner ml-5 mr-5 t-center d-flex align-items-center justify-content-center">
-                                <div class="cp-about-content">
-                                    <span class="cp-about-subtitle mb-15"></span>
-                                    <h2 class="cp-about-title mb-70"></h2>
-                                    <div class="cp-about-btn">
-                                        <a class="cp-btn-2 generation-btn" href="{{ route('create.generation') }}">
-                                            Create
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- about area end here  -->
 
 
         <!-- news area end here  -->
