@@ -215,9 +215,9 @@
 
         <!-- about area start here  -->
         <section class="p-relative fix round-to-banner" id="generations" data-background="assets/img/about/generation.jpg">
-            <div class="cp-about-shape-img five m-img cp-bg-move-y">
-                <img src="{{ asset('assets/img/about/about-squre.png') }}" alt="img not found">
-            </div>
+{{--            <div class="cp-about-shape-img five m-img cp-bg-move-y">--}}
+{{--                <img src="{{ asset('assets/img/about/about-squre.png') }}" alt="img not found">--}}
+{{--            </div>--}}
             <div class="container">
                 <div class="row justify-content-center align-items-center">
                     <div class="col-xl-8">
