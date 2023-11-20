@@ -40,14 +40,14 @@ class ProductImportCron extends Command
         $uploadFile = "";
 
         $files = [
-            //['Diecut Sticker', 'diecut-stickers.png', '/diecut_sticker.csv', '0'],
-            ['Circle Sticker', 'circle-stickers.png', '/circle_sticker.csv', '1'],
-            //['Rectangle Sticker', 'rectangle-stickers.png', '/rectangle_sticker.csv', '0'],
-            ['Square Sticker', 'square-stickers.png', '/square_sticker.csv', '1'],
-            //['Diecut Label', 'diecut-label.png', '/diecut_label.csv', '0'],
-            ['Circle Label', 'circle-label.png', '/circle_label.csv', '1'],
+            // ['Diecut Sticker', 'diecut-stickers.png', '/diecut_sticker.csv', '0'],
+            // ['Circle Sticker', 'circle-stickers.png', '/circle_sticker.csv', '1'],
+            // ['Rectangle Sticker', 'rectangle-stickers.png', '/rectangle_sticker.csv', '0'],
+            // ['Square Sticker', 'square-stickers.png', '/square_sticker.csv', '1'],
+            // ['Diecut Label', 'diecut-label.png', '/diecut_label.csv', '0'],
+             ['Circle Label', 'circle-label.png', '/circle_label.csv', '1'],
             //['Rectangle Label', 'rectangle-label.png', '/rectangle_label.csv', '0'],
-            ['Square Label', 'square-label.png', '/square_label.csv', '1'],
+            //['Square Label', 'square-label.png', '/square_label.csv', '1'],
         ];
 
         try {
@@ -121,7 +121,7 @@ class ProductImportCron extends Command
                         $productAttributeGroup->short_description = "".$value[2]."-".$size."-".$qty."";
                         $productAttributeGroup->sku = $key + 1;
                         $productAttributeGroup->quantity = 100000;
-                        $productAttributeGroup->price = $value[9];
+                        $productAttributeGroup->price = $fileDetail['3'] == '1' ?  $value[8] : $value[9];
                         $productAttributeGroup->visibilty = true;
                         $productAttributeGroup->save();
     

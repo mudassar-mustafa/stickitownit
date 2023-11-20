@@ -88,12 +88,9 @@
         </section>
         <!-- banner area end  -->
 
-        <!-- services area start here  -->
-        <section class="cp-services-area pb-85 p-relative z-index-1 mt--140">
-            <!-- <div class="cp-services-bottom-img p-absolute m-img cp-bg-move-x d-none d-xl-block">
-                <img src="{{ asset('assets/img/service/services-7.png') }}" alt="img not found">
-            </div> -->
-            <div class="container">
+                <!-- services area start here  -->
+        <section class="cp-services-area p-relative">
+            <div class="container mt-75 mb-75">
                 <div class="row align-items-end">
                     <div class="col-xl-6 col-lg-10 d-xl-none">
                         <div class="cp-services-title-wrap space cp-section-title mb-30 ml-30">
@@ -118,9 +115,7 @@
                                     <div class="cp-services-img w-img">
                                         <img src="{{ $category->image }}" alt="{{ $category->name }}">
                                     </div>
-                                    <h4 class="cp-services-title"><a
-                                            href="{{ route('get.products-by-category',$category->slug) }}">{{ $category->name }}</a>
-                                    </h4>
+                                    <h4 class="cp-services-title"><a href="{{ route('get.products-by-category',$category->slug) }}">{{ $category->name }}</a></h4>
                                 </div>
                             </div>
                         @endforeach
@@ -132,9 +127,11 @@
                 </div>
             </div>
         </section>
+        <!-- This is mine -->
         <!-- services area end here  -->
 
-        <section class="cp-services2-area pt-25">
+
+        <!-- <section class="cp-services2-area pt-25">
             <div class="container">
 
                 <div class="cp-services2-item-wrap">
@@ -145,74 +142,33 @@
                             @endif
                             @foreach($categories as $key=>$category)
                                 <div class="col-xl-3 col-lg-4 col-md-6">
-
                                     <div class="product-single ">
-                                        <div class="cp-services-item t-center mb-30 wow fadeInUp animated"
-                                             data-wow-duration="1.5s"
-                                             data-wow-delay=".3s">
-                                            <div class="product-thumb bg-white-color">
-                                                <a href="{{ route('get.products-by-category',$category->slug) }}"
-                                                   class="image">
-                                                    <img class="pic-1" src="{{ $category->image }}"
-                                                         alt="{{ $category->name }}">
-                                                    <img class="pic-2" src="{{ $category->image }}"
-                                                         alt="{{ $category->name }}">
-                                                </a>
+                                        <div class="product-thumb bg-white-color">
+                                            <a href="{{ route('get.products-by-category',$category->slug) }}" class="image">
+                                                <img class="pic-1" src="{{ $category->image }}" alt="{{ $category->name }}">
+                                                <img class="pic-2" src="{{ $category->image }}" alt="{{ $category->name }}">
+                                            </a>
 
-                                            </div>
-                                            <div class="product-description">
-                                                <h4 class="product-name">
-                                                    <a href="{{ route('get.products-by-category',$category->slug) }}">{{ $category->name }}</a>
-                                                </h4>
-
-                                            </div>
                                         </div>
+                                        <div class="product-description">
+                                            <h4 class="product-name">
+                                                <a href="{{ route('get.products-by-category',$category->slug) }}">{{ $category->name }}</a>
+                                            </h4>
 
-                                </div>
-                    </div>
-                    @endforeach
-                    @endif
-
-                    @if(count($categories) === 2)
-                        <div class="col-xl-3 col-lg-4 col-md-6"></div>
-                    @endif
-
-                </div>
-            </div>
-            </div>
-        </section>
-        <!-- about area start here  -->
-        <section class="cp-about-area p-relative pb-115 fix" id="generations">
-            <div class="cp-about-shape-img five m-img cp-bg-move-y">
-                <img src="{{ asset('assets/img/about/about-squre.png') }}" alt="img not found">
-            </div>
-            <div class="container">
-                <div class="row justify-content-center align-items-center">
-                    <div class="col-xl-8">
-                        <div class="cp-about-wrap fade-jr p-relative">
-                            <div class="cp-about-shape one p-absolute d-none d-xl-block cp-round-rotation2"></div>
-                            <div class="cp-about-shape two p-absolute d-none d-xl-block cp-round-rotation1"></div>
-                            <div class="cp-about-shape three p-absolute cp-round-rotation1"></div>
-
-                            <div
-                                class="js-tilt cp-about-inner ml-5 mr-5 t-center d-flex align-items-center justify-content-center"
-                                data-background="assets/img/about/generation.jpg">
-                                <div class="cp-about-content">
-                                    <span class="cp-about-subtitle mb-15"></span>
-                                    <h2 class="cp-about-title mb-70"></h2>
-                                    <div class="cp-about-btn">
-                                        <a class="cp-btn-2 generation-btn" href="{{ route('create.generation') }}">
-                                            Create
-                                        </a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+                            @endforeach
+                        @endif
+
+                        @if(count($categories) === 2)
+                            <div class="col-xl-3 col-lg-4 col-md-6"></div>
+                        @endif
+
                     </div>
                 </div>
             </div>
-        </section>
-        <!-- about area end here  -->
+        </section> -->
 
         <!-- feature area start here  -->
         <section class="cp-feature-area p-relative cp-bg-2 zi-1 pt-145 pb-105">
@@ -255,6 +211,40 @@
             </div>
         </section>
         <!-- feature area start end  -->
+
+
+        <!-- about area start here  -->
+        <section class="p-relative fix round-to-banner" id="generations" data-background="assets/img/about/generation.jpg">
+            <div class="cp-about-shape-img five m-img cp-bg-move-y">
+                <img src="{{ asset('assets/img/about/about-squre.png') }}" alt="img not found">
+            </div>
+            <div class="container">
+                <div class="row justify-content-center align-items-center">
+                    <div class="col-xl-8">
+                        <div class="cp-about-wrap fade-jr p-relative">
+                            <div class="cp-about-shape one p-absolute d-none d-xl-block cp-round-rotation2"></div>
+                            <div class="cp-about-shape two p-absolute d-none d-xl-block cp-round-rotation1"></div>
+                            <div class="cp-about-shape three p-absolute cp-round-rotation1"></div>
+
+                            <div
+                                class="js-tilt cp-about-inner ml-5 mr-5 t-center d-flex align-items-center justify-content-center"
+                                >
+                                <div class="cp-about-content">
+                                    <span class="cp-about-subtitle mb-15"></span>
+                                    <h2 class="cp-about-title mb-70"></h2>
+                                    <div class="cp-about-btn">
+                                        <a class="cp-btn-2 generation-btn" href="{{ route('create.generation') }}">
+                                            Create
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- about area end here  -->
 
 
         <!-- news area end here  -->
