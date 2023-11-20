@@ -12337,7 +12337,8 @@ html .ui-button.ui-state-disabled:active {
 }
 
 .width-17 {
-    width: 17rem;
+    /*width: 17rem;*/
+    width: 11rem;
 }
 
 .text-center {
