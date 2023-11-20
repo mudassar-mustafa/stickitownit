@@ -222,13 +222,11 @@
                 <div class="row justify-content-center align-items-center">
                     <div class="col-xl-8">
                         <div class="cp-about-wrap fade-jr p-relative">
-                            <div class="cp-about-shape one p-absolute d-none d-xl-block cp-round-rotation2"></div>
-                            <div class="cp-about-shape two p-absolute d-none d-xl-block cp-round-rotation1"></div>
-                            <div class="cp-about-shape three p-absolute cp-round-rotation1"></div>
+{{--                            <div class="cp-about-shape one p-absolute d-none d-xl-block cp-round-rotation2"></div>--}}
+{{--                            <div class="cp-about-shape two p-absolute d-none d-xl-block cp-round-rotation1"></div>--}}
+{{--                            <div class="cp-about-shape three p-absolute cp-round-rotation1"></div>--}}
 
-                            <div
-                                class="js-tilt cp-about-inner ml-5 mr-5 t-center d-flex align-items-center justify-content-center"
-                                >
+                            <div class="js-tilt cp-about-inner ml-5 mr-5 t-center d-flex align-items-center justify-content-center">
                                 <div class="cp-about-content">
                                     <span class="cp-about-subtitle mb-15"></span>
                                     <h2 class="cp-about-title mb-70"></h2>
