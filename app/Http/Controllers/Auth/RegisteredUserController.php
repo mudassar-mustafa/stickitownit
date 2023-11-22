@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\RegisterMail;
 
 class RegisteredUserController extends Controller
 {
@@ -46,7 +48,7 @@ class RegisteredUserController extends Controller
             'password' => $request->password,
             'phone_number' => $request->phone_number,
             'user_type' => 'customer',
-            'status' => 'inactive'
+            'status' => 'active'
         ]);
         $user->assignRole(Role::findById(3));
         $package = Package::where('name', strtolower('free'))->first();
@@ -66,12 +68,14 @@ class RegisteredUserController extends Controller
         $packageSubscription->status = "active";
         $packageSubscription->save();
 
+        Mail::to($user->email)->send(new RegisterMail($user));
+
 
         event(new Registered($user));
 
-//        Auth::login($user);
+        Auth::login($user);
 
-//        return redirect(RouteServiceProvider::HOME);
-        return redirect()->route('login');
+        //return redirect(RouteServiceProvider::HOME);
+        return redirect()->back();
     }
 }
