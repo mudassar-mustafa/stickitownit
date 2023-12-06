@@ -18,7 +18,13 @@
                                     <div class="col-xl-6">
                                         <div class="cp-input-field">
                                             <label for="name">Your name</label>
-                                            <input type="text" id="name" name="name" value="{{ old('name') }}">
+                                            <input 
+                                                class="{{$errors->has('name') ? 'has-error' : ''}}"
+                                                type="text" 
+                                                id="name" 
+                                                name="name" 
+                                                value="{{ old('name') }}"
+                                            >
                                             <i class="far fa-user"></i>
                                             @if ($errors->has('name'))
                                                 <div class="invalid-feedback">
@@ -30,7 +36,13 @@
                                     <div class="col-xl-6">
                                         <div class="cp-input-field">
                                             <label for="phone_number">Phone Number</label>
-                                            <input type="text" id="phone_number" name="phone_number" value="{{ old('phone_number') }}">
+                                            <input 
+                                                class="{{$errors->has('phone_number') ? 'has-error' : ''}}"
+                                                type="text" 
+                                                id="phone_number" 
+                                                name="phone_number" 
+                                                value="{{ old('phone_number') }}"
+                                            >
                                             <i class="far fa-phone"></i>
                                             @if ($errors->has('phone_number'))
                                                 <div class="invalid-feedback">
@@ -42,7 +54,8 @@
                                     <div class="col-xl-6">
                                         <div class="cp-input-field">
                                             <label for="password">Password</label>
-                                            <input type="password" id="password" name="password" >
+                                            <input type="password" id="password" name="password" 
+                                                class="{{$errors->has('password') ? 'has-error' : ''}}">
                                             <i class="far fa-lock-alt"></i>
                                             @if ($errors->has('password'))
                                                 <div class="invalid-feedback">
@@ -54,7 +67,12 @@
                                     <div class="col-xl-6">
                                         <div class="cp-input-field">
                                             <label for="password_confirmation">Confirm Password</label>
-                                            <input type="password" id="password_confirmation" name="password_confirmation" >
+                                            <input 
+                                                class="{{$errors->has('password_confirmation') ? 'has-error' : ''}}"
+                                                type="password" 
+                                                id="password_confirmation" 
+                                                name="password_confirmation" 
+                                            >
                                             <i class="far fa-lock-alt"></i>
                                             @if ($errors->has('password_confirmation'))
                                                 <div class="invalid-feedback">
@@ -66,7 +84,7 @@
                                     <div class="col-xl-12">
                                         <div class="cp-input-field">
                                             <label for="email">Your Email</label>
-                                            <input type="email" id="email" name="email" value="{{ old('email') }}">
+                                            <input class="{{$errors->has('email') ? 'has-error' : ''}}" type="email" id="email" name="email" value="{{ old('email') }}">
                                             <i class="far fa-envelope-open"></i>
                                             @if ($errors->has('email'))
                                                 <div class="invalid-feedback">
@@ -77,11 +95,22 @@
                                     </div>
                                 </div>
                                 <div class="cp-signup-btn mt-20 mb-30">
-                                    <button type="submit" class="cp-border2-btn">create account</button>
+                                    <button type="submit" class="cp-border-btn">
+                                        create account
+                                        <span class="cp-border-btn__inner">
+                                            <span class="cp-border-btn__blobs">
+                                                <span class="cp-border-btn__blob"></span>
+                                                <span class="cp-border-btn__blob"></span>
+                                                <span class="cp-border-btn__blob"></span>
+                                                <span class="cp-border-btn__blob"></span>
+                                            </span>
+                                        </span>
+                                    </button>
                                 </div>
                                 <div class="no-account">
                                     <span>Already have an account?
-                                        <a href="{{ route('login') }}">Sign In</a></span>
+                                        <a href="{{ route('login') }}">Sign In</a>
+                                    </span>
                                 </div>
                             </form>
                         </div>

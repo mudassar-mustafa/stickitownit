@@ -12,7 +12,7 @@
 @section('content')
     <main>
         <!-- banner area start  -->
-        <section class="cp-banner-area cp-bg-1 cp-banner-area1 p-relative cp-banner-height fix">
+        <section class="cp-banner-area cp-bg-1 cp-banner-area1 p-relative cp-banner-height fix z-index-nve">
             <div class="zi-500 p-relative">
                 <div class="cp-banner-shape1 p-absolute"></div>
                 <div class="cp-banner-shape2 p-absolute"></div>
@@ -164,7 +164,7 @@
 
 
         <!-- feature area start here  -->
-        <section class="cp-feature-area p-relative cp-bg-2 zi-1 pt-145 pb-105">
+        <section class="cp-feature-area p-relative cp-bg-2 zi-1 pt-145 pb-105 z-index-nve">
             <div class="cp-feature-img m-img p-absolute zi--1 d-none d-xl-block cp-bg-move-x">
                 <img src="{{ asset('assets/img/feature/feature-img.png') }}" alt="feature">
             </div>
@@ -205,10 +205,8 @@
         </section>
         <!-- feature area start end  -->
 
-
-
         <!-- news area end here  -->
-        <section class="cp-news3-area p-relative pt-150 pb-150 mb-150 fix">
+        <section class="cp-news3-area p-relative fix">
             <div class="cp-news3-bg2 p-absolute"></div>
             <div class="container">
                 <div class="row">
@@ -275,7 +273,7 @@
         </section>
         <!-- news area end here  -->
 
-        <div class="cp-brand-area pb-130">
+        <div class="cp-brand-area">
             <div class="container">
                 <div class="row wow fadeInUp animated" data-wow-duration="1.5s" data-wow-delay="0.3">
                     <div class="col-xl-12">
@@ -322,4 +320,18 @@
 @endsection
 @push('niceSelect')
     <script src="{{ asset('assets/js/nice-select.min.js') }}"></script>
+    <script>
+        const swiper = new Swiper('.cp-brand-active', {
+        // Optional parameters
+        loop: true,
+        // spaceBetween: 100,
+        slidesPerView: 1.5
+        // If we need pagination
+
+        // And if we need scrollbar
+        scrollbar: {
+            el: '.swiper-scrollbar',
+        },
+        });
+    </script>
 @endpush

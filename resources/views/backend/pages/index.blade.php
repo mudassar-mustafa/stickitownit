@@ -8,7 +8,7 @@
         <h1>Dashboard</h1>
         <nav>
             <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
             <li class="breadcrumb-item active">Dashboard</li>
             </ol>
         </nav>
@@ -38,16 +38,18 @@
                             </div>
 
                             <div class="card-body">
-                            <h5 class="card-title">Total Sale Orders <span>| Today</span></h5>
+                                <h5 class="card-title">Total Sale Orders <span>| Today</span></h5>
 
-                            <div class="d-flex align-items-center">
-                                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                <i class="bi bi-cart"></i>
+                                <div class="d-flex align-items-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center"
+                                        data-bs-toggle="tooltip" title="Sales Orders"
+                                    >
+                                        <i class="bi bi-cart"></i>
+                                    </div>
+                                    <div class="ps-3">
+                                        <h6>{{ $totalOrders }}</h6>
+                                    </div>
                                 </div>
-                                <div class="ps-3">
-                                <h6>{{ $totalOrders }}</h6>
-                                </div>
-                            </div>
                             </div>
 
                         </div>
@@ -61,7 +63,9 @@
                                 <h5 class="card-title">Remaining Token</h5>
 
                                 <div class="d-flex align-items-center">
-                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center"
+                                        data-bs-toggle="tooltip" title="Package Orders"
+                                    >
                                     <i class="bi bi-database-fill"></i>
                                     </div>
                                     <div class="ps-3">
@@ -130,7 +134,8 @@
                                 <h5 class="card-title">Customers <span>| Today</span></h5>
 
                                 <div class="d-flex align-items-center">
-                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center"
+                                        data-bs-toggle="tooltip" title="Total Customer">
                                     <i class="bi bi-people"></i>
                                     </div>
                                     <div class="ps-3">

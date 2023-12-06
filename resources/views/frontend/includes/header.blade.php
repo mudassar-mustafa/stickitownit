@@ -1,5 +1,5 @@
 <!-- header area start  -->
-<header>
+<header class="header-sticky">
     <div class="cp-header2">
         <div class="cp-header2-top cp-bg-12 d-none d-md-block">
             <div class="container-fluid">
@@ -59,25 +59,38 @@
                         <div class="cp-header2-action d-flex align-items-center justify-content-end">
                             <div class="d-none d-md-block">
                                 <ul>
-                                    @auth
-                                        <li><a href="{{ route('dashboard') }}"><i class="fas fa-home"></i></a></li>
-                                        <li>
-                                            <form method="POST" action="{{ route('logout') }}">
-                                                @csrf
-                                                <a href="{{ route('logout') }}"   onclick="event.preventDefault(); this.closest('form').submit();"><i class="fas fa-sign-out"></i></a>
-                                            </form>
-                                        </li>
-                                    @else
-                                        <li><a href="{{ route('login') }}"><i class="fas fa-user-alt"></i></a></li>
-                                    @endauth
-
-
                                     @php
                                         $userId = auth()->check() == true ? auth()->id() : 0;
                                         $cartCount=  \App\Models\Cart::where('user_id', $userId)->count();
                                     @endphp
-                                    <li><a href="{{ route('cart.index') }}"><i
-                                                class="fas fa-cart-plus"></i><span>{{ $cartCount }}</span></a></li>
+                                    <li>
+                                        <a href="{{ route('cart.index') }}">
+                                            <i class="fas fa-cart-plus"  data-bs-toggle="tooltip" title="Cart"></i>
+                                            <span>{{ $cartCount }}</span>
+                                        </a>
+                                    </li>
+
+                                    @auth
+                                        <li  data-bs-toggle="tooltip" title="Dashboard">
+                                            <a href="{{ route('dashboard') }}">
+                                                <i class="fas fa-home"></i>
+                                            </a>
+                                        </li>
+                                        <li  data-bs-toggle="tooltip" title="Logout">
+                                            <form method="POST" action="{{ route('logout') }}">
+                                                @csrf
+                                                <a href="{{ route('logout') }}"   onclick="event.preventDefault(); this.closest('form').submit();">
+                                                <i class="fas fa-sign-out"></i></a>
+                                            </form>
+                                        </li>
+                                    @else
+                                        <li  data-bs-toggle="tooltip" title="Loginn">
+                                            <a href="{{ route('login') }}">
+                                                <i class="fas fa-user-alt"></i>
+                                            </a>
+                                        </li>
+                                    @endauth
+
                                 </ul>
                             </div>
                             <div class="cp-header-toggle-btn ml-35 mt--5 d-xl-none">

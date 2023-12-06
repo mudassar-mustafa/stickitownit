@@ -195,7 +195,9 @@ p {
     line-height: 25.6px;
 }
 
-@media only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     p br {
         display: none;
     }
@@ -521,9 +523,11 @@ p {
     0% {
         -webkit-box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4);
     }
+
     70% {
         -webkit-box-shadow: 0 0 0 45px rgba(255, 255, 255, 0);
     }
+
     100% {
         -webkit-box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
     }
@@ -534,10 +538,12 @@ p {
         -moz-box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4);
         box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4);
     }
+
     70% {
         -moz-box-shadow: 0 0 0 45px rgba(255, 255, 255, 0);
         box-shadow: 0 0 0 45px rgba(255, 255, 255, 0);
     }
+
     100% {
         -moz-box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
         box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
@@ -1115,7 +1121,10 @@ p {
     }
 }
 
-@media only screen and (min-width: 1200px) and (max-width: 1399px), only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px) {
+@media only screen and (min-width: 1200px) and (max-width: 1399px),
+only screen and (min-width: 992px) and (max-width: 1199px),
+only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px) {
     .cp-title {
         font-size: 40px;
     }
@@ -1154,7 +1163,10 @@ p {
     }
 }
 
-@media only screen and (min-width: 1200px) and (max-width: 1399px), only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px) {
+@media only screen and (min-width: 1200px) and (max-width: 1399px),
+only screen and (min-width: 992px) and (max-width: 1199px),
+only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px) {
     .cp-title2 {
         font-size: 40px;
     }
@@ -1216,7 +1228,9 @@ p {
     }
 }
 
-@media only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px) {
+@media only screen and (min-width: 992px) and (max-width: 1199px),
+only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px) {
     .cp-title span::after {
         height: 6px;
         bottom: 6px;
@@ -1271,6 +1285,7 @@ p {
 }
 
 @media (min-width: 1400px) {
+
     .container,
     .container-lg,
     .container-md,
@@ -1285,7 +1300,8 @@ p {
     position: relative;
 }
 
-.play-border-effect::before, .play-border-effect::after {
+.play-border-effect::before,
+.play-border-effect::after {
     position: absolute;
     left: 0;
     top: 0;
@@ -1302,10 +1318,12 @@ p {
         transform: scale(1);
         opacity: 0;
     }
+
     50% {
         transform: scale(1.4);
         opacity: 0.3;
     }
+
     100% {
         transform: scale(1.8);
         opacity: 0;
@@ -1628,6 +1646,7 @@ p {
 }
 
 @media (max-width: 575px) {
+
     .cp-pagination ul li a,
     .cp-pagination ul li span {
         width: 45px;
@@ -1636,7 +1655,8 @@ p {
     }
 }
 
-.cp-pagination ul li a:hover, .cp-pagination ul li a.current,
+.cp-pagination ul li a:hover,
+.cp-pagination ul li a.current,
 .cp-pagination ul li span:hover,
 .cp-pagination ul li span.current {
     background: var(--clr-theme-1);
@@ -1731,6 +1751,7 @@ p {
     0% {
         width: 100%;
     }
+
     100% {
         width: 0;
     }
@@ -1802,13 +1823,15 @@ p {
     color: var(--clr-theme-1);
 }
 
-@media only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px) {
+@media only screen and (min-width: 992px) and (max-width: 1199px),
+only screen and (min-width: 768px) and (max-width: 991px) {
     .mobile-space1 {
         padding: 15px 0px;
     }
 }
 
-@media only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .mobile-space1 {
         padding: 25px 0px;
     }
@@ -1934,7 +1957,10 @@ p {
     justify-content: space-between;
 }
 
-@media only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 992px) and (max-width: 1199px),
+only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .mobile-padd {
         padding: 13px 0;
     }
@@ -1944,7 +1970,10 @@ p {
     gap: 10px 75px;
 }
 
-@media only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 992px) and (max-width: 1199px),
+only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .menu-btn-wrap {
         gap: 10px 40px;
     }
@@ -1980,7 +2009,9 @@ p {
     gap: 0 40px;
 }
 
-@media only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-header2-order-currency {
         gap: 0 15px;
     }
@@ -2118,7 +2149,10 @@ p {
     font-weight: 500;
 }
 
-@media only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 992px) and (max-width: 1199px),
+only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .mobile-space {
         padding-top: 15px;
         padding-bottom: 15px;
@@ -2133,7 +2167,8 @@ p {
     padding-inline: 35px;
 }
 
-@media only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-header2-bottom {
         padding-inline: 0;
     }
@@ -2178,7 +2213,7 @@ div.mean-container .mean-nav {
     margin-top: 0;
 }
 
-div.mean-container .mean-nav > ul {
+div.mean-container .mean-nav>ul {
     display: block !important;
 }
 
@@ -2521,7 +2556,8 @@ div.mean-container a.meanmenu-reveal {
     margin-inline-start: auto;
 }
 
-@media only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .page-title-area {
         /*height: 250px;*/
         /*padding-top: 145px;*/
@@ -2764,7 +2800,8 @@ div.mean-container a.meanmenu-reveal {
     }
 }
 
-@media only screen and (min-width: 1200px) and (max-width: 1399px), only screen and (min-width: 992px) and (max-width: 1199px) {
+@media only screen and (min-width: 1200px) and (max-width: 1399px),
+only screen and (min-width: 992px) and (max-width: 1199px) {
     .main-menu ul li {
         margin: 0px 13px;
     }
@@ -2856,20 +2893,20 @@ div.mean-container a.meanmenu-reveal {
     top: 58%;
 }
 
-.main-menu ul li .sub-menu li:hover > a {
+.main-menu ul li .sub-menu li:hover>a {
     color: var(--clr-theme-1);
     padding-inline-start: 18px;
 }
 
-.main-menu ul li .sub-menu li:hover > a:before {
+.main-menu ul li .sub-menu li:hover>a:before {
     width: 13px;
 }
 
-.main-menu ul li:hover > a {
+.main-menu ul li:hover>a {
     color: var(--clr-theme-1);
 }
 
-.main-menu ul li:hover > .sub-menu {
+.main-menu ul li:hover>.sub-menu {
     opacity: 1;
     visibility: visible;
     top: 100%;
@@ -2877,7 +2914,7 @@ div.mean-container a.meanmenu-reveal {
     transform: scaleY(1) translateZ(0px);
 }
 
-.main-menu ul li:hover > .sub-menu li:hover > .sub-menu {
+.main-menu ul li:hover>.sub-menu li:hover>.sub-menu {
     top: 0;
 }
 
@@ -2921,7 +2958,10 @@ div.mean-container a.meanmenu-reveal {
     min-height: max-content;
 }
 
-@media only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 992px) and (max-width: 1199px),
+only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-banner-height {
         min-height: auto;
     }
@@ -2944,7 +2984,10 @@ div.mean-container a.meanmenu-reveal {
     }
 }
 
-@media only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 992px) and (max-width: 1199px),
+only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-banner-title {
         font-size: 50px;
     }
@@ -3141,7 +3184,11 @@ div.mean-container a.meanmenu-reveal {
     top: 25px;
 }
 
-@media only screen and (min-width: 1200px) and (max-width: 1399px), only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 1200px) and (max-width: 1399px),
+only screen and (min-width: 992px) and (max-width: 1199px),
+only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-banner-text br {
         display: none;
     }
@@ -3196,7 +3243,9 @@ div.mean-container a.meanmenu-reveal {
     min-height: 780px;
 }
 
-@media only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-banner2-content {
         padding-inline-end: 0;
     }
@@ -3274,13 +3323,16 @@ div.mean-container a.meanmenu-reveal {
     font-size: 60px;
 }
 
-@media only screen and (min-width: 1200px) and (max-width: 1399px), only screen and (min-width: 992px) and (max-width: 1199px) {
+@media only screen and (min-width: 1200px) and (max-width: 1399px),
+only screen and (min-width: 992px) and (max-width: 1199px) {
     .cp-banner2-title {
         font-size: 50px;
     }
 }
 
-@media only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-banner2-title {
         font-size: 45px;
     }
@@ -3292,7 +3344,12 @@ div.mean-container a.meanmenu-reveal {
     }
 }
 
-@media only screen and (min-width: 1400px) and (max-width: 1599px), only screen and (min-width: 1200px) and (max-width: 1399px), only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 1400px) and (max-width: 1599px),
+only screen and (min-width: 1200px) and (max-width: 1399px),
+only screen and (min-width: 992px) and (max-width: 1199px),
+only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-banner2-text br {
         display: none;
     }
@@ -3461,7 +3518,11 @@ div.mean-container a.meanmenu-reveal {
     left: 0;
 }
 
-@media only screen and (min-width: 1200px) and (max-width: 1399px), only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 1200px) and (max-width: 1399px),
+only screen and (min-width: 992px) and (max-width: 1199px),
+only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-banner2-nav {
         display: none;
     }
@@ -3513,7 +3574,8 @@ div.mean-container a.meanmenu-reveal {
     right: -340px;
 }
 
-@media only screen and (min-width: 1600px) and (max-width: 1899px), only screen and (min-width: 1400px) and (max-width: 1599px) {
+@media only screen and (min-width: 1600px) and (max-width: 1899px),
+only screen and (min-width: 1400px) and (max-width: 1599px) {
     .cp-banner-full-video .video-info {
         top: -145px;
     }
@@ -3637,22 +3699,22 @@ div.mean-container a.meanmenu-reveal {
     outline: 0;
 }
 
-.cp-banner-full-video #video_check:hover ~ .video {
+.cp-banner-full-video #video_check:hover~.video {
     -webkit-clip-path: var(--clip-path-hover);
     clip-path: var(--clip-path-hover);
 }
 
-.cp-banner-full-video #video_check:hover ~ .text::before {
+.cp-banner-full-video #video_check:hover~.text::before {
     --r: 25px;
     --opacity: 1;
 }
 
-.cp-banner-full-video #video_check:hover ~ .text::after {
+.cp-banner-full-video #video_check:hover~.text::after {
     -webkit-clip-path: var(--clip-path-hover);
     clip-path: var(--clip-path-hover);
 }
 
-.cp-banner-full-video #video_check:hover ~ .text > span::after {
+.cp-banner-full-video #video_check:hover~.text>span::after {
     -webkit-clip-path: var(--clip-path-hover);
     clip-path: var(--clip-path-hover);
 }
@@ -3666,23 +3728,23 @@ div.mean-container a.meanmenu-reveal {
     bottom: 0;
 }
 
-.cp-banner-full-video #video_check:checked ~ .video {
+.cp-banner-full-video #video_check:checked~.video {
     -webkit-clip-path: var(--clip-path-clicked);
     clip-path: var(--clip-path-clicked);
 }
 
-.cp-banner-full-video #video_check:checked ~ .text {
+.cp-banner-full-video #video_check:checked~.text {
     --opacity: 0;
     -webkit-transition: opacity 0.3s var(--timing-function);
     transition: opacity 0.3s var(--timing-function);
 }
 
-.cp-banner-full-video #video_check:checked ~ .text::after {
+.cp-banner-full-video #video_check:checked~.text::after {
     -webkit-clip-path: var(--clip-path-clicked);
     clip-path: var(--clip-path-clicked);
 }
 
-.cp-banner-full-video #video_check:checked ~ .text > span::after {
+.cp-banner-full-video #video_check:checked~.text>span::after {
     -webkit-clip-path: var(--clip-path-clicked);
     clip-path: var(--clip-path-clicked);
 }
@@ -3712,7 +3774,10 @@ div.mean-container a.meanmenu-reveal {
     padding: 16px 20px;
 }
 
-@media only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 992px) and (max-width: 1199px),
+only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-services-title-wrap.space {
         margin-bottom: 60px;
         margin-inline-start: 0;
@@ -3817,13 +3882,19 @@ div.mean-container a.meanmenu-reveal {
     left: 50px;
 }
 
-@media only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
-    .cp-services-area {
-        padding-top: 140px;
-    }
+@media only screen and (min-width: 992px) and (max-width: 1199px),
+only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
+    /* .cp-services-area {
+        padding-top: 40px;
+    } */
 }
 
-@media only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 992px) and (max-width: 1199px),
+only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-services-area.mt--140 {
         margin-top: 0;
         padding-top: 140px;
@@ -3849,7 +3920,8 @@ div.mean-container a.meanmenu-reveal {
     -webkit-filter: invert(100%);
 }
 
-.cp-service2-item:hover .cp-service2-title, .cp-service2-item:hover .cp-service2-text {
+.cp-service2-item:hover .cp-service2-title,
+.cp-service2-item:hover .cp-service2-text {
     color: var(--clr-common-white);
 }
 
@@ -4137,7 +4209,9 @@ div.mean-container a.meanmenu-reveal {
     margin: 35px auto;
 }
 
-@media only screen and (min-width: 1400px) and (max-width: 1599px), only screen and (min-width: 1200px) and (max-width: 1399px), only screen and (min-width: 992px) and (max-width: 1199px) {
+@media only screen and (min-width: 1400px) and (max-width: 1599px),
+only screen and (min-width: 1200px) and (max-width: 1399px),
+only screen and (min-width: 992px) and (max-width: 1199px) {
     .cp-about-inner {
         height: 700px;
         width: 700px;
@@ -4192,13 +4266,16 @@ div.mean-container a.meanmenu-reveal {
     color: var(--clr-common-white);
 }
 
-@media only screen and (min-width: 1400px) and (max-width: 1599px), only screen and (min-width: 1200px) and (max-width: 1399px), only screen and (min-width: 992px) and (max-width: 1199px) {
+@media only screen and (min-width: 1400px) and (max-width: 1599px),
+only screen and (min-width: 1200px) and (max-width: 1399px),
+only screen and (min-width: 992px) and (max-width: 1199px) {
     .cp-about-title {
         font-size: 60px;
     }
 }
 
-@media only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px) {
+@media only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px) {
     .cp-about-title {
         font-size: 45px;
     }
@@ -4363,7 +4440,9 @@ div.mean-container a.meanmenu-reveal {
     left: -180px;
 }
 
-@media only screen and (min-width: 1400px) and (max-width: 1599px), only screen and (min-width: 1200px) and (max-width: 1399px), only screen and (min-width: 992px) and (max-width: 1199px) {
+@media only screen and (min-width: 1400px) and (max-width: 1599px),
+only screen and (min-width: 1200px) and (max-width: 1399px),
+only screen and (min-width: 992px) and (max-width: 1199px) {
     .cp-about-shape.three {
         width: 300px;
         height: 300px;
@@ -4375,7 +4454,9 @@ div.mean-container a.meanmenu-reveal {
     }
 }
 
-@media only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-about-shape.three {
         right: 0;
         width: 250px;
@@ -4396,7 +4477,8 @@ div.mean-container a.meanmenu-reveal {
     padding-bottom: 60px;
 }
 
-@media only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px) {
+@media only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px) {
     .cp-about2-img-wrap {
         padding-inline-start: 0;
     }
@@ -4440,7 +4522,11 @@ div.mean-container a.meanmenu-reveal {
     transform: translate(-50%);
 }
 
-@media only screen and (min-width: 1200px) and (max-width: 1399px), only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 1200px) and (max-width: 1399px),
+only screen and (min-width: 992px) and (max-width: 1199px),
+only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-about2-content {
         padding-inline-start: 0;
     }
@@ -4456,7 +4542,10 @@ div.mean-container a.meanmenu-reveal {
     }
 }
 
-@media only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 992px) and (max-width: 1199px),
+only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-about3-area {
         padding-top: 150px;
         padding-bottom: 60px;
@@ -4528,7 +4617,11 @@ div.mean-container a.meanmenu-reveal {
     max-width: 100%;
 }
 
-@media only screen and (min-width: 1200px) and (max-width: 1399px), only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 1200px) and (max-width: 1399px),
+only screen and (min-width: 992px) and (max-width: 1199px),
+only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-about3-content {
         padding-inline-start: 0px;
     }
@@ -4629,13 +4722,16 @@ div.mean-container a.meanmenu-reveal {
     }
 }
 
-@media only screen and (min-width: 1200px) and (max-width: 1399px), only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px) {
+@media only screen and (min-width: 1200px) and (max-width: 1399px),
+only screen and (min-width: 992px) and (max-width: 1199px),
+only screen and (min-width: 768px) and (max-width: 991px) {
     .cp-spacial-offer-title {
         font-size: 50px;
     }
 }
 
-@media only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-spacial-offer-title {
         font-size: 40px;
     }
@@ -4738,7 +4834,10 @@ div.mean-container a.meanmenu-reveal {
     border-radius: 690px;
 }
 
-@media only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 992px) and (max-width: 1199px),
+only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-choose-space {
         padding-top: 140px;
         padding-bottom: 90px;
@@ -4755,7 +4854,10 @@ div.mean-container a.meanmenu-reveal {
     }
 }
 
-@media only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 992px) and (max-width: 1199px),
+only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-faq-wrap {
         padding-inline-start: 0;
         padding-inline-end: 0;
@@ -5015,7 +5117,10 @@ div.mean-container a.meanmenu-reveal {
     margin-bottom: 25px;
 }
 
-@media only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 992px) and (max-width: 1199px),
+only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-faq2-title {
         font-size: 30px;
     }
@@ -5035,7 +5140,11 @@ div.mean-container a.meanmenu-reveal {
     margin-inline-start: 70px;
 }
 
-@media only screen and (min-width: 1200px) and (max-width: 1399px), only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 1200px) and (max-width: 1399px),
+only screen and (min-width: 992px) and (max-width: 1199px),
+only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-faq2-right-wrap {
         margin-inline-start: 0;
     }
@@ -5046,7 +5155,10 @@ div.mean-container a.meanmenu-reveal {
     margin-bottom: 15px;
 }
 
-@media only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 992px) and (max-width: 1199px),
+only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-faq2-subtitle {
         font-size: 20px;
     }
@@ -5062,7 +5174,10 @@ div.mean-container a.meanmenu-reveal {
     margin-inline-end: 50px;
 }
 
-@media only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 992px) and (max-width: 1199px),
+only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-faq2-left-wrap {
         margin-inline-end: 0;
     }
@@ -5072,7 +5187,10 @@ div.mean-container a.meanmenu-reveal {
     padding-inline-end: 20px;
 }
 
-@media only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 992px) and (max-width: 1199px),
+only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-faq-p-space-right {
         padding-inline-end: 0;
     }
@@ -5082,7 +5200,10 @@ div.mean-container a.meanmenu-reveal {
     padding-inline-start: 20px;
 }
 
-@media only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 992px) and (max-width: 1199px),
+only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-faq-p-space-left {
         padding-inline-start: 0;
     }
@@ -5094,7 +5215,11 @@ div.mean-container a.meanmenu-reveal {
     right: 235px;
 }
 
-@media only screen and (min-width: 1200px) and (max-width: 1399px), only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 1200px) and (max-width: 1399px),
+only screen and (min-width: 992px) and (max-width: 1199px),
+only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-faq3-wrap .cp-section-title {
         top: 80px;
         right: 0;
@@ -5108,7 +5233,8 @@ div.mean-container a.meanmenu-reveal {
     padding: 30px 60px 60px 60px;
 }
 
-@media only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-faq3-wrap .accordion {
         padding: 30px 40px 60px 40px;
     }
@@ -5198,7 +5324,8 @@ div.mean-container a.meanmenu-reveal {
     }
 }
 
-@media only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-faq3-wrap {
         padding-inline-start: 20px;
     }
@@ -5241,7 +5368,8 @@ div.mean-container a.meanmenu-reveal {
     max-height: 450px;
 }
 
-@media only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-team-img {
         max-height: 500px;
     }
@@ -5387,7 +5515,8 @@ div.mean-container a.meanmenu-reveal {
     opacity: 1;
 }
 
-.cp-team-pagination .swiper-pagination-bullet-active, .cp-team-pagination .swiper-pagination-bullet:hover {
+.cp-team-pagination .swiper-pagination-bullet-active,
+.cp-team-pagination .swiper-pagination-bullet:hover {
     background: var(--clr-theme-1);
 }
 
@@ -5407,13 +5536,15 @@ div.mean-container a.meanmenu-reveal {
     grid-template-columns: auto auto auto auto;
 }
 
-@media only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px) {
+@media only screen and (min-width: 992px) and (max-width: 1199px),
+only screen and (min-width: 768px) and (max-width: 991px) {
     .cp-team2-wrap {
         grid-template-columns: auto auto auto;
     }
 }
 
-@media only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px) {
+@media only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px) {
     .cp-team2-wrap {
         grid-template-columns: auto auto;
     }
@@ -5466,7 +5597,8 @@ div.mean-container a.meanmenu-reveal {
     font-size: 28px;
 }
 
-@media only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-team2-name {
         font-size: 25px;
     }
@@ -5499,19 +5631,23 @@ div.mean-container a.meanmenu-reveal {
     }
 }
 
-.cp-team2-item:hover .cp-team2-img, .cp-team2-item.active .cp-team2-img {
+.cp-team2-item:hover .cp-team2-img,
+.cp-team2-item.active .cp-team2-img {
     opacity: 1;
 }
 
-.cp-team2-item:hover .cp-team2-content, .cp-team2-item.active .cp-team2-content {
+.cp-team2-item:hover .cp-team2-content,
+.cp-team2-item.active .cp-team2-content {
     top: 75%;
 }
 
-.cp-team2-item:hover .cp-team2-name a, .cp-team2-item.active .cp-team2-name a {
+.cp-team2-item:hover .cp-team2-name a,
+.cp-team2-item.active .cp-team2-name a {
     color: var(--clr-common-white);
 }
 
-.cp-team2-item:hover .cp-team2-position, .cp-team2-item.active .cp-team2-position {
+.cp-team2-item:hover .cp-team2-position,
+.cp-team2-item.active .cp-team2-position {
     color: var(--clr-common-white);
 }
 
@@ -5624,7 +5760,10 @@ div.mean-container a.meanmenu-reveal {
     left: 0;
 }
 
-@media only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 992px) and (max-width: 1199px),
+only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-team-d-right {
         padding-inline-start: 0;
     }
@@ -5671,7 +5810,11 @@ div.mean-container a.meanmenu-reveal {
     margin-inline-start: 50px;
 }
 
-@media only screen and (min-width: 1200px) and (max-width: 1399px), only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 1200px) and (max-width: 1399px),
+only screen and (min-width: 992px) and (max-width: 1199px),
+only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-case-study3-active {
         margin-inline-start: 0;
     }
@@ -5699,7 +5842,8 @@ div.mean-container a.meanmenu-reveal {
     }
 }
 
-@media only screen and (min-width: 1400px) and (max-width: 1599px), only screen and (min-width: 992px) and (max-width: 1199px) {
+@media only screen and (min-width: 1400px) and (max-width: 1599px),
+only screen and (min-width: 992px) and (max-width: 1199px) {
     .cp-case-study3-content {
         width: 350px;
         left: 30px;
@@ -5723,7 +5867,10 @@ div.mean-container a.meanmenu-reveal {
     visibility: visible;
 }
 
-@media only screen and (min-width: 1400px) and (max-width: 1599px), only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px), (max-width: 450px) {
+@media only screen and (min-width: 1400px) and (max-width: 1599px),
+only screen and (min-width: 992px) and (max-width: 1199px),
+only screen and (min-width: 768px) and (max-width: 991px),
+(max-width: 450px) {
     .cp-case-study3-item:hover .cp-case-study3-content {
         bottom: 30px;
     }
@@ -5764,7 +5911,11 @@ div.mean-container a.meanmenu-reveal {
     margin-inline-end: 50px;
 }
 
-@media only screen and (min-width: 1200px) and (max-width: 1399px), only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 1200px) and (max-width: 1399px),
+only screen and (min-width: 992px) and (max-width: 1199px),
+only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-case-study4-active {
         margin-inline-end: 0;
     }
@@ -5974,7 +6125,9 @@ div.mean-container a.meanmenu-reveal {
     height: 106px;
 }
 
-@media only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-testimonial-main-wrap {
         padding-top: 0;
     }
@@ -6179,7 +6332,9 @@ div.mean-container a.meanmenu-reveal {
     transition: all 0.3s ease-out 0s;
 }
 
-@media only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-cta-video a {
         right: 50px;
     }
@@ -6209,7 +6364,8 @@ div.mean-container a.meanmenu-reveal {
     text-transform: capitalize;
 }
 
-@media only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-cta2-title h3 {
         font-size: 34px;
     }
@@ -6333,7 +6489,8 @@ div.mean-container a.meanmenu-reveal {
     margin-top: 50px;
 }
 
-@media only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px) {
+@media only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px) {
     .cp-signup-popup {
         padding-inline-start: 60px;
     }
@@ -6396,7 +6553,8 @@ div.mean-container a.meanmenu-reveal {
     box-shadow: none;
 }
 
-@media only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-cta-wrap.three {
         padding: 50px 30px 0px 30px;
     }
@@ -6420,7 +6578,8 @@ div.mean-container a.meanmenu-reveal {
     border-radius: 6px;
 }
 
-@media only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-cta-form {
         padding: 40px 35px;
     }
@@ -6442,7 +6601,11 @@ div.mean-container a.meanmenu-reveal {
     background: rgba(255, 255, 255, 0.631372549);
 }
 
-@media only screen and (min-width: 1200px) and (max-width: 1399px), only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 1200px) and (max-width: 1399px),
+only screen and (min-width: 992px) and (max-width: 1199px),
+only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-cta-form::after {
         display: none;
     }
@@ -6562,7 +6725,11 @@ div.mean-container a.meanmenu-reveal {
     z-index: 1;
 }
 
-@media only screen and (min-width: 1200px) and (max-width: 1399px), only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 1200px) and (max-width: 1399px),
+only screen and (min-width: 992px) and (max-width: 1199px),
+only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-plan-item {
         padding: 50px 35px;
     }
@@ -6610,7 +6777,8 @@ div.mean-container a.meanmenu-reveal {
     z-index: 1;
 }
 
-@media only screen and (min-width: 768px) and (max-width: 991px), (max-width: 450px) {
+@media only screen and (min-width: 768px) and (max-width: 991px),
+(max-width: 450px) {
     .cp-plan2-item {
         padding: 50px 30px;
     }
@@ -6827,7 +6995,11 @@ div.mean-container a.meanmenu-reveal {
     top: -13px;
 }
 
-@media only screen and (min-width: 1200px) and (max-width: 1399px), only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 1200px) and (max-width: 1399px),
+only screen and (min-width: 992px) and (max-width: 1199px),
+only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-plan2-currency {
         top: -2px;
     }
@@ -6844,7 +7016,11 @@ div.mean-container a.meanmenu-reveal {
     display: flex;
 }
 
-@media only screen and (min-width: 1200px) and (max-width: 1399px), only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 1200px) and (max-width: 1399px),
+only screen and (min-width: 992px) and (max-width: 1199px),
+only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-plan2-price {
         font-size: 65px;
     }
@@ -6863,7 +7039,11 @@ div.mean-container a.meanmenu-reveal {
 /*----------------------------------------
     17. news css
 ----------------------------------------*/
-@media only screen and (min-width: 1200px) and (max-width: 1399px), only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 1200px) and (max-width: 1399px),
+only screen and (min-width: 992px) and (max-width: 1199px),
+only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-news-wrap {
         padding-inline-end: 0;
     }
@@ -7047,7 +7227,10 @@ div.mean-container a.meanmenu-reveal {
     }
 }
 
-@media only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 992px) and (max-width: 1199px),
+only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-news2-title {
         font-size: 26px;
     }
@@ -7064,7 +7247,10 @@ div.mean-container a.meanmenu-reveal {
     font-size: 28px;
 }
 
-@media only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 992px) and (max-width: 1199px),
+only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-news2-subtitle {
         font-size: 22px;
     }
@@ -7232,7 +7418,8 @@ div.mean-container a.meanmenu-reveal {
     padding-inline-end: 18px;
 }
 
-@media only screen and (min-width: 992px) and (max-width: 1199px), (max-width: 575px) {
+@media only screen and (min-width: 992px) and (max-width: 1199px),
+(max-width: 575px) {
     .cp-news-widget-title {
         font-size: 22px;
     }
@@ -7295,7 +7482,8 @@ div.mean-container a.meanmenu-reveal {
     transition: all 0.3s ease-out 0s;
 }
 
-@media only screen and (min-width: 1200px) and (max-width: 1399px), only screen and (min-width: 992px) and (max-width: 1199px) {
+@media only screen and (min-width: 1200px) and (max-width: 1399px),
+only screen and (min-width: 992px) and (max-width: 1199px) {
     .cp-news-widget-post-text h4 {
         font-size: 16px;
     }
@@ -7465,7 +7653,11 @@ div.mean-container a.meanmenu-reveal {
     padding-top: 40px;
 }
 
-@media only screen and (min-width: 1200px) and (max-width: 1399px), only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 1200px) and (max-width: 1399px),
+only screen and (min-width: 992px) and (max-width: 1199px),
+only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-news-details-wrap {
         padding-inline-end: 0;
     }
@@ -7493,7 +7685,10 @@ div.mean-container a.meanmenu-reveal {
     font-style: italic;
 }
 
-@media only screen and (min-width: 1200px) and (max-width: 1399px), only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 1200px) and (max-width: 1399px),
+only screen and (min-width: 992px) and (max-width: 1199px),
+only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-news-blockquote p {
         font-size: 22px;
     }
@@ -7510,7 +7705,8 @@ div.mean-container a.meanmenu-reveal {
     gap: 30px;
 }
 
-@media only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-news-details-img-wrap {
         gap: 20px;
     }
@@ -7521,7 +7717,8 @@ div.mean-container a.meanmenu-reveal {
     flex-basis: 40%;
 }
 
-@media only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-news-details-img1 {
         flex-basis: 50%;
     }
@@ -7532,7 +7729,8 @@ div.mean-container a.meanmenu-reveal {
     flex-basis: 60%;
 }
 
-@media only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-news-details-img2 {
         flex-basis: 50%;
     }
@@ -7569,7 +7767,8 @@ div.mean-container a.meanmenu-reveal {
     align-items: center;
 }
 
-@media only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-news2-d-writer {
         flex-wrap: wrap;
     }
@@ -7688,7 +7887,9 @@ div.mean-container a.meanmenu-reveal {
     margin-inline-start: 105px;
 }
 
-@media only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 992px) and (max-width: 1199px),
+only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .latest-comments li.children {
         margin-inline-start: 0;
     }
@@ -7754,7 +7955,11 @@ div.mean-container a.meanmenu-reveal {
     font-size: 50px;
 }
 
-@media only screen and (min-width: 1200px) and (max-width: 1399px), only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 1200px) and (max-width: 1399px),
+only screen and (min-width: 992px) and (max-width: 1199px),
+only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-news3-title-wrap .cp-title {
         font-size: 40px;
     }
@@ -7811,7 +8016,10 @@ div.mean-container a.meanmenu-reveal {
     }
 }
 
-@media only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 992px) and (max-width: 1199px),
+only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-news3-bg2 {
         width: 100%;
     }
@@ -7860,7 +8068,9 @@ div.mean-container a.meanmenu-reveal {
     }
 }
 
-@media only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-news4-item {
         grid-template-columns: auto;
     }
@@ -7891,7 +8101,11 @@ div.mean-container a.meanmenu-reveal {
     transition: all 0.3s ease-out 0s;
 }
 
-@media only screen and (min-width: 1200px) and (max-width: 1399px), only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 1200px) and (max-width: 1399px),
+only screen and (min-width: 992px) and (max-width: 1199px),
+only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-news4-title {
         font-size: 26px;
     }
@@ -7993,13 +8207,16 @@ div.mean-container a.meanmenu-reveal {
     margin-inline-start: 70px;
 }
 
-@media only screen and (min-width: 1200px) and (max-width: 1399px), only screen and (min-width: 992px) and (max-width: 1199px) {
+@media only screen and (min-width: 1200px) and (max-width: 1399px),
+only screen and (min-width: 992px) and (max-width: 1199px) {
     .cp-news4-item.three .cp-news4-content {
         margin-inline-start: 25px;
     }
 }
 
-@media only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-news4-item.three .cp-news4-content {
         margin-inline-start: 0;
     }
@@ -8020,7 +8237,8 @@ div.mean-container a.meanmenu-reveal {
     width: 120px;
 }
 
-@media only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px) {
+@media only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px) {
     .cp-brand-img {
         margin: auto;
     }
@@ -8134,7 +8352,9 @@ div.mean-container a.meanmenu-reveal {
     transition: all 0.3s ease-out 0s;
 }
 
-@media only screen and (min-width: 1200px) and (max-width: 1399px), only screen and (min-width: 992px) and (max-width: 1199px), (max-width: 450px) {
+@media only screen and (min-width: 1200px) and (max-width: 1399px),
+only screen and (min-width: 992px) and (max-width: 1199px),
+(max-width: 450px) {
     .cp-project-title {
         font-size: 20px;
     }
@@ -8163,7 +8383,10 @@ div.mean-container a.meanmenu-reveal {
     font-size: 35px;
 }
 
-@media only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 992px) and (max-width: 1199px),
+only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-project-d-title {
         font-size: 30px;
     }
@@ -8179,7 +8402,10 @@ div.mean-container a.meanmenu-reveal {
     font-size: 30px;
 }
 
-@media only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 992px) and (max-width: 1199px),
+only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-project-d-subtitle {
         font-size: 25px;
     }
@@ -8247,7 +8473,12 @@ div.mean-container a.meanmenu-reveal {
     transition: all 0.3s ease-out 0s;
 }
 
-@media only screen and (min-width: 1400px) and (max-width: 1599px), only screen and (min-width: 1200px) and (max-width: 1399px), only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 1400px) and (max-width: 1599px),
+only screen and (min-width: 1200px) and (max-width: 1399px),
+only screen and (min-width: 992px) and (max-width: 1199px),
+only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-related-project-nav {
         display: none;
     }
@@ -8289,25 +8520,26 @@ div.mean-container a.meanmenu-reveal {
     row-gap: 0;
 }
 
-.product-wrapper > div {
+.product-wrapper>div {
     width: calc((100% - 90px) / 4);
     text-align: center;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
-    .product-wrapper > div {
+    .product-wrapper>div {
         width: calc((100% - 30px) / 2);
     }
 }
 
-@media only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
-    .product-wrapper > div {
+@media only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
+    .product-wrapper>div {
         width: calc((100% - 30px) / 2);
     }
 }
 
 @media (max-width: 450px) {
-    .product-wrapper > div {
+    .product-wrapper>div {
         width: calc((100% - 0px) / 1);
     }
 }
@@ -8372,7 +8604,10 @@ div.mean-container a.meanmenu-reveal {
     justify-content: center;
 }
 
-@media only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 992px) and (max-width: 1199px),
+only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .product-description .product-price {
         font-size: 18px;
     }
@@ -8462,7 +8697,8 @@ div.mean-container a.meanmenu-reveal {
     margin-inline-end: 20px;
 }
 
-@media only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .product-d-img-tab-wrapper {
         margin-inline-end: 0;
     }
@@ -8526,7 +8762,10 @@ div.mean-container a.meanmenu-reveal {
     margin-bottom: 15px;
 }
 
-@media only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 992px) and (max-width: 1199px),
+only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .product-side-info .product-price {
         font-size: 18px;
     }
@@ -8575,7 +8814,8 @@ div.mean-container a.meanmenu-reveal {
     background: var(--clr-common-color-red);
 }
 
-.product-quantity-cart .border-btn:before, .product-quantity-cart .border-btn:after {
+.product-quantity-cart .border-btn:before,
+.product-quantity-cart .border-btn:after {
     display: none;
 }
 
@@ -8627,13 +8867,16 @@ div.mean-container a.meanmenu-reveal {
     border-radius: 6px;
 }
 
-@media only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .product-details-nav .nav-link {
         width: auto;
     }
 }
 
-.product-details-nav .nav-link.active, .product-details-nav .nav-link:hover {
+.product-details-nav .nav-link.active,
+.product-details-nav .nav-link:hover {
     color: var(--clr-common-white);
     background: var(--clr-theme-1);
     border-color: var(--clr-theme-1);
@@ -8807,7 +9050,8 @@ div.mean-container a.meanmenu-reveal {
     text-align: right;
 }
 
-@media only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .product-slider-area-btn {
         text-align: left;
     }
@@ -8964,7 +9208,7 @@ div.mean-container a.meanmenu-reveal {
 }
 
 .style-2 .featured-product-active .swiper-slide-active,
-.style-2 .featured-product-active .swiper-slide-active ~ .swiper-slide {
+.style-2 .featured-product-active .swiper-slide-active~.swiper-slide {
     opacity: 1;
     visibility: visible;
 }
@@ -8975,7 +9219,9 @@ div.mean-container a.meanmenu-reveal {
     justify-content: flex-end;
 }
 
-@media only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .featured-porduct-nav {
         justify-content: flex-start;
     }
@@ -9014,14 +9260,16 @@ div.mean-container a.meanmenu-reveal {
     justify-content: flex-end;
 }
 
-@media only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px) {
+@media only screen and (min-width: 992px) and (max-width: 1199px),
+only screen and (min-width: 768px) and (max-width: 991px) {
     .filter-buttons .nice-select .list {
         left: auto;
         right: 0;
     }
 }
 
-@media only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .filter-buttons {
         justify-content: start;
     }
@@ -9124,7 +9372,11 @@ div.mean-container a.meanmenu-reveal {
     left: 15px;
 }
 
-@media only screen and (min-width: 1200px) and (max-width: 1399px), only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 1200px) and (max-width: 1399px),
+only screen and (min-width: 992px) and (max-width: 1199px),
+only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-cart-left {
         margin-inline-end: 0;
     }
@@ -9152,7 +9404,10 @@ div.mean-container a.meanmenu-reveal {
     outline: none;
 }
 
-@media only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 992px) and (max-width: 1199px),
+only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-cart-table {
         overflow-x: scroll;
     }
@@ -9207,7 +9462,7 @@ div.mean-container a.meanmenu-reveal {
     background: var(--clr-bg-14);
 }
 
-.cp-cart-table .table > :not(:first-child) {
+.cp-cart-table .table> :not(:first-child) {
     border-top: 0;
 }
 
@@ -9254,7 +9509,11 @@ div.mean-container a.meanmenu-reveal {
     border: 1px solid var(--clr-border-2);
 }
 
-@media only screen and (min-width: 1200px) and (max-width: 1399px), only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 1200px) and (max-width: 1399px),
+only screen and (min-width: 992px) and (max-width: 1199px),
+only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-cart-total-area {
         margin-inline-start: 0;
     }
@@ -9294,7 +9553,9 @@ div.mean-container a.meanmenu-reveal {
     font-weight: 500;
 }
 
-@media only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-cart-coupon-update {
         margin-inline-start: 0;
     }
@@ -9437,7 +9698,7 @@ div.mean-container a.meanmenu-reveal {
     width: 0;
 }
 
-.cp-checkout-payment-list input:checked ~ .checkmark {
+.cp-checkout-payment-list input:checked~.checkmark {
     background-color: var(--clr-theme-1);
 }
 
@@ -9485,7 +9746,8 @@ div.mean-container a.meanmenu-reveal {
     color: var(--clr-theme-1);
 }
 
-@media only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .product-side-info .product-price {
         font-size: 18px;
     }
@@ -9687,7 +9949,8 @@ div.mean-container a.meanmenu-reveal {
     border-radius: 10px;
 }
 
-.sidebar-action-btn .border-btn:before, .sidebar-action-btn .border-btn:after {
+.sidebar-action-btn .border-btn:before,
+.sidebar-action-btn .border-btn:after {
     background: var(--clr-bg-1);
 }
 
@@ -10223,7 +10486,8 @@ html .ui-button.ui-state-disabled:active {
     margin: auto;
 }
 
-@media only screen and (min-width: 992px) and (max-width: 1199px), (max-width: 575px) {
+@media only screen and (min-width: 992px) and (max-width: 1199px),
+(max-width: 575px) {
     .product-single .product-thumb {
         min-height: 320px;
     }
@@ -10585,7 +10849,8 @@ html .ui-button.ui-state-disabled:active {
     margin-bottom: 20px;
 }
 
-@media only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .product__modal-box {
         margin-bottom: 30px;
     }
@@ -10742,7 +11007,8 @@ html .ui-button.ui-state-disabled:active {
     margin-bottom: 25px;
 }
 
-@media only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-quote-title {
         font-size: 24px;
     }
@@ -10775,7 +11041,8 @@ html .ui-button.ui-state-disabled:active {
     padding: 40px 50px;
 }
 
-@media only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-quote-wrapper {
         padding: 40px 30px;
     }
@@ -10837,13 +11104,19 @@ html .ui-button.ui-state-disabled:active {
     z-index: 1;
 }
 
-@media only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 992px) and (max-width: 1199px),
+only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-checkout-right {
         margin-inline-start: 0;
     }
 }
 
-@media only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 992px) and (max-width: 1199px),
+only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-checkout-left {
         margin-inline-end: 0;
     }
@@ -10854,7 +11127,9 @@ html .ui-button.ui-state-disabled:active {
     display: flex;
 }
 
-@media only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-contact-info ul li br {
         display: none;
     }
@@ -10903,7 +11178,11 @@ html .ui-button.ui-state-disabled:active {
     margin: 0 40px;
 }
 
-@media only screen and (min-width: 1200px) and (max-width: 1399px), only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 1200px) and (max-width: 1399px),
+only screen and (min-width: 992px) and (max-width: 1199px),
+only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-signin-wrap {
         margin: 0;
     }
@@ -10976,10 +11255,12 @@ html .ui-button.ui-state-disabled:active {
     49% {
         transform: translateX(30%);
     }
+
     50% {
         opacity: 0;
         transform: translateX(-30%);
     }
+
     51% {
         opacity: 1;
     }
@@ -10989,9 +11270,11 @@ html .ui-button.ui-state-disabled:active {
     0% {
         transform: translateX(-30px);
     }
+
     50% {
         transform: translateX(-10px);
     }
+
     100% {
         transform: translateX(-30px);
     }
@@ -11001,9 +11284,11 @@ html .ui-button.ui-state-disabled:active {
     0% {
         transform: translateX(-30px);
     }
+
     50% {
         transform: translateX(-10px);
     }
+
     100% {
         transform: translateX(-30px);
     }
@@ -11024,9 +11309,11 @@ html .ui-button.ui-state-disabled:active {
     0% {
         transform: translateY(-30px);
     }
+
     50% {
         transform: translateY(-10px);
     }
+
     100% {
         transform: translateY(-30px);
     }
@@ -11036,9 +11323,11 @@ html .ui-button.ui-state-disabled:active {
     0% {
         transform: translateY(-30px);
     }
+
     50% {
         transform: translateY(-10px);
     }
+
     100% {
         transform: translateY(-30px);
     }
@@ -11059,9 +11348,11 @@ html .ui-button.ui-state-disabled:active {
     0% {
         transform: translateY(-30px) translateY(-30px);
     }
+
     50% {
         transform: translateY(-10px) translateY(-30px);
     }
+
     100% {
         transform: translateY(-30px) translateY(-30px);
     }
@@ -11071,9 +11362,11 @@ html .ui-button.ui-state-disabled:active {
     0% {
         transform: translateY(-30px) translateY(-30px);
     }
+
     50% {
         transform: translateY(-10px) translateY(-30px);
     }
+
     100% {
         transform: translateY(-30px) translateY(-30px);
     }
@@ -11094,18 +11387,23 @@ html .ui-button.ui-state-disabled:active {
     0% {
         -webkit-transform: translate(0px, 0px) rotate(0deg);
     }
+
     20% {
         -webkit-transform: translate(73px, -1px) rotate(36deg);
     }
+
     40% {
         -webkit-transform: translate(141px, 72px) rotate(72deg);
     }
+
     60% {
         -webkit-transform: translate(83px, 122px) rotate(108deg);
     }
+
     80% {
         -webkit-transform: translate(-40px, 72px) rotate(144deg);
     }
+
     100% {
         -webkit-transform: translate(0px, 0px) rotate(0deg);
     }
@@ -11123,6 +11421,7 @@ html .ui-button.ui-state-disabled:active {
         -ms-transform: translate(0, 0) rotate(0deg);
         -o-transform: translate(0, 0) rotate(0deg);
     }
+
     21% {
         transform: translate(4px, -20px) rotate(38deg);
         -webkit-transform: translate(4px, -20px) rotate(38deg);
@@ -11130,6 +11429,7 @@ html .ui-button.ui-state-disabled:active {
         -ms-transform: translate(4px, -20px) rotate(38deg);
         -o-transform: translate(4px, -20px) rotate(38deg);
     }
+
     41% {
         transform: translate(-50px, -60px) rotate(74deg);
         -webkit-transform: translate(-50px, -60px) rotate(74deg);
@@ -11137,6 +11437,7 @@ html .ui-button.ui-state-disabled:active {
         -ms-transform: translate(-50px, -60px) rotate(74deg);
         -o-transform: translate(-50px, -60px) rotate(74deg);
     }
+
     60% {
         transform: translate(-20px, -30px) rotate(108deg);
         -webkit-transform: translate(-20px, -30px) rotate(108deg);
@@ -11144,6 +11445,7 @@ html .ui-button.ui-state-disabled:active {
         -ms-transform: translate(-20px, -30px) rotate(108deg);
         -o-transform: translate(-20px, -30px) rotate(108deg);
     }
+
     80% {
         transform: translate(-195px, -49px) rotate(144deg);
         -webkit-transform: translate(-195px, -49px) rotate(144deg);
@@ -11151,6 +11453,7 @@ html .ui-button.ui-state-disabled:active {
         -ms-transform: translate(-195px, -49px) rotate(144deg);
         -o-transform: translate(-195px, -49px) rotate(144deg);
     }
+
     100% {
         transform: translate(-1px, 0px) rotate(180deg);
         -webkit-transform: translate(-1px, 0px) rotate(180deg);
@@ -11174,6 +11477,7 @@ html .ui-button.ui-state-disabled:active {
         -webkit-transform: rotate(0deg);
         transform: rotate(0deg);
     }
+
     100% {
         -webkit-transform: rotate(360deg);
         transform: rotate(360deg);
@@ -11185,15 +11489,19 @@ html .ui-button.ui-state-disabled:active {
         width: 0;
         left: 0;
     }
+
     25% {
         width: 25%;
     }
+
     50% {
         width: 50%;
     }
+
     75% {
         width: 75%;
     }
+
     100% {
         width: 94%;
     }
@@ -11214,6 +11522,7 @@ html .ui-button.ui-state-disabled:active {
     from {
         -webkit-transform: scale(0);
     }
+
     to {
         -webkit-transform: scale(1);
     }
@@ -11223,6 +11532,7 @@ html .ui-button.ui-state-disabled:active {
     from {
         -webkit-transform: scale(0);
     }
+
     to {
         -webkit-transform: scale(1);
     }
@@ -11360,7 +11670,8 @@ html .ui-button.ui-state-disabled:active {
     border-radius: 20px;
 }
 
-.tp-theme-toggle-light, .tp-theme-toggle-dark {
+.tp-theme-toggle-light,
+.tp-theme-toggle-dark {
     display: inline-block;
     width: 48%;
     height: 26px;
@@ -11389,7 +11700,7 @@ html .ui-button.ui-state-disabled:active {
     display: none;
 }
 
-.tp-theme-toggle #tp-theme-toggler:checked + i {
+.tp-theme-toggle #tp-theme-toggler:checked+i {
     right: calc(50% - 4px);
 }
 
@@ -11429,7 +11740,8 @@ html .ui-button.ui-state-disabled:active {
     border-radius: 20px;
 }
 
-.tp-theme-dir-ltr, .tp-theme-dir-rtl {
+.tp-theme-dir-ltr,
+.tp-theme-dir-rtl {
     display: inline-block;
     width: 48%;
     height: 26px;
@@ -11458,7 +11770,7 @@ html .ui-button.ui-state-disabled:active {
     display: none;
 }
 
-.tp-theme-dir #tp-dir-toggler:checked + i {
+.tp-theme-dir #tp-dir-toggler:checked+i {
     right: calc(50% - 4px);
 }
 
@@ -11788,7 +12100,8 @@ html .ui-button.ui-state-disabled:active {
     }
 }
 
-@media only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-footer-social ul li {
         margin-inline-end: 15px;
         padding-inline-end: 15px;
@@ -11927,13 +12240,15 @@ html .ui-button.ui-state-disabled:active {
     text-align: center;
 }
 
-@media only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px) {
+@media only screen and (min-width: 992px) and (max-width: 1199px),
+only screen and (min-width: 768px) and (max-width: 991px) {
     .cp-footer-payment {
         text-align: right;
     }
 }
 
-@media only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-footer-payment {
         text-align: start;
     }
@@ -12162,7 +12477,9 @@ html .ui-button.ui-state-disabled:active {
     left: 0;
 }
 
-@media only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
+@media only screen and (min-width: 768px) and (max-width: 991px),
+only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 575px) {
     .cp-footer2-shape {
         top: 12%;
     }
@@ -12349,10 +12666,6 @@ html .ui-button.ui-state-disabled:active {
     .footer-description {
         max-width: 560px;
     }
-
-    .sticker-slider-gap {
-        margin-right: 80px !important;
-    }
 }
 
 .footer-description {
@@ -12392,9 +12705,10 @@ html .ui-button.ui-state-disabled:active {
 }
 
 /*  ----------------------------------------------------------- Vertical Slider --------------------------------------- */
-.vertical-slider{
+.vertical-slider {
     width: 100%;
 }
+
 .vertical-slider .slider {
     padding: 32px;
     color: #fff;
@@ -12522,19 +12836,21 @@ html .ui-button.ui-state-disabled:active {
     }
 }
 
-.pt-56{
+.pt-56 {
     padding-top: 50px;
 }
 
-.contact-us-border{
+.contact-us-border {
     border: 1px solid #00000030;
     padding: 17px;
 }
-.upload-btn{
+
+.upload-btn {
     padding: 27px 20px;
     border: none !important;
 }
-.upload-btn button{
+
+.upload-btn button {
     background: linear-gradient(90deg, var(--clr-theme-1) 0%, var(--clr-theme-2) 84.51%);
     color: var(--clr-common-white);
 
@@ -12545,40 +12861,120 @@ html .ui-button.ui-state-disabled:active {
 
 }
 
-.small-label{
+.small-label {
     font-size: 13px;
     text-align: center;
     padding-left: 3px;
 }
-.generation-btn{
+
+.generation-btn {
     background: linear-gradient(90deg, var(--clr-theme-1) 0%, var(--clr-theme-2) 84.51%);
     color: var(--clr-common-white);
 }
-.cp-about-btn{
+
+.cp-about-btn {
     padding-top: 199px;
 
 }
-.mt-minus-19{
+
+.mt-minus-19 {
     margin-top: -19px;
 }
-.bg-white-color{
+
+.bg-white-color {
     background: white !important;
 }
+
 .cp-services-img.w-img img {
     height: 332px;
     object-fit: cover;
 }
 
-.round-to-banner{
+.round-to-banner {
     background-size: cover;
     background-position: top center;
     background-repeat: no-repeat;
 }
-@media only screen and (max-width: 1300px){
-    .round-to-banner{
+
+@media only screen and (max-width: 1300px) {
+    .round-to-banner {
         background-size: contain !important;
     }
-    .cp-about-btn{
+
+    .cp-about-btn {
         padding-top: 0 !important;
     }
+}
+
+@media(max-width: 1199px) {
+    .cp-news3-area {
+        padding: 50px 0;
+    }
+
+    .cp-brand-area {
+        padding: 100px 0;
+    }
+
+    .sticker-slider-gap {
+        width: unset;
+    }
+}
+
+@media(min-width: 1200px) {
+
+    /* pt-150 pb-150 mb-150 */
+    .cp-news3-area {
+        padding: 150px 0;
+        margin-bottom: 120px;
+    }
+
+    .cp-brand-area {
+        padding-bottom: 100px;
+    }
+
+    .sticker-slider-gap {
+        margin-right: 80px !important;
+    }
+}
+
+.cp-signup-btn {
+    text-align: center;
+}
+
+.has-error {
+    border: 1px solid red !important;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+
+    position: absolute;
+    z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+.header-sticky{
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 1 !important;
+}
+.z-index-nve{
+    z-index: -1 !important;
+}
+.z-index-pve{
+    z-index: 1;
 }
