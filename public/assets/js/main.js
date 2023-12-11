@@ -685,7 +685,7 @@
     // Brand Active Js
     var brandActive = new Swiper(".cp-brand-active", {
         slidesPerView: 5,
-        spaceBetween: 140,
+        spaceBetween: 100,
         centeredSlides: true,
         loop: true,
         autoplay:true,

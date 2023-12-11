@@ -17,7 +17,7 @@
     <main>
 
         <!-- page title area start  -->
-        <section class="page-title-area breadcrumb-spacing cp-bg-12">
+        <section class="page-title-area breadcrumb-spacing cp-bg-12 z-index-zero">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-xxl-9">
@@ -103,7 +103,7 @@
                                     @if(!empty($stickers) && count($stickers) > 0)
                                         @foreach($stickers as $key=>$sticker)
                                             <div class="swiper-slide">
-                                                <div class="cp-brand-img">
+                                                <div class="cp-brand-image-center">
                                                     <img src="{{$sticker->image}}" alt="{{$key+1}}.png"
                                                          class="what-we-are-printing-image">
                                                 </div>

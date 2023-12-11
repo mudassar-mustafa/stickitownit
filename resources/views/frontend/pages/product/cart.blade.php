@@ -5,7 +5,7 @@
 @section('content')
     <div class="loading" style="display: none">Loading&#8230;</div>
     <!-- page title area start  -->
-    <section class="page-title-area breadcrumb-spacing cp-bg-14">
+    <section class="page-title-area breadcrumb-spacing cp-bg-14 z-index-zero">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-xxl-9">

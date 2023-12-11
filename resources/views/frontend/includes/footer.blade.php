@@ -1,6 +1,6 @@
 <!-- footer area start  -->
 <footer>
-    <div class="cp-footer-wrap cp-bg-6 pt-45 pb-30">
+    <div class="cp-footer-wrap cp-bg-6 pt-45">
         <div class="container">
             <div class="row">
             <div class="col-xl-6 col-lg-10">
@@ -85,7 +85,7 @@
             </div>
         </div>
     </div>
-    <div class="cp-copy-right cp-footer-bg pt-20 pb-5">
+    <!-- <div class="cp-copy-right cp-footer-bg pt-20 pb-5">
         <div class="container">
             <div class="cp-copy-item-wrap d-flex align-items-center justify-content-center">
                 
@@ -97,6 +97,6 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 </footer>
 <!-- footer area end  -->

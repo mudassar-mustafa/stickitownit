@@ -27,13 +27,13 @@ affordable without compromising quality.')
 @section('content')
     <div class="loading" style="display: none">Loading&#8230;</div>
     <!-- shop details area start  -->
-    <section class="shop-details-area pt-150 pb-110 fix">
+    <section class="shop-details-area pt-50 pb-50 fix">
         <div class="container">
             <div class="row wow align-items-xl-center fadeInUp" data-wow-delay=".3s">
                 <input type="hidden" value="{{ $product->id }}" id="product_id">
                 <div class="col-lg-7">
-                    <div class="product-d-img-tab-wrapper mb-70">
-                        <div class=" vertical-slider">
+                    <div class="product-d-img-tab-wrapper m-auto">
+                        <div class=" vertical-slider z-index-nve">
 
                             <!-- Vertical Slider Start -->
                             <section class="slider">
@@ -325,7 +325,7 @@ affordable without compromising quality.')
 
     @if(!empty($relatedProducts) && count($relatedProducts) > 0)
         <!-- shop related product area start  -->
-        <section class="cp-related-product pt-145 pb-100 wow fadeInUp" data-wow-delay=".3s">
+        <section class="cp-related-product py-50 wow fadeInUp" data-wow-delay=".3s">
             <div class="container">
                 <div class="row mb-30">
                     <div class="col-md-10">
@@ -347,7 +347,7 @@ affordable without compromising quality.')
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="cp-related-product-wrap">
-                            <div class="swiper-container cp-related-product-active">
+                            <div class="swiper-container cp-related-product-active z-index-zero">
                                 <div class="swiper-wrapper">
                                     @foreach($relatedProducts as $relatedProduct)
                                         <div class="swiper-slide">

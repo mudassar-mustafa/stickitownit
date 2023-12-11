@@ -36,11 +36,21 @@
                                         <a href="{{ route('/') }}">Home</a>
 
                                     </li>
-                                    @if(!empty($categories) && count($categories) >0)
+                                    <li class="dropdown">
+                                        <span>Custom</span>
+                                        <ul class="dropdown-content">
+                                            @if(!empty($categories) && count($categories) >0)
+                                                @foreach($categories as $category)
+                                                    <li><a href="{{ route('get.products-by-category',$category->slug) }}">{{ $category->name }}</a></li>
+                                                @endforeach
+                                            @endif
+                                        </ul>
+                                    </li>
+                                    <!-- @if(!empty($categories) && count($categories) >0)
                                         @foreach($categories as $category)
                                             <li><a href="{{ route('get.products-by-category',$category->slug) }}">{{ $category->name }}</a></li>
                                         @endforeach
-                                    @endif
+                                    @endif -->
                                     <li><a href="{{ route('blogs.list') }}">Blogs</a></li>
 
                                     @if(!empty($pages) && count($pages) >0)
@@ -73,7 +83,8 @@
                                     @auth
                                         <li  data-bs-toggle="tooltip" title="Dashboard">
                                             <a href="{{ route('dashboard') }}">
-                                                <i class="fas fa-home"></i>
+                                            <i class="fa fa-server" aria-hidden="true"></i>
+                                                <!-- <i class="fas fa-home"></i> -->
                                             </a>
                                         </li>
                                         <li  data-bs-toggle="tooltip" title="Logout">

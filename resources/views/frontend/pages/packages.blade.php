@@ -6,13 +6,13 @@
     <main>
 
      <!-- Pricing Table Start Here  -->
-     <section class="pricing__area cp-bg-19 pt-150 pb-110">
+     <section class="pricing__area cp-bg-19 py-50">
         <div class="container">
             <div class="row alin align-items-center">
                 @if (!empty($packages))
                     @foreach ($packages as $package)
-                        <div class="col-xl-4 col-md-6">
-                            <div class="cp-plan2-item white-bg mb-40">
+                        <div class="col-xl-4 col-md-6 z-index-zero">
+                            <div class="cp-plan2-item white-bg">
                             <div class="cp-plan-item-img" data-background="assets/img/plan/plan.png">
                             </div>
                             <div class="cp-plan2-header">

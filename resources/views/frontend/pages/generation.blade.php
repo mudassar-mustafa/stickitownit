@@ -39,7 +39,7 @@
                                     <div class="cp-quote-box mb-40">
                                         <h3 class="cp-quote-title"><span>Get Your Desire Designs</span></h3>
                                         <div class="row">
-                                            <div class="col-xl-4 col-lg-4">
+                                            <div class="col-lg-4">
                                                 <div class="cp-input-field">
                                                     <label for="project">Project Type * </label>
                                                     <select id="project" name="project" class="js-example-basic-single">
@@ -53,17 +53,20 @@
                                                     <span class="text-danger" id="projectErrorMsg"></span>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-6 col-lg-6">
+                                            <div class="col-lg-4">
                                                 <div class="cp-input-field">
-                                                    <label for="prompt_text">Your name * </label>
-                                                    <input type="text" id="prompt_text" name="prompt_text">
+                                                    <label for="prompt_text">Your prompt * </label>
+                                                    <input 
+                                                        type="text" 
+                                                        id="prompt_text" 
+                                                        name="prompt_text">
                                                     <i class="far fa-user"></i>
                                                     <span class="text-danger" id="prompt_textErrorMsg"></span>
                                                 </div>
 
                                             </div>
 
-                                            <div class="col-lg-2 col-lg-2">
+                                            <div class="col-lg-4">
                                                 <div class="cp-input-field">
                                                     <label for="no_of_images">Number of Images * </label>
                                                     <select id="no_of_images" name="no_of_images"
@@ -132,6 +135,7 @@
             }
         });
 
+    
         $('#SubmitForm').on('submit', function (e) {
             e.preventDefault();
 
@@ -159,6 +163,8 @@
                 },
                 error: function (response) {
                     $('.loading').hide();
+                    // $('.cp-input-field').removeClass('error');
+                    $('#prompt_text ').addClass('has-error');
                     $('#projectErrorMsg').text(response.responseJSON.errors.project);
                     $('#prompt_textErrorMsg').text(response.responseJSON.errors.prompt_text);
                     $('#no_of_imagesErrorMsg').text(response.responseJSON.errors.no_of_images);

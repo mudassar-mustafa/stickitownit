@@ -7,7 +7,9 @@
                     <div class="col-9">
                         <a href="{{ route('/') }}">
                             <img width="100" src="{{ asset('storage/uploads/settings/'.$setting->logo_header) }}"
-                                 alt="Logo">
+                                alt="Logo"
+                                class="side-menu-md-screen"
+                            >
                         </a>
                     </div>
                     <div class="col-3 text-end">
@@ -49,7 +51,7 @@
                         </div>
                         <div class="irc-item-content">
                             <p>Location</p>
-                            <div class="support-number">
+                            <div class="support-number address-width">
                                 <a href="#" target="_blank">{{ $setting->address }}</a>
                             </div>
                         </div>
@@ -57,32 +59,46 @@
                 </div>
             </div>
             <div class="offset-widget offset-social mb-30">
-                <div class="footer-social">
-                    <div class="social-links">
-                        <ul>
+                <div class="footer-social side-menu-social-icons">
+                        <div>
                             @if(!is_null($setting->facebook_url))
-                                <li><a target="_blank" href="{{$setting->facebook_url}}"> <i
-                                            class="fab fa-facebook-f"></i></a></li>
+                                <a target="_blank" href="{{$setting->facebook_url}}"> 
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
                             @endif
+                        </div>
+                        <div>
                             @if(!is_null($setting->twitter_url))
-                                <li><a target="_blank" href="{{$setting->twitter_url}}"> <i
-                                            class="fab fa-twitter"></i></a></li>
+                                <a target="_blank" href="{{$setting->twitter_url}}"> 
+                                    <i class="fab fa-twitter"></i>
+                                </a>
                             @endif
+                        </div>
+                        <div>
                             @if(!is_null($setting->instagram_url))
-                                <li><a target="_blank" href="{{$setting->instagram_url}}"> <i
-                                            class="fab fa-instagram"></i></a></li>
+                                <a target="_blank" href="{{$setting->instagram_url}}"> 
+                                    <i class="fab fa-instagram"></i>
+                                </a>
                             @endif
-                            @if(!is_null($setting->youtube_url))
-                                <li><a target="_blank" href="{{$setting->youtube_url}}"> <i
-                                            class="fab fa-youtube"></i></a></li>
-                            @endif
-                            @if(!is_null($setting->linkedin_url))
-                                <li><a target="_blank" href="{{$setting->linkedin_url}}"> <i
-                                            class="fab fa-linkedin-in"></i></a></li>
-                            @endif
-                        </ul>
+                        </div>
+                        <div>
+                        @if(!is_null($setting->youtube_url))
+                            <a target="_blank" href="{{$setting->youtube_url}}"> 
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                        @endif
+                    </div>
+                    <div>
+                        @if(!is_null($setting->linkedin_url))
+                            <a target="_blank" href="{{$setting->linkedin_url}}"> 
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                        @endif
                     </div>
                 </div>
+                <!-- <div class="footer-social side-menu-social-icons">
+                    
+                </div> -->
             </div>
         </div>
     </div>

@@ -6,7 +6,7 @@
 @section('content')
     <main>
         <!-- page title area start  -->
-        <section class="page-title-area breadcrumb-spacing cp-bg-14">
+        <section class="page-title-area breadcrumb-spacing cp-bg-14 z-index-zero">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-xxl-9">
@@ -64,7 +64,7 @@
                                     @csrf
                                     <div class="cp-input-field">
                                         <label for="name">Your Name (required)</label>
-                                        <input type="text" id="name" name="name">
+                                        <input type="text" id="name" name="name" class="{{$errors->has('name') ? 'has-error' : ''}}">
                                         <i class="far fa-user"></i>
                                         @if ($errors->has('name'))
                                             <div class="invalid-feedback">
@@ -74,7 +74,7 @@
                                     </div>
                                     <div class="cp-input-field">
                                         <label for="email">Your E-Mail (required)</label>
-                                        <input type="email" name="email" id="email">
+                                        <input type="email" name="email" id="email" class="{{$errors->has('email') ? 'has-error' : ''}}">
                                         <i class="far fa-envelope-open"></i>
                                         @if ($errors->has('email'))
                                             <div class="invalid-feedback">
@@ -84,7 +84,11 @@
                                     </div>
                                     <div class="cp-input-field textarea">
                                         <label for="message">Type Your Message (required)</label>
-                                        <textarea id="message" cols="30" rows="10" name="message"></textarea>
+                                        <textarea 
+                                            id="message" 
+                                            cols="30" rows="10" 
+                                            name="message" 
+                                            class="{{$errors->has('message') ? 'has-error' : ''}}"></textarea>
                                         <i class="far fa-edit"></i>
                                         @if ($errors->has('message'))
                                             <div class="invalid-feedback">

@@ -2386,6 +2386,7 @@ div.mean-container a.meanmenu-reveal {
     display: flex;
     gap: 20px;
     align-items: center;
+    justify-content: flex-start;
     margin-bottom: 25px;
 }
 
@@ -2399,10 +2400,12 @@ div.mean-container a.meanmenu-reveal {
     background: var(--clr-theme-1);
     color: var(--clr-common-white);
     font-size: 18px;
-    text-align: center;
-    line-height: 51px;
+    line-height: 50px;
     border-radius: 50%;
-    min-width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* min-width: 50px; */
 }
 
 .cp-offset-widget-title {
@@ -2421,9 +2424,23 @@ div.mean-container a.meanmenu-reveal {
     font-size: 20px;
 }
 
+.address-width{
+    width: 180px;
+}
+
 @media (max-width: 575px) {
     .offset-widget .support-meta .support-number {
-        font-size: 18px;
+        font-size: 14px;
+        text-wrap: wrap;
+    }
+    .support-meta .irc-item-icon{
+        width: 32px;
+        height: 32px;
+        font-size: 14px;
+    }
+    .cp-offset-widget-title{
+        font-size: 20px;
+        margin-bottom: 28px;
     }
 }
 
@@ -12937,6 +12954,12 @@ only screen and (min-width: 576px) and (max-width: 767px),
     }
 }
 
+@media (max-width: 900px){
+    .hide-floating-icons{
+        display: none !important;
+    }
+}
+
 .cp-signup-btn {
     text-align: center;
 }
@@ -12975,6 +12998,70 @@ only screen and (min-width: 576px) and (max-width: 767px),
 .z-index-nve{
     z-index: -1 !important;
 }
+
+.z-index-zero{
+    z-index: 0;
+}
 .z-index-pve{
     z-index: 1;
+}
+
+.cp-brand-image-center{
+    display: flex !important;
+    justify-content: center !important;
+}
+
+.py-50{
+    padding: 50px 0;
+}
+
+@media(min-width: 992px) and (max-width: 1200px){
+    .premier-one-card{
+        margin: 0 auto;
+    }
+    .hide-premier-cards{
+        display: none !important;
+    }
+}
+
+.about-use-bg{
+    position: absolute;
+    background-image: url('../img/about/generation.jpg');
+}
+
+.side-menu-md-screen{
+    width: -webkit-fill-available;
+}
+
+.side-menu-social-icons{
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    text-align: left;
+    /* margin-top: 10px; */
+    position: absolute;
+    background-color: #ffffff;
+    max-width: max-content;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 10px;
+    z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.dropdown-content li a{
+    text-align: left !important ;
+    text-wrap: nowrap;
+    padding: 10px !important;
 }

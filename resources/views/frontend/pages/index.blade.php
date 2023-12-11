@@ -103,11 +103,11 @@
                     </div>
                     @if(!empty($categories) && count($categories) > 0)
                         @if(count($categories) === 2)
-                            <div class="col-xl-3 col-lg-4 col-md-6"></div>
+                            <div class="col-xl-3 col-lg-4 col-md-6 hide-premier-cards"></div>
                         @endif
                         @foreach($categories as $key=>$category)
 
-                            <div class="col-xl-3 col-lg-4 col-md-6">
+                            <div class="col-xl-3 col-lg-4 col-md-6 premier-one-card">
                                 <div class="cp-services-item t-center mb-30 wow fadeInUp animated"
                                      data-wow-duration="1.5s"
                                      data-wow-delay=".3s">
@@ -122,7 +122,7 @@
                     @endif
 
                     @if(count($categories) === 2)
-                        <div class="col-xl-3 col-lg-4 col-md-6"></div>
+                        <div class="col-xl-3 col-lg-4 col-md-6 hide-premier-cards"></div>
                     @endif
                 </div>
             </div>
@@ -132,6 +132,19 @@
 
 
         <!-- about area start here  -->
+        <!-- <section class="p-relative fix round-to-banner">
+            <div class="about-use-bg">
+                <div class="cp-about-content">
+                <span class="cp-about-subtitle mb-15"></span>
+                <h2 class="cp-about-title mb-70"></h2>
+                <div class="cp-about-btn">
+                    <a class="cp-btn-2 generation-btn" href="{{ route('create.generation') }}">
+                        Create
+                    </a>
+                </div>
+            </div>
+            </div>
+        </section> -->
         <section class="p-relative fix round-to-banner" id="generations" data-background="assets/img/about/generation.jpg">
             {{--            <div class="cp-about-shape-img five m-img cp-bg-move-y">--}}
             {{--                <img src="{{ asset('assets/img/about/about-squre.png') }}" alt="img not found">--}}
@@ -295,7 +308,7 @@
                                     @if(!empty($stickers) && count($stickers) > 0)
                                         @foreach($stickers as $key=>$sticker)
                                             <div class="swiper-slide sticker-slider-gap">
-                                                <div class="cp-brand-img">
+                                                <div class="cp-brand-image-center">
                                                     <img
                                                         class="what-we-are-printing-image"
                                                         src="{{$sticker->image}}"

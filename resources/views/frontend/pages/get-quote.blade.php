@@ -22,7 +22,7 @@
     <main>
 
         <!-- page title area start  -->
-        <section class="page-title-area breadcrumb-spacing cp-bg-14">
+        <section class="page-title-area breadcrumb-spacing cp-bg-14 z-index-zero">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-xxl-9">
@@ -58,7 +58,12 @@
                                             <div class="col-lg-6">
                                                 <div class="cp-input-field">
                                                     <label for="name">Your name</label>
-                                                    <input type="text" id="name" name="name">
+                                                    <input 
+                                                        type="text" 
+                                                        id="name" 
+                                                        name="name"
+                                                        class="{{$errors->has('name') ? 'has-error' : ''}}"
+                                                    >
                                                     <i class="far fa-user"></i>
                                                     @if ($errors->has('name'))
                                                         <div class="invalid-feedback">
@@ -71,7 +76,12 @@
                                             <div class="col-lg-6">
                                                 <div class="cp-input-field">
                                                     <label for="email">E-mail</label>
-                                                    <input type="email" id="email" name="email">
+                                                    <input 
+                                                        type="email" 
+                                                        id="email" 
+                                                        name="email"
+                                                        class="{{$errors->has('email') ? 'has-error' : ''}}"
+                                                    >
                                                     <i class="far fa-envelope-open"></i>
                                                     @if ($errors->has('email'))
                                                         <div class="invalid-feedback">
@@ -84,7 +94,12 @@
                                             <div class="col-lg-6">
                                                 <div class="cp-input-field">
                                                     <label for="phone">Phone number</label>
-                                                    <input type="text" id="phone" name="phone">
+                                                    <input 
+                                                        type="text" 
+                                                        id="phone" 
+                                                        name="phone"
+                                                        class="{{$errors->has('phone') ? 'has-error' : ''}}"
+                                                    >
                                                     <i class="far fa-phone"></i>
                                                     @if ($errors->has('phone'))
                                                         <div class="invalid-feedback">
@@ -152,7 +167,12 @@
                                             <div class="col-xl-4 col-lg-6">
                                                 <div class="cp-input-field">
                                                     <label for="width">Width</label>
-                                                    <input type="text" id="width" name="width">
+                                                    <input 
+                                                        type="text" 
+                                                        id="width" 
+                                                        name="width"
+                                                        class="{{$errors->has('width') ? 'has-error' : ''}}"
+                                                    >
                                                     <span class="cp-in">in</span>
                                                     @if ($errors->has('width'))
                                                         <div class="invalid-feedback">
@@ -165,7 +185,12 @@
                                             <div class="col-xl-4 col-lg-6">
                                                 <div class="cp-input-field">
                                                     <label for="height">Height</label>
-                                                    <input type="text" id="height" name="height">
+                                                    <input 
+                                                        type="text" 
+                                                        id="height" 
+                                                        name="height"
+                                                        class="{{$errors->has('height') ? 'has-error' : ''}}"
+                                                    >
                                                     <span class="cp-in">in</span>
                                                     @if ($errors->has('height'))
                                                         <div class="invalid-feedback">
@@ -179,7 +204,12 @@
                                             <div class="col-xl-4 col-lg-6">
                                                 <div class="cp-input-field">
                                                     <label for="quantity">Quantity</label>
-                                                    <input type="number" id="quantity" name="quantity">
+                                                    <input 
+                                                        type="number" 
+                                                        id="quantity" 
+                                                        name="quantity"
+                                                        class="{{$errors->has('quantity') ? 'has-error' : ''}}"
+                                                    >
                                                     @if ($errors->has('quantity'))
                                                         <div class="invalid-feedback">
                                                             {{ $errors->first('quantity') }}

@@ -1,6 +1,6 @@
 <!-- floating area start here  -->
 <div class="cp-floating-area d-none d-md-block zi-1100 p-relative ">
-    <div class="cp-floating-action cp-bg-move-y">
+    <div class="cp-floating-action hide-floating-icons cp-bg-move-y">
             <span class="cp-floating-btn cp-floating-phone-btn cp" data-bs-toggle="modal"
                   data-bs-target="#phonePopup"><i class="fal fa-phone-alt"></i></span>
         <span class="cp-floating-btn cp-floating-location-btn cp"><a href="{{ route('cart.index') }}">

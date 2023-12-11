@@ -33,9 +33,12 @@
                                 @csrf
                                 <div class="cp-input-field">
                                     <label for="name">Email Address</label>
-                                    <input id="email" class="block mt-1 w-full" type="email" name="email"
-                                           value="{{ old('email') }}"
-                                           autofocus autocomplete="username">
+                                    <input id="email" 
+                                        class="block mt-1 w-full {{$errors->has('email') ? 'has-error' : ''}}" 
+                                        type="email" 
+                                        name="email"
+                                        value="{{ old('email') }}"
+                                        autofocus autocomplete="username">
                                     <i class="far fa-user"></i>
                                     @if ($errors->has('email'))
                                         <div class="invalid-feedback">
@@ -46,9 +49,11 @@
                                 <div class="cp-input-field">
                                     <label for="password">Your Password</label>
                                     <input id="password"
-                                           type="password"
-                                           name="password"
-                                           autocomplete="current-password">
+                                        type="password"
+                                        name="password"
+                                        autocomplete="current-password"
+                                        class="{{$errors->has('password') ? 'has-error' : ''}}"s
+                                    >
                                     <i class="far fa-lock-alt"></i>
                                     @if ($errors->has('password'))
                                         <div class="invalid-feedback">
@@ -71,7 +76,18 @@
 
                                 </div>
                                 <div class="cp-sign-btn mt-35 mb-30">
-                                    <button type="submit" class="cp-border2-btn">Sign In</button>
+                                    <button type="submit" class="cp-border-btn">
+                                        Sign In
+                                        <span class="cp-border-btn__inner">
+                                            <span class="cp-border-btn__blobs">
+                                                <span class="cp-border-btn__blob"></span>
+                                                <span class="cp-border-btn__blob"></span>
+                                                <span class="cp-border-btn__blob"></span>
+                                                <span class="cp-border-btn__blob"></span>
+                                            </span>
+                                        </span>
+                                    </button>
+
                                     <a href="{{ url('auth/google') }}">
                                     <button type="button" class="cp-border2-btn google-sign-in-button">
                                         <!-- <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 488 512">
@@ -96,7 +112,7 @@
 
         <!-- floating area start here  -->
         <div class="cp-floating-area d-none d-md-block zi-1100 p-relative ">
-            <div class="cp-floating-action cp-bg-move-y">
+            <div class="cp-floating-action hide-floating-icons cp-bg-move-y">
             <span class="cp-floating-btn cp-floating-phone-btn cp" data-bs-toggle="modal"
                   data-bs-target="#phonePopup"><i class="fal fa-phone-alt"></i></span>
                 <span class="cp-floating-btn cp-floating-location-btn cp" data-bs-toggle="modal"

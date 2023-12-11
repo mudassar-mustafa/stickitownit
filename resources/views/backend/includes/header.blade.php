@@ -1,10 +1,10 @@
 <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-        <a href="{{ url('/') }}" class="logo d-flex align-items-center">
+        <i class="logo  bi bi-list toggle-sidebar-btn"></i>
+        <a href="{{ url('/') }}" class="d-flex align-items-center">
             <img src="{{ asset('storage/uploads/settings/'.$setting->logo_header) }}" alt="" style="max-height: 60px;">
         </a>
-        <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
 
 
@@ -17,7 +17,8 @@
                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
                     <img src="{{ !is_null(auth()->user()->profile_image) ? auth()->user()->profile_image : asset('backend/img/profile-img.jpg') }}" alt="Profile" class="rounded-circle">
                     <span class="d-none d-md-block dropdown-toggle ps-2">{{ auth()->user()->name }}</span>
-                </a><!-- End Profile Iamge Icon -->
+                </a>
+                <!-- End Profile Iamge Icon -->
 
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                     <li class="dropdown-header">
