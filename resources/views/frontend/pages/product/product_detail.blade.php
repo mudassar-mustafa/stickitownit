@@ -113,7 +113,7 @@ affordable without compromising quality.')
                         @if (!empty($product->categories))
                             <div class="product-breadcrumb mb-30">
                                 <ul>
-                                    <li><a href="#">{{ $product->categories[0]->name }}</a></li>
+                                    <li><a href="{{ !empty($product->categories) && count($product->categories) > 0 ? route('get.products-by-category',$product->categories[0]->slug) : '#' }}">{{ $product->categories[0]->name }}</a></li>
                                     <li><span>{{ $product->title ?? "" }}</span></li>
                                 </ul>
                             </div>
