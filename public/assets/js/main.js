@@ -98,7 +98,7 @@
     $(window).scroll(function (event) {
         var scroll = $(this).scrollTop();
         if (scroll > lastScrollTop) {
-            $('#menu-show-hide').removeClass('cp-sticky');
+            // $('#menu-show-hide').removeClass('cp-sticky');
         } else {
             $('#menu-show-hide').addClass('cp-sticky');
         }
