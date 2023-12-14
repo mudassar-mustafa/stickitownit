@@ -36,9 +36,10 @@
                                         <a href="{{ route('/') }}">Home</a>
 
                                     </li>
-                                    <li class="dropdown">
-                                        <span>Custom</span>
-                                        <ul class="dropdown-content">
+
+                                    <li class="menu-item-has-children">
+                                        <a href="javascript:void(0)">Custom</a>
+                                        <ul class="sub-menu">
                                             @if(!empty($categories) && count($categories) >0)
                                                 @foreach($categories as $category)
                                                     <li><a href="{{ route('get.products-by-category',$category->slug) }}">{{ $category->name }}</a></li>
@@ -46,11 +47,6 @@
                                             @endif
                                         </ul>
                                     </li>
-                                    <!-- @if(!empty($categories) && count($categories) >0)
-                                        @foreach($categories as $category)
-                                            <li><a href="{{ route('get.products-by-category',$category->slug) }}">{{ $category->name }}</a></li>
-                                        @endforeach
-                                    @endif -->
                                     <li><a href="{{ route('blogs.list') }}">Blogs</a></li>
 
                                     @if(!empty($pages) && count($pages) >0)
