@@ -333,18 +333,18 @@
 @endsection
 @push('niceSelect')
     <script src="{{ asset('assets/js/nice-select.min.js') }}"></script>
-    <script>
-        const swiper = new Swiper('.cp-brand-active', {
-        // Optional parameters
-        loop: true,
-        // spaceBetween: 100,
-        slidesPerView: 1.5
-        // If we need pagination
+{{--    <script>--}}
+{{--        const swiper = new Swiper('.cp-brand-active', {--}}
+{{--        // Optional parameters--}}
+{{--        loop: true,--}}
+{{--        // spaceBetween: 100,--}}
+{{--        slidesPerView: 1.5--}}
+{{--        // If we need pagination--}}
 
-        // And if we need scrollbar
-        scrollbar: {
-            el: '.swiper-scrollbar',
-        },
-        });
-    </script>
+{{--        // And if we need scrollbar--}}
+{{--        scrollbar: {--}}
+{{--            el: '.swiper-scrollbar',--}}
+{{--        },--}}
+{{--        });--}}
+{{--    </script>--}}
 @endpush
