@@ -50,7 +50,7 @@
         <!-- product area start  -->
         <div class="product-area pt-56 pb-10">
             <div class="container">
-                <div class="cp-product-wrap mb-60 wow animated"
+                <div class="cp-product-wrap mb-60 wow fadeInUp animated"
                      data-wow-duration="1.5s" data-wow-delay="0.3s"
                 >
 
