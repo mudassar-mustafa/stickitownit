@@ -177,7 +177,7 @@
 
 
         <!-- feature area start here  -->
-        <section class="cp-feature-area p-relative cp-bg-2 zi-1 pt-145 pb-105 z-index-nve">
+        <section class="cp-feature-area p-relative cp-bg-2 zi-1 pt-40 z-index-nve">
             <div class="cp-feature-img m-img p-absolute zi--1 d-none d-xl-block cp-bg-move-x">
                 <img src="{{ asset('assets/img/feature/feature-img.png') }}" alt="feature">
             </div>
