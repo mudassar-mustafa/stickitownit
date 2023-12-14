@@ -22,6 +22,9 @@ class PackageOrderDataTable extends DataTable
                 $sql = "order_type like ?";
                 $query->whereRaw($sql, ["%{$keyword}%"]);
             })
+            ->addColumn('order_id', function ($order) {
+                return  'ST-'.date('Y', strtotime($order->created_at)).'-'.$order->id ;
+            })
             ->addColumn('order_type', function ($order) {
                 return empty($order->order_type) ? "None" : $order->order_type;
             })
@@ -98,7 +101,7 @@ class PackageOrderDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('Order No#')->name('id')->data("id"),
+            Column::make('Order No#')->name('order_id')->data("order_id"),
             Column::make('Order Type')->name('order_type')->data("order_type")
                 ->addClass('text-center'),
             Column::make('Order Status')->name('order_status')->data("order_status")
