@@ -76,7 +76,7 @@ class ImageGenerationDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('id'),
+            Column::make('generation_id'),
             Column::make('Image')->name('image')->data("image")
                 ->addClass('text-center'),
             Column::computed('action')
