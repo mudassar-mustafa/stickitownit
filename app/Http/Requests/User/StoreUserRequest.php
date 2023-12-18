@@ -31,7 +31,6 @@ class StoreUserRequest extends FormRequest
             'email' => ['required', 'email', 'max:255', 'unique:users'],
             'status' => ['string', 'max:255'],
             'phone_number' => ['required'],
-            'cnic' => ['required'],
             'password' => ['required', Password::min(8)
                 ->letters()
                 ->mixedCase()
