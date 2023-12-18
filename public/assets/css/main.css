@@ -4251,6 +4251,16 @@ only screen and (min-width: 992px) and (max-width: 1199px) {
 
 @media (max-width: 575px) {
     .cp-about-inner {
+        height: 230px;
+        width: 400px;
+        -webkit-border-radius: 200px;
+        -moz-border-radius: 200px;
+        border-radius: 200px;
+    }
+}
+
+@media (min-width: 767px) {
+    .cp-about-inner {
         height: 500px;
         width: 400px;
         -webkit-border-radius: 200px;
@@ -12993,7 +13003,7 @@ only screen and (min-width: 576px) and (max-width: 767px),
 .header-sticky{
     position: sticky !important;
     top: 0 !important;
-    z-index: 1 !important;
+    z-index: 100 !important;
 }
 .z-index-nve{
     z-index: -1 !important;

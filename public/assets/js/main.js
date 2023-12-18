@@ -94,20 +94,22 @@
 
     ////////////////////////////////////////////////////
     // Menu Show Hide Js
-    var lastScrollTop = 300;
-    $(window).scroll(function (event) {
-        var scroll = $(this).scrollTop();
-        if (scroll > lastScrollTop) {
-            $('#menu-show-hide').removeClass('cp-sticky');
-        } else {
-            $('#menu-show-hide').addClass('cp-sticky');
-        }
+    // var lastScrollTop = 300;
+    // $(window).scroll(function (event) {
+    //     var scroll = $(this).scrollTop();
+    //     if (scroll > lastScrollTop) {
+    //         //$('#menu-show-hide').removeClass('cp-sticky');
+    //         document.getElementById("top-header-mini").style.height = "0px";
+    //     } else {
+    //         document.getElementById("top-header-mini").style.height = "30px";
+    //         //$('#menu-show-hide').addClass('cp-sticky');
+    //     }
 
-        if (scroll < 300) {
-            $("#menu-show-hide").removeClass("cp-sticky");
-        }
-        lastScrollTop = scroll;
-    });
+    //     if (scroll < 300) {
+    //         //$("#menu-show-hide").removeClass("cp-sticky");
+    //     }
+    //     lastScrollTop = scroll;
+    // });
 
     ////////////////////////////////////////////////////
     // Data Background Js

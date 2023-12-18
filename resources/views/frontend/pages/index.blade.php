@@ -92,7 +92,7 @@
         <section class="cp-services-area p-relative">
             <div class="container mt-75 mb-75">
                 <div class="row align-items-end">
-                    <div class="col-xl-6 col-lg-10 d-xl-none">
+                    {{-- <div class="col-xl-6 col-lg-10">
                         <div class="cp-services-title-wrap space cp-section-title mb-30 ml-30">
                             <span class="cp-subtitle mb-15">Our Main Services</span>
                             <h2 class="cp-title mb-25">Premier One-stop Custom <span>Print Solutions</span></h2>
@@ -100,14 +100,14 @@
                                 history
                                 of success connecting brands with consumers.</p>
                         </div>
-                    </div>
+                    </div> --}}
                     @if(!empty($categories) && count($categories) > 0)
                         @if(count($categories) === 2)
-                            <div class="col-xl-3 col-lg-4 col-md-6 hide-premier-cards"></div>
+                            <div class="col-12 col-xl-3 col-lg-6 hide-premier-cards"></div>
                         @endif
                         @foreach($categories as $key=>$category)
 
-                            <div class="col-xl-3 col-lg-4 col-md-6 premier-one-card">
+                            <div class="col-12 col-xl-3 col-lg-6 premier-one-card">
                                 <div class="cp-services-item t-center mb-30 wow fadeInUp animated"
                                      data-wow-duration="1.5s"
                                      data-wow-delay=".3s">
@@ -122,7 +122,7 @@
                     @endif
 
                     @if(count($categories) === 2)
-                        <div class="col-xl-3 col-lg-4 col-md-6 hide-premier-cards"></div>
+                        <div class="col-12 col-xl-3 col-lg-6 hide-premier-cards"></div>
                     @endif
                 </div>
             </div>
@@ -146,17 +146,10 @@
             </div>
         </section> -->
         <section class="p-relative fix round-to-banner" id="generations" data-background="assets/img/about/generation.jpg">
-            {{--            <div class="cp-about-shape-img five m-img cp-bg-move-y">--}}
-            {{--                <img src="{{ asset('assets/img/about/about-squre.png') }}" alt="img not found">--}}
-            {{--            </div>--}}
             <div class="container">
                 <div class="row justify-content-center align-items-center">
                     <div class="col-xl-8">
                         <div class="cp-about-wrap fade-jr p-relative">
-                            {{--                            <div class="cp-about-shape one p-absolute d-none d-xl-block cp-round-rotation2"></div>--}}
-                            {{--                            <div class="cp-about-shape two p-absolute d-none d-xl-block cp-round-rotation1"></div>--}}
-                            {{--                            <div class="cp-about-shape three p-absolute cp-round-rotation1"></div>--}}
-
                             <div class="js-tilt cp-about-inner ml-5 mr-5 t-center d-flex align-items-center justify-content-center">
                                 <div class="cp-about-content">
                                     <span class="cp-about-subtitle mb-15"></span>

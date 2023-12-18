@@ -53,7 +53,7 @@
 <script src="{{ asset('assets/js/vendor/jquery-3.6.0.min.js') }}"></script>
 <script src="{{ asset('assets/js/vendor/waypoints.min.js') }}"></script>
 <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
-<script src="{{ asset('assets/js/meanmenu.js') }}"></script>
+ <script src="{{ asset('assets/js/meanmenu.js') }}"></script>
 <script src="{{ asset('assets/js/swiper-bundle.min.js') }}"></script>
 <script src="{{ asset('assets/js/magnific-popup.min.js') }}"></script>
 <script src="{{ asset('assets/js/parallax.min.js') }}"></script>
@@ -69,7 +69,7 @@
 <script src="{{ asset('assets/js/jquery.ez-plus.js') }}"></script>
 <script src="{{ asset('assets/js/tilt.jquery.min.js') }}"></script>
 <script src="{{ asset('assets/js/hover-reveal.js') }}"></script>
-<script src="{{ asset('assets/js/tween-max.js') }}"></script>
+<script src="{{ asset('assets/js/tween-max.js') }}"></script> 
 <script src="{{ asset('assets/js/main.js') }}"></script>
 <script src="{{ asset('assets/js/toastr.min.js') }}"></script>
 
@@ -107,6 +107,19 @@ async function doAjax(url, params = {}, method = 'POST') {
             break;
     }
     @endif
+
+    window.onscroll = function() {scrollFunction()};
+    function scrollFunction() {
+        
+        if (document.body.scrollTop > 0 || document.documentElement.scrollTop > 0) {
+            document.getElementById("top-header-mini").style.height = "0px";
+            document.getElementsByClassName("cp-header2-info")[0].style.display = "none";
+        } else {
+            document.getElementById("top-header-mini").style.height = "30px";
+            document.getElementsByClassName("cp-header2-info")[0].style.display = "block";
+        }
+        console.log(document.body.scrollTop);
+    }
 </script>
 </body>
 </html>

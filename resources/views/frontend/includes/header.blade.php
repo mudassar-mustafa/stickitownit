@@ -1,7 +1,6 @@
-<!-- header area start  -->
 <header class="header-sticky">
     <div class="cp-header2">
-        <div class="cp-header2-top cp-bg-12 d-none d-md-block">
+        <div class="cp-header2-top cp-bg-12 d-none d-md-block" id="top-header-mini">
             <div class="container-fluid">
                 <div class="cp-header2-top-wrap d-flex align-items-center justify-content-between">
                     <div class="cp-header2-top-item">
