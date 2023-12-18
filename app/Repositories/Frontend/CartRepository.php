@@ -47,7 +47,7 @@ class CartRepository extends BaseRepository implements CartContract
 
     public function getAllCountries()
     {
-        return Country::where('status', 'active')->get();
+        return Country::where('status', 'active')->orderBy('name','asc')->get();
     }
 
     public function getStates($countryId)
@@ -57,7 +57,7 @@ class CartRepository extends BaseRepository implements CartContract
             $states = $states->where('country_id', $countryId);
         }
 
-        $states = $states->get();
+        $states = $states->orderBy('name','asc')->get();
         return $states;
     }
 
@@ -68,7 +68,7 @@ class CartRepository extends BaseRepository implements CartContract
             $cities = $cities->where('state_id', $stateId);
         }
 
-        $cities = $cities->get();
+        $cities = $cities->orderBy('name','asc')->get();
         return $cities;
     }
 
@@ -151,7 +151,8 @@ class CartRepository extends BaseRepository implements CartContract
 
                     $order->order_total_amount = $orderTotalAmt;
                     $order->save();
-
+                    $order->order_number = 'ST-'.date('Y', strtotime($order->created_at)).'-'.$order->id;
+                    $order->save();
                     Cart::where('user_id', Auth::user()->id)->where('seller_id', $sellerId)->delete();
                     Mail::to(Auth::user()->email)->send(new OrderMail($order));
                     Mail::to('stickitownit@gmail.com')->send(new OrderMail($order));
@@ -183,7 +184,8 @@ class CartRepository extends BaseRepository implements CartContract
         }
         $order->order_total_amount = Session::get('packagePrice');
         $order->save();
-
+        $order->order_number = 'ST-'.date('Y', strtotime($order->created_at)).'-'.$order->id;
+        $order->save();
 
         $orderPackageDetail = new OrderPackageDetail;
         $orderPackageDetail->order_id = $order->id;

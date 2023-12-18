@@ -53,15 +53,15 @@ class DashboardRepository extends BaseRepository implements DashboardContract
     }
 
     public function getCountries(){
-        return Country::where('status', 'active')->get();
+        return Country::where('status', 'active')->orderBy('name','asc')->get();
     }
 
     public function getStates($countryId){
-        return State::where('status', 'active')->where('country_id', $countryId)->get();
+        return State::where('status', 'active')->where('country_id', $countryId)->orderBy('name','asc')->get();
     }
 
     public function getCities($stateId){
-        return City::where('status', 'active')->where('state_id', $stateId)->get();
+        return City::where('status', 'active')->where('state_id', $stateId)->orderBy('name','asc')->get();
     }
 
 }

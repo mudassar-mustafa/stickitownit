@@ -89,7 +89,12 @@ class User extends Authenticatable
      */
     public function getProfileImageAttribute($value): String
     {
-        return asset('/storage/uploads/profileImages/' . $value);
+        if(!is_null($value)){
+            return asset('/storage/uploads/profileImages/' . $value);
+        }else{
+            return asset('backend/img/profile-img.jpg');
+        }
+
     }
 
     /**

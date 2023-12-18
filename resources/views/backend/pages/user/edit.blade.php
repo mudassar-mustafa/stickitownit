@@ -56,16 +56,16 @@
                                         </div>
                                     @endif
                                 </div>
-                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                    <label for="cnic" class="form-label">CNIC Number</label>
-                                    <input type="text" class="form-control" id="cnic" name="cnic"
-                                           value="{{ old('cnic',$user->cnic) }}">
-                                    @if ($errors->has('cnic'))
-                                        <div class="invalid-feedback">
-                                            {{ $errors->first('cnic') }}
-                                        </div>
-                                    @endif
-                                </div>
+{{--                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">--}}
+{{--                                    <label for="cnic" class="form-label">CNIC Number</label>--}}
+{{--                                    <input type="text" class="form-control" id="cnic" name="cnic"--}}
+{{--                                           value="{{ old('cnic',$user->cnic) }}">--}}
+{{--                                    @if ($errors->has('cnic'))--}}
+{{--                                        <div class="invalid-feedback">--}}
+{{--                                            {{ $errors->first('cnic') }}--}}
+{{--                                        </div>--}}
+{{--                                    @endif--}}
+{{--                                </div>--}}
                                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                     <label for="status" class="form-label">Status</label>
                                     <select id="status" class="form-select" name="status">
