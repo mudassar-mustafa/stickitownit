@@ -35,32 +35,41 @@ class SocialController extends Controller
                 return redirect('/');
 
             }else{
-                $newUser = User::create([
-                    'name' => $user->name,
-                    'email' => $user->email,
-                    'google_user_id'=> $user->id,
-                    'user_type' => 'customer',
-                    'status' => 'active',
-                    'password' => encrypt('customer@123')
-                ]);
 
-                $newUser->assignRole(Role::findById(3));
-                $package = Package::where('name', strtolower('free'))->first();
+                $checkUser = User::whereEmail($user->email)->first();
+                if (!is_null($checkUser)) {
+                    $checkUser->google_user_id = $user->id;
+                    $checkUser->save();
+                    $newUser = $checkUser;
+                } else {
+                    $newUser = User::create([
+                        'name' => $user->name,
+                        'email' => $user->email,
+                        'google_user_id' => $user->id,
+                        'user_type' => 'customer',
+                        'status' => 'active',
+                        'password' => encrypt('customer@123')
+                    ]);
 
-                $startDate = date('Y-m-d H:i:s');
-                $endDate = date('Y-m-d H:i:s', strtotime($startDate. ' + 7 day'));
+                    $newUser->assignRole(Role::findById(3));
+                    $package = Package::where('name', strtolower('free'))->first();
 
-                $packageSubscription = new PackageSubscription;
-                $packageSubscription->user_id = $newUser->id;
-                $packageSubscription->package_id = $package->id;
-                $packageSubscription->package_name = $package->name;
-                $packageSubscription->package_type = $package->package_type;
-                $packageSubscription->token = $package->token;
-                $packageSubscription->remaing_token = $package->token;
-                $packageSubscription->start_date = $startDate;
-                $packageSubscription->end_date = $endDate;
-                $packageSubscription->status = "active";
-                $packageSubscription->save();
+                    $startDate = date('Y-m-d H:i:s');
+                    $endDate = date('Y-m-d H:i:s', strtotime($startDate . ' + 7 day'));
+
+                    $packageSubscription = new PackageSubscription;
+                    $packageSubscription->user_id = $newUser->id;
+                    $packageSubscription->package_id = $package->id;
+                    $packageSubscription->package_name = $package->name;
+                    $packageSubscription->package_type = $package->package_type;
+                    $packageSubscription->token = $package->token;
+                    $packageSubscription->remaing_token = $package->token;
+                    $packageSubscription->start_date = $startDate;
+                    $packageSubscription->end_date = $endDate;
+                    $packageSubscription->status = "active";
+                    $packageSubscription->save();
+                }
+
 
                 Auth::login($newUser);
 
