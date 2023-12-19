@@ -81,10 +81,11 @@
                                     <option value="printed">Printed</option>
                                     <option value="cancelled">Cancelled</option>
                                     <option value="delivered">Delivered</option>
+                                    <option value="completed">Completed</option>
                                 </select>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                <label for="name" class="form-label">Remarks</label>
+                                <label for="remarks" class="form-label">Remarks</label>
                                 <textarea class="form-control" placeholder="Remarks" id="remarks" name="remarks" style="height: 100px;"></textarea>
                             </div>
                         </div>
@@ -94,7 +95,7 @@
                       <button type="button" type="button" class="btn btn-primary" onclick="updateOrderStatus()">Update</button>
                     </div>
                 </form>
-                
+
               </div>
             </div>
           </div>
@@ -113,12 +114,12 @@
                         <input type="hidden" value="" id="order_id">
                         <div class="row">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                                <div class="rating"> 
-                                    <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label> 
-                                    <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label> 
-                                    <input type="radio" name="rating" value="3" id="3"><label for="3">☆</label> 
-                                    <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label> 
-                                    <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label> 
+                                <div class="rating">
+                                    <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label>
+                                    <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label>
+                                    <input type="radio" name="rating" value="3" id="3"><label for="3">☆</label>
+                                    <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label>
+                                    <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label>
                                 </div>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -132,7 +133,7 @@
                       <button type="button" type="button" class="btn btn-primary" onclick="storeFeedback()">Submit</button>
                     </div>
                 </form>
-                
+
               </div>
             </div>
           </div>
@@ -193,14 +194,20 @@
             $("#remarks").val('');
             $("#order_id").val(orderId);
             var orderStatus = $("#btnStatus"+orderId+"").data('order_status');
-            if(orderStatus == "printed"){
+            if(orderStatus === "printed"){
                 $("#status option[value='cancelled']").prop("disabled",true);
+                $("#status option[value='printed']").prop("disabled",true);
+            }else if(orderStatus === "delivered"){
+                $("#status option[value='cancelled']").prop("disabled",true);
+                $("#status option[value='printed']").prop("disabled",true);
+                $("#status option[value='delivered']").prop("disabled",true);
             }
+
             $("#order_status_update_modal").modal('show');
         }
 
         function updateOrderStatus() {
-            if($("#status").val() == ""){
+            if($("#status").val() === ""){
                 swal("Validation!", "Please Select Status", "error");
                 return false;
             }
@@ -248,7 +255,7 @@
                     }
                 }
             });
-                        
+
         }
 
         function updateFeedback(orderId) {

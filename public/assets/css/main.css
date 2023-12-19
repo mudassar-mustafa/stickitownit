@@ -6442,7 +6442,7 @@ only screen and (min-width: 576px) and (max-width: 767px),
 .cp-floating-action {
     position: fixed;
     bottom: 130px;
-    right: 32px;
+    /*right: 32px;*/
     z-index: 100;
     display: inline-block;
     background: var(--clr-common-white);
@@ -12110,7 +12110,8 @@ only screen and (min-width: 576px) and (max-width: 767px),
     display: inline-block;
     position: relative;
     border-right: 2px solid var(--clr-bg-7);
-    padding-inline-end: 25px;
+    /*padding-inline-end: 25px;*/
+    padding-inline-end: 22px;
     margin-inline-end: 25px;
     margin-bottom: 15px;
 }
@@ -13006,7 +13007,7 @@ only screen and (min-width: 576px) and (max-width: 767px),
     z-index: 100 !important;
 }
 .z-index-nve{
-    z-index: -1 !important;
+    z-index: 1 !important;
 }
 
 .z-index-zero{

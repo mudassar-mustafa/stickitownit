@@ -54,8 +54,8 @@ class OrderDataTable extends DataTable
                     return '<span class="badge rounded-pill btn btn-warning">Printed</span>';
                 }else if($order->order_status == "cancelled"){
                     return  '<span class="badge rounded-pill btn btn-danger">Cancelled</span>';
-                }else if($order->order_status == "delivered"){
-                    return '<span class="badge rounded-pill btn btn-success">Delivered</span>';
+                }else if($order->order_status == "delivered" || $order->order_status == "completed"){
+                    return '<span class="badge rounded-pill btn btn-success">'.ucfirst($order->order_status).'</span>';
                 }else{
                     return '<span class="badge rounded-pill btn btn-secondary">Pending</span>';
                 }
@@ -66,7 +66,7 @@ class OrderDataTable extends DataTable
             ->addColumn('action', function ($order) {
 
                 $updateStatus = "";
-                if(($order->order_status == "cancelled" || $order->order_status == "delivered") || auth()->user()->hasrole('Customer') == true ){
+                if(($order->order_status == "cancelled" || $order->order_status == "completed") || auth()->user()->hasrole('Customer') == true ){
 
                 }else{
                     $updateStatus = '<button type="button" class="btn btn-primary" style="font-size: 10px;width: 100%; margin-bottom: 3px;" id="btnStatus'.$order->id.'" data-bs-toggle="modal" data-order_status ="'.$order->order_status.'"  onclick="updateStatus('.$order->id.');">Update Status</button>';

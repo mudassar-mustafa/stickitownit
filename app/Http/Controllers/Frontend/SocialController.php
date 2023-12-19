@@ -18,22 +18,22 @@ class SocialController extends Controller
 
     public function signInwithGoogle()
     {
-        return Socialite::driver('google')->redirect();
+        return Socialite::driver('google')->stateless()->redirect();
     }
     public function callbackToGoogle(UtilService $utilService)
     {
         try {
-     
-            $user = Socialite::driver('google')->user();
-      
+
+            $user = Socialite::driver('google')->stateless()->user();
+
             $finduser = User::where('google_user_id', $user->id)->first();
-      
+
             if($finduser){
-      
+
                 Auth::login($finduser);
-     
-                return redirect('/dashboard');
-      
+
+                return redirect('/');
+
             }else{
                 $newUser = User::create([
                     'name' => $user->name,
@@ -61,12 +61,12 @@ class SocialController extends Controller
                 $packageSubscription->end_date = $endDate;
                 $packageSubscription->status = "active";
                 $packageSubscription->save();
-     
+
                 Auth::login($newUser);
-      
-                return redirect('/dashboard');
+
+                return redirect('/');
             }
-     
+
         } catch (\Exception $exception) {
             return $utilService->logErrorAndRedirectToBack('callbackToGoogle', $exception->getMessage());
         }

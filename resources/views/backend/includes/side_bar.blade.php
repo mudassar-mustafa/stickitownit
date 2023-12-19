@@ -3,6 +3,12 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
         <li class="nav-item">
+            <a class="nav-link collapsed" href="{{ route('/') }}">
+                <i class="bi bi-house"></i>
+                <span>Home</span>
+            </a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link " href="{{ route('dashboard') }}">
                 <i class="bi bi-grid"></i>
                 <span>Dashboard</span>

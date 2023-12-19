@@ -21,4 +21,8 @@ class GenerationImage extends Model
     {
         return asset('/uploads/generations/' . $value);
     }
+
+    public function generation(){
+        return $this->belongsTo(Generation::class,'generation_id','id');
+    }
 }

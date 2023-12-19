@@ -193,7 +193,7 @@
                                                     <i class="far fa-file-archive"></i>
                                                 </div>
                                             </div>
-                                            
+
 
                                             <div class="col-lg-8 padding-right-0">
                                                 <div class="cp-input-field">
@@ -294,8 +294,7 @@
                                     </label> --}}
                                     <div class="cp-checkout-payment-terms mb-30">
                                         <input type="checkbox" id="cp-terms">
-                                        <label for="cp-terms">I have read and agree to the website <a href="#">Terms and
-                                                conditions</a></label>
+                                        <label for="cp-terms">I have read and agree to the Stickitownit <a href="{{ route('page.index','terms-and-conditions') }}">Terms & Conditions</a></label>
                                     </div>
                                     <div class="cp-checkout-btn t-center pt-25">
                                         <button type="submit" class="cp-border2-btn">Proceed to Checkout</button>

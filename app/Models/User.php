@@ -122,9 +122,9 @@ class User extends Authenticatable
     }
 
     /**
-     * @return BelongsToMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function review_user_detail(): HasMany
+    public function review_user_detail(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(ProductReview::class, 'user_id', 'id');
     }

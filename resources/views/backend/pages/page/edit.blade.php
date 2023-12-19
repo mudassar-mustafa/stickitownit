@@ -39,9 +39,7 @@
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <label for="body" class="form-label">Body</label>
-                                    <textarea class="body" name="body" id="description">
-                                        {!! old('body', $page->body) !!}
-                                      </textarea>
+                                    <textarea class="body" name="body" id="description">{!! old('body', $page->body) !!}</textarea>
                                     @if ($errors->has('body'))
                                         <div class="invalid-feedback">
                                             {{ $errors->first('body') }}
@@ -50,9 +48,7 @@
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <label for="meta_description" class="form-label">Meta Decription</label>
-                                    <textarea class="form-control" placeholder="Meta Description" id="floatingTextarea" name="meta_description" style="height: 100px;">
-                                        {{ old('meta_description',$page->meta_decription) }}
-                                    </textarea>
+                                    <textarea class="form-control" placeholder="Meta Description" id="floatingTextarea" name="meta_description" style="height: 100px;">{{ old('meta_description',$page->meta_decription) }}</textarea>
                                     @if ($errors->has('meta_description'))
                                         <div class="invalid-feedback">
                                             {{ $errors->first('meta_description') }}
@@ -61,9 +57,7 @@
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <label for="meta_keyword" class="form-label">Meta Keyword</label>
-                                    <textarea class="form-control" placeholder="Meta Keyword" id="floatingTextarea" name="meta_keyword" style="height: 100px;">
-                                        {{ old('meta_keyword',$page->meta_keyword) }}
-                                    </textarea>
+                                    <textarea class="form-control" placeholder="Meta Keyword" id="floatingTextarea" name="meta_keyword" style="height: 100px;">{{ old('meta_keyword',$page->meta_keyword) }}</textarea>
                                     @if ($errors->has('meta_keyword'))
                                         <div class="invalid-feedback">
                                             {{ $errors->first('meta_keyword') }}

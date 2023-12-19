@@ -623,6 +623,7 @@ affordable without compromising quality.')
             } else {
                 if (userType == "admin") {
                     toastr.info("Admin can't add product in cart.");
+                    $('.loading').hide();
                     return false;
                 }
                 var csrf_token = $('meta[name="csrf-token"]').attr('content');

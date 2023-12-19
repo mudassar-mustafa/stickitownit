@@ -46,9 +46,13 @@
                                 @php
                                 $progressBar = 100;
                                 if($order->order_status == "pending"){
-                                $progressBar = 0;
+                                    $progressBar = 0;
                                 }else if($order->order_status == "printed"){
-                                $progressBar = 50;
+                                    $progressBar = 33;
+                                }else if($order->order_status == "delivered"){
+                                    $progressBar = 67;
+                                }else if($order->order_status == "completed"){
+                                    $progressBar = 100;
                                 }
                                 @endphp
                                 <div class="progress" style="height: 6px; border-radius: 16px;">
@@ -60,6 +64,7 @@
                                     <p class="text-muted mt-1 mb-0 small">Pending</p>
                                     <p class="text-muted mt-1 mb-0 small">Printed</p>
                                     <p class="text-muted mt-1 mb-0 small">Delivered</p>
+                                    <p class="text-muted mt-1 mb-0 small">Completed</p>
                                 </div>
                             </div>
                         </div>
@@ -116,7 +121,7 @@
                       <p class="text-muted d-flex justify-content-end">Order Status:</p>
                     </div>
                     <div class="col-lg-2">
-                      <p class="fw-bold d-flex justify-content-end">{{ $order->order_status }}</p>
+                      <p class="fw-bold d-flex justify-content-end">{{ ucfirst($order->order_status) }}</p>
                     </div>
                   </div>
                 </div>

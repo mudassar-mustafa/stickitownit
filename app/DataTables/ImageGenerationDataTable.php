@@ -18,7 +18,9 @@ class ImageGenerationDataTable extends DataTable
     public function dataTable($query)
     {
         return datatables()->eloquent($query)
-
+            ->addColumn('generation_id',function ($generationImage){
+                return !is_null($generationImage->generation) ? $generationImage->generation->leonardo_generation_id : '-';
+            })
             ->addColumn('image', function ($generationImage) {
                 return ($generationImage->image != null) ? '<img width="50" height="50" class="img-thumbnail"
                 id="img" src="'.$generationImage->image.'"

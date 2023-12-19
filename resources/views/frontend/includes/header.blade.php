@@ -6,7 +6,8 @@
                     <div class="cp-header2-top-item">
                         <div class="cp-header2-info">
                             <ul>
-                                <li><a href="tel:{{ $setting->phone_number }}"><i class="far fa-phone-alt"></i> {{ $setting->phone_number }}</a>
+                                <li><a href="tel:{{ $setting->phone_number }}"><i
+                                            class="far fa-phone-alt"></i> {{ $setting->phone_number }}</a>
                                 </li>
                                 <li><a href="mailto:{{ $setting->email }}"><i class="far fa-envelope"></i>
                                         {{ $setting->email }}</a>
@@ -23,7 +24,8 @@
                     <div class="cp-header2-bottom-item">
                         <div class="logo">
                             <a href="{{ route('/') }}">
-                                <img class="my-3 width-17" src="{{ asset('storage/uploads/settings/'.$setting->logo_header) }}" alt="logo">
+                                <img class="my-3 width-17"
+                                     src="{{ asset('storage/uploads/settings/'.$setting->logo_header) }}" alt="logo">
                             </a>
                         </div>
                     </div>
@@ -41,7 +43,9 @@
                                         <ul class="sub-menu">
                                             @if(!empty($categories) && count($categories) >0)
                                                 @foreach($categories as $category)
-                                                    <li><a href="{{ route('get.products-by-category',$category->slug) }}">{{ $category->name }}</a></li>
+                                                    <li>
+                                                        <a href="{{ route('get.products-by-category',$category->slug) }}">{{ $category->name }}</a>
+                                                    </li>
                                                 @endforeach
                                             @endif
                                         </ul>
@@ -50,7 +54,10 @@
 
                                     @if(!empty($pages) && count($pages) >0)
                                         @foreach($pages as $page)
-                                            <li><a href="{{ route('page.index',$page->slug) }}">{{$page->name}}</a></li>
+                                            @if($page->slug !== 'terms-and-conditions')
+                                                <li><a href="{{ route('page.index',$page->slug) }}">{{$page->name}}</a>
+                                                </li>
+                                            @endif
                                         @endforeach
                                     @endif
 
@@ -70,27 +77,28 @@
                                     @endphp
                                     <li>
                                         <a href="{{ route('cart.index') }}">
-                                            <i class="fas fa-cart-plus"  data-bs-toggle="tooltip" title="Cart"></i>
+                                            <i class="fas fa-cart-plus" data-bs-toggle="tooltip" title="Cart"></i>
                                             <span>{{ $cartCount }}</span>
                                         </a>
                                     </li>
 
                                     @auth
-                                        <li  data-bs-toggle="tooltip" title="Dashboard">
+                                        <li data-bs-toggle="tooltip" title="Dashboard">
                                             <a href="{{ route('dashboard') }}">
-                                            <i class="fa fa-server" aria-hidden="true"></i>
+                                                <i class="fa fa-server" aria-hidden="true"></i>
                                                 <!-- <i class="fas fa-home"></i> -->
                                             </a>
                                         </li>
-                                        <li  data-bs-toggle="tooltip" title="Logout">
+                                        <li data-bs-toggle="tooltip" title="Logout">
                                             <form method="POST" action="{{ route('logout') }}">
                                                 @csrf
-                                                <a href="{{ route('logout') }}"   onclick="event.preventDefault(); this.closest('form').submit();">
-                                                <i class="fas fa-sign-out"></i></a>
+                                                <a href="{{ route('logout') }}"
+                                                   onclick="event.preventDefault(); this.closest('form').submit();">
+                                                    <i class="fas fa-sign-out"></i></a>
                                             </form>
                                         </li>
                                     @else
-                                        <li  data-bs-toggle="tooltip" title="Loginn">
+                                        <li data-bs-toggle="tooltip" title="Loginn">
                                             <a href="{{ route('login') }}">
                                                 <i class="fas fa-user-alt"></i>
                                             </a>
