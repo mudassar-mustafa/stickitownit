@@ -38,7 +38,7 @@ class BlogPageRepository extends BaseRepository implements BlogPageContract
     public function getRelatedBlog($blogId, $blogAuthorName){
         return Blog::where('author_name', $blogAuthorName)
         ->where('status', 'active')
-        ->where('id', '!=', $blogId) // Exclude the current blog post
+        ->where('id', '<>', $blogId) // Exclude the current blog post
         ->orderBy('id', 'asc')
         ->get(['id', 'name', 'title', 'slug', 'image', 'created_at', 'author_name']);
     }
