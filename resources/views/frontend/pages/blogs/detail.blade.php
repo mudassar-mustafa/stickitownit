@@ -117,22 +117,22 @@
                                                     <div class="cp-news-item">
                                                         <div class="cp-news-img fix p-relative ">
                                                             <div class="cp-img-overlay wow"></div>
-                                                            <a href="{{ route('blog.detail',$blog->slug) }}">
+                                                            <a href="{{ route('blog.detail',$relatedBlog->slug) }}">
                                                                 <img
-                                                                    src="{{ $blog->image }}"
-                                                                    alt="{{ $blog->name }}"
+                                                                    src="{{ $relatedBlog->image }}"
+                                                                    alt="{{ $relatedBlog->name }}"
                                                                 >
                                                             </a>
                                                         </div>
                                                         <div class="cp-news-content one">
                                                             <div class="cp-news1-meta mb-25">
-                                                                <span>{{date('F j, Y', strtotime($blog->created_at))}}</span>
+                                                                <span>{{date('F j, Y', strtotime($relatedBlog->created_at))}}</span>
                                                             </div>
                                                             <h3 class="cp-news-title"><a
-                                                                    href="{{ route('blog.detail',$blog->slug) }}">{{ $blog->name }}</a>
+                                                                    href="{{ route('blog.detail',$relatedBlog->slug) }}">{{ $relatedBlog->name }}</a>
                                                             </h3>
                                                             <h5 class="cp-news-post-by">Author : <a
-                                                                    href="javascript:void(0)">{{ $blog->author_name }}</a>
+                                                                    href="javascript:void(0)">{{ $relatedBlog->author_name }}</a>
                                                             </h5>
                                                         </div>
                                                     </div>

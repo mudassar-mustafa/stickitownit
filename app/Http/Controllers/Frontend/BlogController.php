@@ -30,7 +30,6 @@ class BlogController extends Controller
     {
         $blog = $this->blogPageRepository->getBlogDetail($slug);
         $relatedBlogs = $this->blogPageRepository->getRelatedBlog($blog->id, $blog->author_name);
-        dd($relatedBlogs);
         $blogCategories = $this->blogPageRepository->getBlogCategories();
         return view('frontend.pages.blogs.detail', compact('blog', 'relatedBlogs','blogCategories'));
     }
