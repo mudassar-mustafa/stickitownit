@@ -118,7 +118,7 @@
                                                         <div class="cp-news-img fix p-relative ">
                                                             <div class="cp-img-overlay wow"></div>
                                                             <a href="{{ route('blog.detail',$relatedBlog->slug) }}">
-                                                                <img
+                                                                <img class="cp-news-card-image"
                                                                     src="{{ $relatedBlog->image }}"
                                                                     alt="{{ $relatedBlog->name }}"
                                                                 >
