@@ -54,6 +54,48 @@
                             </div>
                         </div>
                         <div class="card-body">
+                            <div class="row g-3 mt-2">
+                                @if (Auth::user()->hasRole('SuperAdmin') || Auth::user()->hasRole('Seller') || Auth::user()->hasRole('Admin'))
+                                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                        <label for="buyer_id" class="form-label">Buyer Name</label>
+                                        <select class="state form-select" id="buyer_id" name="buyer_id">
+                                            <option value=""> Please Select Buyer</option>
+                                            @if (!empty($buyerList))
+                                                @foreach ($buyerList as $buyer)
+                                                    <option value ="{{ $buyer->id }}" {{ request('buyerIds') == $buyer->id ? "selected" : "" }}>{{ $buyer->name }}</option>
+                                                @endforeach
+                                            @endif
+                                        </select>
+                                    </div>    
+                                @endif
+                                @if (Auth::user()->hasRole('SuperAdmin') || Auth::user()->hasRole('Customer') || Auth::user()->hasRole('Admin'))
+                                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                        <label for="seller_id" class="form-label">Seller Name</label>
+                                        <select class="state form-select" id="seller_id">
+                                            <option value=""> Please Select Seller</option>
+                                            @if (!empty($sellerList))
+                                                @foreach ($sellerList as $seller)
+                                                    <option value ="{{ $seller->id }}" {{ request('sellerIds') == $seller->id ? "selected" : "" }}>{{ $seller->name }}</option>
+                                                @endforeach
+                                            @endif
+                                        </select>
+                                    </div>    
+                                @endif
+                                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                    <label for="category_id" class="form-label">Category</label>
+                                    <select class="state form-select" id="category_id">
+                                        <option value=""> Please Select Category</option>
+                                        @if (!empty($sellerList))
+                                            @foreach ($categoryList as $category)
+                                                <option value ="{{ $category->id }}" {{ request('categoryIds') == $category->id ? "selected" : "" }}> {{ $category->name }}</option>
+                                            @endforeach
+                                        @endif
+                                    </select>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                    <button type="button" class="btn btn-primary" style="margin-top: 30px;" onclick="filerData();">Filter</button>
+                                </div>
+                            </div>
                             <div class="mt-4">
                                 {{$dataTable->table()}}
                             </div>
@@ -297,6 +339,28 @@
                     }
                 }
             });
+        }
+
+        function filerData(){
+            debugger;
+            var url = "{{ route('backend.pages.order.sale_order', [':buyerIds',':sellerIds',':categoryIds']) }}";
+            if($("#buyer_id").val() != ""){
+                url = url.replace(':buyerIds',$("#buyer_id").val());
+            }else{
+                url = url.replace(':buyerIds',null);
+            }
+            if($("#seller_id").val() != ""){
+                url = url.replace(':sellerIds',$("#seller_id").val());
+            }else{
+                url = url.replace(':sellerIds',null);
+            }
+            if($("#category_id").val() != ""){
+                url = url.replace(':categoryIds',$("#category_id").val());
+            }else{
+                url = url.replace(':categoryIds',null);
+            }
+
+            window.location.href = url;
         }
     </script>
 @endpush

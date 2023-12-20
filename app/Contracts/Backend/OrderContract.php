@@ -22,4 +22,10 @@ interface OrderContract
 
     public function storeFeedback(array $params);
 
+    public function getBuyerList($orderType);
+
+    public function getSellerList($orderType);
+
+    public function getCategoriesList();
+
 }

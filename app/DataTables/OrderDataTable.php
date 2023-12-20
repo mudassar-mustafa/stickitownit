@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\Order;
+use App\Models\OrderSaleDetail;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
 use Form;
@@ -20,6 +21,15 @@ class OrderDataTable extends DataTable
         return datatables()->eloquent($query)
             ->filterColumn('order_type', function ($query, $keyword) {
                 $sql = "order_type like ?";
+                $query->whereRaw($sql, ["%{$keyword}%"]);
+            })->filterColumn('order_date', function ($query, $keyword) {
+                $sql = "order_date like ?";
+                $query->whereRaw($sql, ["%{$keyword}%"]);
+            })->filterColumn('payment_method', function ($query, $keyword) {
+                $sql = "payment_method like ?";
+                $query->whereRaw($sql, ["%{$keyword}%"]);
+            })->filterColumn('order_status', function ($query, $keyword) {
+                $sql = "order_status like ?";
                 $query->whereRaw($sql, ["%{$keyword}%"]);
             })
             ->addColumn('order_id', function ($order) {
@@ -93,15 +103,36 @@ class OrderDataTable extends DataTable
      */
     public function query(Order $model)
     {
+        $orderIds = [];
         $buyerId = $this->buyerId;
         $sellerId = $this->sellerId;
+        if($this->request->sellerIds != "null" && $this->request->sellerIds != null){
+            $sellerId = $this->request->sellerIds;     
+        }
+
+        if($this->request->buyerIds != "null" && $this->request->buyerIds != null){
+            $buyerId = $this->request->buyerIds;     
+        }
+
         $order = $model->where('order_type', 'Sale')->newQuery();
+
+        if($this->request->categoryIds != "null" && $this->request->categoryIds != null){
+            $categoryId = $this->request->categoryIds;
+            $orderIds = OrderSaleDetail::whereHas('product_attribute_group.product.categories', function($q) use($categoryId){
+                $q->where('category_id', $categoryId);
+            })->groupBy('order_id')->pluck('order_id')->toArray();
+            $order = $order->whereIn('id', $orderIds);     
+        }
+
+
+        
         if($buyerId != 0){
             $order = $order->where('buyer_id', $buyerId);
         }
         if($sellerId != 0){
             $order = $order->where('seller_id', $sellerId);
         }
+        
         return $order;
     }
 

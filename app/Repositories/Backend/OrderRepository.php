@@ -6,6 +6,8 @@ use App\Models\Order;
 use App\Models\OrderSaleDetail;
 use App\Models\OrderPackageDetail;
 use App\Models\ProductReview;
+use App\Models\User;
+use App\Models\Category;
 use App\Contracts\Backend\OrderContract;
 use Auth;
 
@@ -106,5 +108,27 @@ class OrderRepository extends BaseRepository implements OrderContract
         }
 
         return $status;
+    }
+
+    public function getBuyerList($orderType){
+        $buyers = [];
+        $buyerIds = Order::where('order_type', $orderType)->groupBy('buyer_id')->pluck('buyer_id')->toArray();
+        if(!empty($buyerIds)){
+            $buyers = User::whereIn('id', $buyerIds)->get(['id', 'name']);
+        }
+        return $buyers;
+    }
+
+    public function getSellerList($orderType){
+        $sellers = [];
+        $sellerIds = Order::where('order_type', $orderType)->groupBy('seller_id')->pluck('seller_id')->toArray();
+        if(!empty($sellerIds)){
+            $sellers = User::whereIn('id', $sellerIds)->get(['id', 'name']);
+        }
+        return $sellers;
+    }
+
+    public function getCategoriesList(){
+        return Category::where('status', 'active')->get(['id', 'name']);
     }
 }

@@ -32,20 +32,39 @@ class OrderController extends Controller
      */
     public function saleOrder(
         UtilService    $utilService,
-        OrderDataTable $dataTable
+        OrderDataTable $dataTable,
+        $buyerIds = null,
+        $sellerIds = null,
+        $categoryIds = null,
     )
     {
         try {
             
             $buyerId = 0;
+            $sellerId = 0;
+            $buyerList = [];
+            $sellerList = [];
+            $categoryList = [];
+
+            if(Auth::user()->hasRole('Admin') || Auth::user()->hasRole('SuperAdmin')){
+                $buyerList = $this->orderRepository->getBuyerList("Sale"); 
+                $sellerList = $this->orderRepository->getSellerList("Sale"); 
+                $categoryList = $this->orderRepository->getCategoriesList(); 
+            }
+
             if(Auth::user()->hasRole('Customer')){
                 $buyerId = Auth::user()->id;
+                $sellerList = $this->orderRepository->getSellerList("Sale"); 
+                $categoryList = $this->orderRepository->getCategoriesList();
             }
-            $sellerId = 0;
+            
             if(Auth::user()->hasRole('Seller')){
                 $sellerId = Auth::user()->id;
+                $buyerList = $this->orderRepository->getBuyerList("Sale"); 
+                $categoryList = $this->orderRepository->getCategoriesList(); 
             }
-            return $dataTable->with(['buyerId' => $buyerId, 'sellerId' => $sellerId])->render('backend.pages.order.sale_order');
+
+            return $dataTable->with(['buyerId' => $buyerId, 'sellerId' => $sellerId, 'sellerIds' => '$sellerIds',  'buyerIds' => $buyerIds, 'categoryIds' => $categoryIds])->render('backend.pages.order.sale_order', compact('buyerList', 'sellerList', 'categoryList'));
         } catch (\Exception $exception) {
             return $utilService->logErrorAndRedirectToBack('backend.pages.order.sale_order', $exception->getMessage());
         }
