@@ -1016,7 +1016,7 @@
     var cpNewRelated = new Swiper('.cp-news2-related-active', {
         spaceBetween: 30,
         slideToClickedSlide: true,
-        loop: false,
+        loop: true,
         autoplay: {
             delay: 3000,
         },
