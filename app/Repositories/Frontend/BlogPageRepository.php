@@ -18,36 +18,41 @@ class BlogPageRepository extends BaseRepository implements BlogPageContract
     /**
      * @return mixed
      */
-    public function getAllBlogs(){
+    public function getAllBlogs()
+    {
         return Blog::whereStatus('active')
-        ->orderBy('id', 'asc')
-        ->select(['id', 'name', 'title', 'slug', 'image', 'created_at', 'author_name'])
-        ->paginate(9);
+            ->orderBy('id', 'asc')
+            ->select(['id', 'name', 'title', 'slug', 'image', 'created_at', 'author_name'])
+            ->paginate(9);
     }
 
     /**
      * @return mixed
      */
-    public function getBlogDetail($slug){
-       return Blog::where(['status' => 'active', 'slug' => $slug])->with('categories:id,name', 'tags:id,name')->first();
+    public function getBlogDetail($slug)
+    {
+        return Blog::where(['status' => 'active', 'slug' => $slug])->with('categories:id,name', 'tags:id,name')->first();
     }
 
     /**
      * @return mixed
      */
-    public function getRelatedBlog($blogId, $blogAuthorName){
-        return Blog::where('author_name', $blogAuthorName)
-        ->where('status', 'active')
-        ->where('id', '<>', $blogId) // Exclude the current blog post
-        ->orderBy('id', 'asc')
-        ->get(['id', 'name', 'title', 'slug', 'image', 'created_at', 'author_name']);
+    public function getRelatedBlog($blogId, $blogAuthorName)
+    {
+        return Blog::where('id', '<>', $blogId)
+            ->where('author_name', $blogAuthorName)
+            ->where('status', 'active')
+            // Exclude the current blog post
+            ->orderBy('id', 'asc')
+            ->get(['id', 'name', 'title', 'slug', 'image', 'created_at', 'author_name']);
     }
 
     /**
      * @return mixed
      */
-    public function getBlogCategories(){
-        return BlogCategory::withCount('blogs')->get(['id','name']);
+    public function getBlogCategories()
+    {
+        return BlogCategory::withCount('blogs')->get(['id', 'name']);
     }
 
 }
