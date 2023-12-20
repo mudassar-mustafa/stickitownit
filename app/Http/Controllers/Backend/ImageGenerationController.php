@@ -2,24 +2,25 @@
 
 namespace App\Http\Controllers\Backend;
 
-use Illuminate\Contracts\View\View;
+use App\DataTables\ImageGenerationDataTableInprogress;
 use App\Services\UtilService;
-use App\Http\Enums\CommonEnum;
-use Illuminate\Http\RedirectResponse;
 use App\DataTables\ImageGenerationDataTable;
 use App\Models\GenerationImage;
 use Response;
 use Auth;
+use Illuminate\Http\Request;
 class ImageGenerationController extends Controller
 {
-    
+
 
     /**
      * Display a listing of the resource.
      */
     public function index(
+        Request $request,
         UtilService    $utilService,
-        ImageGenerationDataTable $dataTable
+        ImageGenerationDataTable $dataTable1,
+        ImageGenerationDataTableInprogress $dataTable2,
     )
     {
         try {
@@ -27,7 +28,14 @@ class ImageGenerationController extends Controller
             if(Auth::user()->hasRole('Customer')){
                 $userId = Auth::user()->id;
             }
-            return $dataTable->with(['userId' => $userId])->render('backend.pages.generations.index');
+
+            if($request->get('status') !== null && $request->get('status') === 'completed'){
+                $dataTable = $dataTable1->with(['userId' => $userId])->render('backend.pages.generations.index');
+                return $dataTable;
+            }
+            $dataTable = $dataTable2->with(['userId' => $userId])->render('backend.pages.generations.index');
+
+            return $dataTable;
         } catch (\Exception $exception) {
             return $utilService->logErrorAndRedirectToBack('backend.pages.generations.index', $exception->getMessage());
         }
@@ -40,6 +48,6 @@ class ImageGenerationController extends Controller
           }else{
             return $utilService->logErrorAndRedirectToBack('backend.pages.generations.download', "File Not Download");
           }
-        
+
     }
 }

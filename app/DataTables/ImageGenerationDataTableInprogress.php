@@ -2,12 +2,13 @@
 
 namespace App\DataTables;
 
+use App\Models\Generation;
 use App\Models\GenerationImage;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
 use Form;
 
-class ImageGenerationDataTable extends DataTable
+class ImageGenerationDataTableInprogress extends DataTable
 {
     /**
      * Build DataTable class.
@@ -18,40 +19,35 @@ class ImageGenerationDataTable extends DataTable
     public function dataTable($query)
     {
         return datatables()->eloquent($query)
-            ->addColumn('generation_id',function ($generationImage){
-                return !is_null($generationImage->generation) ? $generationImage->generation->leonardo_generation_id : '-';
+            ->filterColumn('generation_id', function ($query, $keyword) {
+                $sql = "leonardo_generation_id like ?";
+                $query->whereRaw($sql, ["%{$keyword}%"]);
             })
-            ->addColumn('image', function ($generationImage) {
-                return ($generationImage->image != null) ? '<img width="50" height="50" class="img-thumbnail"
-                id="img" src="'.$generationImage->image.'"
-                alt="your image"/>' : '<span></span>';
+            ->addColumn('generation_id',function ($generation){
+                return !is_null($generation->leonardo_generation_id) ? $generation->leonardo_generation_id : '-';
+            })
+            ->addColumn('status', function ($generation) {
+                return $generation->status === 'pending' ? 'Inprogress' : 'Completed';
             })
             ->escapeColumns(
                 []
-            )
-            ->addColumn('action', function ($generationImage) {
-
-                $image  = ($generationImage->image != null) ? $generationImage->image : '#';
-                $downloadBtn = '<a href="'. $image .'" download class="btn btn-primary" style="font-size: 10px;width: 100%; margin-bottom: 3px;">Download</a>';
-
-
-                return $downloadBtn;
-            })->rawColumns(['action']);
+            );
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\GenerationImage $model
+     * @param \App\Models\Generation $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(GenerationImage $model)
+    public function query(Generation $model)
     {
         $userId = $this->userId;
         $query = $model->newQuery();
         if($userId != 0){
             $query = $query->where('user_id', $userId);
         }
+        $query = $query->whereStatus('pending');
         return $query;
     }
 
@@ -65,7 +61,6 @@ class ImageGenerationDataTable extends DataTable
         return $this->builder()
             ->setTableId('generation-image-table')
             ->columns($this->getColumns())
-            ->searching(false)
             ->minifiedAjax()
             ->orderBy(1)
             ->parameters(['drawCallback' => 'function() { drawCallBackHandler(); }',]);
@@ -79,12 +74,13 @@ class ImageGenerationDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('generation_id'),
-            Column::make('Image')->name('image')->data("image")
-                ->addClass('text-center'),
-            Column::computed('action')
+            Column::make('generation_id')->width(30),
+            Column::make('Status')->name('status')->data("status")
+                ->addClass('text-center')
                 ->exportable(false)
                 ->printable(false)
+
+
                 ->width(60)
                 ->addClass('text-center'),
         ];
@@ -97,6 +93,6 @@ class ImageGenerationDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'GenerationImage' . date('YmdHis');
+        return 'Generation' . date('YmdHis');
     }
 }
