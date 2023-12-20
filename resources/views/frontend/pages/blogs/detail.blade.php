@@ -113,7 +113,7 @@
 
                                         @foreach($relatedBlogs as $relatedBlog)
                                             <div class="swiper-slide">
-                                                <div class="cp-news3-item">
+                                                <div class="cp-news3-item" style="border: 1px solid #0003;">
                                                     <div class="cp-news3-img w-img">
                                                         <a href="{{ route('blog.detail',$relatedBlog->slug) }}">
                                                             <img
