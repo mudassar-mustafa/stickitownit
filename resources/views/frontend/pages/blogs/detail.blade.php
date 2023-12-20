@@ -113,30 +113,26 @@
 
                                         @foreach($relatedBlogs as $relatedBlog)
                                             <div class="swiper-slide">
-                                                <article>
-                                                    <div class="cp-news-item">
-                                                        <div class="cp-news-img fix p-relative ">
-                                                            <div class="cp-img-overlay wow"></div>
-                                                            <a href="{{ route('blog.detail',$relatedBlog->slug) }}">
-                                                                <img class="cp-news-card-image"
-                                                                    src="{{ $relatedBlog->image }}"
-                                                                    alt="{{ $relatedBlog->name }}"
-                                                                >
-                                                            </a>
-                                                        </div>
-                                                        <div class="cp-news-content one">
-                                                            <div class="cp-news1-meta mb-25">
-                                                                <span>{{date('F j, Y', strtotime($relatedBlog->created_at))}}</span>
-                                                            </div>
-                                                            <h3 class="cp-news-title"><a
-                                                                    href="{{ route('blog.detail',$relatedBlog->slug) }}">{{ $relatedBlog->name }}</a>
-                                                            </h3>
-                                                            <h5 class="cp-news-post-by">Author : <a
-                                                                    href="javascript:void(0)">{{ $relatedBlog->author_name }}</a>
-                                                            </h5>
-                                                        </div>
+                                                <div class="cp-news3-item">
+                                                    <div class="cp-news3-img w-img">
+                                                        <a href="{{ route('blog.detail',$relatedBlog->slug) }}">
+                                                            <img
+                                                                class="cp-news-card-image"
+                                                                src="{{ $relatedBlog->image }}"
+                                                                alt="{{ $relatedBlog->name }}">
+                                                        </a>
                                                     </div>
-                                                </article>
+                                                    <div class="cp-news3-content">
+                                                        <span
+                                                            class="cp-news3-data">{{date('F j, Y', strtotime($relatedBlog->created_at))}}</span>
+                                                        <h3 class="cp-news-title"><a
+                                                                href="{{ route('blog.detail',$relatedBlog->slug) }}">{{ $relatedBlog->name }}</a>
+                                                        </h3>
+                                                        <h5 class="cp-news-post-by">Author : <a
+                                                                href="javascript:void(0)">{{ $relatedBlog->author_name }}</a>
+                                                        </h5>
+                                                    </div>
+                                                </div>
                                             </div>
                                         @endforeach
 
