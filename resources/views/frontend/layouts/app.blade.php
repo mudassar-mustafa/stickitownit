@@ -29,6 +29,9 @@
 </head>
 
 <body>
+    <div id="preloader">
+        <div id="loader"></div>
+    </div>
 <!--[if lte IE 9]>
 <p class="browserupgrade">
     You are using an <strong>outdated</strong> browser. Please
@@ -74,6 +77,13 @@
 <script src="{{ asset('assets/js/toastr.min.js') }}"></script>
 
 <script>
+
+$(document).ready(function (){
+    setTimeout( function(){ 
+        $("#preloader").addClass('hidden');
+    }, 1000 );
+});
+
 async function doAjax(url, params = {}, method = 'POST') {
     return $.ajax({
         url: url,
@@ -107,19 +117,6 @@ async function doAjax(url, params = {}, method = 'POST') {
             break;
     }
     @endif
-
-    window.onscroll = function() {scrollFunction()};
-    function scrollFunction() {
-        
-        if (document.body.scrollTop > 0 || document.documentElement.scrollTop > 0) {
-            document.getElementById("top-header-mini").style.height = "0px";
-            document.getElementsByClassName("cp-header2-info")[0].style.display = "none";
-        } else {
-            document.getElementById("top-header-mini").style.height = "30px";
-            document.getElementsByClassName("cp-header2-info")[0].style.display = "block";
-        }
-        console.log(document.body.scrollTop);
-    }
 </script>
 </body>
 </html>

@@ -42,20 +42,21 @@
 
     ////////////////////////////////////////////////////
     // PreLoader Js
-    function loader() {
-        $(window).on('load', function () {
-            $('#ctn-preloader').addClass('loaded');
-            $("#loading").fadeOut(500);
+    // function loader() {
+    //     $(window).on('load', function () {
+    //         debugger;
+    //         $('#preloader').removeClass('hidden');
+    //         $('#preloader').addClass('xyz');
 
-            if ($('#ctn-preloader').hasClass('loaded')) {
-                $('#preloader').delay(900).queue(function () {
-                    $(this).remove();
-                });
-            }
-        });
-    }
+    //         if ($('#preloader').hasClass('xyz')) {
+    //             $('#preloader').delay(900).queue(function () {
+    //                 $('#preloader').removeClass('hidden');
+    //             });
+    //         }
+    //     });
+    // }
 
-    loader();
+    // loader();
 
     ////////////////////////////////////////////////////
     // Mobile Menu Js
