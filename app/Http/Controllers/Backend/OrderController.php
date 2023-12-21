@@ -72,7 +72,7 @@ class OrderController extends Controller
 
     public function updateOrderStatus(
         Request $request, 
-        UtilService $utilService
+        UtilService $utilService,
         ){
         try {
             $data = $request->except('_token');
@@ -95,16 +95,23 @@ class OrderController extends Controller
      */
     public function packageOrder(
         UtilService    $utilService,
-        PackageOrderDataTable $dataTable
+        PackageOrderDataTable $dataTable,
+        $buyerIds = null
     )
     {
         try {
             $userId = 0;
+            $buyerList = [];
+
             if(Auth::user()->hasRole('Customer')){
                 $userId = Auth::user()->id;
             }
+
+            if(Auth::user()->hasRole('Admin') || Auth::user()->hasRole('SuperAdmin')){
+                $buyerList = $this->orderRepository->getBuyerList("Package"); 
+            }
             
-            return $dataTable->with(['userId' => $userId])->render('backend.pages.order.package_order');
+            return $dataTable->with(['userId' => $userId, 'buyerIds' => $buyerIds])->render('backend.pages.order.package_order', compact('buyerList'));
         } catch (\Exception $exception) {
             return $utilService->logErrorAndRedirectToBack('backend.pages.order.package_order', $exception->getMessage());
         }

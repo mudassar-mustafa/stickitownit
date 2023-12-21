@@ -345,17 +345,17 @@
             debugger;
             var url = "{{ route('backend.pages.order.sale_order', [':buyerIds',':sellerIds',':categoryIds']) }}";
             if($("#buyer_id").val() != ""){
-                url = url.replace(':buyerIds',$("#buyer_id").val());
+                url = url.replace(':buyerIds',$("#buyer_id").val() == undefined ? null : $("#buyer_id").val());
             }else{
                 url = url.replace(':buyerIds',null);
             }
             if($("#seller_id").val() != ""){
-                url = url.replace(':sellerIds',$("#seller_id").val());
+                url = url.replace(':sellerIds',$("#seller_id").val() == undefined ? null : $("#seller_id").val());
             }else{
                 url = url.replace(':sellerIds',null);
             }
             if($("#category_id").val() != ""){
-                url = url.replace(':categoryIds',$("#category_id").val());
+                url = url.replace(':categoryIds',$("#category_id").val() == undefined ? null : $("#category_id").val());
             }else{
                 url = url.replace(':categoryIds',null);
             }

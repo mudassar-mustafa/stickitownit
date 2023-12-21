@@ -16,6 +16,24 @@
                             </div>
                         </div>
                         <div class="card-body">
+                            @if (Auth::user()->hasRole('SuperAdmin') || Auth::user()->hasRole('Admin'))
+                                <div class="row g-3 mt-2">
+                                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                        <label for="buyer_id" class="form-label">Buyer Name</label>
+                                        <select class="state form-select" id="buyer_id" name="buyer_id">
+                                            <option value=""> Please Select Buyer</option>
+                                            @if (!empty($buyerList))
+                                                @foreach ($buyerList as $buyer)
+                                                    <option value ="{{ $buyer->id }}" {{ request('buyerIds') == $buyer->id ? "selected" : "" }}>{{ $buyer->name }}</option>
+                                                @endforeach
+                                            @endif
+                                        </select>
+                                    </div>    
+                                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                        <button type="button" class="btn btn-primary" style="margin-top: 30px;" onclick="filerData();">Filter</button>
+                                    </div>
+                                </div>
+                            @endif
                             <div class="mt-4">
                                 {{$dataTable->table()}}
                             </div>
@@ -58,5 +76,16 @@
                 });
             }
         }
+
+        function filerData(){
+            var url = "{{ route('backend.pages.order.package_order', ':buyerIds') }}";
+            if($("#buyer_id").val() != ""){
+                url = url.replace(':buyerIds',$("#buyer_id").val() == undefined ? null : $("#buyer_id").val());
+            }else{
+                url = url.replace(':buyerIds',null);
+            }
+            window.location.href = url;
+        }
+
     </script>
 @endpush

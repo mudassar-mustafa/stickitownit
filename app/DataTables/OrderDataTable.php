@@ -19,7 +19,10 @@ class OrderDataTable extends DataTable
     public function dataTable($query)
     {
         return datatables()->eloquent($query)
-            ->filterColumn('order_type', function ($query, $keyword) {
+            ->filterColumn('id', function ($query, $keyword) {
+                $sql = "id like ?";
+                $query->whereRaw($sql, ["%{$keyword}%"]);
+            })->filterColumn('order_type', function ($query, $keyword) {
                 $sql = "order_type like ?";
                 $query->whereRaw($sql, ["%{$keyword}%"]);
             })->filterColumn('order_date', function ($query, $keyword) {
@@ -33,7 +36,7 @@ class OrderDataTable extends DataTable
                 $query->whereRaw($sql, ["%{$keyword}%"]);
             })
             ->addColumn('order_id', function ($order) {
-                return  'ST-'.date('Y', strtotime($order->created_at)).'-'.$order->id ;
+                return  'ST-'.date('Y', strtotime($order->created_at)).'-'.$order->id;
             })->addColumn('order_type', function ($order) {
                 return empty($order->order_type) ? "None" : $order->order_type;
             })
@@ -148,7 +151,9 @@ class OrderDataTable extends DataTable
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->orderBy(1)
-            ->parameters(['drawCallback' => 'function() { drawCallBackHandler(); }',]);
+            ->parameters(
+                ['drawCallback' => 'function() { drawCallBackHandler(); }',
+            ]);
     }
 
     /**
