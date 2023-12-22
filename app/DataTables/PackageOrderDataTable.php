@@ -18,8 +18,8 @@ class PackageOrderDataTable extends DataTable
     public function dataTable($query)
     {
         return datatables()->eloquent($query)
-            ->filterColumn('id', function ($query, $keyword) {
-                $sql = "id like ?";
+            ->filterColumn('order_id', function ($query, $keyword) {
+                $sql = "order_number like ?";
                 $query->whereRaw($sql, ["%{$keyword}%"]);
             })->filterColumn('order_type', function ($query, $keyword) {
                 $sql = "order_type like ?";
@@ -35,7 +35,7 @@ class PackageOrderDataTable extends DataTable
                 $query->whereRaw($sql, ["%{$keyword}%"]);
             })
             ->addColumn('order_id', function ($order) {
-                return  'ST-'.date('Y', strtotime($order->created_at)).'-'.$order->id ;
+                return  $order->order_number;
             })
             ->addColumn('order_type', function ($order) {
                 return empty($order->order_type) ? "None" : $order->order_type;
@@ -71,7 +71,7 @@ class PackageOrderDataTable extends DataTable
         $userId = $this->userId;
 
         if($this->request->buyerIds != "null" && $this->request->buyerIds != null){
-            $userId = $this->request->buyerIds;     
+            $userId = $this->request->buyerIds;
         }
 
         $order = $model->where('order_type', 'Package')->newQuery();
@@ -117,7 +117,7 @@ class PackageOrderDataTable extends DataTable
                 ->addClass('text-center'),
             Column::make('Total Amount')->name('order_total_amount')->data("order_total_amount")
                 ->addClass('text-center'),
-            
+
         ];
     }
 

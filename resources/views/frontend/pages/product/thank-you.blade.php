@@ -21,18 +21,18 @@
                     <div class="text-center">
                         <h1>Thank You !</h1>
                         <p>
-                            Your order has been placed successfully. 
+                            Your order has been placed successfully.
                             <br>
-                            Inovice Number# {{ $order->invoice_number }}
+                            Order Number# {{ $order->order_number }}
                         </p>
                         @if (isset($order) && $order->order_type == "Sale")
-                            <a href="{{ route('backend.pages.order.sale_order') }}"><button type="button" class="btn btn-outline-success">Order Detail</button></a>    
+                            <a href="{{ route('backend.pages.order.sale_order') }}"><button type="button" class="btn btn-outline-success">Order Detail</button></a>
                         @endif
 
                         @if (isset($order) && $order->order_type == "Package")
-                            <a href="{{ route('backend.pages.order.package_order') }}"><button type="button" class="btn btn-outline-success">Order Detail</button></a>    
+                            <a href="{{ route('backend.pages.order.package_order') }}"><button type="button" class="btn btn-outline-success">Order Detail</button></a>
                         @endif
-                        
+
                     </div>
                 </div>
             </div>

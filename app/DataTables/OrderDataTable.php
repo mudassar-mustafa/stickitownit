@@ -19,8 +19,8 @@ class OrderDataTable extends DataTable
     public function dataTable($query)
     {
         return datatables()->eloquent($query)
-            ->filterColumn('id', function ($query, $keyword) {
-                $sql = "id like ?";
+            ->filterColumn('order_id', function ($query, $keyword) {
+                $sql = "order_number like ?";
                 $query->whereRaw($sql, ["%{$keyword}%"]);
             })->filterColumn('order_type', function ($query, $keyword) {
                 $sql = "order_type like ?";
@@ -36,7 +36,7 @@ class OrderDataTable extends DataTable
                 $query->whereRaw($sql, ["%{$keyword}%"]);
             })
             ->addColumn('order_id', function ($order) {
-                return  'ST-'.date('Y', strtotime($order->created_at)).'-'.$order->id;
+                return  $order->order_number;
             })->addColumn('order_type', function ($order) {
                 return empty($order->order_type) ? "None" : $order->order_type;
             })
@@ -110,11 +110,11 @@ class OrderDataTable extends DataTable
         $buyerId = $this->buyerId;
         $sellerId = $this->sellerId;
         if($this->request->sellerIds != "null" && $this->request->sellerIds != null){
-            $sellerId = $this->request->sellerIds;     
+            $sellerId = $this->request->sellerIds;
         }
 
         if($this->request->buyerIds != "null" && $this->request->buyerIds != null){
-            $buyerId = $this->request->buyerIds;     
+            $buyerId = $this->request->buyerIds;
         }
 
         $order = $model->where('order_type', 'Sale')->newQuery();
@@ -124,18 +124,18 @@ class OrderDataTable extends DataTable
             $orderIds = OrderSaleDetail::whereHas('product_attribute_group.product.categories', function($q) use($categoryId){
                 $q->where('category_id', $categoryId);
             })->groupBy('order_id')->pluck('order_id')->toArray();
-            $order = $order->whereIn('id', $orderIds);     
+            $order = $order->whereIn('id', $orderIds);
         }
 
 
-        
+
         if($buyerId != 0){
             $order = $order->where('buyer_id', $buyerId);
         }
         if($sellerId != 0){
             $order = $order->where('seller_id', $sellerId);
         }
-        
+
         return $order;
     }
 
