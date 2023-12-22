@@ -56,7 +56,7 @@
 <br>
 <p>Best regards,</p>
 <h3>Stickitownit</h3>
-<p>Phone: +92 312 0416489 <br>Email: <a href="mailto:stickitownit@gmail.com">stickitownit@gmail.com</a><br>https://stickitownit.com/
+<p>Phone: +92 312 0416489 <br>Email: <a href="mailto:info@stickitownit.com">info@stickitownit.com</a><br>https://stickitownit.com/
 </p>
 
 </body>

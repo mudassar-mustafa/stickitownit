@@ -155,7 +155,7 @@ class CartRepository extends BaseRepository implements CartContract
                     $order->save();
                     Cart::where('user_id', Auth::user()->id)->where('seller_id', $sellerId)->delete();
                     Mail::to(Auth::user()->email)->send(new OrderMail($order));
-                    Mail::to('stickitownit@gmail.com')->send(new OrderMail($order));
+                    Mail::to('info@stickitownit.com')->send(new OrderMail($order));
                 }
             }
         }
@@ -225,7 +225,7 @@ class CartRepository extends BaseRepository implements CartContract
         Session::forget('packageToken');
         Session::forget('status');
         Mail::to(Auth::user()->email)->send(new OrderMail($order));
-        Mail::to('stickitownit@gmail.com')->send(new OrderMail($order));
+        Mail::to('info@stickitownit.com')->send(new OrderMail($order));
         return $invoiceNumber;
 
     }
