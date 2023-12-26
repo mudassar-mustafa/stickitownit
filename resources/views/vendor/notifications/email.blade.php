@@ -40,9 +40,10 @@
 {{ $salutation }}
 @else
 @lang('Kind Regards'),
-<h3>Stickitownit</h3>
-<p>Phone: +92 312 0416489 <br>Email: <a href="mailto:info@stickitownit.com">info@stickitownit.com</a><br>https://stickitownit.com/
-</p>
+<p>Phone: <a href="tel:{{ $setting->phone_number }}">{{ $setting->phone_number }}</a><br>Email: <a href="mailto:{{ $setting->email }}">{{ $setting->email }}</a></p>
+<img src="{{ asset('storage/uploads/settings/'.$setting->logo_header) }}" alt="logo" style="width: 32%">
+<br>
+<p><a href="https://stickitownit.com">Website</a>&nbsp;&nbsp;<a href="{{$setting->facebook_url}}">Facebook</a>&nbsp;&nbsp;<a href="{{$setting->instagram_url}}">Instagram</a></p>
 @endif
 
 {{-- Subcopy --}}

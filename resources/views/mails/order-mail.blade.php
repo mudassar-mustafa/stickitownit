@@ -43,9 +43,7 @@
 @if ($order->order_type == 'Sale')
     @if($order->order_status === 'pending')
         <p>Thank you for placing your order with Stickitownit. We are pleased to inform you that your order has been
-            successfully received and is currently being processed. This email serves as an order confirmation and
-            includes
-            the
+            successfully received and is being processed. This email serves as an order confirmation and includes the
             details of your purchase.</p>
     @else
         <p>Your order has been {{ $order->order_status }} successfully</p>
@@ -138,22 +136,26 @@
 @endif
 <br>
 <p>We would like to assure you that we are dedicated to providing you with a seamless shopping experience, and we will
-    do our best to fulfill your order as quickly as possible. You can expect regular updates regarding the progress of
-    your order.
+    do our best to fulfill your order as quickly as possible.
 </p>
 <br>
-<p>If you have any questions or require further assistance, please feel free to contact our customer support team at
-    [+92 312 0416489]. Our representatives will be glad to assist you.</p>
+<p>If you have any questions or require further assistance, please feel free to contact our customer support team at <a
+        href="tel:{{ $setting->phone_number }}">{{ $setting->phone_number }}</a>. Our representatives will be glad to
+    assist you.</p>
 
 <p>
     Once again, we appreciate your business and look forward to delivering your order to you soon. Thank you for
-    choosing Stickitownit
+    choosing Stickitownit.
 </p>
 <br>
-<p>Best regards,</p>
-<h3>Stickitownit</h3>
-<p>Phone: +92 312 0416489 <br>Email: <a href="mailto:info@stickitownit.com">info@stickitownit.com</a><br>https://stickitownit.com/
-</p>
+<p>Kind regards,</p>
+<p>Phone: <a href="tel:{{ $setting->phone_number }}">{{ $setting->phone_number }}</a><br>Email: <a
+        href="mailto:{{ $setting->email }}">{{ $setting->email }}</a></p>
+<img src="{{ asset('storage/uploads/settings/'.$setting->logo_header) }}" alt="logo" style="width: 22%">
+<br>
+<p><a href="https://stickitownit.com">Website</a>&nbsp;&nbsp;<a href="{{$setting->facebook_url}}">Facebook</a>&nbsp;&nbsp;<a
+        href="{{$setting->instagram_url}}">Instagram</a></p>
+
 
 </body>
 </html>
