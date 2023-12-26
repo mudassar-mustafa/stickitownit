@@ -39,25 +39,24 @@
 
 <p>Dear {{ $user->name }},</p>
 <br>
-<p>Your account register successfully</p>
+<p>Thankyou! for registering with Stickitownit</p>
 <br>
-<p>We would like to assure you that we are dedicated to providing you with a seamless shopping experience, and we will
-    do our best to fulfill your order as quickly as possible. You can expect regular updates regarding the progress of
-    your order.
+<p>
+    We would like to assure you that we are dedicated to providing you with a seamless shopping experience, and we will do our best to fulfill your order as quickly as possible. 
+</p>
+<br>
+<p>
+    Visit Stickitownit today and Try our new <a href="https://stickitownit.com/generation">AI Stickers Generator</a> and experience a new dimension of Sticker Designs ready to print.
 </p>
 <br>
 <p>If you have any questions or require further assistance, please feel free to contact our customer support team at
     [+92 312 0416489]. Our representatives will be glad to assist you.</p>
-
-<p>
-    Once again, we appreciate your business and look forward to delivering your order to you soon. Thank you for
-    choosing Stickitownit
-</p>
 <br>
-<p>Best regards,</p>
+<p>Kind regards,</p>
 <h3>Stickitownit</h3>
 <p>Phone: +92 312 0416489 <br>Email: <a href="mailto:info@stickitownit.com">info@stickitownit.com</a><br>https://stickitownit.com/
 </p>
+
 
 </body>
 </html>
