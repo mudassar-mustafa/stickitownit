@@ -284,8 +284,8 @@ Route::group(['prefix' => 'backend', 'middleware' => ['role:Customer']], functio
 Route::group(['prefix' => 'backend'], function () {
 //  Order Routes
     Route::controller(OrderController::class)->prefix('orders')->group(function () {
-        Route::get('/sales/list/{buyerIds?}/{sellerIds?}/{categoryIds?}', 'saleOrder')->name('backend.pages.order.sale_order')->middleware('role:SuperAdmin|Admin|Customer|Seller');
-        Route::get('/packages/list/{buyerIds?}', 'packageOrder')->name('backend.pages.order.package_order')->middleware('role:SuperAdmin|Admin|Customer');
+        Route::get('/sales/list/{buyerIds?}/{sellerIds?}/{categoryIds?}/{orderDate?}/{shipDate?}', 'saleOrder')->name('backend.pages.order.sale_order')->middleware('role:SuperAdmin|Admin|Customer|Seller');
+        Route::get('/packages/list/{buyerIds?}/{orderDate?}', 'packageOrder')->name('backend.pages.order.package_order')->middleware('role:SuperAdmin|Admin|Customer');
         Route::post('/update-order-status', 'updateOrderStatus')->name('backend.pages.order.updateOrderStatus')->middleware('role:SuperAdmin|Admin|Seller');
         Route::delete('/delete/{id}', 'destroy')->name('backend.pages.order.destroy')->middleware('role:SuperAdmin|Admin|Customer|Seller');
         Route::post('/getOrderDetail', 'getOrderDetail')->name('backend.pages.order.getOrderDetail')->middleware('role:SuperAdmin|Admin|Seller|Customer');

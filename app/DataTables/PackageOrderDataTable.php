@@ -69,6 +69,7 @@ class PackageOrderDataTable extends DataTable
     public function query(Order $model)
     {
         $userId = $this->userId;
+        $orderDate = $this->request->orderDate;
 
         if($this->request->buyerIds != "null" && $this->request->buyerIds != null){
             $userId = $this->request->buyerIds;
@@ -77,6 +78,9 @@ class PackageOrderDataTable extends DataTable
         $order = $model->where('order_type', 'Package')->newQuery();
         if($userId != 0){
             $order = $order->where('buyer_id', $userId);
+        }
+        if($orderDate != "null" && $orderDate != null){
+            $order = $order->whereDate('order_date', $orderDate);
         }
         return $order;
     }

@@ -93,6 +93,15 @@
                                     </select>
                                 </div>
                                 <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                    <label for="order_date" class="form-label">Order Date</label>
+                                    <input type="date" class="form-control" id="order_date" name="order_date" value="{{request('orderDate') == 'null' || request('orderDate') == null  ? "" : date('Y-m-d', strtotime(request('orderDate'))) }}">
+                                </div>
+                                
+                                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                    <label for="ship_date" class="form-label">Ship Date</label>
+                                    <input type="date" class="form-control" id="ship_date" name="ship_date" value="{{ request('shipDate') == 'null' || request('shipDate') == null ? "" : date('Y-m-d', strtotime(request('shipDate'))) }}">
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                                     <button type="button" class="btn btn-primary" style="margin-top: 30px;" onclick="filerData();">Filter</button>
                                 </div>
                             </div>
@@ -343,7 +352,7 @@
 
         function filerData(){
             debugger;
-            var url = "{{ route('backend.pages.order.sale_order', [':buyerIds',':sellerIds',':categoryIds']) }}";
+            var url = "{{ route('backend.pages.order.sale_order', [':buyerIds',':sellerIds',':categoryIds',':orderDate',':shipDate']) }}";
             if($("#buyer_id").val() != ""){
                 url = url.replace(':buyerIds',$("#buyer_id").val() == undefined ? null : $("#buyer_id").val());
             }else{
@@ -358,6 +367,16 @@
                 url = url.replace(':categoryIds',$("#category_id").val() == undefined ? null : $("#category_id").val());
             }else{
                 url = url.replace(':categoryIds',null);
+            }
+            if($("#order_date").val() != ""){
+                url = url.replace(':orderDate',$("#order_date").val() == undefined ? null : $("#order_date").val());
+            }else{
+                url = url.replace(':orderDate',null);
+            }
+            if($("#ship_date").val() != ""){
+                url = url.replace(':shipDate',$("#ship_date").val() == undefined ? null : $("#ship_date").val());
+            }else{
+                url = url.replace(':shipDate',null);
             }
 
             window.location.href = url;

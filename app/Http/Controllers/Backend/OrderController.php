@@ -36,6 +36,8 @@ class OrderController extends Controller
         $buyerIds = null,
         $sellerIds = null,
         $categoryIds = null,
+        $orderDate = null,
+        $shipDate = null,
     )
     {
         try {
@@ -64,7 +66,7 @@ class OrderController extends Controller
                 $categoryList = $this->orderRepository->getCategoriesList(); 
             }
 
-            return $dataTable->with(['buyerId' => $buyerId, 'sellerId' => $sellerId, 'sellerIds' => '$sellerIds',  'buyerIds' => $buyerIds, 'categoryIds' => $categoryIds])->render('backend.pages.order.sale_order', compact('buyerList', 'sellerList', 'categoryList'));
+            return $dataTable->with(['buyerId' => $buyerId, 'sellerId' => $sellerId, 'sellerIds' => '$sellerIds',  'buyerIds' => $buyerIds, 'categoryIds' => $categoryIds, 'orderDate' => $orderDate, 'shipDate' => $shipDate])->render('backend.pages.order.sale_order', compact('buyerList', 'sellerList', 'categoryList', 'orderDate', 'shipDate'));
         } catch (\Exception $exception) {
             return $utilService->logErrorAndRedirectToBack('backend.pages.order.sale_order', $exception->getMessage());
         }
@@ -96,7 +98,8 @@ class OrderController extends Controller
     public function packageOrder(
         UtilService    $utilService,
         PackageOrderDataTable $dataTable,
-        $buyerIds = null
+        $buyerIds = null,
+        $orderDate = null
     )
     {
         try {
@@ -111,7 +114,7 @@ class OrderController extends Controller
                 $buyerList = $this->orderRepository->getBuyerList("Package"); 
             }
             
-            return $dataTable->with(['userId' => $userId, 'buyerIds' => $buyerIds])->render('backend.pages.order.package_order', compact('buyerList'));
+            return $dataTable->with(['userId' => $userId, 'buyerIds' => $buyerIds, 'orderDate' => $orderDate])->render('backend.pages.order.package_order', compact('buyerList', 'orderDate'));
         } catch (\Exception $exception) {
             return $utilService->logErrorAndRedirectToBack('backend.pages.order.package_order', $exception->getMessage());
         }

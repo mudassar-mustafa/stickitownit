@@ -49,6 +49,9 @@ class OrderDataTable extends DataTable
             ->addColumn('order_date', function ($order) {
                 return empty($order->order_date) ? "--" : date('Y-m-d H:i:s', strtotime($order->order_date));
             })
+            ->addColumn('order_shipped_date', function ($order) {
+                return empty($order->order_shipped_date) ? "--" : date('Y-m-d H:i:s', strtotime($order->order_shipped_date));
+            })
             ->addColumn('payment_method', function ($order) {
                 return empty($order->payment_method) ? "--" : $order->payment_method;
             })
@@ -109,6 +112,9 @@ class OrderDataTable extends DataTable
         $orderIds = [];
         $buyerId = $this->buyerId;
         $sellerId = $this->sellerId;
+        $orderDate = $this->request->orderDate;
+        $shipDate = $this->request->shipDate;
+
         if($this->request->sellerIds != "null" && $this->request->sellerIds != null){
             $sellerId = $this->request->sellerIds;
         }
@@ -134,6 +140,12 @@ class OrderDataTable extends DataTable
         }
         if($sellerId != 0){
             $order = $order->where('seller_id', $sellerId);
+        }
+        if($orderDate != 'null' && $orderDate != null){
+            $order = $order->whereDate('order_date', $orderDate);
+        }
+        if($shipDate != 'null' && $shipDate != null){
+            $order = $order->whereDate('order_shipped_date', $shipDate);
         }
 
         return $order;
@@ -174,6 +186,8 @@ class OrderDataTable extends DataTable
             Column::make('Seller')->name('seller_id')->data("seller_id")
                 ->addClass('text-center'),
             Column::make('Order Date')->name('order_date')->data("order_date")
+                ->addClass('text-center'),
+            Column::make('Order Ship Date')->name('order_shipped_date')->data("order_shipped_date")
                 ->addClass('text-center'),
             Column::make('Payment Method')->name('payment_method')->data("payment_method")
                 ->addClass('text-center'),
